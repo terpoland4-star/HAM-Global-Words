@@ -1,0 +1,107 @@
+/* === FONT + RESET === */
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&display=swap');
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: 'Montserrat', sans-serif;
+  background-color: #fdfdfd;
+  color: #222;
+  line-height: 1.6;
+}
+
+/* === HEADER === */
+header {
+  background-color: #1d1f20;
+  color: white;
+  padding: 2rem 1rem;
+  text-align: center;
+}
+
+header h1 {
+  font-size: 2.5rem;
+  margin-bottom: 0.5rem;
+}
+
+header p {
+  font-style: italic;
+  font-size: 1.2rem;
+}
+
+/* === NAVIGATION === */
+nav {
+  background-color: #f4c842;
+  text-align: center;
+  padding: 0.5rem 0;
+}
+
+nav a {
+  text-decoration: none;
+  color: #1d1f20;
+  font-weight: bold;
+  margin: 0 1rem;
+  transition: color 0.3s;
+}
+
+nav a:hover {
+  color: #444;
+}
+
+/* === MAIN SECTIONS === */
+section {
+  padding: 2rem 1rem;
+  max-width: 900px;
+  margin: auto;
+}
+
+h2 {
+  color: #1d1f20;
+  margin-top: 2rem;
+  margin-bottom: 1rem;
+}
+
+/* === SERVICE BOXES === */
+.service {
+  margin-bottom: 2rem;
+  padding: 1rem;
+  border-left: 4px solid #f4c842;
+  background: #f8f8f8;
+  border-radius: 4px;
+}
+
+/* === CALL TO ACTION === */
+.cta {
+  background-color: #1d1f20;
+  color: white;
+  text-align: center;
+  padding: 2rem 1rem;
+}
+
+.cta a {
+  display: inline-block;
+  margin-top: 1rem;
+  background-color: #f4c842;
+  color: #1d1f20;
+  padding: 1rem 2rem;
+  text-decoration: none;
+  font-weight: bold;
+  border-radius: 5px;
+  transition: background 0.3s;
+}
+
+.cta a:hover {
+  background-color: #d3ac2b;
+}
+
+/* === FOOTER === */
+footer {
+  text-align: center;
+  padding: 1rem;
+  background-color: #eee;
+  font-size: 0.9rem;
+  color: #333;
+}
