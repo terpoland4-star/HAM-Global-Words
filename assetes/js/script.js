@@ -74,6 +74,7 @@ document.getElementById("accept-cookies").addEventListener("click", () => {
 /* ============================
    SWITCHER LANGUE
 ============================ */
+document.addEventListener("DOMContentLoaded", () => {
 const langSwitcher = document.createElement("div");
 langSwitcher.className = "lang-switcher";
 langSwitcher.innerHTML = `
