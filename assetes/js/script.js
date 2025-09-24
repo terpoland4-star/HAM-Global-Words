@@ -74,7 +74,7 @@ document.getElementById("accept-cookies")?.addEventListener("click", () => {
 });
 
 /* ============================
-   SWITCHER LANGUE
+   SWITCHER LANGUE GLOBAL
 ============================ */
 document.addEventListener("DOMContentLoaded", () => {
     const langSwitcher = document.createElement("div");
@@ -86,49 +86,49 @@ document.addEventListener("DOMContentLoaded", () => {
     `;
     document.body.appendChild(langSwitcher);
 
-    const allTexts = {
+    const translations = {
         fr: {
+            aboutTitle: "🌐 À propos",
+            aboutText: "HAM Global Words est une entreprise spécialisée dans les services linguistiques multilingues à fort impact culturel et technologique. Fondée par Hamadine AG Moctar, elle s'engage à créer des ponts entre les langues africaines, l’intelligence artificielle, et les besoins du monde globalisé.",
+            servicesTitle: "🛠️ Nos Services",
+            servicesText: "Traduction & interprétation (FR, EN, AR, TAM, SONGHAÏ, TADAKSAHAK...), Annotation IA, Transcription, Médiation culturelle",
             ctaTitle: "📩 Travaillons ensemble",
             ctaText: "Besoin d’un traducteur, interprète ou spécialiste des langues sahariennes pour un projet IA ou humanitaire ?",
-            contactBtn: "Contactez-nous",
-            aboutTitle: "🌐 À propos",
-            servicesTitle: "🛠️ Nos Services"
+            contactBtn: "Contactez-nous"
         },
         en: {
+            aboutTitle: "🌐 About",
+            aboutText: "HAM Global Words is a company specializing in multilingual linguistic services with strong cultural and technological impact. Founded by Hamadine AG Moctar, it aims to bridge African languages, artificial intelligence, and global needs.",
+            servicesTitle: "🛠️ Our Services",
+            servicesText: "Translation & Interpretation (FR, EN, AR, TAM, SONGHAÏ, TADAKSAHAK...), AI Annotation, Transcription, Cultural Mediation",
             ctaTitle: "📩 Let's work together",
             ctaText: "Need a translator, interpreter, or Saharan language expert for an AI or humanitarian project?",
-            contactBtn: "Contact us",
-            aboutTitle: "🌐 About",
-            servicesTitle: "🛠️ Our Services"
+            contactBtn: "Contact us"
         },
         ar: {
+            aboutTitle: "🌐 حول",
+            aboutText: "HAM Global Words هي شركة متخصصة في الخدمات اللغوية متعددة اللغات ذات تأثير ثقافي وتقني قوي. أسسها حمادين AG Moctar وتهدف إلى بناء جسور بين اللغات الأفريقية والذكاء الاصطناعي واحتياجات العالم.",
+            servicesTitle: "🛠️ خدماتنا",
+            servicesText: "الترجمة والتفسير (FR, EN, AR, TAM, SONGHAÏ, TADAKSAHAK...)، التعليقات للذكاء الاصطناعي، النسخ، الوساطة الثقافية",
             ctaTitle: "📩 لنعمل معًا",
             ctaText: "هل تحتاج إلى مترجم أو مفسر أو خبير في لغات الصحراء لمشروع ذكاء اصطناعي أو إنساني؟",
-            contactBtn: "اتصل بنا",
-            aboutTitle: "🌐 حول",
-            servicesTitle: "🛠️ خدماتنا"
+            contactBtn: "اتصل بنا"
         }
     };
 
     langSwitcher.querySelectorAll("button").forEach(btn => {
         btn.addEventListener("click", () => {
             const lang = btn.getAttribute("data-lang");
-
-            const ctaH2 = document.querySelector(".cta h2");
-            if (ctaH2) ctaH2.textContent = allTexts[lang].ctaTitle;
-
-            const ctaP = document.querySelector(".cta p");
-            if (ctaP) ctaP.textContent = allTexts[lang].ctaText;
-
-            const ctaA = document.querySelector(".cta a");
-            if (ctaA) ctaA.textContent = allTexts[lang].contactBtn;
-
-            const sectionH2 = document.querySelectorAll("section h2");
-            if (sectionH2[0]) sectionH2[0].textContent = allTexts[lang].aboutTitle;
-            if (sectionH2[1]) sectionH2[1].textContent = allTexts[lang].servicesTitle;
+            document.querySelectorAll("[data-i18n]").forEach(el => {
+                const key = el.getAttribute("data-i18n");
+                if (translations[lang][key]) {
+                    el.textContent = translations[lang][key];
+                }
+            });
         });
     });
 });
+
 
 /* ============================
    SCROLLING DOUX POUR ANCRAGES
