@@ -191,7 +191,7 @@ const quickContact = document.createElement('div');
 quickContact.className = 'quick-contact';
 quickContact.innerHTML = `
   <a href="mailto:hamadineagmoctar@gmail.com?subject=Demande depuis le site&body=Bonjour Hamadine," target="_blank">📧 E-mail</a>
-  <a href="https://wa.me/22786762903?text=Bonjour%20HAM%20Global%20Words,%20j'ai%20une%20question" target="_blank">💬 WhatsApp</a>
+  <a href="https://wa.me/22786762903?text=Bonjour%20HAM%20Global%20Words," target="_blank">💬 WhatsApp</a>
 `;
 document.body.appendChild(quickContact);
 
