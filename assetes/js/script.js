@@ -20,9 +20,11 @@ darkModeToggle.style.background = "#f4c842";
 darkModeToggle.style.color = "#1d1f20";
 document.body.appendChild(darkModeToggle);
 
+// Détecter préférence système
 if (window.matchMedia && window.matchMedia("(prefers-color-scheme: dark)").matches) {
     document.body.classList.add("dark-mode");
 }
+
 darkModeToggle.addEventListener("click", () => {
     document.body.classList.toggle("dark-mode");
 });
@@ -65,6 +67,7 @@ document.body.appendChild(cookieBanner);
 if (!localStorage.getItem("cookiesAccepted")) {
     cookieBanner.classList.add("show");
 }
+
 document.getElementById("accept-cookies")?.addEventListener("click", () => {
     localStorage.setItem("cookiesAccepted", "true");
     cookieBanner.classList.remove("show");
@@ -102,35 +105,35 @@ document.addEventListener("DOMContentLoaded", () => {
         },
         en: {
             headerTitle: "HAM Global Words",
-            headerText: "Languages of the Sahel, voices of the world",
+            headerText: "Languages of the Sahel, voice of the world",
             aboutTitle: "🌐 About",
             aboutText: "HAM Global Words is a company specializing in multilingual linguistic services with strong cultural and technological impact. Founded by Hamadine AG Moctar, it aims to bridge African languages, artificial intelligence, and global needs.",
             servicesTitle: "🛠️ Our Services",
             service1: "Translation & Interpretation (FR, EN, AR, TAM, SONGHAÏ, TADAKSAHAK...)",
-            service2: "Multilingual AI data annotation",
-            service3: "Audio/video transcription and adaptation",
-            service4: "Development of African linguistic dictionaries & resources",
-            service5: "Cultural mediation & humanitarian linguistic projects",
+            service2: "AI Data Annotation",
+            service3: "Transcription & Audio/Video Adaptation",
+            service4: "Development of African dictionaries & linguistic resources",
+            service5: "Cultural mediation & humanitarian language projects",
             ctaTitle: "📩 Let's work together",
             ctaText: "Need a translator, interpreter, or Saharan language expert for an AI or humanitarian project?",
             contactBtn: "Contact us",
-            footerText: "© 2025 HAM Global Words – All rights reserved | Website under construction"
+            footerText: "© 2025 HAM Global Words – All rights reserved | Site under construction"
         },
         ar: {
-            headerTitle: "هام جلوبال ووردز",
-            headerText: "لغات الساحل، أصوات العالم",
+            headerTitle: "HAM Global Words",
+            headerText: "لغات الساحل، صوت العالم",
             aboutTitle: "🌐 حول",
             aboutText: "HAM Global Words هي شركة متخصصة في الخدمات اللغوية متعددة اللغات ذات تأثير ثقافي وتقني قوي. أسسها حمادين AG Moctar وتهدف إلى بناء جسور بين اللغات الأفريقية والذكاء الاصطناعي واحتياجات العالم.",
             servicesTitle: "🛠️ خدماتنا",
-            service1: "الترجمة والتفسير (FR، EN، AR، TAM، SONGHAÏ، TADAKSAHAK...)",
-            service2: "تعليق البيانات للذكاء الاصطناعي متعدد اللغات",
-            service3: "نسخ وتكييف الصوت والفيديو",
-            service4: "تطوير القواميس والموارد اللغوية الأفريقية",
+            service1: "الترجمة والتفسير (FR, EN, AR, TAM, SONGHAÏ, TADAKSAHAK...)",
+            service2: "تعليقات للذكاء الاصطناعي",
+            service3: "النسخ والتكيف الصوتي/المرئي",
+            service4: "تطوير القواميس والموارد اللغوية الإفريقية",
             service5: "الوساطة الثقافية والمشاريع الإنسانية اللغوية",
             ctaTitle: "📩 لنعمل معًا",
             ctaText: "هل تحتاج إلى مترجم أو مفسر أو خبير في لغات الصحراء لمشروع ذكاء اصطناعي أو إنساني؟",
             contactBtn: "اتصل بنا",
-            footerText: "© 2025 HAM Global Words – جميع الحقوق محفوظة | الموقع قيد الإنشاء"
+            footerText: "© 2025 HAM Global Words – جميع الحقوق محفوظة | الموقع تحت الإنشاء"
         }
     };
 
@@ -180,3 +183,46 @@ if (footer) {
     yearSpan.textContent = ` | ${new Date().getFullYear()}`;
     footer.appendChild(yearSpan);
 }
+
+/* ============================
+   BLOC FLOTANT E-MAIL + WHATSAPP
+============================ */
+const quickContact = document.createElement('div');
+quickContact.className = 'quick-contact';
+quickContact.innerHTML = `
+  <a href="mailto:hamadineagmoctar@gmail.com?subject=Demande depuis le site&body=Bonjour Hamadine," target="_blank">📧 E-mail</a>
+  <a href="https://wa.me/22786762903?text=Bonjour%20HAM%20Global%20Words,%20j'ai%20une%20question" target="_blank">💬 WhatsApp</a>
+`;
+document.body.appendChild(quickContact);
+
+/* ============================
+   CSS pour le bloc flottant
+============================ */
+const style = document.createElement('style');
+style.textContent = `
+.quick-contact {
+  position: fixed;
+  bottom: 2rem;
+  right: 2rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  z-index: 1000;
+}
+
+.quick-contact a {
+  background: #f4c842;
+  color: #1d1f20;
+  padding: 0.5rem 1rem;
+  border-radius: 8px;
+  text-decoration: none;
+  font-weight: bold;
+  text-align: center;
+  transition: transform 0.2s;
+}
+
+.quick-contact a:hover {
+  transform: scale(1.1);
+}
+`;
+document.head.appendChild(style);
