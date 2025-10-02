@@ -20,11 +20,9 @@ darkModeToggle.style.background = "#f4c842";
 darkModeToggle.style.color = "#1d1f20";
 document.body.appendChild(darkModeToggle);
 
-// Détecter préférence système
 if (window.matchMedia && window.matchMedia("(prefers-color-scheme: dark)").matches) {
     document.body.classList.add("dark-mode");
 }
-
 darkModeToggle.addEventListener("click", () => {
     document.body.classList.toggle("dark-mode");
 });
@@ -67,7 +65,6 @@ document.body.appendChild(cookieBanner);
 if (!localStorage.getItem("cookiesAccepted")) {
     cookieBanner.classList.add("show");
 }
-
 document.getElementById("accept-cookies")?.addEventListener("click", () => {
     localStorage.setItem("cookiesAccepted", "true");
     cookieBanner.classList.remove("show");
@@ -88,31 +85,52 @@ document.addEventListener("DOMContentLoaded", () => {
 
     const translations = {
         fr: {
+            headerTitle: "HAM Global Words",
+            headerText: "Langues du Sahel, voix du monde",
             aboutTitle: "🌐 À propos",
             aboutText: "HAM Global Words est une entreprise spécialisée dans les services linguistiques multilingues à fort impact culturel et technologique. Fondée par Hamadine AG Moctar, elle s'engage à créer des ponts entre les langues africaines, l’intelligence artificielle, et les besoins du monde globalisé.",
             servicesTitle: "🛠️ Nos Services",
-            servicesText: "Traduction & interprétation (FR, EN, AR, TAM, SONGHAÏ, TADAKSAHAK...), Annotation IA, Transcription, Médiation culturelle",
+            service1: "Traduction & interprétation (FR, EN, AR, TAM, SONGHAÏ, TADAKSAHAK...)",
+            service2: "Annotation de données pour IA multilingue",
+            service3: "Transcription et adaptation audio/vidéo",
+            service4: "Développement de dictionnaires & ressources linguistiques africaines",
+            service5: "Médiation culturelle et projets humanitaires linguistiques",
             ctaTitle: "📩 Travaillons ensemble",
             ctaText: "Besoin d’un traducteur, interprète ou spécialiste des langues sahariennes pour un projet IA ou humanitaire ?",
-            contactBtn: "Contactez-nous"
+            contactBtn: "Contactez-nous",
+            footerText: "© 2025 HAM Global Words – Tous droits réservés | Site en construction"
         },
         en: {
+            headerTitle: "HAM Global Words",
+            headerText: "Languages of the Sahel, voices of the world",
             aboutTitle: "🌐 About",
             aboutText: "HAM Global Words is a company specializing in multilingual linguistic services with strong cultural and technological impact. Founded by Hamadine AG Moctar, it aims to bridge African languages, artificial intelligence, and global needs.",
             servicesTitle: "🛠️ Our Services",
-            servicesText: "Translation & Interpretation (FR, EN, AR, TAM, SONGHAÏ, TADAKSAHAK...), AI Annotation, Transcription, Cultural Mediation",
+            service1: "Translation & Interpretation (FR, EN, AR, TAM, SONGHAÏ, TADAKSAHAK...)",
+            service2: "Multilingual AI data annotation",
+            service3: "Audio/video transcription and adaptation",
+            service4: "Development of African linguistic dictionaries & resources",
+            service5: "Cultural mediation & humanitarian linguistic projects",
             ctaTitle: "📩 Let's work together",
             ctaText: "Need a translator, interpreter, or Saharan language expert for an AI or humanitarian project?",
-            contactBtn: "Contact us"
+            contactBtn: "Contact us",
+            footerText: "© 2025 HAM Global Words – All rights reserved | Website under construction"
         },
         ar: {
+            headerTitle: "هام جلوبال ووردز",
+            headerText: "لغات الساحل، أصوات العالم",
             aboutTitle: "🌐 حول",
             aboutText: "HAM Global Words هي شركة متخصصة في الخدمات اللغوية متعددة اللغات ذات تأثير ثقافي وتقني قوي. أسسها حمادين AG Moctar وتهدف إلى بناء جسور بين اللغات الأفريقية والذكاء الاصطناعي واحتياجات العالم.",
             servicesTitle: "🛠️ خدماتنا",
-            servicesText: "الترجمة والتفسير (FR, EN, AR, TAM, SONGHAÏ, TADAKSAHAK...)، التعليقات للذكاء الاصطناعي، النسخ، الوساطة الثقافية",
+            service1: "الترجمة والتفسير (FR، EN، AR، TAM، SONGHAÏ، TADAKSAHAK...)",
+            service2: "تعليق البيانات للذكاء الاصطناعي متعدد اللغات",
+            service3: "نسخ وتكييف الصوت والفيديو",
+            service4: "تطوير القواميس والموارد اللغوية الأفريقية",
+            service5: "الوساطة الثقافية والمشاريع الإنسانية اللغوية",
             ctaTitle: "📩 لنعمل معًا",
             ctaText: "هل تحتاج إلى مترجم أو مفسر أو خبير في لغات الصحراء لمشروع ذكاء اصطناعي أو إنساني؟",
-            contactBtn: "اتصل بنا"
+            contactBtn: "اتصل بنا",
+            footerText: "© 2025 HAM Global Words – جميع الحقوق محفوظة | الموقع قيد الإنشاء"
         }
     };
 
@@ -128,7 +146,6 @@ document.addEventListener("DOMContentLoaded", () => {
         });
     });
 });
-
 
 /* ============================
    SCROLLING DOUX POUR ANCRAGES
