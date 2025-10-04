@@ -20,7 +20,6 @@ darkModeToggle.style.background = "#f4c842";
 darkModeToggle.style.color = "#1d1f20";
 document.body.appendChild(darkModeToggle);
 
-// Détecter préférence système
 if (window.matchMedia && window.matchMedia("(prefers-color-scheme: dark)").matches) {
     document.body.classList.add("dark-mode");
 }
@@ -157,9 +156,7 @@ document.querySelectorAll('a[href^="#"]').forEach(anchor => {
     anchor.addEventListener('click', function (e) {
         e.preventDefault();
         const target = document.querySelector(this.getAttribute('href'));
-        if (target) {
-            target.scrollIntoView({ behavior: 'smooth' });
-        }
+        if (target) target.scrollIntoView({ behavior: 'smooth' });
     });
 });
 
@@ -195,9 +192,7 @@ quickContact.innerHTML = `
 `;
 document.body.appendChild(quickContact);
 
-/* ============================
-   CSS pour le bloc flottant
-============================ */
+/* CSS bloc flottant */
 const style = document.createElement('style');
 style.textContent = `
 .quick-contact {
@@ -209,7 +204,6 @@ style.textContent = `
   gap: 0.5rem;
   z-index: 1000;
 }
-
 .quick-contact a {
   background: #f4c842;
   color: #1d1f20;
@@ -220,9 +214,42 @@ style.textContent = `
   text-align: center;
   transition: transform 0.2s;
 }
+.quick-contact a:hover { transform: scale(1.1); }
 
-.quick-contact a:hover {
-  transform: scale(1.1);
-}
+/* Modal services */
+.service-modal { display:none; position:fixed; z-index:2000; left:0; top:0; width:100%; height:100%; overflow:auto; background-color:rgba(0,0,0,0.6);}
+.service-modal .modal-content { background:#fff; margin:10% auto; padding:2rem; border-radius:8px; width:90%; max-width:600px; text-align:center;}
+.service-modal .close-modal { float:right; font-size:1.5rem; cursor:pointer; color:#333;}
 `;
 document.head.appendChild(style);
+
+/* ============================
+   MODAL + AJAX POUR SERVICES
+============================ */
+const serviceButtons = document.querySelectorAll(".service-btn");
+const modal = document.getElementById("serviceModal");
+const modalTitle = document.getElementById("modal-title");
+const modalDesc = document.getElementById("modal-desc");
+const closeModal = document.querySelector(".close-modal");
+
+serviceButtons.forEach(btn => {
+    btn.addEventListener("click", () => {
+        const serviceKey = btn.getAttribute("data-service");
+        fetch("services.html")
+            .then(res => res.text())
+            .then(html => {
+                const parser = new DOMParser();
+                const doc = parser.parseFromString(html, "text/html");
+                const serviceDiv = doc.querySelector(`div[data-service="${serviceKey}"]`);
+                if(serviceDiv){
+                    modalTitle.textContent = btn.textContent;
+                    modalDesc.textContent = serviceDiv.querySelector("p").textContent;
+                    modal.style.display = "block";
+                }
+            })
+            .catch(err => console.error("Erreur chargement service :", err));
+    });
+});
+
+closeModal.addEventListener("click", () => { modal.style.display = "none"; });
+window.addEventListener("click", (e) => { if(e.target === modal) modal.style.display = "none"; });
