@@ -4,13 +4,26 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>Nos Services – HAM Global Words</title>
-  <meta name="description" content="Découvrez les services linguistiques proposés par HAM Global Words : traduction, interprétation, annotation IA, transcription, médiation culturelle.">
-  
-  <!-- Polices + CSS -->
   <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&display=swap" rel="stylesheet" />
   <link rel="stylesheet" href="assetes/css/style.css" />
+  <style>
+    body { font-family: 'Montserrat', sans-serif; background:#f9f9f9; color:#1d1f20; margin:0; padding:0; }
+    header { text-align:center; padding:2rem 1rem; background:#f4c842; color:#1d1f20; }
+    nav { display:flex; justify-content:center; gap:2rem; padding:1rem; background:#1d1f20; }
+    nav a { color:#f4c842; text-decoration:none; font-weight:600; transition:0.3s; }
+    nav a:hover { color:#fff; }
+    section#services-section { display:flex; flex-wrap:wrap; justify-content:center; gap:1rem; padding:2rem 1rem; }
+    .service-btn { 
+      background:#f4c842; color:#1d1f20; border:none; border-radius:12px; padding:1rem 2rem; font-size:1.1rem;
+      cursor:pointer; font-weight:600; box-shadow:0 4px 6px rgba(0,0,0,0.1); transition:0.3s;
+    }
+    .service-btn:hover { transform:translateY(-3px) scale(1.05); box-shadow:0 6px 10px rgba(0,0,0,0.15); }
+    .service-modal { display:none; position:fixed; top:0; left:0; width:100%; height:100%; background:rgba(0,0,0,0.6); z-index:1000; justify-content:center; align-items:center; }
+    .modal-content { background:#fff; padding:2rem; border-radius:12px; max-width:600px; width:90%; position:relative; text-align:center; }
+    .close-modal { position:absolute; top:1rem; right:1rem; font-size:1.5rem; font-weight:bold; cursor:pointer; color:#1d1f20; }
+    footer { text-align:center; padding:1.5rem; background:#1d1f20; color:#f4c842; }
+  </style>
 </head>
-
 <body>
 
   <header>
@@ -24,38 +37,67 @@
     <a href="mailto:hamadineagmoctar@gmail.com">Contact</a>
   </nav>
 
-  <section>
-    <div class="service">
-      <h2>🌐 Traduction multilingue</h2>
-      <p>Traduction professionnelle de documents, articles, contenus web, contrats ou supports techniques en plus de 15 langues, avec une spécialisation en langues africaines rares (Tamasheq, Songhaï, Tadaksahak, Haoussa…).</p>
-    </div>
+  <section id="services-section">
+    <button class="service-btn" data-service="translation">🌐 Traduction multilingue</button>
+    <button class="service-btn" data-service="interpretation">🎙️ Interprétation simultanée & consécutive</button>
+    <button class="service-btn" data-service="annotation">🧠 Annotation linguistique & IA</button>
+    <button class="service-btn" data-service="transcription">📜 Transcription & adaptation</button>
+    <button class="service-btn" data-service="mediation">🌱 Médiation culturelle & éducation linguistique</button>
 
-    <div class="service">
-      <h2>🎙️ Interprétation simultanée & consécutive</h2>
-      <p>Services d’interprétation en présentiel ou à distance pour conférences, missions humanitaires, réunions internationales et contextes multilingues. Expérience avec ONU, IOM, Takuba et autres agences de terrain.</p>
-    </div>
-
-    <div class="service">
-      <h2>🧠 Annotation linguistique & IA</h2>
-      <p>Participation à des projets de traitement automatique du langage naturel (TALN) : segmentation, transcription, normalisation, vérification de corpus, annotation audio, entraînement de modèles IA dans des langues sous-représentées.</p>
-    </div>
-
-    <div class="service">
-      <h2>📜 Transcription & adaptation</h2>
-      <p>Transcription d’interviews, vidéos, podcasts, réunions… avec possibilité d’adaptation et de traduction simultanée. Formats personnalisés pour les médias, les ONG et les laboratoires de recherche.</p>
-    </div>
-
-    <div class="service">
-      <h2>🌱 Médiation culturelle & éducation linguistique</h2>
-      <p>Accompagnement interculturel, développement de ressources éducatives, dictionnaires collaboratifs (ex : projet Tadaksahak), modules pédagogiques multilingues, et sensibilisation à la diversité linguistique.</p>
+    <!-- Contenus pour AJAX -->
+    <div style="display:none;">
+      <div data-service="translation">
+        <p>Traduction professionnelle de documents, articles, contenus web, contrats ou supports techniques en plus de 15 langues, avec spécialisation en langues africaines rares (Tamasheq, Songhaï, Tadaksahak, Haoussa…).</p>
+      </div>
+      <div data-service="interpretation">
+        <p>Interprétation en présentiel ou à distance pour conférences, missions humanitaires, réunions internationales. Expérience ONU, IOM, Takuba et agences de terrain.</p>
+      </div>
+      <div data-service="annotation">
+        <p>Projets de TALN : segmentation, transcription, normalisation, vérification de corpus, annotation audio, entraînement IA dans des langues sous-représentées.</p>
+      </div>
+      <div data-service="transcription">
+        <p>Transcription d’interviews, vidéos, podcasts, réunions, avec adaptation et traduction simultanée. Formats personnalisés pour médias, ONG et laboratoires de recherche.</p>
+      </div>
+      <div data-service="mediation">
+        <p>Accompagnement interculturel, dictionnaires collaboratifs, modules pédagogiques multilingues et sensibilisation à la diversité linguistique.</p>
+      </div>
     </div>
   </section>
+
+  <!-- Modal -->
+  <div id="serviceModal" class="service-modal">
+    <div class="modal-content">
+      <span class="close-modal">&times;</span>
+      <h2 id="modal-title"></h2>
+      <p id="modal-desc"></p>
+    </div>
+  </div>
 
   <footer>
     © 2025 HAM Global Words – Tous droits réservés | Site en construction
   </footer>
 
-  <!-- Script JavaScript placé à la fin pour charger après le DOM -->
-  <script src="assetes/js/script.js"></script>
+  <script>
+    // Modal JS
+    const modal = document.getElementById('serviceModal');
+    const modalTitle = document.getElementById('modal-title');
+    const modalDesc = document.getElementById('modal-desc');
+    const closeModal = document.querySelector('.close-modal');
+
+    document.querySelectorAll('.service-btn').forEach(btn => {
+      btn.addEventListener('click', () => {
+        const serviceKey = btn.getAttribute('data-service');
+        const contentDiv = document.querySelector(`div[data-service="${serviceKey}"]`);
+        if(contentDiv){
+          modalTitle.textContent = btn.textContent;
+          modalDesc.innerHTML = contentDiv.innerHTML;
+          modal.style.display = 'flex';
+        }
+      });
+    });
+
+    closeModal.addEventListener('click', () => { modal.style.display = 'none'; });
+    window.addEventListener('click', e => { if(e.target === modal) modal.style.display = 'none'; });
+  </script>
 </body>
 </html>
