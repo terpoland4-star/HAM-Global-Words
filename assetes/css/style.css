@@ -1,4 +1,6 @@
-/* === FONT + RESET === */
+/* ============================
+   RESET + FONTS
+============================ */
 @import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&display=swap');
 
 * {
@@ -9,13 +11,13 @@
 
 body {
   font-family: 'Montserrat', sans-serif;
-  background-color: var(--bg-color);
-  color: var(--text-color);
   line-height: 1.6;
   transition: background-color 0.3s, color 0.3s;
 }
 
-/* === VARIABLES COULEURS === */
+/* ============================
+   VARIABLES (light + dark)
+============================ */
 :root {
   --bg-color: #f4f4f4;
   --text-color: #222;
@@ -30,7 +32,6 @@ body {
   --footer-text: #333;
 }
 
-/* === MODE SOMBRE === */
 body.dark-mode {
   --bg-color: #121212;
   --text-color: #f4f4f4;
@@ -38,19 +39,29 @@ body.dark-mode {
   --header-text: #f4f4f4;
   --cta-bg: #1a1a1a;
   --cta-text: #f4f4f4;
-  --cta-btn-bg: #f4c842;
-  --cta-btn-text: #1d1f20;
-  --cta-btn-hover: #d3ac2b;
   --footer-bg: #1a1a1a;
   --footer-text: #f4f4f4;
 }
 
-/* === HEADER === */
+/* ============================
+   LAYOUT : HEADER, NAV, FOOTER
+============================ */
+body {
+  background-color: var(--bg-color);
+  color: var(--text-color);
+}
+
 header {
   background-color: var(--header-bg);
   color: var(--header-text);
   padding: 2rem 1rem;
   text-align: center;
+}
+
+header img {
+  display: block;
+  margin: 0 auto 10px auto;
+  max-height: 80px;
 }
 
 header h1 {
@@ -63,16 +74,15 @@ header p {
   font-size: 1.2rem;
 }
 
-/* === NAVIGATION === */
 nav {
-  background-color: #f4c842;
+  background-color: var(--cta-btn-bg);
   text-align: center;
   padding: 0.5rem 0;
 }
 
 nav a {
   text-decoration: none;
-  color: #1d1f20;
+  color: var(--cta-btn-text);
   font-weight: bold;
   margin: 0 1rem;
   transition: color 0.3s;
@@ -82,13 +92,23 @@ nav a:hover {
   color: #444;
 }
 
-/* === SECTIONS === */
 section {
   padding: 2rem 1rem;
   max-width: 900px;
   margin: auto;
 }
 
+footer {
+  text-align: center;
+  padding: 1rem;
+  background-color: var(--footer-bg);
+  color: var(--footer-text);
+  font-size: 0.9rem;
+}
+
+/* ============================
+   UI : Titres, listes, CTA
+============================ */
 h2 {
   color: var(--text-color);
   margin-bottom: 1rem;
@@ -99,7 +119,6 @@ ul {
   padding-left: 1.5rem;
 }
 
-/* === CTA === */
 .cta {
   background-color: var(--cta-bg);
   color: var(--cta-text);
@@ -123,44 +142,141 @@ ul {
   background-color: var(--cta-btn-hover);
 }
 
-/* === FOOTER === */
-footer {
-  text-align: center;
-  padding: 1rem;
-  background-color: var(--footer-bg);
-  color: var(--footer-text);
-  font-size: 0.9rem;
-}
-
-/* === FORMULAIRE CONTACT === */
+/* ============================
+   FORMULAIRE
+============================ */
 form {
   display: flex;
   flex-direction: column;
   gap: 1rem;
 }
 
-form input, form textarea, form button {
-  padding: 0.8rem;
+form input,
+form textarea {
+  padding: 1rem;
   font-size: 1rem;
-  border-radius: 4px;
+  border-radius: 6px;
   border: 1px solid #ccc;
-  width: 100%;
   max-width: 500px;
+  width: 100%;
+  background-color: #fff;
+  transition: border-color 0.2s;
+}
+
+form input:focus,
+form textarea:focus {
+  border-color: var(--cta-btn-bg);
+  outline: none;
 }
 
 form button {
   background-color: var(--cta-btn-bg);
   color: var(--cta-btn-text);
-  cursor: pointer;
+  padding: 0.9rem 1.8rem;
+  border-radius: 8px;
   border: none;
-  transition: background 0.3s;
+  font-weight: 600;
+  font-size: 1rem;
+  box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+  transition: all 0.25s ease;
 }
 
 form button:hover {
   background-color: var(--cta-btn-hover);
+  transform: translateY(-2px);
 }
 
-/* === BANNIÈRE COOKIES === */
+/* ============================
+   MODALE SERVICES
+============================ */
+.service-modal {
+  display: none;
+  position: fixed;
+  z-index: 2000;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  overflow: auto;
+  background-color: rgba(0,0,0,0.6);
+}
+
+.modal-content {
+  background: #fff;
+  padding: 2.5rem;
+  border-radius: 12px;
+  box-shadow: 0 12px 24px rgba(0, 0, 0, 0.15);
+  margin: 10% auto;
+  width: 90%;
+  max-width: 600px;
+  text-align: center;
+  animation: fadeIn 0.3s ease-out;
+}
+
+.close-modal {
+  float: right;
+  font-size: 1.5rem;
+  cursor: pointer;
+  color: #333;
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; transform: scale(0.95); }
+  to { opacity: 1; transform: scale(1); }
+}
+
+/* ============================
+   UI FLOTTANTS : lang + contact
+============================ */
+.lang-switcher {
+  position: fixed;
+  top: 1rem;
+  right: 1rem;
+  z-index: 1000;
+}
+
+.lang-switcher button {
+  padding: 0.5rem 1rem;
+  background-color: var(--cta-btn-bg);
+  color: var(--cta-btn-text);
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  font-weight: bold;
+}
+
+.lang-switcher button:hover {
+  background-color: var(--cta-btn-hover);
+}
+
+.quick-contact {
+  position: fixed;
+  bottom: 2rem;
+  right: 2rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  z-index: 1000;
+}
+
+.quick-contact a {
+  background: var(--cta-btn-bg);
+  color: var(--cta-btn-text);
+  padding: 0.5rem 1rem;
+  border-radius: 8px;
+  text-decoration: none;
+  font-weight: bold;
+  text-align: center;
+  transition: transform 0.2s;
+}
+
+.quick-contact a:hover {
+  transform: scale(1.1);
+}
+
+/* ============================
+   BANNIÈRE COOKIES
+============================ */
 .cookie-banner {
   position: fixed;
   bottom: 0;
@@ -177,29 +293,36 @@ form button:hover {
   display: block;
 }
 
-/* === SWITCHER LANGUE === */
-.lang-switcher {
-  position: fixed;
-  top: 1rem;
-  right: 1rem;
-  z-index: 1000;
-}
+/* ============================
+   RESPONSIVE
+============================ */
+@media (max-width: 600px) {
+  header h1 {
+    font-size: 1.8rem;
+  }
 
-.lang-switcher button {
-  padding: 0.5rem 1rem;
-  background-color: #f4c842;
-  color: #1d1f20;
-  border: none;
-  border-radius: 4px;
-  cursor: pointer;
-  font-weight: bold;
-}
+  nav a {
+    display: block;
+    margin: 0.5rem 0;
+  }
 
-.lang-switcher button:hover {
-  background-color: #d3ac2b;
-}
-header img {
-  display: block;
-  margin: 0 auto 10px auto;
-}
+  form input,
+  form textarea,
+  form button {
+    font-size: 0.95rem;
+    max-width: 100%;
+  }
 
+  .lang-switcher {
+    top: auto;
+    bottom: 1rem;
+    right: 1rem;
+  }
+
+  .quick-contact {
+    bottom: 1rem;
+    right: 1rem;
+    flex-direction: row;
+    gap: 0.8rem;
+  }
+}
