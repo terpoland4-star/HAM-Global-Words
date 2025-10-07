@@ -141,6 +141,33 @@ ul {
 .cta a:hover {
   background-color: var(--cta-btn-hover);
 }
+.readme-preview {
+  text-align: left;
+  background: #fff;
+  color: #222;
+  padding: 2rem;
+  border-radius: 8px;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.05);
+  max-width: 800px;
+  margin: 2rem auto 0 auto;
+  font-size: 1rem;
+  line-height: 1.7;
+}
+
+.readme-preview h1,
+.readme-preview h2 {
+  margin-top: 2rem;
+  color: var(--text-color);
+}
+
+.readme-preview p {
+  margin-bottom: 1rem;
+}
+
+.readme-preview ul {
+  list-style-type: "🗸 ";
+  padding-left: 1.5rem;
+}
 
 /* ============================
    FORMULAIRE
