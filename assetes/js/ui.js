@@ -1,29 +1,33 @@
 // ==========================
-// FORMULAIRE DYNAMIQUE (dans .cta)
+// CHARGER README.md DANS .cta
 // ==========================
 document.addEventListener("DOMContentLoaded", () => {
   const contactSection = document.querySelector(".cta");
 
-  if (contactSection) {
-    const form = document.createElement("form");
-    form.setAttribute("aria-label", "Formulaire de contact");
-    form.innerHTML = `
-      <input type="text" name="name" placeholder="Votre nom" required aria-label="Votre nom">
-      <input type="email" name="email" placeholder="Votre email" required aria-label="Votre email">
-      <textarea name="message" placeholder="Votre message" required aria-label="Votre message"></textarea>
-      <button type="submit">Envoyer</button>
-      <p class="form-response" style="margin-top:1rem;color:green;display:none;"></p>
-    `;
-    contactSection.appendChild(form);
+  // Supprimer lien mailto s'il existe
+  const mailtoLink = contactSection?.querySelector('a[href^="mailto:"]');
+  if (mailtoLink) mailtoLink.remove();
 
-    form.addEventListener("submit", function (e) {
-      e.preventDefault();
-      const response = form.querySelector(".form-response");
-      response.textContent = "✅ Merci ! Votre message a été envoyé.";
-      response.style.display = "block";
-      form.reset();
-    });
+  if (contactSection) {
+    fetch("assets/docs/README.md")
+      .then((res) => res.text())
+      .then((md) => {
+        const html = marked.parse(md); // Convertir Markdown en HTML
+        const readmeContainer = document.createElement("div");
+        readmeContainer.innerHTML = html;
+        readmeContainer.classList.add("readme-preview");
+        contactSection.appendChild(readmeContainer);
+      })
+      .catch((err) => {
+        contactSection.innerHTML += "<p>Impossible de charger le fichier README.md.</p>";
+        console.error("Erreur README:", err);
+      });
   }
+
+  // Adresse mail conservée pour usage interne
+  const internalMail = "hamadineagmoctar@gmail.com";
+});
+
 
   // ==========================
   // BANNIÈRE COOKIES
