@@ -3,66 +3,41 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <meta name="description" content="Explorez les services linguistiques de HAM Global Words : traduction, interprétation, annotation IA, transcription, médiation culturelle." />
+  <meta name="description" content="Découvrez les services linguistiques de HAM Global Words : traduction, interprétation, annotation IA, transcription et médiation culturelle." />
   <title>Nos Services – HAM Global Words</title>
 
-  <!-- Fonts -->
-  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&display=swap" rel="stylesheet" />
-
-  <!-- CSS -->
   <link rel="stylesheet" href="assetes/css/style.css" />
-
-  <!-- Favicon -->
   <link rel="icon" href="assetes/img/logo.png" type="image/png" />
 </head>
-<body>
 
+<body>
   <header>
     <h1>Nos Services</h1>
-    <p>HAM Global Words – Langues du Sahel, Voix du monde</p>
+    <p>Langues du Sahel, voix du monde</p>
   </header>
 
   <nav>
     <a href="index.html">Accueil</a>
     <a href="services.html" aria-current="page">Services</a>
     <a href="#contact">Contact</a>
+    <button id="themeToggle">🌙</button>
   </nav>
 
   <main>
-    <section id="services-section" aria-labelledby="services-title">
-      <h2 id="services-title">🛠️ Nos Services</h2>
+    <section>
+      <h2>🛠️ Découvrez nos expertises</h2>
       <div class="services-list">
         <button class="service-btn" data-service="translation">🌐 Traduction multilingue</button>
-        <button class="service-btn" data-service="interpretation">🎙️ Interprétation simultanée & consécutive</button>
-        <button class="service-btn" data-service="annotation">🧠 Annotation linguistique & IA</button>
-        <button class="service-btn" data-service="transcription">📜 Transcription & adaptation</button>
-        <button class="service-btn" data-service="mediation">🌱 Médiation culturelle & éducation linguistique</button>
-      </div>
-
-      <!-- Contenu des services (caché, pour AJAX ou DOM access) -->
-      <div class="service-content" style="display: none;">
-        <div data-service="translation">
-          <p>Traduction professionnelle de documents, articles, contenus web, contrats ou supports techniques en plus de 15 langues, avec spécialisation en langues africaines rares (Tamasheq, Songhaï, Tadaksahak, Haoussa…).</p>
-        </div>
-        <div data-service="interpretation">
-          <p>Interprétation en présentiel ou à distance pour conférences, missions humanitaires, réunions internationales. Expérience ONU, IOM, Takuba et agences de terrain.</p>
-        </div>
-        <div data-service="annotation">
-          <p>Projets de TALN : segmentation, transcription, normalisation, vérification de corpus, annotation audio, entraînement IA dans des langues sous-représentées.</p>
-        </div>
-        <div data-service="transcription">
-          <p>Transcription d’interviews, vidéos, podcasts, réunions, avec adaptation et traduction simultanée. Formats personnalisés pour médias, ONG et laboratoires de recherche.</p>
-        </div>
-        <div data-service="mediation">
-          <p>Accompagnement interculturel, dictionnaires collaboratifs, modules pédagogiques multilingues et sensibilisation à la diversité linguistique.</p>
-        </div>
+        <button class="service-btn" data-service="interpretation">🎙️ Interprétation</button>
+        <button class="service-btn" data-service="annotation">🧠 Annotation IA</button>
+        <button class="service-btn" data-service="transcription">📜 Transcription</button>
+        <button class="service-btn" data-service="mediation">🌱 Médiation culturelle</button>
       </div>
     </section>
 
-    <!-- Modale pour afficher les services -->
-    <div id="serviceModal" class="service-modal" role="dialog" aria-modal="true" aria-labelledby="modal-title">
+    <div id="serviceModal" class="service-modal">
       <div class="modal-content">
-        <button type="button" class="close-modal" aria-label="Fermer la modale">×</button>
+        <button class="close-modal" aria-label="Fermer">×</button>
         <h2 id="modal-title"></h2>
         <p id="modal-desc"></p>
       </div>
@@ -70,12 +45,10 @@
   </main>
 
   <footer>
-    © <span id="year">2025</span> HAM Global Words – Tous droits réservés | Site en construction
+    © <span id="year">2025</span> HAM Global Words – Tous droits réservés
   </footer>
 
-  <!-- JS -->
-  <script src="assetes/js/main.js" defer></script>
   <script src="assetes/js/modal.js" defer></script>
-  <script src="assetes/js/ui.js" defer></script>
+  <script src="assetes/js/main.js" defer></script>
 </body>
 </html>
