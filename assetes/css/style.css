@@ -353,3 +353,288 @@ form button:hover {
     gap: 0.8rem;
   }
 }
+
+/* ============================
+   🎛️ BOUTONS MODERNISÉS
+============================ */
+
+/* Style de base unifié pour tous les boutons */
+button,
+a.button,
+.cta a,
+form button,
+.lang-switcher button,
+.quick-contact a {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  background: var(--cta-btn-bg);
+  color: var(--cta-btn-text);
+  font-weight: 600;
+  font-size: 1rem;
+  border: none;
+  border-radius: 50px;
+  cursor: pointer;
+  padding: 0.9rem 1.8rem;
+  text-decoration: none;
+  overflow: hidden;
+  transition: all 0.3s ease;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+}
+
+/* Effet de survol fluide + léger halo */
+button:hover,
+a.button:hover,
+.cta a:hover,
+form button:hover,
+.lang-switcher button:hover,
+.quick-contact a:hover {
+  background: var(--cta-btn-hover);
+  transform: translateY(-3px);
+  box-shadow: 0 6px 18px rgba(0,0,0,0.25);
+}
+
+/* Animation subtile de lumière qui glisse */
+button::before,
+a.button::before,
+.cta a::before,
+form button::before,
+.lang-switcher button::before,
+.quick-contact a::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: -75%;
+  width: 50%;
+  height: 100%;
+  background: linear-gradient(
+    120deg,
+    transparent,
+    rgba(255,255,255,0.4),
+    transparent
+  );
+  transform: skewX(-20deg);
+  transition: 0.75s;
+}
+
+button:hover::before,
+a.button:hover::before,
+.cta a:hover::before,
+form button:hover::before,
+.lang-switcher button:hover::before,
+.quick-contact a:hover::before {
+  left: 125%;
+}
+
+/* Effet "clic" rapide */
+button:active,
+a.button:active,
+.cta a:active,
+form button:active {
+  transform: translateY(0);
+  box-shadow: 0 2px 6px rgba(0,0,0,0.15);
+}
+
+/* Boutons circulaires (ex: langues) */
+.lang-switcher button {
+  border-radius: 50%;
+  width: 42px;
+  height: 42px;
+  padding: 0;
+  font-size: 1.1rem;
+  line-height: 1;
+}
+
+/* Boutons de contact flottants */
+.quick-contact a {
+  border-radius: 8px;
+  font-size: 0.95rem;
+}
+
+/* Style d'accentuation pour call-to-action principaux */
+.cta a {
+  font-size: 1.05rem;
+  letter-spacing: 0.5px;
+}
+
+/* Effet de focus (accessibilité) */
+button:focus-visible,
+a.button:focus-visible,
+form button:focus-visible,
+.cta a:focus-visible {
+  outline: 3px solid var(--cta-btn-hover);
+  outline-offset: 3px;
+}
+
+/* ============================
+   🌙 MODE SOMBRE ANIMÉ + GLOW
+============================ */
+
+body.dark-mode {
+  background: linear-gradient(145deg, #0d0d0d, #1a1a1a);
+  color: var(--text-color);
+  transition: background 1s ease, color 0.5s ease;
+}
+
+/* Effet lumineux doux sur le texte principal */
+header h1 {
+  position: relative;
+  font-weight: 700;
+  letter-spacing: 1px;
+  text-shadow: 0 0 12px rgba(255, 215, 0, 0.15);
+  animation: titleGlow 3s ease-in-out infinite alternate;
+}
+
+@keyframes titleGlow {
+  from { text-shadow: 0 0 10px rgba(255, 215, 0, 0.1); }
+  to { text-shadow: 0 0 25px rgba(255, 215, 0, 0.4); }
+}
+
+/* Survol lumineux des liens de navigation */
+nav a {
+  position: relative;
+  transition: color 0.3s, text-shadow 0.3s;
+}
+nav a:hover {
+  color: var(--cta-btn-text);
+  text-shadow: 0 0 12px rgba(255, 215, 0, 0.5);
+}
+
+/* ============================
+   🔆 BOUTONS LUMINESCENTS PREMIUM
+============================ */
+button,
+a.button,
+.cta a,
+form button {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.6rem;
+  background: linear-gradient(145deg, var(--cta-btn-bg), #ffd65b);
+  color: var(--cta-btn-text);
+  border: none;
+  border-radius: 50px;
+  padding: 1rem 2.2rem;
+  font-size: 1.05rem;
+  font-weight: 700;
+  cursor: pointer;
+  letter-spacing: 0.4px;
+  transition: all 0.35s ease;
+  overflow: hidden;
+  box-shadow: 0 6px 20px rgba(212, 175, 55, 0.25);
+}
+
+button:hover,
+.cta a:hover,
+form button:hover {
+  transform: translateY(-3px) scale(1.03);
+  box-shadow: 0 10px 25px rgba(255, 215, 0, 0.35);
+  background: linear-gradient(145deg, #ffda5c, #f4c842);
+}
+
+/* Effet de vague lumineuse */
+button::before,
+.cta a::before,
+form button::before {
+  content: "";
+  position: absolute;
+  width: 140%;
+  height: 140%;
+  top: -20%;
+  left: -20%;
+  background: radial-gradient(
+    circle,
+    rgba(255, 255, 255, 0.25) 0%,
+    transparent 60%
+  );
+  transform: scale(0);
+  opacity: 0;
+  transition: transform 0.6s ease, opacity 0.4s ease;
+}
+
+button:hover::before,
+.cta a:hover::before,
+form button:hover::before {
+  transform: scale(1);
+  opacity: 1;
+}
+
+/* ============================
+   🌍 ANIMATIONS AU SCROLL
+============================ */
+[data-animate] {
+  opacity: 0;
+  transform: translateY(30px);
+  transition: all 1s cubic-bezier(0.2, 0.8, 0.2, 1);
+}
+
+[data-animate].visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* Apparition douce du contenu */
+section {
+  animation: fadeSlide 1.2s ease forwards;
+  opacity: 0;
+}
+@keyframes fadeSlide {
+  0% { opacity: 0; transform: translateY(20px); }
+  100% { opacity: 1; transform: translateY(0); }
+}
+
+/* ============================
+   ✨ ÉCLAT DORÉ FLUIDE (effet IA)
+============================ */
+.glow-line {
+  position: absolute;
+  top: 0;
+  left: -50%;
+  width: 50%;
+  height: 100%;
+  background: linear-gradient(90deg, transparent, rgba(255, 215, 0, 0.3), transparent);
+  animation: shimmer 3s linear infinite;
+  pointer-events: none;
+  border-radius: inherit;
+}
+
+@keyframes shimmer {
+  0% { left: -50%; }
+  100% { left: 150%; }
+}
+
+/* ============================
+   🪄 EFFETS INTERACTIFS
+============================ */
+.cta:hover {
+  background: linear-gradient(135deg, #1d1f20 0%, #2a2d2e 100%);
+  box-shadow: 0 0 30px rgba(244, 200, 66, 0.15);
+}
+
+/* Survol sur cartes ou blocs (si présents) */
+.card:hover, .readme-preview:hover {
+  transform: translateY(-6px);
+  box-shadow: 0 10px 24px rgba(0,0,0,0.15);
+  transition: all 0.3s ease;
+}
+
+/* ============================
+   💬 Effet d’écriture IA (optionnel)
+============================ */
+.typewriter {
+  overflow: hidden;
+  white-space: nowrap;
+  border-right: 3px solid var(--cta-btn-bg);
+  animation: typing 3.5s steps(40, end), blink 0.75s step-end infinite;
+}
+@keyframes typing {
+  from { width: 0; }
+  to { width: 100%; }
+}
+@keyframes blink {
+  50% { border-color: transparent; }
+}
