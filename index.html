@@ -3,73 +3,72 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <meta name="description" content="HAM Global Words propose des services linguistiques spécialisés en langues africaines et IA. Traduction, interprétation, transcription, annotation, médiation culturelle." />
-  <title data-i18n="pageTitle">HAM Global Words – Services Linguistiques</title>
+  <meta name="description" content="HAM Global Words – Services linguistiques et IA. Traduction, interprétation, annotation, médiation culturelle en langues africaines et internationales." />
+  <title>HAM Global Words – Langues du Sahel, voix du monde</title>
 
-  <!-- Fonts -->
-  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&display=swap" rel="stylesheet" />
-
-  <!-- Styles -->
   <link rel="stylesheet" href="assetes/css/style.css" />
-
-  <!-- Favicon -->
   <link rel="icon" href="assetes/img/logo.png" type="image/png" />
-  <link rel="apple-touch-icon" href="assetes/img/logoHAM.png" />
 </head>
 
 <body>
   <header>
-    <img src="assetes/img/logoHAM.png" alt="Logo HAM Global Words" style="max-height: 80px;" />
-    <h1 data-i18n="headerTitle">HAM Global Words</h1>
-    <p data-i18n="headerText">Langues du Sahel, voix du monde</p>
+    <img src="assetes/img/logoHAM.png" alt="Logo HAM Global Words" class="logo" />
+    <h1>HAM Global Words</h1>
+    <p>Langues du Sahel, voix du monde</p>
+    <div class="header-buttons">
+      <a href="services.html" class="btn-primary">Découvrir nos services</a>
+      <a href="#contact" class="btn-secondary">Nous contacter</a>
+    </div>
   </header>
 
   <nav>
     <a href="index.html" aria-current="page">Accueil</a>
     <a href="services.html">Services</a>
-    <a href="#contact" data-i18n="contactBtn">Contact</a>
+    <a href="#contact">Contact</a>
+    <button id="themeToggle" aria-label="Changer de thème">🌙</button>
   </nav>
 
   <main>
-    <section>
-      <h2 data-i18n="aboutTitle">🌐 À propos</h2>
-      <p data-i18n="aboutText">
-        <strong>HAM Global Words</strong> est une entreprise spécialisée dans les services linguistiques multilingues à fort impact culturel et technologique.
-        Fondée par <strong>Hamadine AG Moctar</strong>, elle s'engage à créer des ponts entre les langues africaines, l’intelligence artificielle, et les besoins du monde globalisé.
+    <section class="intro">
+      <h2>🌍 À propos</h2>
+      <p>
+        <strong>HAM Global Words</strong> relie les cultures et les technologies. Nous offrons des services linguistiques multilingues spécialisés dans les langues du Sahel et les projets d’intelligence artificielle, pour une communication plus inclusive et durable.
       </p>
     </section>
 
-    <section>
-      <h2 data-i18n="servicesTitle">🛠️ Nos Services</h2>
-      <ul>
-        <li data-i18n="service1">Traduction & interprétation (FR, EN, AR, TAM, SONGHAÏ, TADAKSAHAK...)</li>
-        <li data-i18n="service2">Annotation de données pour IA multilingue</li>
-        <li data-i18n="service3">Transcription et adaptation audio/vidéo</li>
-        <li data-i18n="service4">Développement de dictionnaires & ressources linguistiques africaines</li>
-        <li data-i18n="service5">Médiation culturelle et projets humanitaires linguistiques</li>
-      </ul>
+    <section class="services-preview">
+      <h2>🛠️ Nos principaux services</h2>
+      <div class="service-grid">
+        <div class="card">
+          <h3>🌐 Traduction</h3>
+          <p>Précise, fluide et culturellement adaptée en plus de 15 langues africaines et internationales.</p>
+        </div>
+        <div class="card">
+          <h3>🎙️ Interprétation</h3>
+          <p>Simultanée ou consécutive, sur site ou à distance pour conférences et missions internationales.</p>
+        </div>
+        <div class="card">
+          <h3>🧠 Annotation IA</h3>
+          <p>Création et vérification de corpus multilingues pour l'entraînement de modèles IA.</p>
+        </div>
+      </div>
+      <a href="services.html" class="btn-primary">Voir tous les services</a>
     </section>
 
     <section id="contact" class="cta">
-      <h2 data-i18n="ctaTitle">📩 Travaillons ensemble</h2>
-      <p data-i18n="ctaText">
-        Besoin d’un traducteur, interprète ou spécialiste des langues sahariennes pour un projet IA ou humanitaire ?
+      <h2>📩 Travaillons ensemble</h2>
+      <p>
+        Vous cherchez un traducteur, un interprète ou un expert linguistique pour un projet humanitaire ou IA ?
       </p>
-      <a href="mailto:hamadineagmoctar@gmail.com" data-i18n="contactBtn">Contactez-nous</a>
+      <a href="mailto:hamadineagmoctar@gmail.com" class="btn-primary">Contactez-nous</a>
     </section>
   </main>
 
-  <footer data-i18n="footerText">
-    © <span id="year">2025</span> HAM Global Words – Tous droits réservés | Site en construction<br />
-   📱 <a href="https://wa.me/22786762903" target="_blank" rel="noopener">WhatsApp</a>
+  <footer>
+    © <span id="year">2025</span> HAM Global Words – Tous droits réservés |
+    <a href="https://wa.me/22786762903" target="_blank" rel="noopener">📱 WhatsApp</a>
   </footer>
 
-  <!-- Scripts -->
   <script src="assetes/js/main.js" defer></script>
-  <script src="assetes/js/i18n.js" defer></script>
-  <script src="assetes/js/ui.js" defer></script>
-  <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
-  <script src="assetes/js/ui.js" defer></script>
-
 </body>
 </html>
