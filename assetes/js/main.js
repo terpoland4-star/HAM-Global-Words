@@ -58,25 +58,19 @@ document.querySelectorAll("section, .cta").forEach((el) => {
 document.addEventListener("DOMContentLoaded", () => {
   const contactSection = document.querySelector(".cta");
 
-  // Supprimer lien mailto existant
-  const mailtoLink = contactSection?.querySelector('a[href^="mailto:"]');
-  if (mailtoLink) mailtoLink.remove();
-
-  if (contactSection) {
-    fetch("assetes/docs/README.md")
-      .then((res) => res.text())
-      .then((md) => {
-        const html = marked.parse(md);
-        const readmeContainer = document.createElement("div");
-        readmeContainer.innerHTML = html;
-        readmeContainer.classList.add("readme-preview");
-        contactSection.appendChild(readmeContainer);
-      })
-      .catch((err) => {
-        contactSection.innerHTML +=
-          "<p>Impossible de charger le fichier README.md.</p>";
-        console.error("Erreur README:", err);
-      });
+  fetch("assetes/docs/README.md")
+    .then(res => res.text())
+    .then(md => {
+      const html = marked.parse(md);
+      const readmeContainer = document.createElement("div");
+      readmeContainer.innerHTML = html;
+      readmeContainer.classList.add("readme-preview");
+      contactSection.appendChild(readmeContainer);
+    })
+    .catch(err => {
+      contactSection.innerHTML += "<p>Impossible de charger le fichier README.md.</p>";
+      console.error("Erreur README:", err);
+    });
   }
 
   // ==========================
