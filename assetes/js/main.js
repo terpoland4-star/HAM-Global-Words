@@ -63,7 +63,7 @@ document.addEventListener("DOMContentLoaded", () => {
   if (mailtoLink) mailtoLink.remove();
 
   if (contactSection) {
-    fetch("assets/docs/README.md")
+    fetch("assetes/docs/README.md")
       .then((res) => res.text())
       .then((md) => {
         const html = marked.parse(md);
