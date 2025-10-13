@@ -1,49 +1,36 @@
 // ==========================
-// MODALE SERVICE – services.html uniquement
+// MODALE DES SERVICES
 // ==========================
+const modal = document.getElementById("serviceModal");
+const modalTitle = document.getElementById("modal-title");
+const modalDesc = document.getElementById("modal-desc");
+const closeModalBtn = document.querySelector(".close-modal");
 
-document.addEventListener("DOMContentLoaded", () => {
-  const modal = document.getElementById("serviceModal");
-  const modalTitle = document.getElementById("modal-title");
-  const modalDesc = document.getElementById("modal-desc");
-  const closeModal = document.querySelector(".close-modal");
-  const serviceButtons = document.querySelectorAll(".service-btn");
+const serviceButtons = document.querySelectorAll(".service-btn");
+const serviceContents = document.querySelectorAll(".service-content > div");
 
-  if (!modal || !modalTitle || !modalDesc) return;
+serviceButtons.forEach((btn) => {
+  btn.addEventListener("click", () => {
+    const serviceType = btn.getAttribute("data-service");
+    const content = Array.from(serviceContents).find(
+      (div) => div.getAttribute("data-service") === serviceType
+    );
 
-  // Affichage de la modale
-  serviceButtons.forEach((btn) => {
-    btn.addEventListener("click", () => {
-      const serviceKey = btn.getAttribute("data-service");
-      const contentDiv = document.querySelector(`.service-content [data-service="${serviceKey}"]`);
-      if (contentDiv) {
-        modalTitle.textContent = btn.textContent;
-        modalDesc.textContent = contentDiv.textContent;
-        modal.style.display = "flex";
-        modal.setAttribute("aria-hidden", "false");
-      }
-    });
-  });
-
-  // Fermeture de la modale
-  closeModal?.addEventListener("click", () => {
-    modal.style.display = "none";
-    modal.setAttribute("aria-hidden", "true");
-  });
-
-  // Fermer si clic à l'extérieur
-  window.addEventListener("click", (e) => {
-    if (e.target === modal) {
-      modal.style.display = "none";
-      modal.setAttribute("aria-hidden", "true");
+    if (content) {
+      modalTitle.textContent = btn.textContent;
+      modalDesc.textContent = content.textContent;
+      modal.classList.add("show");
+      document.body.style.overflow = "hidden"; // bloque scroll
     }
   });
+});
 
-  // ESC pour fermer
-  document.addEventListener("keydown", (e) => {
-    if (e.key === "Escape" && modal.style.display === "flex") {
-      modal.style.display = "none";
-      modal.setAttribute("aria-hidden", "true");
-    }
-  });
+const closeModal = () => {
+  modal.classList.remove("show");
+  document.body.style.overflow = "auto";
+};
+
+if (closeModalBtn) closeModalBtn.addEventListener("click", closeModal);
+window.addEventListener("click", (e) => {
+  if (e.target === modal) closeModal();
 });
