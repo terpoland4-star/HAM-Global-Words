@@ -1,32 +1,36 @@
 /* ============================
-   🌙 THEME SAHEL NIGHT
-   Fond sombre + accents dorés et oasis
+   🌙 THEME SAHEL NIGHT DELUXE
+   Élégance sombre, accents dorés et oasis bleue
 ============================ */
 
-/* Palette principale */
 :root {
-  --bg-color: #0f1113; /* fond global sombre */
-  --text-color: #e9e9e9;
-  --header-bg: linear-gradient(135deg, #0d4d4d, #3aa6d0); /* vert saharien → bleu ciel */
+  --bg-color: #0d0f11;
+  --text-color: #eaeaea;
+  --header-bg: linear-gradient(135deg, #0b4b4b, #3ab6d0);
   --header-text: #fefefe;
-  --cta-bg: #111;
+  --cta-bg: #1a1a1a;
   --cta-text: #fefefe;
-  --cta-btn-bg: #d4a531; /* doré sable */
+  --cta-btn-bg: #d4a531;
   --cta-btn-text: #1a1a1a;
-  --cta-btn-hover: #f8d45c; /* doré plus lumineux */
-  --footer-bg: linear-gradient(135deg, #d4a531, #b88a1e); /* désert doré */
+  --cta-btn-hover: #f8d45c;
+  --footer-bg: linear-gradient(135deg, #d4a531, #b88a1e);
   --footer-text: #1a1a1a;
 }
 
-/* Corps du site */
+/* ============================
+   🌌 BODY
+============================ */
 body {
   background-color: var(--bg-color);
   color: var(--text-color);
   font-family: 'Montserrat', sans-serif;
-  transition: background-color 0.4s ease, color 0.4s ease;
+  transition: background 0.6s ease, color 0.4s ease;
+  overflow-x: hidden;
 }
 
-/* HEADER : Oasis nocturne */
+/* ============================
+   🌅 HEADER : OASIS NOCTURNE
+============================ */
 header {
   background: var(--header-bg);
   color: var(--header-text);
@@ -34,6 +38,24 @@ header {
   padding: 3rem 1.5rem;
   box-shadow: 0 8px 25px rgba(0, 0, 0, 0.5);
   position: relative;
+  overflow: hidden;
+}
+
+header::before {
+  content: "";
+  position: absolute;
+  top: -40%;
+  left: -40%;
+  width: 180%;
+  height: 180%;
+  background: radial-gradient(
+    circle at 50% 30%,
+    rgba(58, 166, 208, 0.12) 0%,
+    rgba(13, 77, 77, 0.15) 40%,
+    transparent 80%
+  );
+  animation: blueAura 25s linear infinite;
+  z-index: 0;
 }
 
 header::after {
@@ -47,6 +69,11 @@ header::after {
   transform: translateX(-50%);
 }
 
+header * {
+  position: relative;
+  z-index: 1;
+}
+
 header h1 {
   font-size: 2.8rem;
   font-weight: 700;
@@ -55,11 +82,20 @@ header h1 {
 
 header p {
   font-style: italic;
-  font-size: 1.3rem;
+  font-size: 1.2rem;
   opacity: 0.9;
 }
 
-/* NAVIGATION */
+/* Animation d’aura bleue */
+@keyframes blueAura {
+  0% { transform: rotate(0deg) scale(1); opacity: 0.7; }
+  50% { transform: rotate(180deg) scale(1.1); opacity: 1; }
+  100% { transform: rotate(360deg) scale(1); opacity: 0.7; }
+}
+
+/* ============================
+   🧭 NAVIGATION
+============================ */
 nav {
   background: #182020;
   text-align: center;
@@ -77,201 +113,127 @@ nav a {
 
 nav a:hover {
   color: #fff;
-  text-shadow: 0 0 8px #f4c842;
+  text-shadow: 0 0 10px #f4c842;
 }
 
-/* FOOTER : Désert doré */
-footer {
+/* ============================
+   👤 SECTION FONDATEUR
+============================ */
+.founder-section {
+  max-width: 900px;
+  margin: 4rem auto;
+  padding: 2rem 1.5rem;
+  background: #131516;
+  border-radius: 16px;
+  box-shadow: 0 8px 20px rgba(0,0,0,0.5);
   text-align: center;
-  padding: 2rem 1rem;
-  background: var(--footer-bg);
-  color: var(--footer-text);
-  font-weight: 600;
-  font-size: 1rem;
-  letter-spacing: 0.3px;
-  box-shadow: 0 -4px 25px rgba(0, 0, 0, 0.4);
+  animation: slideFadeIn 1.5s ease both;
 }
 
-footer a {
-  color: #1a1a1a;
-  font-weight: bold;
-  text-decoration: none;
-  transition: color 0.3s;
-}
-
-footer a:hover {
-  color: #3a2b00;
-}
-
-/* ============================
-   ✨ EFFETS VISUELS PREMIUM SAHEL NIGHT (version compacte)
-============================ */
-
-/* 1️⃣ Photo du fondateur – version plus petite */
 .founder-photo-container {
   position: relative;
   display: inline-block;
 }
 
 .founder-photo {
-  width: 120px;       /* Réduction de la taille */
-  height: 120px;
+  width: 110px;
+  height: 110px;
   border-radius: 50%;
   object-fit: cover;
   border: 3px solid #f4c842;
-  box-shadow: 0 0 15px rgba(244, 200, 66, 0.25);
+  box-shadow: 0 0 18px rgba(244, 200, 66, 0.25);
   transition: transform 0.4s ease, box-shadow 0.4s ease;
-  position: relative;
-  z-index: 1;
 }
 
 .founder-photo:hover {
-  transform: scale(1.05);
+  transform: scale(1.06);
   box-shadow: 0 0 25px rgba(244, 200, 66, 0.4);
 }
 
-/* ============================
-   ✨ EFFETS VISUELS PREMIUM SAHEL NIGHT (version compacte)
-============================ */
-
-/* 1️⃣ Photo du fondateur – version plus petite */
-.founder-photo-container {
-  position: relative;
-  display: inline-block;
-}
-
-.founder-photo {
-  width: 120px;       /* Réduction de la taille */
-  height: 120px;
-  border-radius: 50%;
-  object-fit: cover;
-  border: 3px solid #f4c842;
-  box-shadow: 0 0 15px rgba(244, 200, 66, 0.25);
-  transition: transform 0.4s ease, box-shadow 0.4s ease;
-  position: relative;
-  z-index: 1;
-}
-
-.founder-photo:hover {
-  transform: scale(1.05);
-  box-shadow: 0 0 25px rgba(244, 200, 66, 0.4);
-}
-
-/* Halo doré allégé autour de la photo */
+/* Halo doré doux autour */
 .founder-photo-container::before {
   content: "";
   position: absolute;
   top: 50%;
   left: 50%;
-  width: 160px; /* réduit par rapport à la photo */
-  height: 160px;
+  width: 150px;
+  height: 150px;
   transform: translate(-50%, -50%);
   border-radius: 50%;
-  background: radial-gradient(
-    circle,
-    rgba(244, 200, 66, 0.25) 0%,
-    rgba(244, 200, 66, 0.08) 40%,
-    transparent 70%
-  );
+  background: radial-gradient(circle, rgba(244, 200, 66, 0.15), transparent 70%);
   filter: blur(20px);
   animation: goldenPulse 6s ease-in-out infinite;
-  z-index: 0;
 }
 
 @keyframes goldenPulse {
-  0%, 100% {
-    opacity: 0.5;
-    transform: translate(-50%, -50%) scale(1);
-  }
-  50% {
-    opacity: 0.9;
-    transform: translate(-50%, -50%) scale(1.1);
-  }
+  0%, 100% { opacity: 0.4; transform: scale(1); }
+  50% { opacity: 0.8; transform: scale(1.1); }
 }
 
-/* 2️⃣ Aura bleue mouvante dans le header */
-header::before {
-  content: "";
-  position: absolute;
-  top: -40%;
-  left: -40%;
-  width: 180%;
-  height: 180%;
-  background: radial-gradient(
-    circle at 50% 30%,
-    rgba(58, 166, 208, 0.12) 0%,
-    rgba(13, 77, 77, 0.15) 40%,
-    transparent 80%
-  );
-  animation: blueAura 20s linear infinite;
-  z-index: 0;
+/* Texte fondateur */
+.founder-bio p {
+  font-size: 1.05rem;
+  line-height: 1.8;
+  text-align: justify;
+  margin-top: 1rem;
+  color: #ddd;
 }
 
-@keyframes blueAura {
-  0% { transform: rotate(0deg) scale(1); opacity: 0.7; }
-  50% { transform: rotate(180deg) scale(1.1); opacity: 1; }
-  100% { transform: rotate(360deg) scale(1); opacity: 0.7; }
-}
-
-header * {
-  position: relative;
-  z-index: 1;
-}
-
-/* 3️⃣ Apparition du fondateur fluide */
-.founder-section {
-  animation: slideFadeIn 1.5s ease both;
-}
-
-@keyframes slideFadeIn {
-  from {
-    opacity: 0;
-    transform: translateY(40px);
-  }
-  to {
-    opacity: 1;
-    transform: translateY(0);
-  }
+.founder-bio blockquote {
+  background: rgba(212,165,49,0.1);
+  border-left: 4px solid #f4c842;
+  padding: 1rem 1.5rem;
+  font-style: italic;
+  margin: 2rem 0;
+  color: #f6e9c0;
 }
 
 /* ============================
-   🔗 LIENS DU FONDATEUR MODERNISÉS
+   🔗 SOCIAL BUTTONS PREMIUM
 ============================ */
 
 .founder-links {
   display: flex;
   justify-content: center;
-  align-items: center;
-  gap: 1rem;
-  margin-top: 2rem;
   flex-wrap: wrap;
+  gap: 1.2rem;
+  margin-top: 2rem;
 }
 
-/* Boutons sociaux unifiés */
 .founder-btn.social-btn {
+  position: relative;
   display: inline-flex;
   align-items: center;
-  justify-content: center;
   gap: 0.6rem;
-  background: rgba(255,255,255,0.1);
-  border: 1px solid rgba(255,255,255,0.15);
+  background: rgba(255, 255, 255, 0.07);
+  border: 1px solid rgba(244, 200, 66, 0.15);
   border-radius: 50px;
-  padding: 0.8rem 1.6rem;
-  font-weight: 600;
+  padding: 0.9rem 1.6rem;
   color: #f4f4f4;
+  font-weight: 600;
   text-decoration: none;
-  transition: all 0.3s ease;
-  box-shadow: 0 4px 10px rgba(0,0,0,0.2);
+  letter-spacing: 0.3px;
+  transition: all 0.35s ease;
+  overflow: hidden;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
 }
 
-.founder-btn.social-btn:hover {
-  background: linear-gradient(135deg, #f4c842, #b88a1e);
-  color: #111;
-  transform: translateY(-3px);
-  box-shadow: 0 6px 20px rgba(244, 200, 66, 0.3);
+.founder-btn.social-btn::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: -75%;
+  width: 50%;
+  height: 100%;
+  background: linear-gradient(120deg, transparent, rgba(255, 255, 255, 0.3), transparent);
+  transform: skewX(-20deg);
+  transition: 0.75s;
 }
 
-/* Icônes */
+.founder-btn.social-btn:hover::before {
+  left: 125%;
+}
+
 .founder-btn.social-btn img {
   width: 22px;
   height: 22px;
@@ -280,85 +242,89 @@ header * {
 }
 
 .founder-btn.social-btn:hover img {
-  filter: brightness(0) invert(0);
-  transform: scale(1.2);
+  transform: scale(1.25);
 }
 
-/* Couleurs personnalisées */
+/* Hover colorés */
 .founder-btn.linkedin:hover {
   background: linear-gradient(135deg, #0077b5, #00a0dc);
   color: #fff;
+  border-color: transparent;
+  box-shadow: 0 6px 20px rgba(0, 160, 220, 0.35);
 }
 
 .founder-btn.whatsapp:hover {
   background: linear-gradient(135deg, #25d366, #1ebe57);
   color: #fff;
+  border-color: transparent;
+  box-shadow: 0 6px 20px rgba(37, 211, 102, 0.35);
 }
 
-/* Effet doré pulsé pour Portfolio */
-.founder-btn.portfolio {
-  position: relative;
-  overflow: hidden;
+.founder-btn.portfolio:hover {
+  background: linear-gradient(135deg, #f4c842, #b88a1e);
+  color: #111;
+  border-color: transparent;
+  box-shadow: 0 6px 20px rgba(244, 200, 66, 0.45);
 }
-.founder-btn.portfolio::before {
-  content: "";
-  position: absolute;
-  width: 160%;
-  height: 160%;
-  top: -30%;
-  left: -30%;
-  background: radial-gradient(circle, rgba(255,255,255,0.2), transparent 70%);
+
+/* Apparition animée */
+.founder-btn.social-btn {
   opacity: 0;
-  transition: opacity 0.5s ease;
+  transform: translateY(15px);
+  animation: fadeUp 0.8s ease forwards;
 }
-.founder-btn.portfolio:hover::before {
-  opacity: 1;
-  animation: pulseLight 2s infinite ease-in-out;
-}
+.founder-btn.social-btn:nth-child(1) { animation-delay: 0.3s; }
+.founder-btn.social-btn:nth-child(2) { animation-delay: 0.5s; }
+.founder-btn.social-btn:nth-child(3) { animation-delay: 0.7s; }
 
-@keyframes pulseLight {
-  0%, 100% { transform: scale(1); opacity: 0.5; }
-  50% { transform: scale(1.2); opacity: 1; }
+@keyframes fadeUp {
+  to { opacity: 1; transform: translateY(0); }
 }
 
 /* ============================
-   🌟 FOOTER PRESTIGE – Effet désert doré
+   🏜️ FOOTER PRESTIGE
 ============================ */
-.footer-prestige {
+footer.footer-prestige {
   position: relative;
-  text-align: center;
-  padding: 3rem 1rem;
-  color: #111;
   background: var(--footer-bg);
+  color: var(--footer-text);
+  text-align: center;
+  padding: 3rem 1rem 1.5rem;
   overflow: hidden;
-  border-top: 3px solid rgba(255,255,255,0.15);
-}
-
-.footer-prestige .footer-gradient {
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  background: radial-gradient(circle at 50% 30%, rgba(255, 215, 0, 0.15), transparent 70%);
-  animation: shimmerGlow 12s linear infinite;
-  pointer-events: none;
 }
 
 .footer-logo-prestige {
-  width: 140px;
-  filter: drop-shadow(0 0 10px rgba(244, 200, 66, 0.4));
+  width: 130px;
   margin-bottom: 1rem;
+  filter: drop-shadow(0 0 10px rgba(244,200,66,0.4));
   transition: transform 0.5s ease;
 }
 
 .footer-logo-prestige:hover {
-  transform: scale(1.1);
+  transform: scale(1.08);
 }
 
-@keyframes shimmerGlow {
-  0% { background-position: 0% 50%; opacity: 0.6; }
-  50% { background-position: 100% 50%; opacity: 1; }
-  100% { background-position: 0% 50%; opacity: 0.6; }
+footer.footer-prestige p {
+  font-weight: 600;
+  margin-top: 0.5rem;
+  letter-spacing: 0.5px;
 }
 
+footer.footer-prestige a {
+  color: #111;
+  font-weight: bold;
+  text-decoration: none;
+  transition: color 0.3s;
+}
+
+footer.footer-prestige a:hover {
+  color: #3a2b00;
+}
+
+/* ============================
+   ANIMATIONS D’APPARITION
+============================ */
+@keyframes slideFadeIn {
+  from { opacity: 0; transform: translateY(30px); }
+  to { opacity: 1; transform: translateY(0); }
+}
