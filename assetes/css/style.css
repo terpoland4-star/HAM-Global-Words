@@ -279,10 +279,8 @@ nav a:hover {
 
 @keyframes fadeUp {
   to { opacity: 1; transform: translateY(0); }
-}
-
-/* ============================
-   🏜️ FOOTER PRESTIGE
+}/* ============================
+   🏜️ FOOTER PRESTIGE - SAHEL NIGHT DELUXE
 ============================ */
 footer.footer-prestige {
   position: relative;
@@ -291,34 +289,80 @@ footer.footer-prestige {
   text-align: center;
   padding: 3rem 1rem 1.5rem;
   overflow: hidden;
+  box-shadow: 0 -4px 20px rgba(0, 0, 0, 0.4);
 }
 
+/* Logo HAM – un peu plus grand et lumineux */
 .footer-logo-prestige {
-  width: 130px;
+  width: 180px; /* <== augmenté (avant 130px) */
   margin-bottom: 1rem;
-  filter: drop-shadow(0 0 10px rgba(244,200,66,0.4));
-  transition: transform 0.5s ease;
+  filter: drop-shadow(0 0 12px rgba(244, 200, 66, 0.4));
+  transition: transform 0.5s ease, filter 0.5s ease;
 }
 
 .footer-logo-prestige:hover {
-  transform: scale(1.08);
+  transform: scale(1.05);
+  filter: drop-shadow(0 0 25px rgba(244, 200, 66, 0.6));
 }
 
+/* ============================
+   🌐 BOUTON WHATSAPP DU FOOTER
+============================ */
+.footer-social {
+  margin: 1rem 0 0.5rem 0;
+}
+
+.footer-social a {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  text-decoration: none;
+  color: var(--footer-text);
+  font-weight: 600;
+  background: rgba(255, 255, 255, 0.25);
+  padding: 0.6rem 1.2rem;
+  border-radius: 50px;
+  transition: all 0.3s ease;
+}
+
+.footer-social a:hover {
+  background: linear-gradient(135deg, #25d366, #1ebe57);
+  color: #fff;
+  box-shadow: 0 0 18px rgba(37, 211, 102, 0.4);
+  transform: translateY(-3px);
+}
+
+/* Icône WhatsApp plus petite */
+.footer-whatsapp-icon {
+  width: 22px; /* avant : souvent 40px ou plus */
+  height: 22px;
+  filter: brightness(0) invert(1);
+  transition: transform 0.3s ease;
+}
+
+.footer-social a:hover .footer-whatsapp-icon {
+  transform: scale(1.15);
+  filter: brightness(1);
+}
+
+/* ============================
+   TEXTE DU FOOTER
+============================ */
 footer.footer-prestige p {
   font-weight: 600;
-  margin-top: 0.5rem;
-  letter-spacing: 0.5px;
+  margin-top: 0.8rem;
+  letter-spacing: 0.4px;
+  color: var(--footer-text);
 }
 
 footer.footer-prestige a {
-  color: #111;
-  font-weight: bold;
+  color: var(--footer-text);
   text-decoration: none;
-  transition: color 0.3s;
 }
 
 footer.footer-prestige a:hover {
-  color: #3a2b00;
+  color: #222;
 }
 
 /* ============================
