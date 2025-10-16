@@ -104,59 +104,134 @@ footer a:hover {
 }
 
 /* ============================
-   FONDATEUR : Mode prestige nocturne
+   ✨ EFFETS VISUELS PREMIUM SAHEL NIGHT (version compacte)
 ============================ */
-.founder-section {
-  background: linear-gradient(145deg, #141414, #1c1e20);
-  color: #f4f4f4;
-  border: 1px solid rgba(255,255,255,0.05);
-  box-shadow: 0 8px 28px rgba(0,0,0,0.6);
-  position: relative;
-}
 
-.founder-section::before {
-  content: "";
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 6px;
-  background: linear-gradient(90deg, #3aa6d0, #f4c842, #0d4d4d);
-  border-radius: 0 0 8px 8px;
+/* 1️⃣ Photo du fondateur – version plus petite */
+.founder-photo-container {
+  position: relative;
+  display: inline-block;
 }
 
 .founder-photo {
+  width: 120px;       /* Réduction de la taille */
+  height: 120px;
+  border-radius: 50%;
+  object-fit: cover;
   border: 3px solid #f4c842;
-  box-shadow: 0 0 20px rgba(244, 200, 66, 0.3);
+  box-shadow: 0 0 15px rgba(244, 200, 66, 0.25);
   transition: transform 0.4s ease, box-shadow 0.4s ease;
+  position: relative;
+  z-index: 1;
 }
 
 .founder-photo:hover {
   transform: scale(1.05);
-  box-shadow: 0 0 30px rgba(244, 200, 66, 0.5);
+  box-shadow: 0 0 25px rgba(244, 200, 66, 0.4);
 }
 
-.founder-info h2 {
-  color: #3aa6d0;
-  text-shadow: 0 0 10px rgba(58,166,208,0.5);
+/* ============================
+   ✨ EFFETS VISUELS PREMIUM SAHEL NIGHT (version compacte)
+============================ */
+
+/* 1️⃣ Photo du fondateur – version plus petite */
+.founder-photo-container {
+  position: relative;
+  display: inline-block;
 }
 
-.founder-info h3 {
-  color: #f4c842;
+.founder-photo {
+  width: 120px;       /* Réduction de la taille */
+  height: 120px;
+  border-radius: 50%;
+  object-fit: cover;
+  border: 3px solid #f4c842;
+  box-shadow: 0 0 15px rgba(244, 200, 66, 0.25);
+  transition: transform 0.4s ease, box-shadow 0.4s ease;
+  position: relative;
+  z-index: 1;
 }
 
-.founder-role {
-  color: #bfbfbf;
+.founder-photo:hover {
+  transform: scale(1.05);
+  box-shadow: 0 0 25px rgba(244, 200, 66, 0.4);
 }
 
-/* Citation dorée */
-.founder-bio blockquote {
-  background: rgba(244, 200, 66, 0.15);
-  color: #f8e7b0;
-  border-left: 4px solid #f4c842;
-  font-style: italic;
-  padding: 1rem 1.2rem;
-  border-radius: 8px;
+/* Halo doré allégé autour de la photo */
+.founder-photo-container::before {
+  content: "";
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 160px; /* réduit par rapport à la photo */
+  height: 160px;
+  transform: translate(-50%, -50%);
+  border-radius: 50%;
+  background: radial-gradient(
+    circle,
+    rgba(244, 200, 66, 0.25) 0%,
+    rgba(244, 200, 66, 0.08) 40%,
+    transparent 70%
+  );
+  filter: blur(20px);
+  animation: goldenPulse 6s ease-in-out infinite;
+  z-index: 0;
+}
+
+@keyframes goldenPulse {
+  0%, 100% {
+    opacity: 0.5;
+    transform: translate(-50%, -50%) scale(1);
+  }
+  50% {
+    opacity: 0.9;
+    transform: translate(-50%, -50%) scale(1.1);
+  }
+}
+
+/* 2️⃣ Aura bleue mouvante dans le header */
+header::before {
+  content: "";
+  position: absolute;
+  top: -40%;
+  left: -40%;
+  width: 180%;
+  height: 180%;
+  background: radial-gradient(
+    circle at 50% 30%,
+    rgba(58, 166, 208, 0.12) 0%,
+    rgba(13, 77, 77, 0.15) 40%,
+    transparent 80%
+  );
+  animation: blueAura 20s linear infinite;
+  z-index: 0;
+}
+
+@keyframes blueAura {
+  0% { transform: rotate(0deg) scale(1); opacity: 0.7; }
+  50% { transform: rotate(180deg) scale(1.1); opacity: 1; }
+  100% { transform: rotate(360deg) scale(1); opacity: 0.7; }
+}
+
+header * {
+  position: relative;
+  z-index: 1;
+}
+
+/* 3️⃣ Apparition du fondateur fluide */
+.founder-section {
+  animation: slideFadeIn 1.5s ease both;
+}
+
+@keyframes slideFadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(40px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
 }
 
 /* Liens du fondateur */
