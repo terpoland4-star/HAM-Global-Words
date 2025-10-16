@@ -1,36 +1,59 @@
 // ==========================
-// MODALE DES SERVICES
+// MODALE DYNAMIQUE – SERVICES
 // ==========================
-const modal = document.getElementById("serviceModal");
-const modalTitle = document.getElementById("modal-title");
-const modalDesc = document.getElementById("modal-desc");
-const closeModalBtn = document.querySelector(".close-modal");
+document.addEventListener("DOMContentLoaded", () => {
+  const buttons = document.querySelectorAll(".service-btn");
+  const modal = document.getElementById("serviceModal");
+  const modalTitle = document.getElementById("modal-title");
+  const modalDesc = document.getElementById("modal-desc");
+  const closeModalBtn = document.querySelector(".close-modal");
+  const serviceContents = document.querySelectorAll(".service-content [data-service]");
 
-const serviceButtons = document.querySelectorAll(".service-btn");
-const serviceContents = document.querySelectorAll(".service-content > div");
+  if (!buttons.length || !modal) return;
 
-serviceButtons.forEach((btn) => {
-  btn.addEventListener("click", () => {
-    const serviceType = btn.getAttribute("data-service");
-    const content = Array.from(serviceContents).find(
-      (div) => div.getAttribute("data-service") === serviceType
-    );
+  // Quand on clique sur un bouton
+  buttons.forEach((btn) => {
+    btn.addEventListener("click", () => {
+      const serviceType = btn.getAttribute("data-service");
+      const serviceData = Array.from(serviceContents).find(
+        (el) => el.getAttribute("data-service") === serviceType
+      );
 
-    if (content) {
-      modalTitle.textContent = btn.textContent;
-      modalDesc.textContent = content.textContent;
-      modal.classList.add("show");
-      document.body.style.overflow = "hidden"; // bloque scroll
+      // Définir le titre
+      modalTitle.textContent = btn.textContent.trim();
+
+      // Charger le contenu
+      if (serviceData) {
+        modalDesc.innerHTML = serviceData.innerHTML;
+      } else {
+        modalDesc.textContent = "Détails du service indisponibles.";
+      }
+
+      // Afficher la modale
+      modal.style.display = "block";
+      document.body.style.overflow = "hidden"; // empêche le scroll arrière-plan
+    });
+  });
+
+  // Fermer la modale
+  closeModalBtn.addEventListener("click", () => {
+    modal.style.display = "none";
+    document.body.style.overflow = "auto";
+  });
+
+  // Fermer la modale en cliquant à l’extérieur
+  window.addEventListener("click", (e) => {
+    if (e.target === modal) {
+      modal.style.display = "none";
+      document.body.style.overflow = "auto";
     }
   });
-});
 
-const closeModal = () => {
-  modal.classList.remove("show");
-  document.body.style.overflow = "auto";
-};
-
-if (closeModalBtn) closeModalBtn.addEventListener("click", closeModal);
-window.addEventListener("click", (e) => {
-  if (e.target === modal) closeModal();
+  // Fermer avec la touche Échap
+  document.addEventListener("keydown", (e) => {
+    if (e.key === "Escape" && modal.style.display === "block") {
+      modal.style.display = "none";
+      document.body.style.overflow = "auto";
+    }
+  });
 });
