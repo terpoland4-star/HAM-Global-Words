@@ -168,6 +168,105 @@ ul {
   list-style-type: "🗸 ";
   padding-left: 1.5rem;
 }
+/* ============================
+   FONDATEUR SECTION
+============================ */
+.founder-section {
+  max-width: 1000px;
+  margin: 4rem auto;
+  padding: 2rem 1rem;
+  background: linear-gradient(135deg, #fff, #f9f9f9);
+  border-radius: 16px;
+  box-shadow: 0 8px 20px rgba(0,0,0,0.1);
+  color: var(--text-color);
+  animation: fadeIn 1s ease;
+}
+
+.founder-header {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 1.5rem;
+  text-align: left;
+  margin-bottom: 1.5rem;
+}
+
+.founder-photo {
+  width: 180px;
+  height: 180px;
+  border-radius: 50%;
+  object-fit: cover;
+  border: 4px solid var(--cta-btn-bg);
+  box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+}
+
+.founder-title h2 {
+  color: var(--cta-btn-bg);
+  margin-bottom: 0.5rem;
+}
+
+.founder-title h3 {
+  font-size: 1.8rem;
+  margin-bottom: 0.2rem;
+}
+
+.founder-role {
+  font-style: italic;
+  color: #777;
+}
+
+.founder-bio p {
+  margin-bottom: 1rem;
+  text-align: justify;
+  font-size: 1.05rem;
+  line-height: 1.8;
+}
+
+.founder-bio blockquote {
+  background: var(--cta-btn-bg);
+  color: var(--cta-btn-text);
+  padding: 1.2rem;
+  border-radius: 8px;
+  margin: 1.5rem 0;
+  font-size: 1rem;
+  text-align: center;
+  font-style: italic;
+}
+
+.founder-links {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1rem;
+  justify-content: center;
+  margin-top: 2rem;
+}
+
+.founder-btn {
+  background: var(--cta-btn-bg);
+  color: var(--cta-btn-text);
+  text-decoration: none;
+  padding: 0.8rem 1.6rem;
+  border-radius: 8px;
+  font-weight: bold;
+  transition: background 0.3s ease, transform 0.2s ease;
+}
+
+.founder-btn:hover {
+  background: var(--cta-btn-hover);
+  transform: translateY(-3px);
+}
+
+@media (max-width: 700px) {
+  .founder-header {
+    flex-direction: column;
+    text-align: center;
+  }
+  .founder-photo {
+    width: 150px;
+    height: 150px;
+  }
+}
+
 
 /* ============================
    FORMULAIRE
