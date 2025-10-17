@@ -263,6 +263,47 @@ nav a:hover {
   display: inline-block;
   margin: 25px auto 0;
 }
+/* ============================
+   Boutons de service (style cohérent avec btn-primary)
+============================ */
+.service-btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: linear-gradient(135deg, #0078d7, #00b0ff);
+  color: #fff;
+  font-weight: 600;
+  font-size: 16px;
+  border: none;
+  border-radius: 8px;
+  padding: 12px 18px;
+  margin: 10px auto;
+  width: 90%;
+  max-width: 500px;
+  text-align: center;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.15);
+}
+
+.service-btn:hover {
+  background: linear-gradient(135deg, #005fa3, #0099cc);
+  transform: translateY(-2px);
+  box-shadow: 0 6px 14px rgba(0, 0, 0, 0.25);
+}
+
+.service-btn:active {
+  transform: translateY(1px);
+}
+
+/* Organisation verticale fluide */
+.services-list {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-top: 30px;
+}
+
 
 /* ============================
    🔗 SOCIAL BUTTONS PREMIUM
