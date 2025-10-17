@@ -28,32 +28,41 @@ body {
   overflow-x: hidden;
 }
 
+
 /* ============================
-   🌅 HEADER : OASIS NOCTURNE
+   🕊️ OISEAUX VOLANTS
 ============================ */
-header {
-  background: var(--header-bg);
-  color: var(--header-text);
-  text-align: center;
-  padding: 3rem 1.5rem;
-  box-shadow: 0 8px 25px rgba(0, 0, 0, 0.5);
-  position: relative;
-  overflow: hidden;
+.bird {
+  position: absolute;
+  width: 35px;
+  height: 35px;
+  background: url('assetes/img/bird.svg') no-repeat center/contain;
+  opacity: 0.85;
+  animation: flyAcross 28s linear infinite;
+  z-index: 2;
 }
 
+.bird:nth-child(2) { top: 35%; left: -10%; animation-delay: 8s; animation-duration: 30s; transform: scale(1); opacity: 0.7; }
+.bird:nth-child(3) { top: 55%; left: -20%; animation-delay: 15s; animation-duration: 34s; transform: scale(1.2); opacity: 0.9; }
+
+@keyframes flyAcross {
+  0% { transform: translateX(-10%) translateY(0) scale(1); opacity: 0; }
+  10% { opacity: 1; }
+  50% { transform: translateX(120vw) translateY(-30px) scale(1.05); }
+  100% { transform: translateX(220vw) translateY(0); opacity: 0; }
+}
+
+/* ============================
+   🌫️ BRUME + VENT DU DÉSERT
+============================ */
 header::before {
   content: "";
   position: absolute;
-  top: -40%;
-  left: -40%;
-  width: 180%;
-  height: 180%;
-  background: radial-gradient(
-    circle at 50% 30%,
-    rgba(58, 166, 208, 0.12) 0%,
-    rgba(13, 77, 77, 0.15) 40%,
-    transparent 80%
-  );
+  top: -10%;
+  left: -20%;
+  width: 150%;
+  height: 150%;
+  background: radial-gradient(circle at 50% 30%, rgba(58, 166, 208, 0.1), transparent 80%);
   animation: blueAura 25s linear infinite;
   z-index: 0;
 }
@@ -61,37 +70,64 @@ header::before {
 header::after {
   content: "";
   position: absolute;
-  bottom: 0;
-  left: 50%;
-  width: 80%;
-  height: 3px;
-  background: linear-gradient(90deg, transparent, #f4c842, transparent);
-  transform: translateX(-50%);
-}
-
-header * {
-  position: relative;
+  top: 0;
+  left: 0;
+  width: 200%;
+  height: 100%;
+  background: linear-gradient(90deg, rgba(255,255,255,0.04) 0%, rgba(255,255,255,0.1) 50%, rgba(255,255,255,0.04) 100%);
+  opacity: 0.25;
+  animation: mistMove 40s linear infinite;
   z-index: 1;
 }
 
-header h1 {
-  font-size: 2.8rem;
-  font-weight: 700;
-  text-shadow: 0 0 18px rgba(255, 255, 255, 0.3);
+@keyframes mistMove {
+  from { transform: translateX(-50%); }
+  to { transform: translateX(0); }
 }
 
-header p {
-  font-style: italic;
-  font-size: 1.2rem;
-  opacity: 0.9;
-}
-
-/* Animation d’aura bleue */
 @keyframes blueAura {
   0% { transform: rotate(0deg) scale(1); opacity: 0.7; }
   50% { transform: rotate(180deg) scale(1.1); opacity: 1; }
   100% { transform: rotate(360deg) scale(1); opacity: 0.7; }
 }
+
+/* ============================
+   🌟 POUSSIÈRE DORÉE DU DÉSERT
+============================ */
+@keyframes goldenDust {
+  0% { transform: translateY(0) translateX(0); opacity: 0.5; }
+  50% { transform: translateY(-40px) translateX(20px); opacity: 0.8; }
+  100% { transform: translateY(-80px) translateX(-30px); opacity: 0; }
+}
+
+.desert-dust {
+  position: absolute;
+  top: 70%;
+  left: 0;
+  width: 100%;
+  height: 120px;
+  overflow: hidden;
+  pointer-events: none;
+  z-index: 3;
+}
+
+.desert-dust span {
+  position: absolute;
+  bottom: 0;
+  width: 4px;
+  height: 4px;
+  background: radial-gradient(circle, rgba(244, 200, 66, 0.8) 0%, transparent 70%);
+  border-radius: 50%;
+  animation: goldenDust 6s linear infinite;
+  opacity: 0.6;
+}
+
+.desert-dust span:nth-child(1) { left: 10%; animation-delay: 0s; animation-duration: 8s; }
+.desert-dust span:nth-child(2) { left: 25%; animation-delay: 2s; animation-duration: 10s; }
+.desert-dust span:nth-child(3) { left: 45%; animation-delay: 3s; animation-duration: 9s; }
+.desert-dust span:nth-child(4) { left: 65%; animation-delay: 1s; animation-duration: 11s; }
+.desert-dust span:nth-child(5) { left: 80%; animation-delay: 4s; animation-duration: 8s; }
+
 
 /* ============================
    🌅 LOGO DU HEADER
