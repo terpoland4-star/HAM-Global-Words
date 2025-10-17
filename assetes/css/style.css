@@ -34,52 +34,68 @@ body {
 header .logo {
   display: block;
   margin: 0 auto 1rem auto;
-  width: 90px;
+  width: 120px; /* Taille idéale et équilibrée */
   height: auto;
-  border-radius: 10px;
-  filter: drop-shadow(0 0 8px rgba(255, 255, 255, 0.25));
+  border-radius: 12px; /* coins légers et doux */
+  filter: drop-shadow(0 0 10px rgba(255, 255, 255, 0.25));
   transition: transform 0.4s ease, filter 0.4s ease;
 }
 
 header .logo:hover {
-  transform: scale(1.06);
-  filter: drop-shadow(0 0 14px rgba(244, 200, 66, 0.4));
+  transform: scale(1.05);
+  filter: drop-shadow(0 0 16px rgba(244, 200, 66, 0.4)); /* effet doré doux au survol */
 }
 
 /* ============================
-   🕊️ OISEAUX VOLANTS
+   🕊️ OISEAUX VOLANTS (Header)
 ============================ */
 .bird {
   position: absolute;
-  width: 35px;
-  height: 35px;
+  top: 40%;
+  width: 40px;
+  height: 40px;
   background: url('assetes/img/bird.svg') no-repeat center/contain;
-  opacity: 0.85;
-  animation: flyAcross 28s linear infinite;
-  z-index: 2;
+  opacity: 0.9;
+  animation: flyAcross 22s linear infinite;
+  z-index: 1;
 }
 
-.bird:nth-child(2) { top: 35%; left: -10%; animation-delay: 8s; animation-duration: 30s; transform: scale(1); opacity: 0.7; }
-.bird:nth-child(3) { top: 55%; left: -20%; animation-delay: 15s; animation-duration: 34s; transform: scale(1.2); opacity: 0.9; }
+.bird:nth-child(1) { top: 30%; left: -10%; animation-delay: 0s; animation-duration: 20s; transform: scale(0.8); }
+.bird:nth-child(2) { top: 45%; left: -15%; animation-delay: 5s; animation-duration: 25s; transform: scale(1); opacity: 0.7; }
+.bird:nth-child(3) { top: 55%; left: -20%; animation-delay: 10s; animation-duration: 28s; transform: scale(0.9); opacity: 0.85; }
 
 @keyframes flyAcross {
-  0% { transform: translateX(-10%) translateY(0) scale(1); opacity: 0; }
-  10% { opacity: 1; }
-  50% { transform: translateX(120vw) translateY(-30px) scale(1.05); }
-  100% { transform: translateX(220vw) translateY(0); opacity: 0; }
+  0% { transform: translateX(0) translateY(0) scaleX(1); }
+  50% { transform: translateX(110vw) translateY(-20px) scaleX(1.1); }
+  100% { transform: translateX(220vw) translateY(0) scaleX(1); }
 }
 
 /* ============================
-   🌫️ BRUME LUMINEUSE + VENT DU DÉSERT
+   🌅 HEADER : OASIS NOCTURNE
 ============================ */
+header {
+  background: var(--header-bg);
+  color: var(--header-text);
+  text-align: center;
+  padding: 3rem 1.5rem;
+  box-shadow: 0 8px 25px rgba(0, 0, 0, 0.5);
+  position: relative;
+  overflow: hidden;
+}
+
 header::before {
   content: "";
   position: absolute;
-  top: -10%;
-  left: -20%;
-  width: 150%;
-  height: 150%;
-  background: radial-gradient(circle at 50% 30%, rgba(58, 166, 208, 0.1), transparent 80%);
+  top: -40%;
+  left: -40%;
+  width: 180%;
+  height: 180%;
+  background: radial-gradient(
+    circle at 50% 30%,
+    rgba(58, 166, 208, 0.12) 0%,
+    rgba(13, 77, 77, 0.15) 40%,
+    transparent 80%
+  );
   animation: blueAura 25s linear infinite;
   z-index: 0;
 }
@@ -87,56 +103,17 @@ header::before {
 header::after {
   content: "";
   position: absolute;
-  top: 0;
-  left: 0;
-  width: 200%;
-  height: 100%;
-  background: linear-gradient(90deg, rgba(255,255,255,0.04) 0%, rgba(255,255,255,0.1) 50%, rgba(255,255,255,0.04) 100%);
-  opacity: 0.25;
-  animation: mistMove 40s linear infinite;
-  z-index: 1;
+  bottom: 0;
+  left: 50%;
+  width: 80%;
+  height: 3px;
+  background: linear-gradient(90deg, transparent, #f4c842, transparent);
+  transform: translateX(-50%);
 }
 
-@keyframes mistMove {
-  from { transform: translateX(-50%); }
-  to { transform: translateX(0); }
-}
-
-@keyframes blueAura {
-  0% { transform: rotate(0deg) scale(1); opacity: 0.7; }
-  50% { transform: rotate(180deg) scale(1.1); opacity: 1; }
-  100% { transform: rotate(360deg) scale(1); opacity: 0.7; }
-}
-
-/* Vent du désert visuel */
-.desert-wind {
-  position: absolute;
-  top: 70%;
-  left: 0;
-  width: 100%;
-  height: 80px;
-  background: radial-gradient(circle at 50% 60%, rgba(255, 219, 77, 0.15), transparent 70%);
-  animation: desertBreeze 20s linear infinite alternate;
-  z-index: 1;
-}
-
-@keyframes desertBreeze {
-  0% { transform: translateX(-5%) scale(1); opacity: 0.3; }
-  50% { transform: translateX(5%) scale(1.1); opacity: 0.5; }
-  100% { transform: translateX(-3%) scale(1); opacity: 0.3; }
-}
-
-/* ============================
-   🌅 HEADER
-============================ */
-header {
-  background: var(--header-bg);
-  color: var(--header-text);
-  text-align: center;
-  padding: 3.5rem 1.5rem 5rem;
-  box-shadow: 0 8px 25px rgba(0, 0, 0, 0.5);
+header * {
   position: relative;
-  overflow: hidden;
+  z-index: 1;
 }
 
 header h1 {
@@ -149,6 +126,13 @@ header p {
   font-style: italic;
   font-size: 1.2rem;
   opacity: 0.9;
+}
+
+/* Animation d’aura bleue */
+@keyframes blueAura {
+  0% { transform: rotate(0deg) scale(1); opacity: 0.7; }
+  50% { transform: rotate(180deg) scale(1.1); opacity: 1; }
+  100% { transform: rotate(360deg) scale(1); opacity: 0.7; }
 }
 
 /* ============================
@@ -175,7 +159,78 @@ nav a:hover {
 }
 
 /* ============================
-   🌌 SECTION "NOS SERVICES"
+   👤 SECTION FONDATEUR
+============================ */
+.founder-section {
+  max-width: 900px;
+  margin: 4rem auto;
+  padding: 2rem 1.5rem;
+  background: #131516;
+  border-radius: 16px;
+  box-shadow: 0 8px 20px rgba(0,0,0,0.5);
+  text-align: center;
+  animation: slideFadeIn 1.5s ease both;
+}
+
+.founder-photo-container {
+  position: relative;
+  display: inline-block;
+}
+
+.founder-photo {
+  width: 110px;
+  height: 110px;
+  border-radius: 50%;
+  object-fit: cover;
+  border: 3px solid #f4c842;
+  box-shadow: 0 0 18px rgba(244, 200, 66, 0.25);
+  transition: transform 0.4s ease, box-shadow 0.4s ease;
+}
+
+.founder-photo:hover {
+  transform: scale(1.06);
+  box-shadow: 0 0 25px rgba(244, 200, 66, 0.4);
+}
+
+/* Halo doré doux autour */
+.founder-photo-container::before {
+  content: "";
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 150px;
+  height: 150px;
+  transform: translate(-50%, -50%);
+  border-radius: 50%;
+  background: radial-gradient(circle, rgba(244, 200, 66, 0.15), transparent 70%);
+  filter: blur(20px);
+  animation: goldenPulse 6s ease-in-out infinite;
+}
+
+@keyframes goldenPulse {
+  0%, 100% { opacity: 0.4; transform: scale(1); }
+  50% { opacity: 0.8; transform: scale(1.1); }
+}
+
+/* Texte fondateur */
+.founder-bio p {
+  font-size: 1.05rem;
+  line-height: 1.8;
+  text-align: justify;
+  margin-top: 1rem;
+  color: #ddd;
+}
+
+.founder-bio blockquote {
+  background: rgba(212,165,49,0.1);
+  border-left: 4px solid #f4c842;
+  padding: 1rem 1.5rem;
+  font-style: italic;
+  margin: 2rem 0;
+  color: #f6e9c0;
+}
+/* ============================
+   🌌 SECTION "NOS SERVICES" — NUIT DU SAHEL ANIMÉE
 ============================ */
 .services-preview {
   position: relative;
@@ -183,16 +238,22 @@ nav a:hover {
   padding: 80px 20px;
   color: #eaeaea;
   overflow: hidden;
+  border-top: 1px solid rgba(255, 255, 255, 0.05);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+
+  /* Fond bleu nuit dynamique */
   background: radial-gradient(circle at 50% 20%, #16293a, #0a0d11 80%);
   animation: skyDrift 25s ease-in-out infinite alternate;
 }
 
+/* Animation du ciel nocturne */
 @keyframes skyDrift {
   0% { background: radial-gradient(circle at 20% 30%, #122438, #0a0c10 85%); }
   50% { background: radial-gradient(circle at 70% 40%, #193b54, #0a0d11 85%); }
   100% { background: radial-gradient(circle at 50% 20%, #16293a, #0a0d11 85%); }
 }
 
+/* Étoiles scintillantes légères */
 .services-preview::before {
   content: "";
   position: absolute;
@@ -201,6 +262,7 @@ nav a:hover {
   background-size: 2px 2px;
   opacity: 0.07;
   animation: starsTwinkle 6s infinite alternate;
+  z-index: 0;
 }
 
 @keyframes starsTwinkle {
@@ -208,6 +270,7 @@ nav a:hover {
   50% { opacity: 0.12; }
 }
 
+/* Grille de services */
 .service-grid {
   display: flex;
   flex-wrap: wrap;
@@ -218,6 +281,7 @@ nav a:hover {
   z-index: 2;
 }
 
+/* Cartes lumineuses flottantes */
 .service-grid .card {
   background: rgba(255, 255, 255, 0.06);
   border: 1px solid rgba(255, 255, 255, 0.1);
@@ -236,6 +300,20 @@ nav a:hover {
   background: rgba(244, 200, 66, 0.12);
 }
 
+/* Titres & paragraphes des cartes */
+.service-grid .card h3 {
+  color: #f4c842;
+  font-size: 1.3rem;
+  margin-bottom: 10px;
+}
+
+.service-grid .card p {
+  color: #d9d9d9;
+  line-height: 1.6;
+  font-size: 0.95rem;
+}
+
+/* Bouton central “Voir tous les services” */
 .services-preview .btn-primary {
   display: inline-flex;
   align-items: center;
@@ -248,6 +326,8 @@ nav a:hover {
   letter-spacing: 0.4px;
   box-shadow: 0 4px 15px rgba(0,0,0,0.4);
   transition: all 0.3s ease;
+  z-index: 2;
+  position: relative;
 }
 
 .services-preview .btn-primary:hover {
@@ -256,9 +336,11 @@ nav a:hover {
   box-shadow: 0 8px 22px rgba(244, 200, 66, 0.4);
 }
 
+
 /* ============================
-   🔗 SOCIAL BUTTONS
+   🔗 SOCIAL BUTTONS PREMIUM
 ============================ */
+
 .founder-links {
   display: flex;
   justify-content: center;
@@ -268,6 +350,7 @@ nav a:hover {
 }
 
 .founder-btn.social-btn {
+  position: relative;
   display: inline-flex;
   align-items: center;
   gap: 0.6rem;
@@ -278,27 +361,75 @@ nav a:hover {
   color: #f4f4f4;
   font-weight: 600;
   text-decoration: none;
+  letter-spacing: 0.3px;
   transition: all 0.35s ease;
+  overflow: hidden;
   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
 }
 
+.founder-btn.social-btn::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: -75%;
+  width: 50%;
+  height: 100%;
+  background: linear-gradient(120deg, transparent, rgba(255, 255, 255, 0.3), transparent);
+  transform: skewX(-20deg);
+  transition: 0.75s;
+}
+
+.founder-btn.social-btn:hover::before {
+  left: 125%;
+}
+
+.founder-btn.social-btn img {
+  width: 22px;
+  height: 22px;
+  filter: brightness(0) invert(1);
+  transition: transform 0.3s ease, filter 0.3s ease;
+}
+
+.founder-btn.social-btn:hover img {
+  transform: scale(1.25);
+}
+
+/* Hover colorés */
 .founder-btn.linkedin:hover {
   background: linear-gradient(135deg, #0077b5, #00a0dc);
   color: #fff;
+  border-color: transparent;
+  box-shadow: 0 6px 20px rgba(0, 160, 220, 0.35);
 }
 
 .founder-btn.whatsapp:hover {
   background: linear-gradient(135deg, #25d366, #1ebe57);
   color: #fff;
+  border-color: transparent;
+  box-shadow: 0 6px 20px rgba(37, 211, 102, 0.35);
 }
 
 .founder-btn.portfolio:hover {
   background: linear-gradient(135deg, #f4c842, #b88a1e);
   color: #111;
+  border-color: transparent;
+  box-shadow: 0 6px 20px rgba(244, 200, 66, 0.45);
 }
 
-/* ============================
-   🏜️ FOOTER PRESTIGE
+/* Apparition animée */
+.founder-btn.social-btn {
+  opacity: 0;
+  transform: translateY(15px);
+  animation: fadeUp 0.8s ease forwards;
+}
+.founder-btn.social-btn:nth-child(1) { animation-delay: 0.3s; }
+.founder-btn.social-btn:nth-child(2) { animation-delay: 0.5s; }
+.founder-btn.social-btn:nth-child(3) { animation-delay: 0.7s; }
+
+@keyframes fadeUp {
+  to { opacity: 1; transform: translateY(0); }
+}/* ============================
+   🏜️ FOOTER PRESTIGE - SAHEL NIGHT DELUXE
 ============================ */
 footer.footer-prestige {
   position: relative;
@@ -310,8 +441,9 @@ footer.footer-prestige {
   box-shadow: 0 -4px 20px rgba(0, 0, 0, 0.4);
 }
 
+/* Logo HAM – un peu plus grand et lumineux */
 .footer-logo-prestige {
-  width: 280px;
+  width:  380px; /* <== augmenté (avant 130px) */
   margin-bottom: 1rem;
   filter: drop-shadow(0 0 12px rgba(244, 200, 66, 0.4));
   transition: transform 0.5s ease, filter 0.5s ease;
@@ -322,7 +454,13 @@ footer.footer-prestige {
   filter: drop-shadow(0 0 25px rgba(244, 200, 66, 0.6));
 }
 
-/* WhatsApp footer */
+/* ============================
+   🌐 BOUTON WHATSAPP DU FOOTER
+============================ */
+.footer-social {
+  margin: 1rem 0 0.5rem 0;
+}
+
 .footer-social a {
   display: inline-flex;
   align-items: center;
@@ -344,8 +482,9 @@ footer.footer-prestige {
   transform: translateY(-3px);
 }
 
+/* Icône WhatsApp plus petite */
 .footer-whatsapp-icon {
-  width: 22px;
+  width: 22px; /* avant : souvent 40px ou plus */
   height: 22px;
   filter: brightness(0) invert(1);
   transition: transform 0.3s ease;
@@ -356,3 +495,58 @@ footer.footer-prestige {
   filter: brightness(1);
 }
 
+/* ============================
+   TEXTE DU FOOTER
+============================ */
+footer.footer-prestige p {
+  font-weight: 600;
+  margin-top: 0.8rem;
+  letter-spacing: 0.4px;
+  color: var(--footer-text);
+}
+
+footer.footer-prestige a {
+  color: var(--footer-text);
+  text-decoration: none;
+}
+
+footer.footer-prestige a:hover {
+  color: #222;
+}
+
+/* ============================
+   ANIMATIONS D’APPARITION
+============================ */
+@keyframes slideFadeIn {
+  from { opacity: 0; transform: translateY(30px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+.install-banner {
+  position: fixed;
+  bottom: 1rem;
+  left: 50%;
+  transform: translateX(-50%);
+  background: var(--footer-bg);
+  color: var(--footer-text);
+  border-radius: 10px;
+  padding: 1rem 1.5rem;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.4);
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  z-index: 3000;
+  animation: fadeIn 0.6s ease;
+}
+.install-banner button {
+  background: var(--cta-btn-bg);
+  color: var(--cta-btn-text);
+  border: none;
+  padding: 0.6rem 1.2rem;
+  border-radius: 8px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: 0.3s;
+}
+.install-banner button:hover {
+  background: var(--cta-btn-hover);
+}
