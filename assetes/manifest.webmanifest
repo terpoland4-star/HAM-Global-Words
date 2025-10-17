@@ -1,0 +1,23 @@
+{
+  "name": "HAM Global Words",
+  "short_name": "HAM Words",
+  "description": "Services linguistiques, traduction, IA et médiation culturelle – Langues du Sahel, voix du monde.",
+  "start_url": "index.html",
+  "scope": "./",
+  "display": "standalone",
+  "background_color": "#0f1113",
+  "theme_color": "#d4a531",
+  "orientation": "portrait",
+  "icons": [
+    {
+      "src": "assetes/img/logoHAM.png",
+      "sizes": "192x192",
+      "type": "image/png"
+    },
+    {
+      "src": "assetes/img/HAM.png",
+      "sizes": "512x512",
+      "type": "image/png"
+    }
+  ]
+}
