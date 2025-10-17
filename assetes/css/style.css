@@ -187,6 +187,42 @@ nav a:hover {
   margin: 2rem 0;
   color: #f6e9c0;
 }
+/* Section des services */
+.services-preview {
+  text-align: center;
+  padding: 60px 20px;
+  background: #f8f9fa; /* couleur douce optionnelle */
+}
+
+/* Grille des cartes */
+.service-grid {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 25px;
+  margin-bottom: 30px;
+}
+
+/* Cartes individuelles */
+.service-grid .card {
+  background: #fff;
+  border-radius: 10px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+  padding: 20px;
+  width: 280px;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.service-grid .card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 6px 14px rgba(0, 0, 0, 0.15);
+}
+
+/* Bouton centré sous la grille */
+.services-preview .btn-primary {
+  display: inline-block;
+  margin: 20px auto 0;
+}
 
 /* ============================
    🔗 SOCIAL BUTTONS PREMIUM
