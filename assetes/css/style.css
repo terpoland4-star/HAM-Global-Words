@@ -489,3 +489,33 @@ footer.footer-prestige a:hover {
   from { opacity: 0; transform: translateY(30px); }
   to { opacity: 1; transform: translateY(0); }
 }
+.install-banner {
+  position: fixed;
+  bottom: 1rem;
+  left: 50%;
+  transform: translateX(-50%);
+  background: var(--footer-bg);
+  color: var(--footer-text);
+  border-radius: 10px;
+  padding: 1rem 1.5rem;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.4);
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  z-index: 3000;
+  animation: fadeIn 0.6s ease;
+}
+.install-banner button {
+  background: var(--cta-btn-bg);
+  color: var(--cta-btn-text);
+  border: none;
+  padding: 0.6rem 1.2rem;
+  border-radius: 8px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: 0.3s;
+}
+.install-banner button:hover {
+  background: var(--cta-btn-hover);
+}
+
