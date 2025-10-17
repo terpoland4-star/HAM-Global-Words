@@ -29,48 +29,6 @@ body {
 }
 
 /* ============================
-   🌅 LOGO DU HEADER
-============================ */
-header .logo {
-  display: block;
-  margin: 0 auto 1rem auto;
-  width: 120px; /* Taille idéale et équilibrée */
-  height: auto;
-  border-radius: 12px; /* coins légers et doux */
-  filter: drop-shadow(0 0 10px rgba(255, 255, 255, 0.25));
-  transition: transform 0.4s ease, filter 0.4s ease;
-}
-
-header .logo:hover {
-  transform: scale(1.05);
-  filter: drop-shadow(0 0 16px rgba(244, 200, 66, 0.4)); /* effet doré doux au survol */
-}
-
-/* ============================
-   🕊️ OISEAUX VOLANTS (Header)
-============================ */
-.bird {
-  position: absolute;
-  top: 40%;
-  width: 40px;
-  height: 40px;
-  background: url('assetes/img/bird.svg') no-repeat center/contain;
-  opacity: 0.9;
-  animation: flyAcross 22s linear infinite;
-  z-index: 1;
-}
-
-.bird:nth-child(1) { top: 30%; left: -10%; animation-delay: 0s; animation-duration: 20s; transform: scale(0.8); }
-.bird:nth-child(2) { top: 45%; left: -15%; animation-delay: 5s; animation-duration: 25s; transform: scale(1); opacity: 0.7; }
-.bird:nth-child(3) { top: 55%; left: -20%; animation-delay: 10s; animation-duration: 28s; transform: scale(0.9); opacity: 0.85; }
-
-@keyframes flyAcross {
-  0% { transform: translateX(0) translateY(0) scaleX(1); }
-  50% { transform: translateX(110vw) translateY(-20px) scaleX(1.1); }
-  100% { transform: translateX(220vw) translateY(0) scaleX(1); }
-}
-
-/* ============================
    🌅 HEADER : OASIS NOCTURNE
 ============================ */
 header {
@@ -133,6 +91,24 @@ header p {
   0% { transform: rotate(0deg) scale(1); opacity: 0.7; }
   50% { transform: rotate(180deg) scale(1.1); opacity: 1; }
   100% { transform: rotate(360deg) scale(1); opacity: 0.7; }
+}
+
+/* ============================
+   🌅 LOGO DU HEADER
+============================ */
+header .logo {
+  display: block;
+  margin: 0 auto 1rem auto;
+  width: 120px; /* Taille idéale et équilibrée */
+  height: auto;
+  border-radius: 12px; /* coins légers et doux */
+  filter: drop-shadow(0 0 10px rgba(255, 255, 255, 0.25));
+  transition: transform 0.4s ease, filter 0.4s ease;
+}
+
+header .logo:hover {
+  transform: scale(1.05);
+  filter: drop-shadow(0 0 16px rgba(244, 200, 66, 0.4)); /* effet doré doux au survol */
 }
 
 /* ============================
@@ -229,111 +205,121 @@ nav a:hover {
   margin: 2rem 0;
   color: #f6e9c0;
 }
-/* ============================
-   🌌 SECTION "NOS SERVICES" — NUIT DU SAHEL ANIMÉE
-============================ */
+/* Section des services */
 .services-preview {
-  position: relative;
   text-align: center;
-  padding: 80px 20px;
-  color: #eaeaea;
-  overflow: hidden;
-  border-top: 1px solid rgba(255, 255, 255, 0.05);
-  border-bottom: 1px solid rgba(255, 255, 255, 0.08);
-
-  /* Fond bleu nuit dynamique */
-  background: radial-gradient(circle at 50% 20%, #16293a, #0a0d11 80%);
-  animation: skyDrift 25s ease-in-out infinite alternate;
+  padding: 60px 20px;
+  background: #f8f9fa; /* couleur douce optionnelle */
 }
 
-/* Animation du ciel nocturne */
-@keyframes skyDrift {
-  0% { background: radial-gradient(circle at 20% 30%, #122438, #0a0c10 85%); }
-  50% { background: radial-gradient(circle at 70% 40%, #193b54, #0a0d11 85%); }
-  100% { background: radial-gradient(circle at 50% 20%, #16293a, #0a0d11 85%); }
-}
-
-/* Étoiles scintillantes légères */
-.services-preview::before {
-  content: "";
-  position: absolute;
-  inset: 0;
-  background-image: radial-gradient(white 1px, transparent 1px);
-  background-size: 2px 2px;
-  opacity: 0.07;
-  animation: starsTwinkle 6s infinite alternate;
-  z-index: 0;
-}
-
-@keyframes starsTwinkle {
-  0%, 100% { opacity: 0.05; }
-  50% { opacity: 0.12; }
-}
-
-/* Grille de services */
+/* Grille des cartes */
 .service-grid {
   display: flex;
   flex-wrap: wrap;
   justify-content: center;
-  gap: 30px;
-  margin-bottom: 40px;
-  position: relative;
-  z-index: 2;
+  gap: 25px;
+  margin-bottom: 30px;
 }
 
-/* Cartes lumineuses flottantes */
+/* Cartes individuelles */
 .service-grid .card {
-  background: rgba(255, 255, 255, 0.06);
-  border: 1px solid rgba(255, 255, 255, 0.1);
-  color: #f8f8f8;
-  border-radius: 14px;
-  padding: 28px;
+  background: #fff;
+  border-radius: 10px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+  padding: 20px;
   width: 280px;
-  box-shadow: 0 8px 25px rgba(0, 0, 0, 0.4);
-  transition: transform 0.4s ease, box-shadow 0.4s ease, background 0.4s ease;
-  backdrop-filter: blur(6px);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
 }
 
 .service-grid .card:hover {
-  transform: translateY(-8px);
-  box-shadow: 0 12px 30px rgba(244, 200, 66, 0.35);
-  background: rgba(244, 200, 66, 0.12);
+  transform: translateY(-5px);
+  box-shadow: 0 6px 14px rgba(0, 0, 0, 0.15);
 }
 
-/* Titres & paragraphes des cartes */
-.service-grid .card h3 {
-  color: #f4c842;
-  font-size: 1.3rem;
-  margin-bottom: 10px;
-}
-
-.service-grid .card p {
-  color: #d9d9d9;
-  line-height: 1.6;
-  font-size: 0.95rem;
-}
-
-/* Bouton central “Voir tous les services” */
+/* Bouton centré sous la grille */
 .services-preview .btn-primary {
+   display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  margin: 20px auto 0;
+}
+/* ================================
+   Bouton principal universel
+   (Voir tous les services, etc.)
+================================ */
+.btn-primary {
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  background: linear-gradient(135deg, #d4a531, #f8d45c);
-  color: #111;
-  padding: 14px 28px;
-  border-radius: 50px;
-  font-weight: 700;
-  letter-spacing: 0.4px;
-  box-shadow: 0 4px 15px rgba(0,0,0,0.4);
+  padding: 12px 24px;
+  border-radius: 6px;
+  background: linear-gradient(135deg, #0078d7, #00b0ff);
+  color: #fff;
+  font-weight: 600;
+  font-size: 16px;
+  text-decoration: none;
+  box-shadow: 0 3px 10px rgba(0, 0, 0, 0.2);
   transition: all 0.3s ease;
-  z-index: 2;
-  position: relative;
+  cursor: pointer;
 }
 
-.services-preview .btn-primary:hover {
-  background: linear-gradient(135deg, #f4c842, #d4a531);
-  transform: translateY(-3px);
-  box-shadow: 0 8px 22px rgba(244, 200, 66, 0.4);
+/* Effet au survol */
+.btn-primary:hover {
+  background: linear-gradient(135deg, #005fa3, #0099cc);
+  transform: translateY(-2px);
+  box-shadow: 0 5px 14px rgba(0, 0, 0, 0.3);
+}
+
+/* Optionnel : effet au clic */
+.btn-primary:active {
+  transform: translateY(1px);
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.2);
+}
+
+/* Centrage dans la section services */
+.services-preview .btn-primary {
+  display: inline-block;
+  margin: 25px auto 0;
+}
+/* ============================
+   Boutons de service (style cohérent avec btn-primary)
+============================ */
+.service-btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: linear-gradient(135deg, #0078d7, #00b0ff);
+  color: #fff;
+  font-weight: 600;
+  font-size: 16px;
+  border: none;
+  border-radius: 8px;
+  padding: 12px 18px;
+  margin: 10px auto;
+  width: 90%;
+  max-width: 500px;
+  text-align: center;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.15);
+}
+
+.service-btn:hover {
+  background: linear-gradient(135deg, #005fa3, #0099cc);
+  transform: translateY(-2px);
+  box-shadow: 0 6px 14px rgba(0, 0, 0, 0.25);
+}
+
+.service-btn:active {
+  transform: translateY(1px);
+}
+
+/* Organisation verticale fluide */
+.services-list {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-top: 30px;
 }
 
 
