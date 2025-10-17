@@ -206,3 +206,28 @@ style.textContent = `
   }
 `;
 document.head.appendChild(style);
+
+// ============================
+// 🧩 PWA INSTALL PROMPT
+// ============================
+let deferredPrompt;
+window.addEventListener("beforeinstallprompt", (e) => {
+  e.preventDefault();
+  deferredPrompt = e;
+
+  const installBanner = document.createElement("div");
+  installBanner.className = "install-banner";
+  installBanner.innerHTML = `
+    <p>📲 Installez <strong>HAM Global Words</strong> sur votre appareil</p>
+    <button id="installBtn">Installer</button>
+  `;
+  document.body.appendChild(installBanner);
+
+  document.getElementById("installBtn").addEventListener("click", async () => {
+    installBanner.remove();
+    deferredPrompt.prompt();
+    const { outcome } = await deferredPrompt.userChoice;
+    console.log("Résultat installation :", outcome);
+    deferredPrompt = null;
+  });
+});
