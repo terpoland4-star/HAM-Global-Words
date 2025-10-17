@@ -225,6 +225,44 @@ nav a:hover {
   justify-content: center;
   margin: 20px auto 0;
 }
+/* ================================
+   Bouton principal universel
+   (Voir tous les services, etc.)
+================================ */
+.btn-primary {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 12px 24px;
+  border-radius: 6px;
+  background: linear-gradient(135deg, #0078d7, #00b0ff);
+  color: #fff;
+  font-weight: 600;
+  font-size: 16px;
+  text-decoration: none;
+  box-shadow: 0 3px 10px rgba(0, 0, 0, 0.2);
+  transition: all 0.3s ease;
+  cursor: pointer;
+}
+
+/* Effet au survol */
+.btn-primary:hover {
+  background: linear-gradient(135deg, #005fa3, #0099cc);
+  transform: translateY(-2px);
+  box-shadow: 0 5px 14px rgba(0, 0, 0, 0.3);
+}
+
+/* Optionnel : effet au clic */
+.btn-primary:active {
+  transform: translateY(1px);
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.2);
+}
+
+/* Centrage dans la section services */
+.services-preview .btn-primary {
+  display: inline-block;
+  margin: 25px auto 0;
+}
 
 /* ============================
    🔗 SOCIAL BUTTONS PREMIUM
