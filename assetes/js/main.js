@@ -12,7 +12,6 @@ if ("serviceWorker" in navigator) {
         console.error("❌ Erreur lors de l’enregistrement du Service Worker :", err);
       });
   });
-}
 
 // ==========================
 // 🎉 MESSAGE DE BIENVENUE
@@ -87,7 +86,6 @@ document.addEventListener("DOMContentLoaded", () => {
       contactSection.innerHTML += "<p>Impossible de charger le fichier README.md.</p>";
       console.error("Erreur README:", err);
     });
-  }
 
   // ==========================
   // 🍪 BANNIÈRE COOKIES
