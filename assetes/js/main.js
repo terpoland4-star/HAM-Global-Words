@@ -174,27 +174,6 @@ document.addEventListener("DOMContentLoaded", () => {
   }
 });
 
-// ============================
-// 🎵 AMBIANCE SONORE : VENT DU DÉSERT
-// ============================
-const audio = new Audio("assetes/sounds/desert-wind.mp3");
-audio.loop = true;
-audio.volume = 0.25;
-
-const soundToggle = document.createElement("button");
-soundToggle.classList.add("sound-toggle");
-soundToggle.textContent = "🔈 Activer le vent du désert";
-document.body.appendChild(soundToggle);
-
-soundToggle.addEventListener("click", () => {
-  if (audio.paused) {
-    audio.play();
-    soundToggle.textContent = "🔇 Couper le vent du désert";
-  } else {
-    audio.pause();
-    soundToggle.textContent = "🔈 Activer le vent du désert";
-  }
-});
 
 // ============================
 // 🧩 INSTALLATION PWA
