@@ -157,58 +157,83 @@ header::after {
 }
 
 /* ============================
-   🪞 MODALE DE SERVICE
+   🏜️ MODALE DES SERVICES
 ============================ */
 .service-modal {
+  display: none;
   position: fixed;
   inset: 0;
-  background: rgba(0, 0, 0, 0.75);
-  display: none;
-  align-items: center;
+  background: radial-gradient(circle at center, rgba(10,10,10,0.95) 0%, rgba(0,0,0,0.85) 100%);
+  z-index: 9999;
   justify-content: center;
-  z-index: 3000;
+  align-items: center;
   backdrop-filter: blur(4px);
   transition: opacity 0.4s ease;
 }
 .service-modal.active {
   display: flex;
-  animation: fadeInModal 0.4s ease forwards;
-}
-@keyframes fadeInModal {
-  from { opacity: 0; }
-  to { opacity: 1; }
+  animation: fadeIn 0.5s ease;
 }
 .modal-content {
-  background: radial-gradient(circle at top, #1b1f22, #0d0f11);
-  color: #eaeaea;
-  max-width: 700px;
-  width: 90%;
-  padding: 2.5rem 2rem;
-  border-radius: 20px;
-  box-shadow: 0 8px 40px rgba(244, 200, 66, 0.3);
   position: relative;
+  background: rgba(18, 22, 26, 0.9);
+  color: #fefefe;
+  border-radius: 16px;
+  max-width: 720px;
+  padding: 2.2rem 2.5rem;
+  box-shadow: 0 0 40px rgba(244, 200, 66, 0.3);
   text-align: left;
-  animation: waveEntry 0.8s ease both;
-  border: 1px solid rgba(255, 255, 255, 0.1);
-}
-@keyframes waveEntry {
-  0% { transform: translateY(100px) scale(0.9); opacity: 0; }
-  50% { transform: translateY(-10px) scale(1.02); opacity: 1; }
-  100% { transform: translateY(0) scale(1); }
+  overflow-y: auto;
+  max-height: 80vh;
+  z-index: 10;
 }
 .close-modal {
   position: absolute;
   top: 1rem;
-  right: 1rem;
+  right: 1.2rem;
   background: none;
-  color: #f4c842;
   border: none;
-  font-size: 2rem;
+  color: #f4c842;
+  font-size: 1.8rem;
   cursor: pointer;
-  transition: transform 0.3s ease;
+  transition: transform 0.3s ease, color 0.3s ease;
 }
 .close-modal:hover {
-  transform: rotate(90deg) scale(1.2);
+  color: #fff;
+  transform: scale(1.15);
+}
+@keyframes fadeIn {
+  from { opacity: 0; transform: scale(0.95); }
+  to { opacity: 1; transform: scale(1); }
+}
+
+/* ============================
+   ✨ SOUFFLE DU VENT DORÉ
+============================ */
+.modal-desert-dust {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  height: 200px;
+  pointer-events: none;
+  overflow: hidden;
+  z-index: 1;
+}
+.modal-desert-dust span {
+  position: absolute;
+  bottom: 0;
+  width: 5px;
+  height: 5px;
+  background: radial-gradient(circle, rgba(244, 200, 66, 0.8), transparent 70%);
+  border-radius: 50%;
+  opacity: 0.7;
+  animation: goldenDustModal 8s linear infinite;
+}
+@keyframes goldenDustModal {
+  0% { transform: translateY(0) translateX(0) scale(0.8); opacity: 0.7; }
+  40% { opacity: 1; transform: translateY(-40px) translateX(30px) scale(1); }
+  100% { transform: translateY(-120px) translateX(-50px) scale(1.1); opacity: 0; }
 }
 
 /* ============================
