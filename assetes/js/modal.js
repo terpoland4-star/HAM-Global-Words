@@ -65,3 +65,32 @@ document.addEventListener("DOMContentLoaded", () => {
     }
   });
 });
+
+// ============================
+// 🎯 AFFICHAGE AUTO DU SERVICE
+// ============================
+document.addEventListener("DOMContentLoaded", () => {
+  const params = new URLSearchParams(window.location.search);
+  const service = params.get("service");
+  
+  if (service) {
+    const content = document.querySelector(`.service-content [data-service="${service}"]`);
+    const modal = document.getElementById("serviceModal");
+
+    if (content && modal) {
+      // Injecte le contenu dans la modale
+      const title = content.querySelector("strong") ? content.querySelector("strong").textContent : service;
+      document.getElementById("modal-title").textContent = title;
+      document.getElementById("modal-desc").innerHTML = content.innerHTML;
+      
+      // Affiche la modale
+      modal.classList.add("active");
+    }
+  }
+
+  // Fermeture de la modale
+  document.querySelector(".close-modal")?.addEventListener("click", () => {
+    document.getElementById("serviceModal").classList.remove("active");
+  });
+});
+
