@@ -641,3 +641,15 @@ footer.footer-prestige a:hover {
 .install-banner button:hover {
   background: var(--cta-btn-hover);
 }
+
+.service-link {
+  text-decoration: none;
+  color: inherit;
+  display: block;
+  transition: transform 0.4s ease, box-shadow 0.4s ease;
+}
+
+.service-link:hover {
+  transform: translateY(-8px);
+  box-shadow: 0 12px 25px rgba(244, 200, 66, 0.4);
+}
