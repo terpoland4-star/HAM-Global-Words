@@ -9,28 +9,37 @@
   <!-- Styles -->
   <link rel="stylesheet" href="assetes/css/style.css" />
   <link rel="icon" href="assetes/img/logo.png" type="image/png" />
-  <!-- ✅ PWA Essentials -->
-<link rel="manifest" href="assetes/manifest.webmanifest" />
-<meta name="theme-color" content="#d4a531" />
 
-  <!-- Suppression des balises <img> inutiles dans le <head> -->
+  <!-- ✅ PWA Essentials -->
+  <link rel="manifest" href="assetes/manifest.webmanifest" />
+  <meta name="theme-color" content="#d4a531" />
 </head>
 
 <body>
-  <!-- HEADER PRINCIPAL -->
+  <!-- ============================
+       HEADER PRINCIPAL
+  ============================= -->
   <header>
     <img src="assetes/img/logoHAM.png" alt="Logo HAM Global Words" class="logo" />
-    <!-- Oiseaux animés dans le header -->
-<div class="bird"></div>
-<div class="bird"></div>
-<div class="bird"></div>
+
+    <!-- Oiseaux animés -->
+    <div class="bird"></div>
+    <div class="bird"></div>
+    <div class="bird"></div>
 
     <h1>HAM Global Words</h1>
     <p>Langues du Sahel, voix du monde</p>
+
+    <!-- Effet brume et vent -->
+    <div class="desert-dust">
+      <span></span><span></span><span></span><span></span><span></span>
+    </div>
   </header>
 
   <main>
-    <!-- INTRODUCTION -->
+    <!-- ============================
+         INTRODUCTION
+    ============================= -->
     <section class="intro">
       <h2>🌍 À propos</h2>
       <p>
@@ -80,81 +89,96 @@
           <em>« Une langue n’est pas qu’un moyen de communication : c’est une mémoire, un héritage et une lumière sur le monde. »</em>
         </blockquote>
 
+        <div class="founder-links">
+          <a href="https://www.linkedin.com/in/hamadine-ag-moctar-002059294" target="_blank" class="founder-btn social-btn linkedin">
+            <img src="assetes/img/linkedin.png" alt="linkedin" /> LinkedIn
+          </a>
+
+          <a href="https://hamadine.github.io/hamadineprojects/" target="_blank" class="founder-btn social-btn portfolio">
+            🌐 Portfolio
+          </a>
+
+          <a href="https://wa.me/22786762903?text=Bonjour%20HAM%20Global%20Words," target="_blank" rel="noopener" class="founder-btn social-btn whatsapp">
+            <img src="assetes/img/whatsapp.png" alt="whatsapp" /> WhatsApp
+          </a>
+        </div>
+      </article>
     </section>
 
-   <!-- ============================
-     SERVICES
-============================= -->
-<section class="services-preview">
-  <h2 data-i18n="servicesTitle">🛠️ Nos principaux services</h2>
+    <!-- ============================
+         SERVICES
+    ============================= -->
+    <section class="services-preview">
+      <h2 data-i18n="servicesTitle">🛠️ Nos principaux services</h2>
 
-  <div class="service-grid">
-    <a href="services.html?service=translation" class="card service-link">
-      <h3 data-i18n="serviceTranslationTitle">🌐 Traduction</h3>
-      <p data-i18n="serviceTranslationDesc">
-        Précise, fluide et culturellement adaptée en plus de 15 langues africaines et internationales.
-      </p>
-    </a>
+      <div class="service-grid">
+        <a href="services.html?service=translation" class="card service-link">
+          <h3>🌐 Traduction</h3>
+          <p>
+            Précise, fluide et culturellement adaptée en plus de 15 langues africaines et internationales.
+          </p>
+        </a>
 
-    <a href="services.html?service=interpretation" class="card service-link">
-      <h3 data-i18n="serviceInterpretationTitle">🎙️ Interprétation</h3>
-      <p data-i18n="serviceInterpretationDesc">
-        Simultanée ou consécutive, sur site ou à distance pour conférences et missions internationales.
-      </p>
-    </a>
+        <a href="services.html?service=interpretation" class="card service-link">
+          <h3>🎙️ Interprétation</h3>
+          <p>
+            Simultanée ou consécutive, sur site ou à distance pour conférences et missions internationales.
+          </p>
+        </a>
 
-    <a href="services.html?service=annotation" class="card service-link">
-      <h3 data-i18n="serviceAnnotationTitle">🧠 Annotation IA</h3>
-      <p data-i18n="serviceAnnotationDesc">
-        Création et vérification de corpus multilingues pour l'entraînement de modèles IA.
-      </p>
-    </a>
-  </div>
+        <a href="services.html?service=annotation" class="card service-link">
+          <h3>🧠 Annotation IA</h3>
+          <p>
+            Création et vérification de corpus multilingues pour l'entraînement de modèles IA.
+          </p>
+        </a>
+      </div>
 
-  <a href="services.html" class="btn-primary" data-i18n="seeAllServices">
-    Voir tous les services
-  </a>
-</section>
+      <a href="services.html" class="btn-primary">Voir tous les services</a>
+    </section>
 
-    
-<!-- ============================
-     MODALE SERVICES
-============================ -->
-<div id="serviceModal" class="service-modal" aria-hidden="true">
-  <div class="modal-content">
-    <button class="close-modal" aria-label="Fermer la modale">×</button>
-    <h2 id="modal-title"></h2>
-    <div id="modal-desc"></div>
-  </div>
-</div>
+    <!-- ============================
+         MODALE SERVICES
+    ============================= -->
+    <div id="serviceModal" class="service-modal" aria-hidden="true">
+      <div class="modal-content">
+        <button class="close-modal" aria-label="Fermer la modale">×</button>
+        <h2 id="modal-title"></h2>
+        <div id="modal-desc"></div>
+      </div>
+    </div>
 
+    <!-- Contenu invisible pour la modale -->
+    <div class="service-content" style="display:none;">
+      <div data-service="translation">
+        <p>Traductions certifiées dans plus de 15 langues africaines et internationales, adaptées aux besoins techniques, juridiques et humanitaires.</p>
+      </div>
+      <div data-service="interpretation">
+        <p>Interprétation simultanée ou consécutive pour conférences, réunions diplomatiques ou missions de terrain.</p>
+      </div>
+      <div data-service="annotation">
+        <p>Annotation linguistique pour l’IA : segmentation audio, vérification de corpus et création de datasets multilingues.</p>
+      </div>
+    </div>
+  </main>
 
-    
-
-  
-<!-- ============================
-     FOOTER
-============================ -->
-<footer class="footer-prestige">
-  <div class="footer-gradient"></div>
-
-  <!-- Logo principal agrandi -->
-  <img src="assetes/img/HAM.png" alt="Logo HAM Global Words" class="footer-logo-prestige" />
-
-
-
-  <p>© <span id="year">2025</span> HAM Global Words – Tous droits réservés</p>
-</footer>
-
+  <!-- ============================
+       FOOTER AVEC VENT DU DÉSERT
+  ============================= -->
+  <footer class="footer-prestige">
+    <div class="footer-gradient"></div>
+    <img src="assetes/img/HAM.png" alt="Logo HAM Global Words" class="footer-logo-prestige" />
+    <div class="footer-dust">
+      <span></span><span></span><span></span><span></span><span></span>
+    </div>
+    <p>© <span id="year">2025</span> HAM Global Words – Tous droits réservés</p>
+  </footer>
 
   <!-- ============================
        SCRIPTS
   ============================= -->
   <script src="assetes/js/main.js" defer></script>
-  <script src="assetes/js/sounds.js" defer></script>
-  <script src="assetes/js/carousel.js" defer></script>
-  <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
   <script src="assetes/js/modal.js" defer></script>
-
+  <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
 </body>
 </html>
