@@ -252,6 +252,42 @@ footer.footer-prestige {
   margin-bottom: 1rem;
   filter: drop-shadow(0 0 12px rgba(244, 200, 66, 0.4));
 }
+/* ============================
+   🌬️ Vent du désert (footer)
+============================ */
+.footer-dust {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  height: 120px;
+  overflow: hidden;
+  pointer-events: none;
+  z-index: 1;
+}
+
+.footer-dust span {
+  position: absolute;
+  bottom: 0;
+  width: 4px;
+  height: 4px;
+  background: radial-gradient(circle, rgba(244, 200, 66, 0.9) 0%, transparent 70%);
+  border-radius: 50%;
+  animation: goldenDust 10s linear infinite;
+  opacity: 0.5;
+}
+
+.footer-dust span:nth-child(1) { left: 10%; animation-delay: 0s; animation-duration: 8s; }
+.footer-dust span:nth-child(2) { left: 30%; animation-delay: 2s; animation-duration: 9s; }
+.footer-dust span:nth-child(3) { left: 55%; animation-delay: 4s; animation-duration: 10s; }
+.footer-dust span:nth-child(4) { left: 75%; animation-delay: 1s; animation-duration: 11s; }
+.footer-dust span:nth-child(5) { left: 90%; animation-delay: 3s; animation-duration: 9s; }
+
+@keyframes goldenDust {
+  0% { transform: translateY(0) translateX(0); opacity: 0.6; }
+  50% { transform: translateY(-40px) translateX(20px); opacity: 0.8; }
+  100% { transform: translateY(-80px) translateX(-30px); opacity: 0; }
+}
 
 /* ============================
    🌟 ANIMATIONS GLOBALES
