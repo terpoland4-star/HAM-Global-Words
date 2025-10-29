@@ -11,66 +11,75 @@ document.addEventListener("DOMContentLoaded", () => {
 
   if (!modal || !modalTitle || !modalDesc) return;
 
-  // Dictionnaire des titres
+  // ----------------------------
+  // 📚 Dictionnaire des titres
+  // ----------------------------
   const titleMap = {
     translation: "🌐 Traduction multilingue",
-    interpretation: "🎙️ Interprétation",
-    annotation: "🧠 Annotation linguistique & IA",
+    interpretation: "🎙️ Interprétation simultanée & consécutive",
+    annotation: "🧠 Annotation linguistique & Intelligence Artificielle",
     transcription: "📜 Transcription & adaptation",
-    mediation: "🌱 Médiation culturelle",
+    mediation: "🌱 Médiation culturelle & éducation linguistique",
   };
 
-  // ----------------------------
+  // ============================
   // 🔹 OUVERTURE DE LA MODALE
-  // ----------------------------
+  // ============================
   const openModal = (serviceKey) => {
-    const serviceData = Array.from(serviceContentBlocks).find(
-      (block) => block.getAttribute("data-service") === serviceKey
+    const serviceData = [...serviceContentBlocks].find(
+      (block) => block.dataset.service === serviceKey
     );
 
-    if (serviceData) {
-      modalTitle.textContent = titleMap[serviceKey] || "Service linguistique";
-      modalDesc.innerHTML = serviceData.innerHTML;
+    if (!serviceData) return;
 
-      modal.classList.add("active");
-      document.body.style.overflow = "hidden";
-      modal.setAttribute("aria-hidden", "false");
+    modalTitle.textContent = titleMap[serviceKey] || "Service linguistique";
+    modalDesc.innerHTML = serviceData.innerHTML;
 
-      // Focus sur le bouton fermer pour accessibilité
-      closeModalBtn.focus();
-    }
+    modal.classList.add("active");
+    modal.setAttribute("aria-hidden", "false");
+    document.body.classList.add("no-scroll");
+
+    // Animation d’apparition douce
+    modal.querySelector(".modal-content").classList.add("fade-in");
+
+    // Focus accessibilité
+    closeModalBtn?.focus();
   };
 
-  // ----------------------------
+  // ============================
   // 🔹 FERMETURE DE LA MODALE
-  // ----------------------------
+  // ============================
   const closeModal = () => {
     modal.classList.remove("active");
     modal.setAttribute("aria-hidden", "true");
-    document.body.style.overflow = "auto";
+    document.body.classList.remove("no-scroll");
+
+    // Supprimer l’animation après transition
+    modal.querySelector(".modal-content").classList.remove("fade-in");
   };
 
-  // ----------------------------
+  // ============================
   // 🔸 ÉVÉNEMENTS UTILISATEUR
-  // ----------------------------
+  // ============================
+
   // Clic sur les boutons ou cartes
   serviceButtons.forEach((btn) => {
     btn.addEventListener("click", (e) => {
       e.preventDefault();
-      const serviceKey = btn.getAttribute("data-service");
-      if (serviceKey) {
-        // Si on est sur index.html, ouvrir la modale
-        if (document.querySelector(".services-preview")) {
-          openModal(serviceKey);
-        } else {
-          // Sinon, rediriger vers services.html avec le bon service
-          window.location.href = `services.html?service=${serviceKey}`;
-        }
+      const serviceKey = btn.dataset.service;
+      if (!serviceKey) return;
+
+      const onIndex = document.querySelector(".services-preview");
+      if (onIndex) {
+        openModal(serviceKey);
+      } else {
+        // Redirection propre avec ancre SEO-friendly
+        window.location.href = `services.html?service=${encodeURIComponent(serviceKey)}`;
       }
     });
   });
 
-  // Clic sur le bouton "×"
+  // Bouton fermeture
   closeModalBtn?.addEventListener("click", closeModal);
 
   // Clic à l’extérieur du contenu
@@ -85,19 +94,20 @@ document.addEventListener("DOMContentLoaded", () => {
     }
   });
 
-  // ----------------------------
+  // ============================
   // 🎯 OUVERTURE AUTO VIA PARAMÈTRE
-  // ----------------------------
+  // ============================
   const params = new URLSearchParams(window.location.search);
   const service = params.get("service");
 
   if (service) {
-    const content = document.querySelector(`.service-content [data-service="${service}"]`);
-    if (content) {
+    const targetBlock = document.querySelector(`.service-content [data-service="${service}"]`);
+    if (targetBlock) {
       modalTitle.textContent = titleMap[service] || "Service linguistique";
-      modalDesc.innerHTML = content.innerHTML;
+      modalDesc.innerHTML = targetBlock.innerHTML;
       modal.classList.add("active");
-      document.body.style.overflow = "hidden";
+      modal.setAttribute("aria-hidden", "false");
+      document.body.classList.add("no-scroll");
     }
   }
 });
