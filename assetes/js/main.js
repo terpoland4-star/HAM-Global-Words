@@ -1,271 +1,262 @@
 // ============================
-// 🌍 HAM GLOBAL WORDS - MAIN JS
-// Thème Sahel Night Deluxe + Vent du Désert
+// 🌍 HAM GLOBAL WORDS - MAIN JS (Sahel Night Pro Edition)
 // ============================
 
-// ============================
-// 🔧 Enregistrement du Service Worker (PWA)
-// ============================
-if ("serviceWorker" in navigator) {
-  window.addEventListener("load", () => {
-    navigator.serviceWorker
-      .register("assetes/js/service-worker.js")
-      .then((registration) => {
-        console.log("✅ Service Worker enregistré :", registration.scope);
-      })
-      .catch((err) => {
+(() => {
+  "use strict";
+
+  // ============================
+  // 🔧 Service Worker (PWA)
+  // ============================
+  if ("serviceWorker" in navigator) {
+    window.addEventListener("load", async () => {
+      try {
+        const reg = await navigator.serviceWorker.register("assetes/js/service-worker.js");
+        console.log("✅ Service Worker enregistré :", reg.scope);
+      } catch (err) {
         console.error("❌ Erreur Service Worker :", err);
-      });
-  });
-}
+      }
+    });
+  }
 
-// ============================
-// 🎉 MESSAGE DE BIENVENUE
-// ============================
-console.log(
-  "%cBienvenue sur le site de HAM Global Words 🌍",
-  "color:#f4c842;font-size:16px;font-weight:bold;"
-);
-
-// ============================
-// 🌙 MODE SOMBRE
-// ============================
-const darkModeToggle = document.createElement("button");
-darkModeToggle.textContent = "🌓 Mode sombre";
-darkModeToggle.classList.add("dark-toggle");
-document.body.appendChild(darkModeToggle);
-
-if (localStorage.getItem("theme") === "dark") {
-  document.body.classList.add("dark-mode");
-  darkModeToggle.classList.add("active");
-}
-
-darkModeToggle.addEventListener("click", () => {
-  document.body.classList.toggle("dark-mode");
-  darkModeToggle.classList.toggle("active");
-  localStorage.setItem(
-    "theme",
-    document.body.classList.contains("dark-mode") ? "dark" : "light"
+  // ============================
+  // 🎉 Message de bienvenue console
+  // ============================
+  console.log(
+    "%cBienvenue sur HAM Global Words 🌍",
+    "color:#f4c842;font-size:16px;font-weight:bold;"
   );
-});
 
-// ============================
-// 📅 ANNÉE DYNAMIQUE
-// ============================
-const yearSpan = document.getElementById("year");
-if (yearSpan) yearSpan.textContent = new Date().getFullYear();
+  // ============================
+  // 🌙 Mode sombre
+  // ============================
+  const initDarkMode = () => {
+    const toggle = document.createElement("button");
+    toggle.textContent = "🌓 Mode sombre";
+    toggle.className = "dark-toggle";
+    document.body.appendChild(toggle);
 
-// ============================
-// 🪄 ANIMATION AU SCROLL
-// ============================
-const observer = new IntersectionObserver(
-  (entries) => {
-    entries.forEach((entry) => {
-      if (entry.isIntersecting) entry.target.classList.add("visible");
+    const applyTheme = (theme) => {
+      document.body.classList.toggle("dark-mode", theme === "dark");
+      toggle.classList.toggle("active", theme === "dark");
+      localStorage.setItem("theme", theme);
+    };
+
+    const current = localStorage.getItem("theme") || "light";
+    applyTheme(current);
+
+    toggle.addEventListener("click", () => {
+      applyTheme(document.body.classList.contains("dark-mode") ? "light" : "dark");
     });
-  },
-  { threshold: 0.2 }
-);
-document.querySelectorAll("section, .cta").forEach((el) => {
-  el.classList.add("hidden");
-  observer.observe(el);
-});
+  };
 
-// ============================
-// 📄 CHARGER README.md DANS .cta (si présent)
-// ============================
-document.addEventListener("DOMContentLoaded", () => {
-  const contactSection = document.querySelector(".cta");
-  if (!contactSection) return;
+  // ============================
+  // 📅 Année dynamique
+  // ============================
+  const setYear = () => {
+    const yearEl = document.getElementById("year");
+    if (yearEl) yearEl.textContent = new Date().getFullYear();
+  };
 
-  fetch("assetes/docs/README.md")
-    .then((res) => res.text())
-    .then((md) => {
-      const html = marked.parse(md);
-      const readmeContainer = document.createElement("div");
-      readmeContainer.innerHTML = html;
-      readmeContainer.classList.add("readme-preview");
-      contactSection.appendChild(readmeContainer);
-    })
-    .catch((err) => {
-      contactSection.innerHTML += "<p>Impossible de charger le fichier README.md.</p>";
-      console.error("Erreur README:", err);
-    });
-});
-
-// ============================
-// 🍪 BANNIÈRE COOKIES
-// ============================
-const cookieBanner = document.createElement("div");
-cookieBanner.className = "cookie-banner";
-cookieBanner.innerHTML = `
-  🍪 Ce site utilise des cookies pour améliorer votre expérience.
-  <button id="accept-cookies" style="margin-left:1rem;padding:0.3rem 0.6rem;">Accepter</button>
-`;
-document.body.appendChild(cookieBanner);
-
-if (!localStorage.getItem("cookiesAccepted")) {
-  cookieBanner.classList.add("show");
-}
-
-document.getElementById("accept-cookies")?.addEventListener("click", () => {
-  localStorage.setItem("cookiesAccepted", "true");
-  cookieBanner.classList.remove("show");
-});
-
-// ============================
-// 💌 MAILTO PROTECTION
-// ============================
-const contactLink = document.querySelector('a[href^="mailto:"]');
-if (contactLink) {
-  contactLink.addEventListener("click", function (e) {
-    const confirmSend = confirm(
-      "Souhaitez-vous contacter HAM Global Words par e-mail ?"
+  // ============================
+  // 🪄 Animation au scroll
+  // ============================
+  const initScrollAnimations = () => {
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((e) => e.target.classList.toggle("visible", e.isIntersecting));
+      },
+      { threshold: 0.2 }
     );
-    if (!confirmSend) e.preventDefault();
-  });
-}
 
-// ============================
-// 📞 BOUTONS FLOTTANTS : EMAIL + WHATSAPP
-// ============================
-const quickContact = document.createElement("div");
-quickContact.className = "quick-contact";
-quickContact.innerHTML = `
-  <a href="mailto:hamadineagmoctar@gmail.com?subject=Demande depuis le site&body=Bonjour Hamadine," target="_blank">📧 E-mail</a>
-  <a href="https://wa.me/22786762903?text=Bonjour%20HAM%20Global%20Words," target="_blank">💬 WhatsApp</a>
-`;
-document.body.appendChild(quickContact);
+    document.querySelectorAll("section, .cta").forEach((el) => {
+      el.classList.add("hidden");
+      observer.observe(el);
+    });
+  };
 
-// ============================
-// 🌀 SCROLL DOUX SUR ANCRES
-// ============================
-document.querySelectorAll('a[href^="#"]').forEach((anchor) => {
-  anchor.addEventListener("click", function (e) {
-    const target = document.querySelector(this.getAttribute("href"));
-    if (target) {
-      e.preventDefault();
-      target.scrollIntoView({ behavior: "smooth" });
+  // ============================
+  // 📄 Charger README.md
+  // ============================
+  const loadReadme = async () => {
+    const section = document.querySelector(".cta");
+    if (!section) return;
+    try {
+      const res = await fetch("assetes/docs/README.md");
+      const md = await res.text();
+      const html = marked.parse(md);
+      const wrapper = document.createElement("div");
+      wrapper.className = "readme-preview";
+      wrapper.innerHTML = html;
+      section.appendChild(wrapper);
+    } catch (err) {
+      console.warn("Erreur lors du chargement du README.md :", err);
+      section.insertAdjacentHTML("beforeend", "<p>📄 Contenu non disponible pour le moment.</p>");
     }
+  };
+
+  // ============================
+  // 🍪 Bannière cookies
+  // ============================
+  const initCookies = () => {
+    if (localStorage.getItem("cookiesAccepted")) return;
+
+    const banner = document.createElement("div");
+    banner.className = "cookie-banner show";
+    banner.innerHTML = `
+      🍪 Ce site utilise des cookies pour améliorer votre expérience.
+      <button id="acceptCookies">Accepter</button>
+    `;
+    document.body.appendChild(banner);
+
+    document.getElementById("acceptCookies")?.addEventListener("click", () => {
+      localStorage.setItem("cookiesAccepted", "true");
+      banner.remove();
+    });
+  };
+
+  // ============================
+  // 💌 Protection mailto
+  // ============================
+  const protectMailto = () => {
+    document.querySelectorAll('a[href^="mailto:"]').forEach((link) =>
+      link.addEventListener("click", (e) => {
+        if (!confirm("Souhaitez-vous contacter HAM Global Words par e-mail ?")) {
+          e.preventDefault();
+        }
+      })
+    );
+  };
+
+  // ============================
+  // 📞 Boutons flottants : E-mail & WhatsApp
+  // ============================
+  const initQuickContact = () => {
+    const div = document.createElement("div");
+    div.className = "quick-contact";
+    div.innerHTML = `
+      <a href="mailto:hamadineagmoctar@gmail.com?subject=Demande depuis le site&body=Bonjour Hamadine," target="_blank">📧 E-mail</a>
+      <a href="https://wa.me/22786762903?text=Bonjour%20HAM%20Global%20Words," target="_blank">💬 WhatsApp</a>
+    `;
+    document.body.appendChild(div);
+  };
+
+  // ============================
+  // 🌀 Scroll doux sur ancres
+  // ============================
+  const initSmoothScroll = () => {
+    document.querySelectorAll('a[href^="#"]').forEach((a) =>
+      a.addEventListener("click", (e) => {
+        const target = document.querySelector(a.getAttribute("href"));
+        if (target) {
+          e.preventDefault();
+          target.scrollIntoView({ behavior: "smooth" });
+        }
+      })
+    );
+  };
+
+  // ============================
+  // 🌬️ Effets “Vent du Désert”
+  // ============================
+  const initDesertEffects = () => {
+    const wind = document.createElement("div");
+    wind.className = "desert-wind";
+    document.body.appendChild(wind);
+
+    const haze = document.createElement("div");
+    haze.className = "desert-haze";
+    document.body.appendChild(haze);
+
+    for (let i = 0; i < 60; i++) {
+      const p = document.createElement("div");
+      p.className = "sand-particle";
+      Object.assign(p.style, {
+        left: `${Math.random() * 100}vw`,
+        top: `${Math.random() * 100}vh`,
+        animationDelay: `${Math.random() * 30}s`,
+        animationDuration: `${25 + Math.random() * 20}s`,
+        opacity: `${0.4 + Math.random() * 0.6}`,
+      });
+      wind.appendChild(p);
+    }
+  };
+
+  // ============================
+  // 🧩 Installation PWA
+  // ============================
+  const initPWAInstall = () => {
+    let deferredPrompt;
+    window.addEventListener("beforeinstallprompt", (e) => {
+      e.preventDefault();
+      deferredPrompt = e;
+
+      const banner = document.createElement("div");
+      banner.className = "install-banner";
+      banner.innerHTML = `
+        <p>📲 Installez <strong>HAM Global Words</strong> sur votre appareil</p>
+        <button id="installBtn">Installer</button>
+      `;
+      document.body.appendChild(banner);
+
+      document.getElementById("installBtn").addEventListener("click", async () => {
+        banner.remove();
+        deferredPrompt.prompt();
+        const result = await deferredPrompt.userChoice;
+        console.log("Résultat installation :", result.outcome);
+        deferredPrompt = null;
+      });
+    });
+  };
+
+  // ============================
+  // 🖌️ Styles dynamiques
+  // ============================
+  const injectStyles = () => {
+    const css = `
+      .dark-toggle {
+        position: fixed; top: 1rem; left: 1rem;
+        background: #f4c842; color: #1d1f20;
+        padding: 0.6rem 1rem; border: none; border-radius: 8px;
+        font-weight: bold; cursor: pointer; z-index: 1000;
+        box-shadow: 0 4px 10px rgba(0,0,0,0.2); transition: all 0.3s ease;
+      }
+      .dark-toggle.active { background: #1d1f20; color: #f4c842; }
+      .hidden { opacity: 0; transform: translateY(30px); transition: opacity 0.8s, transform 0.8s; }
+      .visible { opacity: 1; transform: translateY(0); }
+      .cookie-banner {
+        position: fixed; bottom: 0; width: 100%; background: #222; color: #fff;
+        text-align: center; padding: 1rem; z-index: 1000;
+      }
+      .quick-contact {
+        position: fixed; bottom: 2rem; right: 2rem; display: flex; flex-direction: column; gap: 0.5rem; z-index: 1000;
+      }
+      .quick-contact a {
+        background: #f4c842; color: #1d1f20; padding: 0.5rem 1rem;
+        border-radius: 8px; text-decoration: none; font-weight: bold; text-align: center;
+        transition: transform 0.2s ease;
+      }
+      .quick-contact a:hover { transform: scale(1.1); }
+    `;
+    const styleEl = document.createElement("style");
+    styleEl.textContent = css;
+    document.head.appendChild(styleEl);
+  };
+
+  // ============================
+  // 🚀 Initialisation globale
+  // ============================
+  document.addEventListener("DOMContentLoaded", () => {
+    injectStyles();
+    initDarkMode();
+    setYear();
+    initScrollAnimations();
+    loadReadme();
+    initCookies();
+    protectMailto();
+    initQuickContact();
+    initSmoothScroll();
+    initDesertEffects();
+    initPWAInstall();
   });
-});
-
-// ============================
-// 🌬️ VENT DU DÉSERT + NUIT ÉTOILÉE
-// ============================
-document.addEventListener("DOMContentLoaded", () => {
-  const windContainer = document.createElement("div");
-  windContainer.className = "desert-wind";
-  document.body.appendChild(windContainer);
-
-  const haze = document.createElement("div");
-  haze.className = "desert-haze";
-  document.body.appendChild(haze);
-
-  for (let i = 0; i < 60; i++) {
-    const particle = document.createElement("div");
-    particle.className = "sand-particle";
-    particle.style.left = `${Math.random() * 100}vw`;
-    particle.style.top = `${Math.random() * 100}vh`;
-    particle.style.animationDelay = `${Math.random() * 30}s`;
-    particle.style.animationDuration = `${25 + Math.random() * 20}s`;
-    particle.style.opacity = `${0.4 + Math.random() * 0.6}`;
-    windContainer.appendChild(particle);
-  }
-});
-
-
-// ============================
-// 🧩 INSTALLATION PWA
-// ============================
-let deferredPrompt;
-window.addEventListener("beforeinstallprompt", (e) => {
-  e.preventDefault();
-  deferredPrompt = e;
-
-  const installBanner = document.createElement("div");
-  installBanner.className = "install-banner";
-  installBanner.innerHTML = `
-    <p>📲 Installez <strong>HAM Global Words</strong> sur votre appareil</p>
-    <button id="installBtn">Installer</button>
-  `;
-  document.body.appendChild(installBanner);
-
-  document.getElementById("installBtn").addEventListener("click", async () => {
-    installBanner.remove();
-    deferredPrompt.prompt();
-    const { outcome } = await deferredPrompt.userChoice;
-    console.log("Résultat installation :", outcome);
-    deferredPrompt = null;
-  });
-});
-
-// ============================
-// 🎨 STYLES DYNAMIQUES ADDITIONNELS
-// ============================
-const style = document.createElement("style");
-style.textContent = `
-  .dark-toggle, .sound-toggle {
-    position: fixed;
-    left: 1rem;
-    z-index: 1000;
-    padding: 0.6rem 1rem;
-    border: none;
-    border-radius: 8px;
-    cursor: pointer;
-    background: #f4c842;
-    color: #1d1f20;
-    font-weight: bold;
-    box-shadow: 0 4px 10px rgba(0,0,0,0.2);
-    transition: all 0.3s ease;
-  }
-  .dark-toggle { top: 1rem; }
-  .sound-toggle { top: 4.2rem; }
-
-  .dark-toggle:hover, .sound-toggle:hover {
-    background: #d3ac2b;
-    transform: translateY(-2px);
-  }
-  .dark-toggle.active {
-    background: #1d1f20;
-    color: #f4c842;
-  }
-
-  .hidden { opacity: 0; transform: translateY(30px); transition: opacity 0.8s ease, transform 0.8s ease; }
-  .visible { opacity: 1; transform: translateY(0); }
-
-  .cookie-banner {
-    position: fixed;
-    bottom: 0;
-    width: 100%;
-    background: #222;
-    color: #fff;
-    text-align: center;
-    padding: 1rem;
-    display: none;
-    z-index: 1000;
-  }
-  .cookie-banner.show { display: block; }
-
-  .quick-contact {
-    position: fixed;
-    bottom: 2rem;
-    right: 2rem;
-    display: flex;
-    flex-direction: column;
-    gap: 0.5rem;
-    z-index: 1000;
-  }
-  .quick-contact a {
-    background: #f4c842;
-    color: #1d1f20;
-    padding: 0.5rem 1rem;
-    border-radius: 8px;
-    text-decoration: none;
-    font-weight: bold;
-    text-align: center;
-    transition: transform 0.2s;
-  }
-  .quick-contact a:hover { transform: scale(1.1); }
-`;
-document.head.appendChild(style);
+})();
