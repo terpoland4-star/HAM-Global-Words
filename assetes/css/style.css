@@ -1,20 +1,33 @@
-/* ============================
-   🌙 THEME SAHEL NIGHT DELUXE
-   Élégance sombre, accents dorés et oasis bleue
-============================ */
+/* =====================================================
+   🌙 THEME SAHEL NIGHT DELUXE — PRO+ OPTIMISÉ
+   Édition : Sahel Night Deluxe + Vent du Désert v2.0
+   Auteur : HAM Global Words
+   Licence : CC-BY 2025
+===================================================== */
 
 :root {
+  /* Couleurs principales */
   --bg-color: #0d0f11;
   --text-color: #eaeaea;
+  --accent-gold: #f4c842;
+  --accent-blue: #3ab6d0;
+  --accent-dark: #1a1a1a;
+
+  /* Dégradés & fonds */
   --header-bg: linear-gradient(135deg, #0b4b4b, #3ab6d0);
-  --header-text: #fefefe;
-  --cta-bg: #1a1a1a;
-  --cta-text: #fefefe;
-  --cta-btn-bg: #d4a531;
-  --cta-btn-text: #1a1a1a;
-  --cta-btn-hover: #f8d45c;
   --footer-bg: linear-gradient(135deg, #d4a531, #b88a1e);
-  --footer-text: #1a1a1a;
+
+  /* Couleurs spécifiques */
+  --cta-bg: #131516;
+  --cta-text: #ffffff;
+  --cta-btn-bg: #d4a531;
+  --cta-btn-text: #0d0f11;
+  --cta-btn-hover: #f8d45c;
+
+  /* Ombres & transitions */
+  --shadow-soft: 0 6px 16px rgba(0, 0, 0, 0.4);
+  --shadow-gold: 0 0 12px rgba(244, 200, 66, 0.3);
+  --transition: all 0.4s ease;
 }
 
 /* ============================
@@ -24,18 +37,28 @@ body {
   background-color: var(--bg-color);
   color: var(--text-color);
   font-family: 'Montserrat', sans-serif;
+  line-height: 1.6;
   transition: background 0.6s ease, color 0.4s ease;
   overflow-x: hidden;
+  scroll-behavior: smooth;
 }
 
 /* ============================
-   🌅 LOGO DU HEADER
+   🌅 HEADER & LOGO
 ============================ */
+header {
+  position: relative;
+  background: var(--header-bg);
+  color: var(--header-text);
+  text-align: center;
+  padding: 2rem 1rem;
+  overflow: hidden;
+}
+
 header .logo {
   display: block;
   margin: 0 auto 1rem auto;
   width: 120px;
-  height: auto;
   border-radius: 12px;
   filter: drop-shadow(0 0 10px rgba(255, 255, 255, 0.25));
   transition: transform 0.4s ease, filter 0.4s ease;
@@ -46,6 +69,24 @@ header .logo:hover {
   filter: drop-shadow(0 0 16px rgba(244, 200, 66, 0.4));
 }
 
+/* Vent du désert visuel */
+header::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  width: 200%;
+  background: linear-gradient(
+    90deg,
+    rgba(255, 255, 255, 0.04) 0%,
+    rgba(255, 255, 255, 0.1) 50%,
+    rgba(255, 255, 255, 0.04) 100%
+  );
+  opacity: 0.25;
+  animation: mistMove 40s linear infinite;
+  pointer-events: none;
+  z-index: 1;
+}
+
 /* ============================
    🕊️ OISEAUX VOLANTS
 ============================ */
@@ -53,79 +94,57 @@ header .logo:hover {
   position: absolute;
   width: 35px;
   height: 35px;
-  background: url('assetes/img/bird.svg') no-repeat center/contain;
+  background: url("assetes/img/bird.svg") no-repeat center/contain;
   opacity: 0.85;
   animation: flyAcross 28s linear infinite;
+  will-change: transform;
   z-index: 2;
 }
-.bird:nth-child(2) { top: 35%; left: -10%; animation-delay: 8s; animation-duration: 30s; }
-.bird:nth-child(3) { top: 55%; left: -20%; animation-delay: 15s; animation-duration: 34s; }
-
-@keyframes flyAcross {
-  0% { transform: translateX(-10%) translateY(0); opacity: 0; }
-  10% { opacity: 1; }
-  50% { transform: translateX(120vw) translateY(-30px); }
-  100% { transform: translateX(220vw); opacity: 0; }
+.bird:nth-child(2) {
+  top: 35%;
+  left: -10%;
+  animation-delay: 8s;
+}
+.bird:nth-child(3) {
+  top: 55%;
+  left: -20%;
+  animation-delay: 15s;
 }
 
 /* ============================
-   🌫️ VENT DU DÉSERT
-============================ */
-header::after {
-  content: "";
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 200%;
-  height: 100%;
-  background: linear-gradient(90deg, rgba(255,255,255,0.04) 0%, rgba(255,255,255,0.1) 50%, rgba(255,255,255,0.04) 100%);
-  opacity: 0.25;
-  animation: mistMove 40s linear infinite;
-  z-index: 1;
-}
-@keyframes mistMove {
-  from { transform: translateX(-50%); }
-  to { transform: translateX(0); }
-}
-
-/* ============================
-   👤 SECTION FONDATEUR
+   👤 FONDATEUR
 ============================ */
 .founder-section {
   max-width: 900px;
   margin: 4rem auto;
   padding: 2rem 1.5rem;
-  background: #131516;
+  background: var(--cta-bg);
   border-radius: 16px;
-  box-shadow: 0 8px 20px rgba(0,0,0,0.5);
+  box-shadow: var(--shadow-soft);
   text-align: center;
   animation: slideFadeIn 1.5s ease both;
 }
+
 .founder-photo {
   width: 70px;
   height: 70px;
   border-radius: 50%;
   object-fit: cover;
-  border: 3px solid #f4c842;
-  box-shadow: 0 0 18px rgba(244, 200, 66, 0.25);
+  border: 3px solid var(--accent-gold);
+  box-shadow: var(--shadow-gold);
 }
 
 /* ============================
-   🌌 SECTION SERVICES – NUIT DU SAHEL
+   🌌 SERVICES
 ============================ */
 .services-preview {
   position: relative;
   text-align: center;
   padding: 80px 20px;
-  color: #eaeaea;
-  overflow: hidden;
+  color: var(--text-color);
   background: radial-gradient(circle at 50% 20%, #16293a, #0a0d11 80%);
   animation: skyDrift 25s ease-in-out infinite alternate;
-}
-@keyframes skyDrift {
-  0% { background: radial-gradient(circle at 20% 30%, #122438, #0a0c10 85%); }
-  50% { background: radial-gradient(circle at 70% 40%, #193b54, #0a0d11 85%); }
-  100% { background: radial-gradient(circle at 50% 20%, #16293a, #0a0d11 85%); }
+  overflow: hidden;
 }
 
 .service-grid {
@@ -133,17 +152,16 @@ header::after {
   flex-wrap: wrap;
   justify-content: center;
   gap: 30px;
-  margin-bottom: 40px;
-  position: relative;
   z-index: 2;
 }
+
 .service-grid .card {
   background: rgba(255, 255, 255, 0.06);
   border-radius: 14px;
   padding: 28px;
   width: 280px;
-  box-shadow: 0 8px 25px rgba(0, 0, 0, 0.4);
-  transition: transform 0.4s ease, background 0.4s ease;
+  box-shadow: var(--shadow-soft);
+  transition: var(--transition);
   cursor: pointer;
 }
 .service-grid .card:hover {
@@ -151,24 +169,27 @@ header::after {
   background: rgba(244, 200, 66, 0.12);
 }
 .service-grid .card h3 {
-  color: #f4c842;
+  color: var(--accent-gold);
   font-size: 1.3rem;
   margin-bottom: 10px;
 }
 
 /* ============================
-   🏜️ MODALE DES SERVICES
+   🏜️ MODALE SERVICES
 ============================ */
 .service-modal {
   display: none;
   position: fixed;
   inset: 0;
-  background: radial-gradient(circle at center, rgba(10,10,10,0.95) 0%, rgba(0,0,0,0.85) 100%);
+  background: radial-gradient(
+    circle at center,
+    rgba(10, 10, 10, 0.95) 0%,
+    rgba(0, 0, 0, 0.85) 100%
+  );
   z-index: 9999;
   justify-content: center;
   align-items: center;
   backdrop-filter: blur(4px);
-  transition: opacity 0.4s ease;
 }
 .service-modal.active {
   display: flex;
@@ -181,11 +202,10 @@ header::after {
   border-radius: 16px;
   max-width: 720px;
   padding: 2.2rem 2.5rem;
-  box-shadow: 0 0 40px rgba(244, 200, 66, 0.3);
+  box-shadow: var(--shadow-gold);
   text-align: left;
   overflow-y: auto;
   max-height: 80vh;
-  z-index: 10;
 }
 .close-modal {
   position: absolute;
@@ -193,51 +213,18 @@ header::after {
   right: 1.2rem;
   background: none;
   border: none;
-  color: #f4c842;
+  color: var(--accent-gold);
   font-size: 1.8rem;
   cursor: pointer;
-  transition: transform 0.3s ease, color 0.3s ease;
+  transition: var(--transition);
 }
 .close-modal:hover {
   color: #fff;
   transform: scale(1.15);
 }
-@keyframes fadeIn {
-  from { opacity: 0; transform: scale(0.95); }
-  to { opacity: 1; transform: scale(1); }
-}
 
 /* ============================
-   ✨ SOUFFLE DU VENT DORÉ
-============================ */
-.modal-desert-dust {
-  position: absolute;
-  bottom: 0;
-  left: 0;
-  width: 100%;
-  height: 200px;
-  pointer-events: none;
-  overflow: hidden;
-  z-index: 1;
-}
-.modal-desert-dust span {
-  position: absolute;
-  bottom: 0;
-  width: 5px;
-  height: 5px;
-  background: radial-gradient(circle, rgba(244, 200, 66, 0.8), transparent 70%);
-  border-radius: 50%;
-  opacity: 0.7;
-  animation: goldenDustModal 8s linear infinite;
-}
-@keyframes goldenDustModal {
-  0% { transform: translateY(0) translateX(0) scale(0.8); opacity: 0.7; }
-  40% { opacity: 1; transform: translateY(-40px) translateX(30px) scale(1); }
-  100% { transform: translateY(-120px) translateX(-50px) scale(1.1); opacity: 0; }
-}
-
-/* ============================
-   🏜️ FOOTER
+   🏜️ FOOTER PRESTIGE
 ============================ */
 footer.footer-prestige {
   position: relative;
@@ -252,47 +239,78 @@ footer.footer-prestige {
   margin-bottom: 1rem;
   filter: drop-shadow(0 0 12px rgba(244, 200, 66, 0.4));
 }
-/* ============================
-   🌬️ Vent du désert (footer)
-============================ */
-.footer-dust {
-  position: absolute;
-  bottom: 0;
-  left: 0;
-  width: 100%;
-  height: 120px;
-  overflow: hidden;
-  pointer-events: none;
-  z-index: 1;
-}
-
-.footer-dust span {
-  position: absolute;
-  bottom: 0;
-  width: 4px;
-  height: 4px;
-  background: radial-gradient(circle, rgba(244, 200, 66, 0.9) 0%, transparent 70%);
-  border-radius: 50%;
-  animation: goldenDust 10s linear infinite;
-  opacity: 0.5;
-}
-
-.footer-dust span:nth-child(1) { left: 10%; animation-delay: 0s; animation-duration: 8s; }
-.footer-dust span:nth-child(2) { left: 30%; animation-delay: 2s; animation-duration: 9s; }
-.footer-dust span:nth-child(3) { left: 55%; animation-delay: 4s; animation-duration: 10s; }
-.footer-dust span:nth-child(4) { left: 75%; animation-delay: 1s; animation-duration: 11s; }
-.footer-dust span:nth-child(5) { left: 90%; animation-delay: 3s; animation-duration: 9s; }
-
-@keyframes goldenDust {
-  0% { transform: translateY(0) translateX(0); opacity: 0.6; }
-  50% { transform: translateY(-40px) translateX(20px); opacity: 0.8; }
-  100% { transform: translateY(-80px) translateX(-30px); opacity: 0; }
-}
 
 /* ============================
-   🌟 ANIMATIONS GLOBALES
+   🌬️ ANIMATIONS
 ============================ */
+@keyframes flyAcross {
+  0% {
+    transform: translateX(-10%) translateY(0);
+    opacity: 0;
+  }
+  10% {
+    opacity: 1;
+  }
+  50% {
+    transform: translateX(120vw) translateY(-30px);
+  }
+  100% {
+    transform: translateX(220vw);
+    opacity: 0;
+  }
+}
+@keyframes mistMove {
+  from {
+    transform: translateX(-50%);
+  }
+  to {
+    transform: translateX(0);
+  }
+}
 @keyframes slideFadeIn {
-  from { opacity: 0; transform: translateY(30px); }
-  to { opacity: 1; transform: translateY(0); }
+  from {
+    opacity: 0;
+    transform: translateY(30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: scale(0.95);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+@keyframes skyDrift {
+  0% {
+    background: radial-gradient(circle at 20% 30%, #122438, #0a0c10 85%);
+  }
+  50% {
+    background: radial-gradient(circle at 70% 40%, #193b54, #0a0d11 85%);
+  }
+  100% {
+    background: radial-gradient(circle at 50% 20%, #16293a, #0a0d11 85%);
+  }
+}
+
+/* ============================
+   📱 RESPONSIVE
+============================ */
+@media (max-width: 768px) {
+  .service-grid {
+    flex-direction: column;
+    align-items: center;
+  }
+  .service-grid .card {
+    width: 90%;
+  }
+  .founder-section {
+    margin: 2rem 1rem;
+  }
 }
