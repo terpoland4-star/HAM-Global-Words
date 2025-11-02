@@ -8,6 +8,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="robots" content="index, follow" />
   <meta name="description" content="HAM Global Words – Services linguistiques et IA : traduction, interprétation, annotation et médiation culturelle en langues africaines et internationales." />
+  <meta name="author" content="Hamadine AG Moctar" />
   <title>HAM Global Words – Langues du Sahel, voix du monde</title>
 
   <!-- =========================
@@ -15,33 +16,43 @@
   ========================== -->
   <meta property="og:title" content="HAM Global Words – Langues du Sahel, voix du monde" />
   <meta property="og:description" content="Services linguistiques multilingues et IA : traduction, interprétation, annotation, médiation culturelle." />
-  <meta property="og:image" content="assets/img/logoHAM.png" />
+  <meta property="og:image" content="assetes/img/logoHAM.png" />
   <meta property="og:type" content="website" />
   <meta property="og:url" content="https://www.hamglobalwords.com" />
   <meta name="twitter:card" content="summary_large_image" />
   <meta name="twitter:title" content="HAM Global Words" />
   <meta name="twitter:description" content="Langues du Sahel, voix du monde – Traduction, interprétation et IA linguistique." />
-  <meta name="twitter:image" content="assets/img/logoHAM.png" />
+  <meta name="twitter:image" content="assetes/img/logoHAM.png" />
 
   <!-- =========================
        PWA & APP ICONS
   ========================== -->
-  <link rel="manifest" href="assets/manifest.webmanifest" />
+  <link rel="manifest" href="assetes/manifest.webmanifest" />
   <meta name="theme-color" content="#d4a531" />
-  <link rel="apple-touch-icon" href="assets/img/logo.png" />
-  <link rel="icon" href="assets/img/logo.png" type="image/png" />
+  <link rel="apple-touch-icon" href="assetes/img/logo.png" />
+  <link rel="icon" href="assetes/img/logo.png" type="image/png" />
+
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+  <meta name="mobile-web-app-capable" content="yes" />
 
   <!-- =========================
        PERFORMANCES
   ========================== -->
-  <link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin>
+  <link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin />
+  <link rel="preload" as="image" href="assetes/img/logoHAM.png" />
   <link rel="stylesheet" href="assetes/css/style.css" />
 
   <!-- =========================
-       SÉCURITÉ (BASIC CSP)
+       SÉCURITÉ (CSP ADAPTÉE AUX MODULES)
   ========================== -->
-  <meta http-equiv="Content-Security-Policy" content="default-src 'self'; img-src 'self' https: data:; script-src 'self' https://cdn.jsdelivr.net; style-src 'self' 'unsafe-inline' https://cdn.jsdelivr.net;">
-
+  <meta http-equiv="Content-Security-Policy"
+        content="default-src 'self';
+                 script-src 'self' 'unsafe-inline' https://cdn.jsdelivr.net;
+                 style-src 'self' 'unsafe-inline' https://cdn.jsdelivr.net;
+                 img-src 'self' data: https:;
+                 connect-src 'self' https:;
+                 object-src 'none';" />
 </head>
 
 <body>
@@ -94,7 +105,7 @@
     <section id="founder" class="founder-section">
       <div class="founder-header">
         <figure class="founder-photo-container">
-          <img src="assetes/img/hamadine.jpeg" alt="Photo de Hamadine AG Moctar" class="founder-photo" loading="lazy" />
+          <img src="assetes/img/hamadine.jpeg" alt="Photo du fondateur de HAM Global Words" class="founder-photo" loading="lazy" />
         </figure>
         <div class="founder-title">
           <h2>👤 À propos du fondateur</h2>
@@ -188,23 +199,15 @@
       <span></span><span></span><span></span><span></span><span></span>
     </div>
     <p>© <span id="year">2025</span> HAM Global Words – Tous droits réservés</p>
+    <p><a href="#cookies">Politique de cookies</a></p>
   </footer>
 
   <!-- =========================
-       SCRIPTS
+       SCRIPTS MODERNISÉS
   ========================== -->
-  <script src="assetes/js/main.js" defer></script>
+  <script type="module" src="assetes/js/main.js"></script>
   <script src="assetes/js/modal.js" defer></script>
-  <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js" async></script>
-
-  <!-- Service Worker -->
-  <script>
-    if ('serviceWorker' in navigator) {
-      navigator.serviceWorker.register('assets/js/sw.js').then(() => {
-        console.log('✅ Service Worker enregistré avec succès');
-      }).catch(err => console.warn('Erreur Service Worker :', err));
-    }
-  </script>
+  <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js" defer></script>
 
   <noscript>Veuillez activer JavaScript pour une expérience optimale sur ce site.</noscript>
 </body>
