@@ -8,7 +8,7 @@ import { setYear } from './modules/year.js';
 import { initScrollAnimations } from './modules/scrollAnimations.js';
 import { loadReadme } from './modules/readmeLoader.js';
 import { initCookies } from './modules/cookies.js';
-import { protectMailto } from './modules/mailProtection.js';
+import { initServiceModal } from './modules/modal.js';
 import { initQuickContact } from './modules/quickContact.js';
 import { initSmoothScroll } from './modules/smoothScroll.js';
 import { initDesertEffects } from './modules/desertEffects.js';
@@ -23,6 +23,7 @@ document.addEventListener("DOMContentLoaded", () => {
   setYear();
   initScrollAnimations();
   loadReadme();
+  initServiceModal();
   initCookies();
   initQuickContact();
   initSmoothScroll();
