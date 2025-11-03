@@ -386,3 +386,21 @@ footer.footer-prestige {
   from { opacity: 0; transform: translateY(30px); }
   to { opacity: 1; transform: translateY(0); }
 }
+/* Effet visuel lors du focus ou du scroll vers un service */
+.highlight-service {
+  background: rgba(244, 200, 66, 0.2);
+  transition: background 1s ease;
+}
+
+/* Rendez toute la card cliquable */
+.card {
+  position: relative;
+  cursor: pointer;
+}
+.card::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+}
+
