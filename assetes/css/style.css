@@ -404,3 +404,30 @@ footer.footer-prestige {
   z-index: 1;
 }
 
+.service-modal {
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.6);
+  display: none;
+  justify-content: center;
+  align-items: center;
+  z-index: 999;
+}
+
+.service-modal.active {
+  display: flex;
+}
+
+.service-modal[aria-hidden="true"] {
+  display: none;
+  pointer-events: none;
+}
+
+.modal-content {
+  background: #fff;
+  border-radius: 1rem;
+  padding: 2rem;
+  max-width: 600px;
+  width: 90%;
+}
+
