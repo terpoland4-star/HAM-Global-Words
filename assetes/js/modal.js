@@ -6,7 +6,7 @@ document.addEventListener("DOMContentLoaded", () => {
   const modalTitle = document.getElementById("modal-title");
   const modalDesc = document.getElementById("modal-desc");
   const closeModalBtn = document.querySelector(".close-modal");
-  const serviceButtons = document.querySelectorAll(".service-btn, .card");
+  const serviceButtons = document.querySelectorAll(".service-btn, .card, .service-link");
   const serviceContentBlocks = document.querySelectorAll(".service-content [data-service]");
 
   if (!modal || !modalTitle || !modalDesc) return;
@@ -29,7 +29,6 @@ document.addEventListener("DOMContentLoaded", () => {
     const serviceData = [...serviceContentBlocks].find(
       (block) => block.dataset.service === serviceKey
     );
-
     if (!serviceData) return;
 
     modalTitle.textContent = titleMap[serviceKey] || "Service linguistique";
@@ -39,8 +38,8 @@ document.addEventListener("DOMContentLoaded", () => {
     modal.setAttribute("aria-hidden", "false");
     document.body.classList.add("no-scroll");
 
-    // Animation d’apparition douce
-    modal.querySelector(".modal-content").classList.add("fade-in");
+    const content = modal.querySelector(".modal-content");
+    if (content) content.classList.add("fade-in");
 
     // Focus accessibilité
     closeModalBtn?.focus();
@@ -50,44 +49,43 @@ document.addEventListener("DOMContentLoaded", () => {
   // 🔹 FERMETURE DE LA MODALE
   // ============================
   const closeModal = () => {
+    const content = modal.querySelector(".modal-content");
+    if (content) content.classList.remove("fade-in");
+
     modal.classList.remove("active");
     modal.setAttribute("aria-hidden", "true");
     document.body.classList.remove("no-scroll");
-
-    // Supprimer l’animation après transition
-    modal.querySelector(".modal-content").classList.remove("fade-in");
   };
 
   // ============================
   // 🔸 ÉVÉNEMENTS UTILISATEUR
   // ============================
 
-  // Clic sur les boutons ou cartes
   serviceButtons.forEach((btn) => {
     btn.addEventListener("click", (e) => {
-      e.preventDefault();
       const serviceKey = btn.dataset.service;
-      if (!serviceKey) return;
+      if (!serviceKey) return; // Laisse le lien agir normalement si pas de dataset
+      e.preventDefault();
 
       const onIndex = document.querySelector(".services-preview");
       if (onIndex) {
         openModal(serviceKey);
       } else {
-        // Redirection propre avec ancre SEO-friendly
+        // Redirection propre SEO-friendly
         window.location.href = `services.html?service=${encodeURIComponent(serviceKey)}`;
       }
     });
   });
 
-  // Bouton fermeture
+  // Bouton de fermeture
   closeModalBtn?.addEventListener("click", closeModal);
 
-  // Clic à l’extérieur du contenu
+  // Fermeture au clic à l’extérieur du contenu
   modal.addEventListener("click", (e) => {
     if (e.target === modal) closeModal();
   });
 
-  // Touche Échap
+  // Fermeture via la touche Échap
   window.addEventListener("keydown", (e) => {
     if (e.key === "Escape" && modal.classList.contains("active")) {
       closeModal();
@@ -95,19 +93,10 @@ document.addEventListener("DOMContentLoaded", () => {
   });
 
   // ============================
-  // 🎯 OUVERTURE AUTO VIA PARAMÈTRE
+  // 🎯 OUVERTURE AUTO VIA PARAMÈTRE D'URL
   // ============================
   const params = new URLSearchParams(window.location.search);
   const service = params.get("service");
 
-  if (service) {
-    const targetBlock = document.querySelector(`.service-content [data-service="${service}"]`);
-    if (targetBlock) {
-      modalTitle.textContent = titleMap[service] || "Service linguistique";
-      modalDesc.innerHTML = targetBlock.innerHTML;
-      modal.classList.add("active");
-      modal.setAttribute("aria-hidden", "false");
-      document.body.classList.add("no-scroll");
-    }
-  }
+  if (service) openModal(service);
 });
