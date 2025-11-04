@@ -1,14 +1,14 @@
 // ============================
-// 💬 MODALE DES SERVICES (HAM Global Words)
+// 💬 MODALE DES SERVICES — Version Avancée
 // ============================
-
-export function initServiceModal() {
+document.addEventListener("DOMContentLoaded", () => {
   const modal = document.getElementById("serviceModal");
   const modalTitle = document.getElementById("modal-title");
   const modalDesc = document.getElementById("modal-desc");
   const closeModalBtn = document.querySelector(".close-modal");
-  const serviceButtons = document.querySelectorAll(".service-btn, .card");
+  const serviceButtons = document.querySelectorAll(".service-link, .service-btn, .card");
   const serviceContentBlocks = document.querySelectorAll(".service-content [data-service]");
+  const body = document.body;
 
   if (!modal || !modalTitle || !modalDesc) return;
 
@@ -21,6 +21,20 @@ export function initServiceModal() {
     annotation: "🧠 Annotation linguistique & Intelligence Artificielle",
     transcription: "📜 Transcription & adaptation",
     mediation: "🌱 Médiation culturelle & éducation linguistique",
+  };
+
+  // ----------------------------
+  // ✨ Gestion du flou d’arrière-plan
+  // ----------------------------
+  const toggleBlur = (state) => {
+    const main = document.querySelector("main");
+    if (!main) return;
+    if (state) {
+      main.style.filter = "blur(4px)";
+      main.style.transition = "filter 0.3s ease";
+    } else {
+      main.style.filter = "none";
+    }
   };
 
   // ============================
@@ -37,32 +51,69 @@ export function initServiceModal() {
 
     modal.classList.add("active");
     modal.setAttribute("aria-hidden", "false");
-    document.body.classList.add("no-scroll");
+    body.classList.add("no-scroll");
+    toggleBlur(true);
 
     const content = modal.querySelector(".modal-content");
-    if (content) content.classList.add("fade-in");
+    if (content) {
+      content.classList.add("fade-in");
+      content.focus();
+    }
 
-    // Focus pour l’accessibilité
+    // Accessibilité : focus initial
     closeModalBtn?.focus();
+
+    // Empêche la fermeture accidentelle pendant l’animation
+    setTimeout(() => (modal.dataset.ready = "true"), 200);
   };
 
   // ============================
   // 🔹 FERMETURE DE LA MODALE
   // ============================
   const closeModal = () => {
-    modal.classList.remove("active");
-    modal.setAttribute("aria-hidden", "true");
-    document.body.classList.remove("no-scroll");
+    if (modal.dataset.ready !== "true") return; // évite les clics précoces
 
     const content = modal.querySelector(".modal-content");
     if (content) content.classList.remove("fade-in");
+
+    modal.classList.remove("active");
+    modal.setAttribute("aria-hidden", "true");
+    body.classList.remove("no-scroll");
+    toggleBlur(false);
+
+    modal.dataset.ready = "false";
   };
+
+  // ============================
+  // 🔸 GESTION DU FOCUS CLAVIER
+  // ============================
+  modal.addEventListener("keydown", (e) => {
+    if (e.key === "Tab") {
+      const focusable = modal.querySelectorAll(
+        'button, [href], input, select, textarea, [tabindex]:not([tabindex="-1"])'
+      );
+      const focusableArray = Array.from(focusable);
+      const first = focusableArray[0];
+      const last = focusableArray[focusableArray.length - 1];
+
+      if (e.shiftKey) {
+        if (document.activeElement === first) {
+          e.preventDefault();
+          last.focus();
+        }
+      } else {
+        if (document.activeElement === last) {
+          e.preventDefault();
+          first.focus();
+        }
+      }
+    }
+  });
 
   // ============================
   // 🔸 ÉVÉNEMENTS UTILISATEUR
   // ============================
 
-  // Clic sur les boutons ou cartes
   serviceButtons.forEach((btn) => {
     btn.addEventListener("click", (e) => {
       e.preventDefault();
@@ -73,21 +124,17 @@ export function initServiceModal() {
       if (onIndex) {
         openModal(serviceKey);
       } else {
-        // Redirection SEO-friendly
         window.location.href = `services.html?service=${encodeURIComponent(serviceKey)}`;
       }
     });
   });
 
-  // Bouton fermeture
   closeModalBtn?.addEventListener("click", closeModal);
 
-  // Clic à l’extérieur du contenu
   modal.addEventListener("click", (e) => {
     if (e.target === modal) closeModal();
   });
 
-  // Touche Échap
   window.addEventListener("keydown", (e) => {
     if (e.key === "Escape" && modal.classList.contains("active")) closeModal();
   });
@@ -101,11 +148,7 @@ export function initServiceModal() {
   if (service) {
     const targetBlock = document.querySelector(`.service-content [data-service="${service}"]`);
     if (targetBlock) {
-      modalTitle.textContent = titleMap[service] || "Service linguistique";
-      modalDesc.innerHTML = targetBlock.innerHTML;
-      modal.classList.add("active");
-      modal.setAttribute("aria-hidden", "false");
-      document.body.classList.add("no-scroll");
+      openModal(service);
     }
   }
-}
+});
