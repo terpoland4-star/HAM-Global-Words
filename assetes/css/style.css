@@ -246,36 +246,48 @@ body.dark-mode .service-btn:hover {
 }
 
 /* ============================
-   🏜️ MODALE DES SERVICES
+   🏜️ MODALE DES SERVICES — VERSION FINALE SAHEL NIGHT DELUXE
 ============================ */
 .service-modal {
-  display: none;
   position: fixed;
   inset: 0;
-  background: radial-gradient(circle at center, rgba(10,10,10,0.95) 0%, rgba(0,0,0,0.85) 100%);
-  z-index: 9999;
+  display: none;
   justify-content: center;
   align-items: center;
-  backdrop-filter: blur(4px);
+  background: radial-gradient(circle at center, rgba(10,10,10,0.95) 0%, rgba(0,0,0,0.85) 100%);
+  backdrop-filter: blur(6px);
+  z-index: 9999;
+  opacity: 0;
   transition: opacity 0.4s ease;
 }
+
 .service-modal.active {
   display: flex;
+  opacity: 1;
   animation: fadeIn 0.5s ease;
 }
+
 .modal-content {
   position: relative;
-  background: rgba(18, 22, 26, 0.9);
+  background: rgba(18, 22, 26, 0.95);
   color: #fefefe;
   border-radius: 16px;
   max-width: 720px;
   padding: 2.2rem 2.5rem;
-  box-shadow: 0 0 40px rgba(244, 200, 66, 0.3);
+  box-shadow: 0 0 40px rgba(244, 200, 66, 0.35);
   text-align: left;
   overflow-y: auto;
   max-height: 80vh;
   z-index: 10;
+  transform: translateY(20px);
+  animation: modalRise 0.4s ease forwards;
 }
+
+@keyframes modalRise {
+  from { transform: translateY(40px); opacity: 0; }
+  to { transform: translateY(0); opacity: 1; }
+}
+
 .close-modal {
   position: absolute;
   top: 1rem;
@@ -286,11 +298,44 @@ body.dark-mode .service-btn:hover {
   font-size: 1.8rem;
   cursor: pointer;
   transition: transform 0.3s ease, color 0.3s ease;
+  z-index: 20;
 }
+
 .close-modal:hover {
   color: #fff;
   transform: scale(1.15);
 }
+
+.modal-content h2 {
+  color: #f4c842;
+  font-size: 1.6rem;
+  margin-bottom: 1rem;
+}
+
+.modal-content p {
+  line-height: 1.7;
+  color: #eaeaea;
+  margin-bottom: 1rem;
+}
+
+/* Petit effet visuel doré dans la modale */
+.modal-desert-dust span {
+  position: absolute;
+  bottom: 0;
+  width: 6px;
+  height: 6px;
+  background: radial-gradient(circle, rgba(244, 200, 66, 0.8), transparent 70%);
+  border-radius: 50%;
+  opacity: 0.7;
+  animation: goldenDustModal 8s linear infinite;
+}
+
+@keyframes goldenDustModal {
+  0% { transform: translateY(0) translateX(0) scale(0.8); opacity: 0.7; }
+  40% { opacity: 1; transform: translateY(-40px) translateX(30px) scale(1); }
+  100% { transform: translateY(-120px) translateX(-50px) scale(1.1); opacity: 0; }
+}
+
 @keyframes fadeIn {
   from { opacity: 0; transform: scale(0.95); }
   to { opacity: 1; transform: scale(1); }
