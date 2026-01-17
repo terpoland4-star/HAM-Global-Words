@@ -1,478 +1,280 @@
-/* ============================
-   🌙 THEME SAHEL NIGHT DELUXE
-   Élégance sombre, accents dorés et oasis bleue
-============================ */
+/* =========================================================
+   🌙 THEME SAHEL NIGHT DELUXE — VERSION FINALE
+========================================================= */
 
+/* =========================
+   VARIABLES
+========================= */
 :root {
   --bg-color: #0d0f11;
   --text-color: #eaeaea;
-  --header-bg: linear-gradient(135deg, #0b4b4b, #3ab6d0);
-  --header-text: #fefefe;
-  --cta-bg: #1a1a1a;
-  --cta-text: #fefefe;
-  --cta-btn-bg: #d4a531;
-  --cta-btn-text: #1a1a1a;
-  --cta-btn-hover: #f8d45c;
+  --gold: #f4c842;
+  --gold-dark: #b88a1e;
+  --blue-oasis: #3ab6d0;
+  --dark-panel: #131516;
   --footer-bg: linear-gradient(135deg, #d4a531, #b88a1e);
-  --footer-text: #1a1a1a;
 }
 
-/* ============================
-   🌌 BODY
-============================ */
+/* =========================
+   RESET MINIMAL
+========================= */
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
 body {
-  background-color: var(--bg-color);
+  margin: 0;
+  background: var(--bg-color);
   color: var(--text-color);
-  font-family: 'Montserrat', sans-serif;
-  transition: background 0.6s ease, color 0.4s ease;
+  font-family: "Montserrat", system-ui, sans-serif;
   overflow-x: hidden;
 }
 
-/* ============================
-   🌅 LOGO DU HEADER
-============================ */
-header .logo {
-  display: block;
-  margin: 0 auto 1rem auto;
-  width: 120px;
-  height: auto;
-  border-radius: 12px;
-  filter: drop-shadow(0 0 10px rgba(255, 255, 255, 0.25));
-  transition: transform 0.4s ease, filter 0.4s ease;
+/* =========================
+   THEME JOUR
+========================= */
+body:not(.dark-mode) {
+  --bg-color: #f5f5f5;
+  --text-color: #1a1a1a;
+  background: var(--bg-color);
+  color: var(--text-color);
 }
 
-header .logo:hover {
-  transform: scale(1.05);
-  filter: drop-shadow(0 0 16px rgba(244, 200, 66, 0.4));
-}
-
-/* ============================
-   🕊️ OISEAUX VOLANTS
-============================ */
-.bird {
-  position: absolute;
-  width: 35px;
-  height: 35px;
-  background: url('assetes/img/bird.svg') no-repeat center/contain;
-  opacity: 0.85;
-  animation: flyAcross 28s linear infinite;
-  z-index: 2;
-}
-.bird:nth-child(2) { top: 35%; left: -10%; animation-delay: 8s; animation-duration: 30s; }
-.bird:nth-child(3) { top: 55%; left: -20%; animation-delay: 15s; animation-duration: 34s; }
-
-@keyframes flyAcross {
-  0% { transform: translateX(-10%) translateY(0); opacity: 0; }
-  10% { opacity: 1; }
-  50% { transform: translateX(120vw) translateY(-30px); }
-  100% { transform: translateX(220vw); opacity: 0; }
-}
-
-/* ============================
-   🌫️ VENT DU DÉSERT
-============================ */
-header::after {
-  content: "";
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 200%;
-  height: 100%;
-  background: linear-gradient(90deg, rgba(255,255,255,0.04) 0%, rgba(255,255,255,0.1) 50%, rgba(255,255,255,0.04) 100%);
-  opacity: 0.25;
-  animation: mistMove 40s linear infinite;
-  z-index: 1;
-}
-@keyframes mistMove {
-  from { transform: translateX(-50%); }
-  to { transform: translateX(0); }
-}
-
-/* ============================
-   👤 SECTION FONDATEUR
-============================ */
-.founder-section {
-  max-width: 900px;
-  margin: 4rem auto;
-  padding: 2rem 1.5rem;
-  background: #131516;
-  border-radius: 16px;
-  box-shadow: 0 8px 20px rgba(0,0,0,0.5);
-  text-align: center;
-  animation: slideFadeIn 1.5s ease both;
-}
-.founder-photo {
-  width: 70px;
-  height: 70px;
+/* =========================
+   SWITCH THEME
+========================= */
+#themeToggle {
+  position: fixed;
+  top: 1rem;
+  right: 1rem;
+  width: 48px;
+  height: 48px;
   border-radius: 50%;
-  object-fit: cover;
-  border: 3px solid #f4c842;
-  box-shadow: 0 0 18px rgba(244, 200, 66, 0.25);
+  border: none;
+  cursor: pointer;
+  font-size: 1.2rem;
+  background: linear-gradient(135deg, var(--gold), var(--gold-dark));
+  color: #1a1a1a;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.4);
+  z-index: 9999;
 }
 
-/* ============================
-   🌌 SECTION SERVICES – NUIT DU SAHEL
-============================ */
-.services-preview {
+/* =========================
+   HEADER
+========================= */
+.site-header {
   position: relative;
   text-align: center;
-  padding: 80px 20px;
-  color: #eaeaea;
+  padding: 3rem 1rem 4rem;
+  background: linear-gradient(135deg, #0b4b4b, var(--blue-oasis));
+  color: #fff;
   overflow: hidden;
-  background: radial-gradient(circle at 50% 20%, #16293a, #0a0d11 80%);
-  animation: skyDrift 25s ease-in-out infinite alternate;
 }
-@keyframes skyDrift {
-  0% { background: radial-gradient(circle at 20% 30%, #122438, #0a0c10 85%); }
-  50% { background: radial-gradient(circle at 70% 40%, #193b54, #0a0d11 85%); }
-  100% { background: radial-gradient(circle at 50% 20%, #16293a, #0a0d11 85%); }
+
+.logo {
+  width: 120px;
+  border-radius: 12px;
+  margin-bottom: 1rem;
+  filter: drop-shadow(0 0 10px rgba(255,255,255,0.25));
+}
+
+/* =========================
+   OISEAUX
+========================= */
+.bird {
+  position: absolute;
+  width: 36px;
+  height: 36px;
+  background: url("../img/bird.svg") no-repeat center / contain;
+  animation: flyAcross 30s linear infinite;
+  opacity: 0.8;
+  will-change: transform;
+}
+.bird:nth-child(2) { top: 30%; animation-delay: 8s; }
+.bird:nth-child(3) { top: 55%; animation-delay: 15s; }
+
+@keyframes flyAcross {
+  from { transform: translateX(-20vw); }
+  to   { transform: translateX(120vw); }
+}
+
+/* =========================
+   NAVIGATION
+========================= */
+.main-nav ul {
+  list-style: none;
+  padding: 0;
+  display: flex;
+  justify-content: center;
+  gap: 1.5rem;
+}
+
+.main-nav a {
+  color: #fff;
+  text-decoration: none;
+  font-weight: 500;
+}
+
+/* =========================
+   SECTIONS
+========================= */
+section {
+  padding: 4rem 1.5rem;
+  max-width: 1100px;
+  margin: auto;
+}
+
+/* =========================
+   FONDATEUR
+========================= */
+.founder-section {
+  background: var(--dark-panel);
+  border-radius: 16px;
+  text-align: center;
+  box-shadow: 0 8px 24px rgba(0,0,0,0.5);
+}
+
+.founder-photo {
+  width: 80px;
+  height: 80px;
+  border-radius: 50%;
+  border: 3px solid var(--gold);
+  margin-bottom: 1rem;
+}
+
+/* =========================
+   SERVICES
+========================= */
+.services-preview {
+  text-align: center;
+  background: radial-gradient(circle at top, #16293a, #0a0d11 80%);
 }
 
 .service-grid {
   display: flex;
   flex-wrap: wrap;
   justify-content: center;
-  gap: 30px;
-  margin-bottom: 40px;
-  position: relative;
-  z-index: 2;
-}
-.service-grid .card {
-  background: rgba(255, 255, 255, 0.06);
-  border-radius: 14px;
-  padding: 28px;
-  width: 280px;
-  box-shadow: 0 8px 25px rgba(0, 0, 0, 0.4);
-  transition: transform 0.4s ease, background 0.4s ease;
-  cursor: pointer;
-}
-.service-grid .card:hover {
-  transform: translateY(-8px);
-  background: rgba(244, 200, 66, 0.12);
-}
-.service-grid .card h3 {
-  color: #f4c842;
-  font-size: 1.3rem;
-  margin-bottom: 10px;
-}
-
-/* ============================
-   ✨ BOUTONS DE SERVICES – STYLE SAHEL PRESTIGE
-============================ */
-.service-btn {
-  display: inline-block;
-  background: linear-gradient(135deg, #d4a531, #b88a1e);
-  color: #1a1a1a;
-  font-weight: 600;
-  font-size: 1.1rem;
-  padding: 1rem 1.8rem;
-  margin: 0.6rem;
-  border: none;
-  border-radius: 50px;
-  cursor: pointer;
-  box-shadow: 0 4px 12px rgba(244, 200, 66, 0.3);
-  transition: 
-    transform 0.3s ease,
-    box-shadow 0.3s ease,
-    background 0.4s ease;
-  position: relative;
-  overflow: hidden;
-  opacity: 0;
-  transform: translateY(20px);
-  animation: fadeUp 0.8s ease forwards;
-}
-
-.service-btn:nth-child(1) { animation-delay: 0.1s; }
-.service-btn:nth-child(2) { animation-delay: 0.2s; }
-.service-btn:nth-child(3) { animation-delay: 0.3s; }
-.service-btn:nth-child(4) { animation-delay: 0.4s; }
-.service-btn:nth-child(5) { animation-delay: 0.5s; }
-
-.service-btn::before {
-  content: "";
-  position: absolute;
-  top: 0;
-  left: -100%;
-  width: 100%;
-  height: 100%;
-  background: rgba(255, 255, 255, 0.25);
-  transform: skewX(-30deg);
-  transition: left 0.6s ease;
-}
-
-.service-btn:hover::before {
-  left: 200%;
-}
-
-.service-btn:hover {
-  transform: translateY(-4px) scale(1.03);
-  background: linear-gradient(135deg, #f8d45c, #e3b636);
-  box-shadow: 0 6px 16px rgba(244, 200, 66, 0.45);
-}
-
-body.dark-mode .service-btn {
-  background: linear-gradient(135deg, #2a2a2a, #1a1a1a);
-  color: #f4c842;
-  box-shadow: 0 4px 10px rgba(244, 200, 66, 0.25);
-}
-body.dark-mode .service-btn:hover {
-  background: linear-gradient(135deg, #3d3d3d, #272727);
-  color: #fff;
-  transform: translateY(-3px);
-  box-shadow: 0 6px 16px rgba(255, 255, 255, 0.15);
-}
-
-.services-list {
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: center;
-  gap: 1rem;
+  gap: 2rem;
   margin-top: 2rem;
 }
 
-@keyframes fadeUp {
-  to {
-    opacity: 1;
-    transform: translateY(0);
-  }
+.card {
+  width: 260px;
+  padding: 2rem;
+  background: rgba(255,255,255,0.06);
+  border-radius: 14px;
+  color: var(--text-color);
+  cursor: pointer;
+  transition: transform 0.3s ease, background 0.3s ease;
 }
 
-@media (max-width: 600px) {
-  .service-btn {
-    width: 90%;
-    font-size: 1rem;
-    padding: 0.9rem 1.2rem;
-  }
+.card:hover {
+  transform: translateY(-6px);
+  background: rgba(244,200,66,0.12);
 }
 
-/* ============================
-   🏜️ MODALE DES SERVICES — VERSION FINALE SAHEL NIGHT DELUXE
-============================ */
+/* =========================
+   BOUTONS SERVICES
+========================= */
+.service-btn {
+  background: linear-gradient(135deg, var(--gold), var(--gold-dark));
+  border: none;
+  border-radius: 50px;
+  padding: 1rem 1.8rem;
+  font-size: 1.1rem;
+  cursor: pointer;
+  box-shadow: 0 4px 12px rgba(244,200,66,0.3);
+  transition: transform 0.3s ease;
+}
+
+.service-btn:hover {
+  transform: scale(1.05);
+}
+
+/* =========================
+   MODALE
+========================= */
 .service-modal {
   position: fixed;
   inset: 0;
-  display: none;
+  background: radial-gradient(circle, rgba(10,10,10,0.95), rgba(0,0,0,0.85));
+  display: flex;
   justify-content: center;
   align-items: center;
-  background: radial-gradient(circle at center, rgba(10,10,10,0.95) 0%, rgba(0,0,0,0.85) 100%);
-  backdrop-filter: blur(6px);
-  z-index: 9999;
   opacity: 0;
+  pointer-events: none;
   transition: opacity 0.4s ease;
+  z-index: 9999;
 }
 
-.service-modal.active {
-  display: flex;
+.service-modal.open {
   opacity: 1;
-  animation: fadeIn 0.5s ease;
+  pointer-events: auto;
 }
 
 .modal-content {
-  position: relative;
-  background: rgba(18, 22, 26, 0.95);
-  color: #fefefe;
+  background: rgba(18,22,26,0.95);
+  color: #fff;
   border-radius: 16px;
   max-width: 720px;
-  padding: 2.2rem 2.5rem;
-  box-shadow: 0 0 40px rgba(244, 200, 66, 0.35);
-  text-align: left;
-  overflow-y: auto;
+  width: 90%;
+  padding: 2.5rem;
   max-height: 80vh;
-  z-index: 10;
-  transform: translateY(20px);
+  overflow-y: auto;
+  box-shadow: 0 0 40px rgba(244,200,66,0.35);
   animation: modalRise 0.4s ease forwards;
 }
 
 @keyframes modalRise {
-  from { transform: translateY(40px); opacity: 0; }
-  to { transform: translateY(0); opacity: 1; }
+  from { opacity: 0; transform: translateY(40px); }
+  to   { opacity: 1; transform: translateY(0); }
 }
 
 .close-modal {
   position: absolute;
   top: 1rem;
   right: 1.2rem;
+  font-size: 1.8rem;
   background: none;
   border: none;
-  color: #f4c842;
-  font-size: 1.8rem;
+  color: var(--gold);
   cursor: pointer;
-  transition: transform 0.3s ease, color 0.3s ease;
-  z-index: 20;
 }
 
-.close-modal:hover {
-  color: #fff;
-  transform: scale(1.15);
-}
-
-.modal-content h2 {
-  color: #f4c842;
-  font-size: 1.6rem;
-  margin-bottom: 1rem;
-}
-
-.modal-content p {
-  line-height: 1.7;
-  color: #eaeaea;
-  margin-bottom: 1rem;
-}
-
-/* Petit effet visuel doré dans la modale */
-.modal-desert-dust span {
-  position: absolute;
-  bottom: 0;
-  width: 6px;
-  height: 6px;
-  background: radial-gradient(circle, rgba(244, 200, 66, 0.8), transparent 70%);
-  border-radius: 50%;
-  opacity: 0.7;
-  animation: goldenDustModal 8s linear infinite;
-}
-
-@keyframes goldenDustModal {
-  0% { transform: translateY(0) translateX(0) scale(0.8); opacity: 0.7; }
-  40% { opacity: 1; transform: translateY(-40px) translateX(30px) scale(1); }
-  100% { transform: translateY(-120px) translateX(-50px) scale(1.1); opacity: 0; }
-}
-
-@keyframes fadeIn {
-  from { opacity: 0; transform: scale(0.95); }
-  to { opacity: 1; transform: scale(1); }
-}
-
-/* ============================
-   ✨ SOUFFLE DU VENT DORÉ
-============================ */
-.modal-desert-dust {
-  position: absolute;
-  bottom: 0;
-  left: 0;
-  width: 100%;
-  height: 200px;
-  pointer-events: none;
-  overflow: hidden;
-  z-index: 1;
-}
-.modal-desert-dust span {
-  position: absolute;
-  bottom: 0;
-  width: 5px;
-  height: 5px;
-  background: radial-gradient(circle, rgba(244, 200, 66, 0.8), transparent 70%);
-  border-radius: 50%;
-  opacity: 0.7;
-  animation: goldenDustModal 8s linear infinite;
-}
-@keyframes goldenDustModal {
-  0% { transform: translateY(0) translateX(0) scale(0.8); opacity: 0.7; }
-  40% { opacity: 1; transform: translateY(-40px) translateX(30px) scale(1); }
-  100% { transform: translateY(-120px) translateX(-50px) scale(1.1); opacity: 0; }
-}
-
-/* ============================
-   🏜️ FOOTER
-============================ */
-footer.footer-prestige {
-  position: relative;
+/* =========================
+   FOOTER
+========================= */
+.footer-prestige {
   background: var(--footer-bg);
-  color: var(--footer-text);
+  color: #1a1a1a;
   text-align: center;
-  padding: 3rem 1rem 1.5rem;
-  box-shadow: 0 -4px 20px rgba(0, 0, 0, 0.4);
+  padding: 3rem 1rem;
 }
+
 .footer-logo-prestige {
   width: 260px;
   margin-bottom: 1rem;
-  filter: drop-shadow(0 0 12px rgba(244, 200, 66, 0.4));
 }
 
-/* ============================
-   🌬️ Vent du désert (footer)
-============================ */
-.footer-dust {
-  position: absolute;
-  bottom: 0;
-  left: 0;
-  width: 100%;
-  height: 120px;
+/* =========================
+   SCROLL LOCK
+========================= */
+body.modal-open {
   overflow: hidden;
-  pointer-events: none;
-  z-index: 1;
 }
 
-.footer-dust span {
-  position: absolute;
-  bottom: 0;
-  width: 4px;
-  height: 4px;
-  background: radial-gradient(circle, rgba(244, 200, 66, 0.9) 0%, transparent 70%);
-  border-radius: 50%;
-  animation: goldenDust 10s linear infinite;
-  opacity: 0.5;
+/* =========================
+   ACCESSIBILITÉ
+========================= */
+@media (prefers-reduced-motion: reduce) {
+  * {
+    animation: none !important;
+    transition: none !important;
+  }
 }
-
-.footer-dust span:nth-child(1) { left: 10%; animation-delay: 0s; animation-duration: 8s; }
-.footer-dust span:nth-child(2) { left: 30%; animation-delay: 2s; animation-duration: 9s; }
-.footer-dust span:nth-child(3) { left: 55%; animation-delay: 4s; animation-duration: 10s; }
-.footer-dust span:nth-child(4) { left: 75%; animation-delay: 1s; animation-duration: 11s; }
-.footer-dust span:nth-child(5) { left: 90%; animation-delay: 3s; animation-duration: 9s; }
-
-@keyframes goldenDust {
-  0% { transform: translateY(0) translateX(0); opacity: 0.6; }
-  50% { transform: translateY(-40px) translateX(20px); opacity: 0.8; }
-  100% { transform: translateY(-80px) translateX(-30px); opacity: 0; }
-}
-
-/* ============================
-   🌟 ANIMATIONS GLOBALES
-============================ */
-@keyframes slideFadeIn {
-  from { opacity: 0; transform: translateY(30px); }
-  to { opacity: 1; transform: translateY(0); }
-}
-/* Effet visuel lors du focus ou du scroll vers un service */
-.highlight-service {
-  background: rgba(244, 200, 66, 0.2);
-  transition: background 1s ease;
-}
-
-/* Rendez toute la card cliquable */
-.card {
-  position: relative;
-  cursor: pointer;
-}
-.card::after {
-  content: "";
-  position: absolute;
-  inset: 0;
-  z-index: 1;
-}
-
-.service-modal {
-  position: fixed;
-  inset: 0;
-  background: rgba(0, 0, 0, 0.6);
-  display: none;
-  justify-content: center;
-  align-items: center;
-  z-index: 999;
-}
-
-.service-modal.active {
-  display: flex;
-}
-
-.service-modal[aria-hidden="true"] {
-  display: none;
-  pointer-events: none;
-}
-
-.modal-content {
-  background: #fff;
-  border-radius: 1rem;
-  padding: 2rem;
-  max-width: 600px;
-  width: 90%;
-}
-
