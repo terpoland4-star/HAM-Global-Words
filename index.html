@@ -1,193 +1,148 @@
 <!DOCTYPE html>
 <html lang="fr">
 <head>
-  <!-- =========================
-       MÉTADONNÉES GÉNÉRALES
-  ========================== -->
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <meta name="description"
-        content="HAM Global Words – Services linguistiques et IA : traduction, interprétation, annotation, médiation culturelle." />
+  <meta name="description" content="HAM Global Words – Services linguistiques, IA et développement digital : traduction, interprétation, apps, web et code." />
   <meta name="author" content="Hamadine AG Moctar" />
   <meta name="robots" content="index, follow" />
+  <link rel="canonical" href="https://hamglobalwords.com/" />
 
-  <title>HAM Global Words – Langues du Sahel, voix du monde</title>
+  <title>HAM Global Words – Des langues enracinées au Sahel, amplifiées au monde</title>
 
-  <!-- =========================
-       OPEN GRAPH / RÉSEAUX
-  ========================== -->
-  <meta property="og:title" content="HAM Global Words – Langues du Sahel, voix du monde" />
-  <meta property="og:description" content="Traduction, interprétation et intelligence artificielle linguistique." />
-  <meta property="og:image" content="assetes/img/logoHAM.png" />
+  <!-- Open Graph -->
+  <meta property="og:title" content="HAM Global Words" />
+  <meta property="og:description" content="Langues, IA et solutions digitales sur mesure." />
+  <meta property="og:image" content="https://tonsite.com/assets/img/logoHAM.png" />
   <meta property="og:type" content="website" />
+  <meta property="og:url" content="https://hamglobalwords.com/" />
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="HAM Global Words" />
+  <meta name="twitter:description" content="Langues, IA et solutions digitales sur mesure." />
+  <meta name="twitter:image" content="https://tonsite.com/assets/img/logoHAM.png" />
 
-  <!-- =========================
-       ICONES & PWA
-  ========================== -->
-  <link rel="icon" href="assetes/img/logo.png" type="image/png" />
-  <link rel="apple-touch-icon" href="assetes/img/logo.png" />
+  <!-- Favicon -->
+  <link rel="icon" href="assets/img/logo.png" type="image/png" />
+  <link rel="apple-touch-icon" href="assets/img/logo.png" />
   <meta name="theme-color" content="#0d0f11" />
 
-  <!-- =========================
-       STYLES
-  ========================== -->
-  <link rel="stylesheet" href="assetes/css/style.css" />
-</head>
+  <!-- Google Fonts -->
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
 
+  <!-- CSS -->
+  <link rel="preload" href="assets/css/style.css" as="style" />
+  <link rel="stylesheet" href="assets/css/style.css" />
+
+  <!-- JSON-LD Organization -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "Organization",
+    "name": "HAM Global Words",
+    "url": "https://hamglobalwords.com/",
+    "logo": "https://tonsite.com/assets/img/logoHAM.png",
+    "sameAs": [
+      "https://www.linkedin.com/company/hamglobalwords",
+      "https://twitter.com/hamglobalwords"
+    ],
+    "contactPoint": {
+      "@type": "ContactPoint",
+      "email": "contact@hamglobalwords.com",
+      "contactType": "customer support",
+      "availableLanguage": ["French", "English"]
+    }
+  }
+  </script>
+</head>
 <body class="dark-mode">
 
-  <!-- =========================
-       SWITCH THEME
-  ========================== -->
-  <button id="themeToggle" aria-label="Changer le thème">
-    🌙 / ☀️
-  </button>
+  <!-- Theme Toggle -->
+  <button id="themeToggle" aria-label="Changer le thème" class="theme-btn">🌙</button>
 
-  <!-- =========================
-       HEADER
-  ========================== -->
+  <!-- Header -->
   <header class="site-header">
-    <img src="assetes/img/logoHAM.png"
-         alt="Logo HAM Global Words"
-         class="logo"
-         loading="lazy" />
-
-    <!-- Oiseaux décoratifs -->
-    <div class="bird" aria-hidden="true"></div>
-    <div class="bird" aria-hidden="true"></div>
-    <div class="bird" aria-hidden="true"></div>
-
-    <h1>HAM Global Words</h1>
-    <p>Langues du Sahel, voix du monde</p>
+    <div class="header-content">
+      <img src="assets/img/logoHAM.png" alt="Logo HAM Global Words" class="logo" loading="lazy" />
+      <div class="header-text">
+        <h1>HAM Global Words</h1>
+        <p>Des langues enracinées au Sahel, amplifiées à l’échelle du monde.</p>
+      </div>
+    </div>
 
     <nav class="main-nav" aria-label="Navigation principale">
       <ul>
         <li><a href="#about">À propos</a></li>
-        <li><a href="#founder">Fondateur</a></li>
         <li><a href="#services">Services</a></li>
-        <li><a href="services.html">Tous les services</a></li>
+        <li><a href="#languages">Langues</a></li>
+        <li><a href="#digital">Digital</a></li>
+        <li><a href="#contact">Contact</a></li>
       </ul>
     </nav>
+
+    <a href="mailto:contact@hamglobalwords.com" class="cta-btn" rel="noopener noreferrer">📩 Travailler avec nous</a>
   </header>
 
-  <!-- =========================
-       CONTENU PRINCIPAL
-  ========================== -->
   <main>
 
-    <!-- À PROPOS -->
+    <!-- About -->
     <section id="about" class="intro">
       <h2>🌍 À propos</h2>
       <p>
-        <strong>HAM Global Words</strong> relie les langues africaines,
-        les cultures et l’intelligence artificielle pour une communication
-        inclusive, durable et responsable.
+        HAM Global Words relie les langues africaines, les cultures et l’intelligence artificielle pour une communication inclusive, durable et stratégique.
       </p>
     </section>
 
-    <!-- FONDATEUR -->
-    <section id="founder" class="founder-section">
-      <img src="assetes/img/hamadine.jpeg"
-           alt="Hamadine AG Moctar"
-           class="founder-photo"
-           loading="lazy" />
-      <h2>👤 Le fondateur</h2>
-      <p>
-        <strong>Hamadine AG MOCTAR</strong>, linguiste multilingue et
-        interprète humanitaire, spécialisé dans les langues du Sahel
-        et la technologie linguistique.
-      </p>
-    </section>
-
-    <!-- SERVICES -->
-    <section id="services" class="services-preview">
-      <h2>🛠️ Nos services</h2>
-
+    <!-- Services Linguistiques -->
+    <section id="services" class="services">
+      <h2>🛠️ Services linguistiques</h2>
       <div class="service-grid">
-        <button class="card service-btn" data-service="translation">
-          🌐 Traduction
-        </button>
-
-        <button class="card service-btn" data-service="interpretation">
-          🎙️ Interprétation
-        </button>
-
-        <button class="card service-btn" data-service="annotation">
-          🧠 Annotation IA
-        </button>
+        <div class="card">🌐 Traduction professionnelle</div>
+        <div class="card">🎙️ Interprétation (présentiel & remote live)</div>
+        <div class="card">🧠 Annotation & datasets IA</div>
       </div>
     </section>
 
-    <!-- =========================
-         CONTENU INVISIBLE MODALE
-    ========================== -->
-    <div class="service-content" hidden>
-      <div data-service="translation">
-        <p>
-          Traductions professionnelles et certifiées en langues africaines
-          et internationales, adaptées aux contextes juridiques,
-          techniques et humanitaires.
-        </p>
+    <!-- Digital Services -->
+    <section id="digital" class="services">
+      <h2>💻 Solutions digitales</h2>
+      <div class="service-grid">
+        <div class="card">📱 Conception d’applications</div>
+        <div class="card">🌍 Création de sites web</div>
+        <div class="card">🧩 Révision & correction de code</div>
+        <div class="card">📡 Interprétariat remote live (programmable)</div>
       </div>
+    </section>
 
-      <div data-service="interpretation">
-        <p>
-          Interprétation simultanée ou consécutive pour conférences,
-          missions internationales et réunions diplomatiques.
-        </p>
-      </div>
+    <!-- Languages -->
+    <section id="languages" class="languages">
+      <h2>🗣️ Langues couvertes</h2>
+      <p>Français • Anglais • Arabe • Tamasheq • Hausa • Fulfulde</p>
+    </section>
 
-      <div data-service="annotation">
-        <p>
-          Annotation linguistique, transcription audio, création de
-          datasets multilingues pour l’intelligence artificielle.
-        </p>
-      </div>
-    </div>
+    <!-- Trust -->
+    <section class="trust">
+      <h2>🤝 Pourquoi nous faire confiance</h2>
+      <ul>
+        <li>✔ Expertise linguistique du Sahel</li>
+        <li>✔ Expérience terrain humanitaire</li>
+        <li>✔ Double compétence : Langues & Tech</li>
+        <li>✔ Solutions sur mesure (IA + digital)</li>
+      </ul>
+    </section>
 
-    <!-- =========================
-         MODALE
-    ========================== -->
-    <div id="serviceModal"
-         class="service-modal"
-         role="dialog"
-         aria-hidden="true">
-
-      <div class="modal-content" role="document">
-        <button class="close-modal" aria-label="Fermer la fenêtre">
-          ×
-        </button>
-        <h2 id="modal-title"></h2>
-        <div id="modal-desc"></div>
-      </div>
-    </div>
+    <!-- Contact -->
+    <section id="contact" class="contact">
+      <h2>📞 Contact</h2>
+      <p>Email : <a href="mailto:contact@hamglobalwords.com">contact@hamglobalwords.com</a></p>
+    </section>
 
   </main>
 
-  <!-- =========================
-       FOOTER
-  ========================== -->
-  <footer class="footer-prestige">
-    <img src="assetes/img/HAM.png"
-         alt="HAM Global Words"
-         class="footer-logo-prestige"
-         loading="lazy" />
-
-    <div class="footer-dust" aria-hidden="true">
-      <span></span><span></span><span></span><span></span><span></span>
-    </div>
-
-    <p>© <span id="year"></span> HAM Global Words – Tous droits réservés</p>
+  <footer class="footer">
+    <p>© <span id="year"></span> HAM Global Words</p>
   </footer>
 
-  <!-- =========================
-       SCRIPT UNIQUE
-  ========================== -->
-  <script src="assetes/js/app.js" defer></script>
-
-  <noscript>
-    Veuillez activer JavaScript pour une expérience optimale.
-  </noscript>
-
+  <!-- JS -->
+  <script src="assets/js/app.js" defer></script>
 </body>
 </html>
