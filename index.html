@@ -101,10 +101,31 @@
 
     <!-- Contact -->
     <section id="contact" class="contact">
-      <h2>📞 Contact</h2>
-      <p>Email : <a href="mailto:hamadineagmoctar@gmail.com">contact@hamglobalwords.com</a></p>
-    </section>
+  <h2>📞 Demande de service</h2>
 
+  <form id="contactForm">
+    
+    <input type="text" name="name" placeholder="Votre nom" required />
+
+    <input type="email" name="email" placeholder="Votre email" required />
+
+    <select name="service" required>
+      <option value="">Choisissez un service</option>
+      <option>🌐 Traduction professionnelle</option>
+      <option>🎙️ Interprétation</option>
+      <option>🧠 Annotation IA</option>
+      <option>📱 Conception d’application</option>
+      <option>🌍 Création de site web</option>
+      <option>🧩 Correction de code</option>
+      <option>📡 Interprétariat remote live</option>
+    </select>
+
+    <textarea name="message" placeholder="Décrivez votre besoin..." rows="5" required></textarea>
+
+    <button type="submit">🚀 Envoyer la demande</button>
+
+  </form>
+</section>
     <!-- Service Content (modale) -->
     <div class="service-content" style="display:none;">
       <div data-service="translation"><p>Traductions professionnelles et certifiées dans 15+ langues africaines et internationales.</p></div>
