@@ -1,162 +1,164 @@
 // ========================================
-// Dark/Light Mode Toggle
+// SAFE INIT
 // ========================================
-const themeToggle = document.getElementById('themeToggle');
-const body = document.body;
+document.addEventListener("DOMContentLoaded", () => {
 
-// Vérifier le thème sauvegardé
-const savedTheme = localStorage.getItem('theme');
-if (savedTheme) {
-  body.classList.toggle('light-mode', savedTheme === 'light');
-  themeToggle.textContent = savedTheme === 'light' ? '🌙' : '☀️';
-}
+  // ========================================
+  // Dark / Light Mode
+  // ========================================
+  const themeToggle = document.getElementById('themeToggle');
 
-// Fonction toggle
-themeToggle.addEventListener('click', () => {
-  body.classList.toggle('light-mode');
-  const currentTheme = body.classList.contains('light-mode') ? 'light' : 'dark';
-  localStorage.setItem('theme', currentTheme);
-  themeToggle.textContent = currentTheme === 'light' ? '🌙' : '☀️';
-});
+  if (themeToggle) {
+    const body = document.body;
+    const savedTheme = localStorage.getItem('theme');
 
-// ========================================
-// Dynamic Year in Footer
-// ========================================
-const yearEl = document.getElementById('year');
-if (yearEl) {
-  yearEl.textContent = new Date().getFullYear();
-}
-
-// ========================================
-// Smooth Scroll for Nav Links
-// ========================================
-const navLinks = document.querySelectorAll('.main-nav a');
-navLinks.forEach(link => {
-  link.addEventListener('click', (e) => {
-    e.preventDefault();
-    const targetId = link.getAttribute('href').slice(1);
-    const targetSection = document.getElementById(targetId);
-    if (targetSection) {
-      targetSection.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    if (savedTheme === 'light') {
+      body.classList.add('light-mode');
+      themeToggle.textContent = '🌙';
+    } else {
+      themeToggle.textContent = '☀️';
     }
-  });
-});
 
-// ========================================
-// Section Fade-in on Scroll
-// ========================================
-const sections = document.querySelectorAll('section');
-const observer = new IntersectionObserver((entries) => {
-  entries.forEach(entry => {
-    if (entry.isIntersecting) {
-      entry.target.style.animationPlayState = 'running';
-      entry.target.classList.add('visible');
-    }
-  });
-}, { threshold: 0.1 });
-
-sections.forEach(section => {
-  section.style.animationPlayState = 'paused';
-  observer.observe(section);
-});
-
-// ========================================
-// Modal for Service Details
-// ========================================
-const modal = document.getElementById('serviceModal');
-const modalTitle = document.getElementById('modal-title');
-const modalDesc = document.getElementById('modal-desc');
-const closeModal = modal.querySelector('.close-modal');
-const serviceBtns = document.querySelectorAll('.service-btn');
-const serviceContents = document.querySelectorAll('.service-content > div');
-
-// Fonction pour ouvrir modale
-serviceBtns.forEach(btn => {
-  btn.addEventListener('click', () => {
-    const serviceKey = btn.dataset.service;
-    const contentDiv = Array.from(serviceContents).find(div => div.dataset.service === serviceKey);
-    if (contentDiv) {
-      modalTitle.textContent = btn.textContent;
-      modalDesc.innerHTML = contentDiv.innerHTML;
-      modal.style.display = 'flex';
-      modal.setAttribute('aria-hidden', 'false');
-    }
-  });
-});
-
-// Fermer modale
-closeModal.addEventListener('click', () => {
-  modal.style.display = 'none';
-  modal.setAttribute('aria-hidden', 'true');
-});
-
-// Fermer modale en cliquant en dehors
-modal.addEventListener('click', (e) => {
-  if (e.target === modal) {
-    modal.style.display = 'none';
-    modal.setAttribute('aria-hidden', 'true');
+    themeToggle.addEventListener('click', () => {
+      body.classList.toggle('light-mode');
+      const currentTheme = body.classList.contains('light-mode') ? 'light' : 'dark';
+      localStorage.setItem('theme', currentTheme);
+      themeToggle.textContent = currentTheme === 'light' ? '🌙' : '☀️';
+    });
   }
-});
 
-// Optionnel : fermer avec ESC
-document.addEventListener('keydown', (e) => {
-  if (e.key === 'Escape' && modal.style.display === 'flex') {
-    modal.style.display = 'none';
-    modal.setAttribute('aria-hidden', 'true');
+  // ========================================
+  // Footer Year
+  // ========================================
+  const yearEl = document.getElementById('year');
+  if (yearEl) {
+    yearEl.textContent = new Date().getFullYear();
   }
-});
 
-// ========================================
-// Formation Form → Gmail
-// ========================================
-const formationForm = document.getElementById('formationForm');
+  // ========================================
+  // Smooth Scroll (ONLY anchors)
+  // ========================================
+  document.querySelectorAll('.main-nav a[href^="#"]').forEach(link => {
+    link.addEventListener('click', (e) => {
+      const targetId = link.getAttribute('href').substring(1);
+      const target = document.getElementById(targetId);
 
-if (formationForm) {
-  formationForm.addEventListener('submit', function(e) {
-    e.preventDefault();
-
-    const name = formationForm.name.value;
-    const email = formationForm.email.value;
-    const plan = formationForm.plan.value;
-    const message = formationForm.message.value;
-
-    const subject = `Inscription Formation - ${plan}`;
-    const body = `
-Nom: ${name}
-Email: ${email}
-Formule: ${plan}
-
-Objectif:
-${message}
-    `;
-
-    window.location.href = `mailto:hamadineagmoctar@gmail.com?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
+      if (target) {
+        e.preventDefault();
+        target.scrollIntoView({ behavior: 'smooth' });
+      }
+    });
   });
-}
-// ========================================
-// Contact Form → Gmail
-// ========================================
-const form = document.getElementById('contactForm');
 
-if (form) {
-  form.addEventListener('submit', function(e) {
-    e.preventDefault();
+  // ========================================
+  // Fade-in Sections
+  // ========================================
+  const sections = document.querySelectorAll('section');
 
-    const name = form.name.value;
-    const email = form.email.value;
-    const service = form.service.value;
-    const message = form.message.value;
+  if (sections.length > 0) {
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('visible');
+        }
+      });
+    }, { threshold: 0.1 });
 
-    const subject = `Demande de service - ${service}`;
-    const body = `
-Nom: ${name}
-Email: ${email}
-Service: ${service}
+    sections.forEach(section => observer.observe(section));
+  }
+
+  // ========================================
+  // Modal Services
+  // ========================================
+  const modal = document.getElementById('serviceModal');
+
+  if (modal) {
+    const modalTitle = document.getElementById('modal-title');
+    const modalDesc = document.getElementById('modal-desc');
+    const closeBtn = modal.querySelector('.close-modal');
+    const buttons = document.querySelectorAll('.service-btn');
+    const contents = document.querySelectorAll('.service-content > div');
+
+    buttons.forEach(btn => {
+      btn.addEventListener('click', () => {
+        const key = btn.dataset.service;
+
+        const content = Array.from(contents).find(c => c.dataset.service === key);
+
+        if (content && modalTitle && modalDesc) {
+          modalTitle.textContent = btn.textContent;
+          modalDesc.innerHTML = content.innerHTML;
+          modal.style.display = 'flex';
+        }
+      });
+    });
+
+    // Close modal
+    if (closeBtn) {
+      closeBtn.addEventListener('click', () => {
+        modal.style.display = 'none';
+      });
+    }
+
+    // Click outside
+    modal.addEventListener('click', (e) => {
+      if (e.target === modal) {
+        modal.style.display = 'none';
+      }
+    });
+
+    // ESC
+    document.addEventListener('keydown', (e) => {
+      if (e.key === 'Escape') {
+        modal.style.display = 'none';
+      }
+    });
+  }
+
+  // ========================================
+  // Contact Form
+  // ========================================
+  const contactForm = document.getElementById('contactForm');
+
+  if (contactForm) {
+    contactForm.addEventListener('submit', (e) => {
+      e.preventDefault();
+
+      const subject = `Demande - ${contactForm.service.value}`;
+      const body = `
+Nom: ${contactForm.name.value}
+Email: ${contactForm.email.value}
+Service: ${contactForm.service.value}
 
 Message:
-${message}
-    `;
+${contactForm.message.value}
+      `;
 
-    window.location.href = `mailto:hamadineagmoctar@gmail.com?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
-  });
-}
+      window.location.href = `mailto:hamadineagmoctar@gmail.com?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
+    });
+  }
+
+  // ========================================
+  // Formation Form
+  // ========================================
+  const formationForm = document.getElementById('formationForm');
+
+  if (formationForm) {
+    formationForm.addEventListener('submit', (e) => {
+      e.preventDefault();
+
+      const subject = `Inscription Formation - ${formationForm.plan.value}`;
+      const body = `
+Nom: ${formationForm.name.value}
+Email: ${formationForm.email.value}
+Formule: ${formationForm.plan.value}
+
+Objectif:
+${formationForm.message.value}
+      `;
+
+      window.location.href = `mailto:hamadineagmoctar@gmail.com?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
+    });
+  }
+
+});
