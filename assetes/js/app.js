@@ -105,3 +105,31 @@ document.addEventListener('keydown', (e) => {
     modal.setAttribute('aria-hidden', 'true');
   }
 });
+
+// ========================================
+// Contact Form → Gmail
+// ========================================
+const form = document.getElementById('contactForm');
+
+if (form) {
+  form.addEventListener('submit', function(e) {
+    e.preventDefault();
+
+    const name = form.name.value;
+    const email = form.email.value;
+    const service = form.service.value;
+    const message = form.message.value;
+
+    const subject = `Demande de service - ${service}`;
+    const body = `
+Nom: ${name}
+Email: ${email}
+Service: ${service}
+
+Message:
+${message}
+    `;
+
+    window.location.href = `mailto:hamadineagmoctar@gmail.com?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
+  });
+}
