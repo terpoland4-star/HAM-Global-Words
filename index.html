@@ -29,9 +29,8 @@
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
 
   <!-- CSS -->
-  <link rel="preload" href="assetes/css/style.css" as="style" />
   <link rel="stylesheet" href="assetes/css/style.css" />
- 
+
   <!-- JSON-LD Organization -->
   <script type="application/ld+json">
   {
@@ -95,9 +94,9 @@
     <section id="services" class="services">
       <h2>🛠️ Services linguistiques</h2>
       <div class="service-grid">
-        <div class="card">🌐 Traduction professionnelle</div>
-        <div class="card">🎙️ Interprétation (présentiel & remote live)</div>
-        <div class="card">🧠 Annotation & datasets IA</div>
+        <button class="service-btn" data-service="translation">🌐 Traduction professionnelle</button>
+        <button class="service-btn" data-service="interpretation">🎙️ Interprétation (présentiel & remote live)</button>
+        <button class="service-btn" data-service="annotation">🧠 Annotation & datasets IA</button>
       </div>
     </section>
 
@@ -105,10 +104,10 @@
     <section id="digital" class="services">
       <h2>💻 Solutions digitales</h2>
       <div class="service-grid">
-        <div class="card">📱 Conception d’applications</div>
-        <div class="card">🌍 Création de sites web</div>
-        <div class="card">🧩 Révision & correction de code</div>
-        <div class="card">📡 Interprétariat remote live (programmable)</div>
+        <button class="service-btn" data-service="appdev">📱 Conception d’applications</button>
+        <button class="service-btn" data-service="webdev">🌍 Création de sites web</button>
+        <button class="service-btn" data-service="codefix">🧩 Révision & correction de code</button>
+        <button class="service-btn" data-service="remote">📡 Interprétariat remote live (programmable)</button>
       </div>
     </section>
 
@@ -135,13 +134,46 @@
       <p>Email : <a href="mailto:contact@hamglobalwords.com">contact@hamglobalwords.com</a></p>
     </section>
 
+    <!-- Service Content (hidden for modale) -->
+    <div class="service-content" style="display:none;">
+      <div data-service="translation">
+        <p>Traductions professionnelles et certifiées dans plus de 15 langues africaines et internationales. Nos traducteurs natifs et spécialisés garantissent fluidité et fidélité.</p>
+      </div>
+      <div data-service="interpretation">
+        <p>Interprétation simultanée ou consécutive en présentiel et à distance, avec option Remote Live pour conférences et réunions multilingues.</p>
+      </div>
+      <div data-service="annotation">
+        <p>Annotation linguistique, transcription audio, création de datasets multilingues pour IA, avec un focus sur les langues africaines sous-représentées.</p>
+      </div>
+      <div data-service="appdev">
+        <p>Conception et prototypage d’applications mobiles et web sur mesure, adaptées aux besoins multilingues et multiculturels.</p>
+      </div>
+      <div data-service="webdev">
+        <p>Création de sites web responsives, intégration de contenus multilingues et optimisation pour le référencement international.</p>
+      </div>
+      <div data-service="codefix">
+        <p>Révision et correction de code, audit de projet et optimisation des performances pour applications et sites web.</p>
+      </div>
+      <div data-service="remote">
+        <p>Service d’interprétariat remote live programmable, avec possibilité de planifier vos sessions en ligne pour conférences ou réunions internationales.</p>
+      </div>
+    </div>
+
+    <!-- Modale -->
+    <div id="serviceModal" class="service-modal">
+      <div class="modal-content">
+        <button class="close-modal" aria-label="Fermer">×</button>
+        <h2 id="modal-title"></h2>
+        <p id="modal-desc"></p>
+      </div>
+    </div>
+
   </main>
 
   <footer class="footer">
     <p>© <span id="year"></span> HAM Global Words</p>
   </footer>
 
-  <!-- JS -->
   <script src="assetes/js/app.js" defer></script>
 </body>
 </html>
