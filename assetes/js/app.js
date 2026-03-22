@@ -107,6 +107,33 @@ document.addEventListener('keydown', (e) => {
 });
 
 // ========================================
+// Formation Form → Gmail
+// ========================================
+const formationForm = document.getElementById('formationForm');
+
+if (formationForm) {
+  formationForm.addEventListener('submit', function(e) {
+    e.preventDefault();
+
+    const name = formationForm.name.value;
+    const email = formationForm.email.value;
+    const plan = formationForm.plan.value;
+    const message = formationForm.message.value;
+
+    const subject = `Inscription Formation - ${plan}`;
+    const body = `
+Nom: ${name}
+Email: ${email}
+Formule: ${plan}
+
+Objectif:
+${message}
+    `;
+
+    window.location.href = `mailto:hamadineagmoctar@gmail.com?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
+  });
+}
+// ========================================
 // Contact Form → Gmail
 // ========================================
 const form = document.getElementById('contactForm');
