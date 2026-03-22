@@ -1,280 +1,241 @@
-/* =========================================================
-   🌙 THEME SAHEL NIGHT DELUXE — VERSION FINALE
-========================================================= */
-
-/* =========================
-   VARIABLES
-========================= */
+/* ========================================
+   Global Styles
+======================================== */
 :root {
-  --bg-color: #0d0f11;
-  --text-color: #eaeaea;
-  --gold: #f4c842;
-  --gold-dark: #b88a1e;
-  --blue-oasis: #3ab6d0;
-  --dark-panel: #131516;
-  --footer-bg: linear-gradient(135deg, #d4a531, #b88a1e);
+  --color-bg-light: #ffffff;
+  --color-bg-dark: #0d0f11;
+  --color-text-light: #0d0f11;
+  --color-text-dark: #f5f5f5;
+  --color-primary: #1e90ff;
+  --color-accent: #ff9800;
+  --transition-speed: 0.3s;
+  --font-family: 'Inter', sans-serif;
 }
 
-/* =========================
-   RESET MINIMAL
-========================= */
-*,
-*::before,
-*::after {
+* {
+  margin: 0;
+  padding: 0;
   box-sizing: border-box;
 }
 
 html {
   scroll-behavior: smooth;
+  font-family: var(--font-family);
 }
 
 body {
-  margin: 0;
-  background: var(--bg-color);
-  color: var(--text-color);
-  font-family: "Montserrat", system-ui, sans-serif;
-  overflow-x: hidden;
+  background-color: var(--color-bg-dark);
+  color: var(--color-text-dark);
+  line-height: 1.6;
+  transition: background-color var(--transition-speed), color var(--transition-speed);
 }
 
-/* =========================
-   THEME JOUR
-========================= */
-body:not(.dark-mode) {
-  --bg-color: #f5f5f5;
-  --text-color: #1a1a1a;
-  background: var(--bg-color);
-  color: var(--text-color);
+/* ========================================
+   Dark/Light Mode
+======================================== */
+body.light-mode {
+  background-color: var(--color-bg-light);
+  color: var(--color-text-light);
 }
 
-/* =========================
-   SWITCH THEME
-========================= */
-#themeToggle {
-  position: fixed;
-  top: 1rem;
-  right: 1rem;
-  width: 48px;
-  height: 48px;
-  border-radius: 50%;
-  border: none;
-  cursor: pointer;
-  font-size: 1.2rem;
-  background: linear-gradient(135deg, var(--gold), var(--gold-dark));
-  color: #1a1a1a;
-  box-shadow: 0 4px 12px rgba(0,0,0,0.4);
-  z-index: 9999;
-}
-
-/* =========================
-   HEADER
-========================= */
+/* ========================================
+   Header
+======================================== */
 .site-header {
-  position: relative;
-  text-align: center;
-  padding: 3rem 1rem 4rem;
-  background: linear-gradient(135deg, #0b4b4b, var(--blue-oasis));
-  color: #fff;
-  overflow: hidden;
-}
-
-.logo {
-  width: 120px;
-  border-radius: 12px;
-  margin-bottom: 1rem;
-  filter: drop-shadow(0 0 10px rgba(255,255,255,0.25));
-}
-
-/* =========================
-   OISEAUX
-========================= */
-.bird {
-  position: absolute;
-  width: 36px;
-  height: 36px;
-  background: url("../img/bird.svg") no-repeat center / contain;
-  animation: flyAcross 30s linear infinite;
-  opacity: 0.8;
-  will-change: transform;
-}
-.bird:nth-child(2) { top: 30%; animation-delay: 8s; }
-.bird:nth-child(3) { top: 55%; animation-delay: 15s; }
-
-@keyframes flyAcross {
-  from { transform: translateX(-20vw); }
-  to   { transform: translateX(120vw); }
-}
-
-/* =========================
-   NAVIGATION
-========================= */
-.main-nav ul {
-  list-style: none;
-  padding: 0;
   display: flex;
-  justify-content: center;
+  flex-direction: column;
+  align-items: center;
+  padding: 2rem 1rem;
+  text-align: center;
+  background-color: inherit;
+}
+
+.header-content {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1rem;
+}
+
+.site-header .logo {
+  width: 120px;
+  height: auto;
+}
+
+.main-nav ul {
+  display: flex;
   gap: 1.5rem;
+  list-style: none;
+  margin: 1rem 0;
+  flex-wrap: wrap;
+  justify-content: center;
 }
 
 .main-nav a {
-  color: #fff;
   text-decoration: none;
-  font-weight: 500;
+  color: inherit;
+  font-weight: 600;
+  transition: color var(--transition-speed);
 }
 
-/* =========================
-   SECTIONS
-========================= */
-section {
-  padding: 4rem 1.5rem;
-  max-width: 1100px;
-  margin: auto;
+.main-nav a:hover {
+  color: var(--color-primary);
 }
 
-/* =========================
-   FONDATEUR
-========================= */
-.founder-section {
-  background: var(--dark-panel);
-  border-radius: 16px;
-  text-align: center;
-  box-shadow: 0 8px 24px rgba(0,0,0,0.5);
+.cta-btn {
+  display: inline-block;
+  padding: 0.6rem 1.2rem;
+  margin-top: 1rem;
+  background-color: var(--color-accent);
+  color: #fff;
+  font-weight: 600;
+  border-radius: 8px;
+  text-decoration: none;
+  transition: background-color var(--transition-speed);
 }
 
-.founder-photo {
-  width: 80px;
-  height: 80px;
+.cta-btn:hover {
+  background-color: darkorange;
+}
+
+/* ========================================
+   Theme Toggle Button
+======================================== */
+.theme-btn {
+  position: fixed;
+  top: 1rem;
+  right: 1rem;
+  padding: 0.5rem;
+  font-size: 1.2rem;
+  border: none;
+  cursor: pointer;
+  background: var(--color-primary);
+  color: #fff;
   border-radius: 50%;
-  border: 3px solid var(--gold);
+  transition: transform var(--transition-speed);
+  z-index: 1000;
+}
+
+.theme-btn:hover {
+  transform: scale(1.1);
+}
+
+/* ========================================
+   Sections
+======================================== */
+section {
+  padding: 4rem 1rem;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+section h2 {
+  font-size: 2rem;
   margin-bottom: 1rem;
-}
-
-/* =========================
-   SERVICES
-========================= */
-.services-preview {
   text-align: center;
-  background: radial-gradient(circle at top, #16293a, #0a0d11 80%);
+  position: relative;
 }
 
+section p {
+  text-align: center;
+  max-width: 800px;
+  margin: 0 auto 1rem auto;
+}
+
+/* ========================================
+   Service Grid
+======================================== */
 .service-grid {
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: center;
-  gap: 2rem;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap: 1.5rem;
   margin-top: 2rem;
 }
 
 .card {
-  width: 260px;
   padding: 2rem;
-  background: rgba(255,255,255,0.06);
-  border-radius: 14px;
-  color: var(--text-color);
-  cursor: pointer;
-  transition: transform 0.3s ease, background 0.3s ease;
+  background-color: rgba(255, 255, 255, 0.05);
+  border-radius: 12px;
+  text-align: center;
+  font-weight: 600;
+  transition: transform var(--transition-speed), background-color var(--transition-speed);
+  cursor: default;
 }
 
 .card:hover {
-  transform: translateY(-6px);
-  background: rgba(244,200,66,0.12);
+  transform: translateY(-5px);
+  background-color: rgba(30, 144, 255, 0.1);
 }
 
-/* =========================
-   BOUTONS SERVICES
-========================= */
-.service-btn {
-  background: linear-gradient(135deg, var(--gold), var(--gold-dark));
-  border: none;
-  border-radius: 50px;
-  padding: 1rem 1.8rem;
-  font-size: 1.1rem;
-  cursor: pointer;
-  box-shadow: 0 4px 12px rgba(244,200,66,0.3);
-  transition: transform 0.3s ease;
-}
-
-.service-btn:hover {
-  transform: scale(1.05);
-}
-
-/* =========================
-   MODALE
-========================= */
-.service-modal {
-  position: fixed;
-  inset: 0;
-  background: radial-gradient(circle, rgba(10,10,10,0.95), rgba(0,0,0,0.85));
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  opacity: 0;
-  pointer-events: none;
-  transition: opacity 0.4s ease;
-  z-index: 9999;
-}
-
-.service-modal.open {
-  opacity: 1;
-  pointer-events: auto;
-}
-
-.modal-content {
-  background: rgba(18,22,26,0.95);
-  color: #fff;
-  border-radius: 16px;
-  max-width: 720px;
-  width: 90%;
-  padding: 2.5rem;
-  max-height: 80vh;
-  overflow-y: auto;
-  box-shadow: 0 0 40px rgba(244,200,66,0.35);
-  animation: modalRise 0.4s ease forwards;
-}
-
-@keyframes modalRise {
-  from { opacity: 0; transform: translateY(40px); }
-  to   { opacity: 1; transform: translateY(0); }
-}
-
-.close-modal {
-  position: absolute;
-  top: 1rem;
-  right: 1.2rem;
-  font-size: 1.8rem;
-  background: none;
-  border: none;
-  color: var(--gold);
-  cursor: pointer;
-}
-
-/* =========================
-   FOOTER
-========================= */
-.footer-prestige {
-  background: var(--footer-bg);
-  color: #1a1a1a;
+/* ========================================
+   Languages & Trust
+======================================== */
+.languages p {
   text-align: center;
-  padding: 3rem 1rem;
+  font-size: 1.1rem;
+  margin-top: 1rem;
 }
 
-.footer-logo-prestige {
-  width: 260px;
-  margin-bottom: 1rem;
+.trust ul {
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: 0.8rem;
+  max-width: 600px;
+  margin: 2rem auto 0 auto;
 }
 
-/* =========================
-   SCROLL LOCK
-========================= */
-body.modal-open {
-  overflow: hidden;
+.trust li::before {
+  content: "✔ ";
+  color: var(--color-primary);
 }
 
-/* =========================
-   ACCESSIBILITÉ
-========================= */
-@media (prefers-reduced-motion: reduce) {
-  * {
-    animation: none !important;
-    transition: none !important;
+/* ========================================
+   Contact
+======================================== */
+.contact p, .contact a {
+  text-align: center;
+  font-size: 1.1rem;
+  display: block;
+  margin-top: 0.5rem;
+  color: inherit;
+}
+
+/* ========================================
+   Footer
+======================================== */
+.footer {
+  text-align: center;
+  padding: 2rem 1rem;
+  background-color: rgba(255,255,255,0.05);
+  margin-top: 4rem;
+}
+
+/* ========================================
+   Animations & Fade-in
+======================================== */
+section {
+  opacity: 0;
+  transform: translateY(30px);
+  animation: fadeInUp 0.8s forwards;
+  animation-delay: 0.3s;
+}
+
+@keyframes fadeInUp {
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* ========================================
+   Responsive
+======================================== */
+@media (min-width: 768px) {
+  .header-content {
+    flex-direction: row;
+    justify-content: center;
+    gap: 2rem;
+    text-align: left;
   }
 }
