@@ -26,7 +26,67 @@ document.addEventListener("DOMContentLoaded", () => {
       themeToggle.textContent = currentTheme === 'light' ? '🌙' : '☀️';
     });
   }
+// ==============================
+// LANGUAGES SYSTEM
+// ==============================
 
+const translations = {
+  fr: {
+    title: "HAM Global Words",
+    subtitle: "Des langues enracinées au Sahel, amplifiées au monde",
+    about: "🌍 À propos",
+    about_text: "HAM Global Words relie les langues africaines, les cultures et l’intelligence artificielle pour une communication moderne et stratégique.",
+    services: "🛠️ Services linguistiques",
+    contact: "📞 Demande de service",
+    send: "🚀 Envoyer"
+  },
+
+  en: {
+    title: "HAM Global Words",
+    subtitle: "Languages rooted in the Sahel, amplified worldwide",
+    about: "🌍 About",
+    about_text: "HAM Global Words connects African languages, cultures, and AI for modern and strategic communication.",
+    services: "🛠️ Language Services",
+    contact: "📞 Service Request",
+    send: "🚀 Send"
+  },
+
+  ar: {
+    title: "HAM Global Words",
+    subtitle: "لغات من الساحل إلى العالم",
+    about: "🌍 من نحن",
+    about_text: "تربط HAM Global Words اللغات الإفريقية والثقافات والذكاء الاصطناعي من أجل تواصل حديث واستراتيجي.",
+    services: "🛠️ الخدمات اللغوية",
+    contact: "📞 طلب خدمة",
+    send: "🚀 إرسال"
+  }
+};
+
+const langSwitcher = document.getElementById("langSwitcher");
+
+// Charger langue sauvegardée
+const savedLang = localStorage.getItem("lang") || "fr";
+langSwitcher.value = savedLang;
+setLanguage(savedLang);
+
+langSwitcher.addEventListener("change", (e) => {
+  const lang = e.target.value;
+  localStorage.setItem("lang", lang);
+  setLanguage(lang);
+});
+
+function setLanguage(lang) {
+  document.querySelectorAll("[data-key]").forEach(el => {
+    const key = el.getAttribute("data-key");
+    if (translations[lang][key]) {
+      el.textContent = translations[lang][key];
+    }
+  });
+
+  // Gestion RTL pour arabe
+  document.documentElement.dir = lang === "ar" ? "rtl" : "ltr";
+}
+  
   // ========================================
   // Footer Year
   // ========================================
