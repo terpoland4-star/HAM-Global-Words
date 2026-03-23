@@ -320,3 +320,30 @@ body.light-mode .footer {
   background: #eaeaea;
   color: #111;
 }
+/* =========================
+   WhatsApp Floating Button
+========================= */
+.whatsapp-float {
+  position: fixed;
+  bottom: 20px;
+  right: 20px;
+  background: #25D366;
+  color: #fff;
+  font-size: 1.8rem;
+  padding: 15px;
+  border-radius: 50%;
+  box-shadow: 0 0 20px rgba(0,0,0,0.3);
+  z-index: 999;
+  transition: transform 0.3s, box-shadow 0.3s;
+}
+
+.whatsapp-float:hover {
+  transform: scale(1.1);
+  box-shadow: 0 0 30px rgba(0,0,0,0.5);
+}
+
+/* Light mode */
+body.light-mode .whatsapp-float {
+  background: #25D366;
+  color: #fff;
+}
