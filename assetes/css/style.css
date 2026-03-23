@@ -347,3 +347,22 @@ body.light-mode .whatsapp-float {
   background: #25D366;
   color: #fff;
 }
+.lang-switcher {
+  position: absolute;
+  top: 20px;
+  right: 70px;
+}
+
+.lang-switcher select {
+  padding: 0.4rem;
+  border-radius: 6px;
+  border: none;
+  background: #1a1c22;
+  color: #fff;
+  cursor: pointer;
+}
+
+body.light-mode .lang-switcher select {
+  background: #fff;
+  color: #111;
+}
