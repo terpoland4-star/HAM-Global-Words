@@ -8,6 +8,7 @@
 
   <meta name="description" content="HAM Global Words – Services linguistiques, IA et solutions digitales : traduction, interprétation, développement web et formation." />
   <meta name="author" content="Hamadine AG Moctar" />
+  <meta name="robots" content="index, follow" />
 
   <link rel="canonical" href="https://hamglobalwords.com/" />
 
@@ -15,21 +16,21 @@
   <meta property="og:title" content="HAM Global Words" />
   <meta property="og:description" content="Langues, IA et solutions digitales sur mesure." />
   <meta property="og:image" content="https://hamglobalwords.com/assetes/img/logoHAM.png" />
+  <meta property="og:type" content="website" />
 
   <!-- CSS -->
   <link rel="stylesheet" href="assetes/css/style.css" />
   <link rel="icon" href="assetes/img/logo.png" />
-
 </head>
 
 <body class="dark-mode">
 
   <!-- Theme -->
-  <button id="themeToggle">🌙</button>
+  <button id="themeToggle" aria-label="Changer le thème">🌙</button>
 
   <!-- HEADER -->
   <header class="site-header">
-    <img src="assetes/img/logoHAM.png" class="logo" />
+    <img src="assetes/img/logoHAM.png" class="logo" alt="Logo HAM Global Words" />
 
     <h1>HAM Global Words</h1>
     <p>Des langues enracinées au Sahel, amplifiées au monde</p>
@@ -66,9 +67,9 @@
       <h2>🛠️ Services linguistiques</h2>
 
       <div class="service-grid">
-        <button class="service-btn" data-service="translation">🌐 Traduction</button>
-        <button class="service-btn" data-service="interpretation">🎙️ Interprétation</button>
-        <button class="service-btn" data-service="annotation">🧠 Annotation IA</button>
+        <a href="services/translation.html" class="service-btn">🌐 Traduction</a>
+        <a href="services/interpretation.html" class="service-btn">🎙️ Interprétation</a>
+        <a href="services/annotation.html" class="service-btn">🧠 Annotation IA</a>
       </div>
     </section>
 
@@ -77,11 +78,11 @@
       <h2>💻 Solutions digitales</h2>
 
       <div class="service-grid">
-        <button class="service-btn" data-service="appdev">📱 Applications</button>
-        <button class="service-btn" data-service="webdev">🌍 Sites web</button>
-        <button class="service-btn" data-service="codefix">🧩 Correction code</button>
-        <button class="service-btn" data-service="remote">📡 Remote live</button>
-        <button class="service-btn" data-service="formation">🧠 Formation</button>
+        <a href="services/webdev.html" class="service-btn">📱 Applications & Web</a>
+        <a href="services/webdev.html" class="service-btn">🌍 Sites web</a>
+        <a href="services/webdev.html" class="service-btn">🧩 Correction code</a>
+        <a href="services/interpretation.html" class="service-btn">📡 Remote live</a>
+        <a href="formation.html" class="service-btn">🧠 Formation</a>
       </div>
     </section>
 
@@ -89,17 +90,20 @@
     <section id="booking">
       <h2>📅 Réserver une session</h2>
       <p>Planifiez directement votre session du Programme Starter Tech.</p>
-      <a href="https://calendar.google.com/appointments/https://calendar.app.google/NAWDmrJRRUW5AqRe9"
+
+      <a href="https://calendar.app.google/NAWDmrJRRUW5AqRe9"
          target="_blank"
          class="cta-btn">
-         🚀 Réserver maintenant ici
-      </a> 
+         🚀 Réserver maintenant
+      </a>
     </section>
 
     <!-- LANGUES -->
     <section>
       <h2>🗣️ Langues couvertes</h2>
-      <p>•Français • Anglais • Arabe • Tamasheq • Hausa • Fon • Yoruba • Zarma • Songhai • Dendi • Tadaksahak•</p>
+      <p>
+        Français • Anglais • Arabe • Tamasheq • Hausa • Fon • Yoruba • Zarma • Songhai • Dendi • Tadaksahak
+      </p>
     </section>
 
     <!-- CONTACT -->
@@ -114,7 +118,7 @@
           <option value="">Choisissez un service</option>
           <option>Traduction</option>
           <option>Interprétation</option>
-           <option>Formations</option>
+          <option>Formation</option>
           <option>Annotation IA</option>
           <option>Applications</option>
           <option>Sites web</option>
@@ -128,39 +132,22 @@
       </form>
     </section>
 
-    <!-- DATA -->
-    <div class="service-content" hidden>
-      <div data-service="translation"><p>Traductions professionnelles certifiées.</p></div>
-      <div data-service="interpretation"><p>Interprétation présentielle et à distance.</p></div>
-      <div data-service="annotation"><p>Annotation linguistique pour IA.</p></div>
-      <div data-service="appdev"><p>Développement d’applications.</p></div>
-      <div data-service="webdev"><p>Création de sites web.</p></div>
-      <div data-service="codefix"><p>Correction de code.</p></div>
-      <div data-service="remote"><p>Interprétation remote live.</p></div>
-      <div data-service="formation"><p>Programme Starter Tech.</p></div>
-    </div>
-
-    <!-- MODAL -->
-    <div id="serviceModal" class="service-modal">
-      <div class="modal-content">
-        <button class="close-modal">×</button>
-        <h2 id="modal-title"></h2>
-        <p id="modal-desc"></p>
-      </div>
-    </div>
-
   </main>
 
   <footer class="footer">
     <p>© <span id="year"></span> HAM Global Words</p>
   </footer>
 
+  <!-- JS -->
   <script src="assetes/js/app.js" defer></script>
-<a href="https://wa.me/22786762903?text=Bonjour%20HAM%20Global%20Words,%20je%20souhaite%20plus%20d'informations%20sur%20vos%20services."
-   class="whatsapp-float"
-   target="_blank"
-   aria-label="Contacter sur WhatsApp">
-   💬
-</a>
+
+  <!-- WhatsApp -->
+  <a href="https://wa.me/22786762903?text=Bonjour%20HAM%20Global%20Words,%20je%20souhaite%20plus%20d'informations%20sur%20vos%20services."
+     class="whatsapp-float"
+     target="_blank"
+     aria-label="Contacter sur WhatsApp">
+     💬
+  </a>
+
 </body>
 </html>
