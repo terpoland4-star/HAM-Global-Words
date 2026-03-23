@@ -1,50 +1,36 @@
+
 <!DOCTYPE html>
 <html lang="fr">
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <meta name="description" content="HAM Global Words – Services linguistiques, IA et solutions digitales : traduction, interprétation, annotation, développement d'apps et web." />
-  <meta name="author" content="Hamadine AG Moctar" />
-  <meta name="robots" content="index, follow" />
-
-  <!-- Canonical -->
-  <link rel="canonical" href="https://hamglobalwords.com/" />
 
   <title>HAM Global Words – Langues du Sahel, voix du monde</title>
+
+  <meta name="description" content="HAM Global Words – Services linguistiques, IA et solutions digitales : traduction, interprétation, développement web et formation." />
+  <meta name="author" content="Hamadine AG Moctar" />
+
+  <link rel="canonical" href="https://hamglobalwords.com/" />
 
   <!-- Open Graph -->
   <meta property="og:title" content="HAM Global Words" />
   <meta property="og:description" content="Langues, IA et solutions digitales sur mesure." />
-  <meta property="og:type" content="website" />
-  <meta property="og:url" content="https://hamglobalwords.com/" />
   <meta property="og:image" content="https://hamglobalwords.com/assetes/img/logoHAM.png" />
-
-  <!-- Twitter -->
-  <meta name="twitter:card" content="summary_large_image" />
-  <meta name="twitter:title" content="HAM Global Words" />
-  <meta name="twitter:description" content="Langues, IA et solutions digitales sur mesure." />
-  <meta name="twitter:image" content="https://hamglobalwords.com/assetes/img/logoHAM.png" />
-
-  <!-- Favicon -->
-  <link rel="icon" href="assetes/img/logo.png" type="image/png" />
-  <link rel="apple-touch-icon" href="assetes/img/logo.png" />
-  <meta name="theme-color" content="#0d0f11" />
-
-  <!-- Fonts -->
-  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700&display=swap" rel="stylesheet">
 
   <!-- CSS -->
   <link rel="stylesheet" href="assetes/css/style.css" />
+  <link rel="icon" href="assetes/img/logo.png" />
+
 </head>
 
 <body class="dark-mode">
 
-  <!-- Theme Toggle -->
-  <button id="themeToggle" class="theme-btn">🌙</button>
+  <!-- Theme -->
+  <button id="themeToggle">🌙</button>
 
-  <!-- Header -->
+  <!-- HEADER -->
   <header class="site-header">
-    <img src="assetes/img/logoHAM.png" alt="Logo HAM Global Words" class="logo" />
+    <img src="assetes/img/logoHAM.png" class="logo" />
 
     <h1>HAM Global Words</h1>
     <p>Des langues enracinées au Sahel, amplifiées au monde</p>
@@ -54,27 +40,29 @@
         <li><a href="#about">À propos</a></li>
         <li><a href="#services">Services</a></li>
         <li><a href="#digital">Digital</a></li>
-        <li><a href="#languages">Langues</a></li>
+        <li><a href="#booking">Réserver</a></li>
         <li><a href="formation.html">Formation</a></li>
         <li><a href="#contact">Contact</a></li>
       </ul>
     </nav>
 
-    <a href="mailto:hamadineagmoctar@gmail.com" class="cta-btn">📩 Travailler avec nous</a>
+    <a href="mailto:hamadineagmoctar@gmail.com" class="cta-btn">
+      📩 Travailler avec nous
+    </a>
   </header>
 
   <main>
 
-    <!-- About -->
+    <!-- ABOUT -->
     <section id="about">
       <h2>🌍 À propos</h2>
       <p>
-        HAM Global Words relie les langues africaines, les cultures et l’intelligence artificielle
-        pour une communication inclusive, durable et stratégique.
+        HAM Global Words relie les langues africaines, les cultures et l’intelligence artificielle 
+        pour une communication inclusive, moderne et stratégique.
       </p>
     </section>
 
-    <!-- Services -->
+    <!-- SERVICES -->
     <section id="services">
       <h2>🛠️ Services linguistiques</h2>
 
@@ -85,7 +73,7 @@
       </div>
     </section>
 
-    <!-- Digital -->
+    <!-- DIGITAL -->
     <section id="digital">
       <h2>💻 Solutions digitales</h2>
 
@@ -98,13 +86,25 @@
       </div>
     </section>
 
-    <!-- Languages -->
-    <section id="languages">
+    <!-- BOOKING -->
+    <section id="booking">
+      <h2>📅 Réserver une session</h2>
+      <p>Planifiez directement votre session d’interprétation en ligne.</p>
+
+      <a href="https://calendar.google.com/appointments/https://calendar.app.google/NAWDmrJRRUW5AqRe9"
+         target="_blank"
+         class="cta-btn">
+         🚀 Réserver maintenant
+      </a>
+    </section>
+
+    <!-- LANGUES -->
+    <section>
       <h2>🗣️ Langues couvertes</h2>
       <p>Français • Anglais • Arabe • Tamasheq • Hausa • Fon</p>
     </section>
 
-    <!-- Contact -->
+    <!-- CONTACT -->
     <section id="contact">
       <h2>📞 Demande de service</h2>
 
@@ -123,25 +123,25 @@
           <option>Remote live</option>
         </select>
 
-        <textarea name="message" placeholder="Décrivez votre besoin..." required></textarea>
+        <textarea name="message" placeholder="Votre besoin..." required></textarea>
 
         <button type="submit">🚀 Envoyer</button>
       </form>
     </section>
 
-    <!-- DATA (modale) -->
+    <!-- DATA -->
     <div class="service-content" hidden>
       <div data-service="translation"><p>Traductions professionnelles certifiées.</p></div>
       <div data-service="interpretation"><p>Interprétation présentielle et à distance.</p></div>
-      <div data-service="annotation"><p>Annotation IA multilingue.</p></div>
-      <div data-service="appdev"><p>Développement d'applications.</p></div>
+      <div data-service="annotation"><p>Annotation linguistique pour IA.</p></div>
+      <div data-service="appdev"><p>Développement d’applications.</p></div>
       <div data-service="webdev"><p>Création de sites web.</p></div>
-      <div data-service="codefix"><p>Correction et optimisation de code.</p></div>
-      <div data-service="remote"><p>Interprétariat remote live.</p></div>
+      <div data-service="codefix"><p>Correction de code.</p></div>
+      <div data-service="remote"><p>Interprétation remote live.</p></div>
       <div data-service="formation"><p>Programme Starter Tech.</p></div>
     </div>
 
-    <!-- Modal -->
+    <!-- MODAL -->
     <div id="serviceModal" class="service-modal">
       <div class="modal-content">
         <button class="close-modal">×</button>
@@ -157,7 +157,7 @@
   </footer>
 
   <script src="assetes/js/app.js" defer></script>
-<a href="https://wa.me/22786762903?text=Bonjour%20HAM%20Global%20Words,%20je%20souhaite%20plus%20d'informations%20sur%20vos%20services." 
+<a href="https://wa.me/22786762903?text=Bonjour%20HAM%20Global%20Words,%20je%20souhaite%20plus%20d'informations%20sur%20vos%20services."
    class="whatsapp-float"
    target="_blank"
    aria-label="Contacter sur WhatsApp">
