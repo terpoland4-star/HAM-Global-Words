@@ -3,124 +3,52 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-
-  <title>Création de sites & applications – HAM Global Words</title>
-
-  <meta name="description" content="Conception de sites web et applications sur mesure, adaptés aux besoins linguistiques, éducatifs et humanitaires." />
+  <title data-key="webdev_title">Développement web – HAM Global Words</title>
 
   <link rel="stylesheet" href="../assetes/css/style.css" />
 </head>
 
 <body class="dark-mode">
 
-  <button id="themeToggle">🌙</button>
+<div class="lang-switcher">
+  <select id="langSwitcher">
+    <option value="fr">🇫🇷 Français</option>
+    <option value="en">🇬🇧 English</option>
+    <option value="ar">🇸🇦 العربية</option>
+  </select>
+</div>
 
-  <!-- HEADER -->
-  <header class="site-header">
-    <h1>💻 Solutions digitales</h1>
-    <p>Du concept à la solution. Du code à l’impact.</p>
-    <a href="../index.html" class="cta-btn">⬅ Retour</a>
-  </header>
+<button id="themeToggle">🌙</button>
 
-  <main>
+<header class="site-header">
+  <h1 data-key="webdev_h1">💻 Web & Apps</h1>
+  <p data-key="webdev_tagline">Solutions digitales sur mesure.</p>
+  <a href="../index.html" class="cta-btn" data-key="back">⬅ Retour</a>
+</header>
 
-    <!-- INTRO -->
-    <section>
-      <h2>🎯 Notre vision</h2>
-      <p>
-        Le digital n’est pas seulement une question de code.
-        C’est la capacité à transformer une idée en solution concrète,
-        utile, accessible et performante.
-      </p>
-    </section>
+<main>
 
-    <!-- PROJETS -->
-    <section>
-      <h2>🚀 Projets réalisés</h2>
+<section>
+  <h2 data-key="webdev_services">⚙️ Services</h2>
+  <ul>
+    <li data-key="web_1">🌍 Sites web</li>
+    <li data-key="web_2">📱 Applications</li>
+    <li data-key="web_3">⚡ UX/UI</li>
+  </ul>
+</section>
 
-      <p>
-        HAM Global Words développe des solutions numériques adaptées aux réalités du terrain,
-        notamment dans les domaines linguistiques, éducatifs et de la santé.
-      </p>
+<section>
+  <h2 data-key="webdev_cta">🚀 Lancer un projet</h2>
+  <a href="mailto:hamadineagmoctar@gmail.com" class="cta-btn">🚀 Start</a>
+</section>
 
-      <ul>
-        <li>📚 Dictionnaire multilingue Tadaksahak (PWA – accès offline)</li>
-        <li>🏥 Plateforme HabibaMedics (information santé digitale)</li>
-        <li>🌍 Sites web multilingues</li>
-        <li>📱 Applications web & mobiles sur mesure</li>
-      </ul>
-    </section>
+</main>
 
-    <!-- SERVICES -->
-    <section>
-      <h2>⚙️ Nos expertises</h2>
+<footer class="footer">
+  <p>© <span id="year"></span> HAM Global Words</p>
+</footer>
 
-      <ul>
-        <li>🌐 Création de sites web modernes (responsive, SEO)</li>
-        <li>📱 Développement d’applications web & mobiles</li>
-        <li>🔧 Maintenance et optimisation de plateformes</li>
-        <li>🧩 Révision et correction de code</li>
-        <li>🌍 Intégration multilingue (langues africaines incluses)</li>
-      </ul>
-    </section>
-
-    <!-- APPROCHE -->
-    <section>
-      <h2>🧠 Notre approche</h2>
-
-      <ul>
-        <li>✔ Analyse du besoin réel</li>
-        <li>✔ Conception orientée utilisateur</li>
-        <li>✔ Solutions simples mais puissantes</li>
-        <li>✔ Optimisation performance & accessibilité</li>
-      </ul>
-
-      <p>
-        👉 Chaque projet est pensé pour durer et évoluer.
-      </p>
-    </section>
-
-    <!-- VALEUR -->
-    <section>
-      <h2>🚀 Ce que vous gagnez</h2>
-
-      <ul>
-        <li>✔ Une solution sur mesure</li>
-        <li>✔ Une interface claire et efficace</li>
-        <li>✔ Une présence digitale professionnelle</li>
-        <li>✔ Un outil réellement utile (pas juste esthétique)</li>
-      </ul>
-    </section>
-
-    <!-- CAS -->
-    <section>
-      <h2>🎯 Cas d’utilisation</h2>
-
-      <ul>
-        <li>✔ ONG & projets humanitaires</li>
-        <li>✔ Startups et entrepreneurs</li>
-        <li>✔ Plateformes éducatives</li>
-        <li>✔ Solutions linguistiques & IA</li>
-      </ul>
-    </section>
-
-    <!-- CTA -->
-    <section>
-      <h2>📩 Créer votre solution</h2>
-      <p>Transformons votre idée en projet concret.</p>
-
-      <a href="../index.html#contact" class="cta-btn">
-        🚀 Lancer mon projet
-      </a>
-    </section>
-
-  </main>
-
-  <footer class="footer">
-    <p>© HAM Global Words</p>
-  </footer>
-
-  <script src="../assetes/js/app.js" defer></script>
+<script src="../assetes/js/app.js" defer></script>
 
 </body>
 </html>
