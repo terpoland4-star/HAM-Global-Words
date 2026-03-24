@@ -4,7 +4,7 @@
 document.addEventListener("DOMContentLoaded", () => {
 
   // ========================================
-  // Dark / Light Mode
+  // THEME (DARK / LIGHT)
   // ========================================
   const themeToggle = document.getElementById('themeToggle');
 
@@ -26,81 +26,130 @@ document.addEventListener("DOMContentLoaded", () => {
       themeToggle.textContent = currentTheme === 'light' ? '🌙' : '☀️';
     });
   }
-// ==============================
-// LANGUAGES SYSTEM
-// ==============================
 
-const translations = {
-  fr: {
-    title: "HAM Global Words",
-    subtitle: "Des langues enracinées au Sahel, amplifiées au monde",
-    about: "🌍 À propos",
-    about_text: "HAM Global Words relie les langues africaines, les cultures et l’intelligence artificielle pour une communication moderne et stratégique.",
-    services: "🛠️ Services linguistiques",
-    contact: "📞 Demande de service",
-    send: "🚀 Envoyer"
-  },
-
-  en: {
-    title: "HAM Global Words",
-    subtitle: "Languages rooted in the Sahel, amplified worldwide",
-    about: "🌍 About",
-    about_text: "HAM Global Words connects African languages, cultures, and AI for modern and strategic communication.",
-    services: "🛠️ Language Services",
-    contact: "📞 Service Request",
-    send: "🚀 Send"
-  },
-
-  ar: {
-    title: "HAM Global Words",
-    subtitle: "لغات من الساحل إلى العالم",
-    about: "🌍 من نحن",
-    about_text: "تربط HAM Global Words اللغات الإفريقية والثقافات والذكاء الاصطناعي من أجل تواصل حديث واستراتيجي.",
-    services: "🛠️ الخدمات اللغوية",
-    contact: "📞 طلب خدمة",
-    send: "🚀 إرسال"
-  }
-};
-
-const langSwitcher = document.getElementById("langSwitcher");
-
-// Charger langue sauvegardée
-const savedLang = localStorage.getItem("lang") || "fr";
-langSwitcher.value = savedLang;
-setLanguage(savedLang);
-
-langSwitcher.addEventListener("change", (e) => {
-  const lang = e.target.value;
-  localStorage.setItem("lang", lang);
-  setLanguage(lang);
-});
-
-function setLanguage(lang) {
-  document.querySelectorAll("[data-key]").forEach(el => {
-    const key = el.getAttribute("data-key");
-    if (translations[lang][key]) {
-      el.textContent = translations[lang][key];
-    }
-  });
-
-  // Gestion RTL pour arabe
-  document.documentElement.dir = lang === "ar" ? "rtl" : "ltr";
-}
-traduction_title: "Traduction professionnelle – HAM Global Words",
-traduction_h1: "🌐 Traduction professionnelle",
-traduction_tagline: "Précision linguistique. Impact global.",
-traduction_approach: "🎯 Notre approche",
-traduction_text: "HAM Global Words transforme la traduction en levier stratégique.",
-traduction_expertise: "💼 Expertise",
-trad_1: "✔ Documents humanitaires",
-trad_2: "✔ Rapports techniques",
-trad_3: "✔ Contenus médicaux",
-traduction_cta_title: "📩 Besoin d’une traduction ?",
-cta_quote: "🚀 Demander un devis",
-back: "⬅ Retour",
-  
   // ========================================
-  // Footer Year
+  // 🌐 LANGUAGE SYSTEM (FULL POWER)
+  // ========================================
+
+  const translations = {
+    fr: {
+      title: "HAM Global Words",
+      subtitle: "Des langues enracinées au Sahel, amplifiées au monde",
+      nav_about: "À propos",
+      nav_services: "Services",
+      nav_digital: "Digital",
+      nav_portfolio: "Projets",
+      nav_booking: "Réserver",
+      nav_contact: "Contact",
+      cta_work: "📩 Travailler avec nous",
+
+      services_title: "🛠️ Services linguistiques",
+      digital_title: "💻 Solutions digitales",
+      portfolio_title: "🚀 Projets réalisés",
+      booking_title: "📅 Réserver une session",
+      contact_title: "📞 Demande de service",
+
+      form_name: "Votre nom",
+      form_email: "Votre email",
+      form_message: "Votre besoin...",
+      form_select: "Choisissez un service",
+      send: "🚀 Envoyer"
+    },
+
+    en: {
+      title: "HAM Global Words",
+      subtitle: "Languages rooted in the Sahel, amplified worldwide",
+      nav_about: "About",
+      nav_services: "Services",
+      nav_digital: "Digital",
+      nav_portfolio: "Projects",
+      nav_booking: "Book",
+      nav_contact: "Contact",
+      cta_work: "📩 Work with us",
+
+      services_title: "🛠️ Language Services",
+      digital_title: "💻 Digital Solutions",
+      portfolio_title: "🚀 Projects",
+      booking_title: "📅 Book a session",
+      contact_title: "📞 Service Request",
+
+      form_name: "Your name",
+      form_email: "Your email",
+      form_message: "Your need...",
+      form_select: "Choose a service",
+      send: "🚀 Send"
+    },
+
+    ar: {
+      title: "HAM Global Words",
+      subtitle: "لغات من الساحل إلى العالم",
+      nav_about: "من نحن",
+      nav_services: "الخدمات",
+      nav_digital: "الحلول الرقمية",
+      nav_portfolio: "المشاريع",
+      nav_booking: "حجز",
+      nav_contact: "اتصل",
+      cta_work: "📩 العمل معنا",
+
+      services_title: "🛠️ الخدمات اللغوية",
+      digital_title: "💻 الحلول الرقمية",
+      portfolio_title: "🚀 المشاريع",
+      booking_title: "📅 حجز جلسة",
+      contact_title: "📞 طلب خدمة",
+
+      form_name: "اسمك",
+      form_email: "بريدك الإلكتروني",
+      form_message: "طلبك...",
+      form_select: "اختر خدمة",
+      send: "🚀 إرسال"
+    }
+  };
+
+  const langSwitcher = document.getElementById("langSwitcher");
+
+  const savedLang = localStorage.getItem("lang") || "fr";
+
+  if (langSwitcher) {
+    langSwitcher.value = savedLang;
+
+    langSwitcher.addEventListener("change", (e) => {
+      const lang = e.target.value;
+      localStorage.setItem("lang", lang);
+      setLanguage(lang);
+    });
+  }
+
+  setLanguage(savedLang);
+
+  function setLanguage(lang) {
+    const dict = translations[lang];
+
+    // TEXT CONTENT
+    document.querySelectorAll("[data-key]").forEach(el => {
+      const key = el.dataset.key;
+      if (dict[key]) el.textContent = dict[key];
+    });
+
+    // PLACEHOLDERS
+    document.querySelectorAll("[data-placeholder]").forEach(el => {
+      const key = el.dataset.placeholder;
+      if (dict[key]) el.placeholder = dict[key];
+    });
+
+    // ATTRIBUTES (aria, title…)
+    document.querySelectorAll("[data-attr]").forEach(el => {
+      const attr = el.dataset.attr;
+      const key = el.dataset.key;
+      if (dict[key]) el.setAttribute(attr, dict[key]);
+    });
+
+    // RTL
+    document.documentElement.dir = lang === "ar" ? "rtl" : "ltr";
+    document.documentElement.lang = lang;
+  }
+
+  // ========================================
+  // YEAR
   // ========================================
   const yearEl = document.getElementById('year');
   if (yearEl) {
@@ -108,13 +157,11 @@ back: "⬅ Retour",
   }
 
   // ========================================
-  // Smooth Scroll (ONLY anchors)
+  // SMOOTH SCROLL
   // ========================================
   document.querySelectorAll('.main-nav a[href^="#"]').forEach(link => {
     link.addEventListener('click', (e) => {
-      const targetId = link.getAttribute('href').substring(1);
-      const target = document.getElementById(targetId);
-
+      const target = document.getElementById(link.getAttribute('href').substring(1));
       if (target) {
         e.preventDefault();
         target.scrollIntoView({ behavior: 'smooth' });
@@ -123,16 +170,14 @@ back: "⬅ Retour",
   });
 
   // ========================================
-  // Fade-in Sections
+  // FADE-IN
   // ========================================
   const sections = document.querySelectorAll('section');
 
-  if (sections.length > 0) {
-    const observer = new IntersectionObserver((entries) => {
+  if (sections.length) {
+    const observer = new IntersectionObserver(entries => {
       entries.forEach(entry => {
-        if (entry.isIntersecting) {
-          entry.target.classList.add('visible');
-        }
+        if (entry.isIntersecting) entry.target.classList.add('visible');
       });
     }, { threshold: 0.1 });
 
@@ -140,7 +185,7 @@ back: "⬅ Retour",
   }
 
   // ========================================
-  // Modal Services
+  // MODAL SERVICES
   // ========================================
   const modal = document.getElementById('serviceModal');
 
@@ -154,10 +199,9 @@ back: "⬅ Retour",
     buttons.forEach(btn => {
       btn.addEventListener('click', () => {
         const key = btn.dataset.service;
-
         const content = Array.from(contents).find(c => c.dataset.service === key);
 
-        if (content && modalTitle && modalDesc) {
+        if (content) {
           modalTitle.textContent = btn.textContent;
           modalDesc.innerHTML = content.innerHTML;
           modal.style.display = 'flex';
@@ -165,30 +209,21 @@ back: "⬅ Retour",
       });
     });
 
-    // Close modal
     if (closeBtn) {
-      closeBtn.addEventListener('click', () => {
-        modal.style.display = 'none';
-      });
+      closeBtn.addEventListener('click', () => modal.style.display = 'none');
     }
 
-    // Click outside
-    modal.addEventListener('click', (e) => {
-      if (e.target === modal) {
-        modal.style.display = 'none';
-      }
+    modal.addEventListener('click', e => {
+      if (e.target === modal) modal.style.display = 'none';
     });
 
-    // ESC
-    document.addEventListener('keydown', (e) => {
-      if (e.key === 'Escape') {
-        modal.style.display = 'none';
-      }
+    document.addEventListener('keydown', e => {
+      if (e.key === 'Escape') modal.style.display = 'none';
     });
   }
 
   // ========================================
-  // Contact Form
+  // CONTACT FORM
   // ========================================
   const contactForm = document.getElementById('contactForm');
 
@@ -211,7 +246,7 @@ ${contactForm.message.value}
   }
 
   // ========================================
-  // Formation Form
+  // FORMATION FORM
   // ========================================
   const formationForm = document.getElementById('formationForm');
 
