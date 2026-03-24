@@ -86,6 +86,18 @@ function setLanguage(lang) {
   // Gestion RTL pour arabe
   document.documentElement.dir = lang === "ar" ? "rtl" : "ltr";
 }
+traduction_title: "Traduction professionnelle – HAM Global Words",
+traduction_h1: "🌐 Traduction professionnelle",
+traduction_tagline: "Précision linguistique. Impact global.",
+traduction_approach: "🎯 Notre approche",
+traduction_text: "HAM Global Words transforme la traduction en levier stratégique.",
+traduction_expertise: "💼 Expertise",
+trad_1: "✔ Documents humanitaires",
+trad_2: "✔ Rapports techniques",
+trad_3: "✔ Contenus médicaux",
+traduction_cta_title: "📩 Besoin d’une traduction ?",
+cta_quote: "🚀 Demander un devis",
+back: "⬅ Retour",
   
   // ========================================
   // Footer Year
