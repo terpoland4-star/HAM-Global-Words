@@ -1,51 +1,67 @@
 // ========================================
-// SAFE INIT
+// INIT
 // ========================================
 document.addEventListener("DOMContentLoaded", () => {
 
   // ========================================
-  // THEME (DARK / LIGHT)
+  // STORAGE SAFE
+  // ========================================
+  const storage = {
+    get: (key, fallback) => {
+      try { return localStorage.getItem(key) || fallback; }
+      catch { return fallback; }
+    },
+    set: (key, value) => {
+      try { localStorage.setItem(key, value); }
+      catch {}
+    }
+  };
+
+  // ========================================
+  // THEME SYSTEM
   // ========================================
   const themeToggle = document.getElementById('themeToggle');
+  const body = document.body;
 
-  if (themeToggle) {
-    const body = document.body;
-    const savedTheme = localStorage.getItem('theme');
+  const initTheme = () => {
+    const savedTheme = storage.get('theme', 'dark');
 
     if (savedTheme === 'light') {
       body.classList.add('light-mode');
-      themeToggle.textContent = '🌙';
+      if (themeToggle) themeToggle.textContent = '🌙';
     } else {
-      themeToggle.textContent = '☀️';
+      if (themeToggle) themeToggle.textContent = '☀️';
     }
+  };
+
+  if (themeToggle) {
+    initTheme();
 
     themeToggle.addEventListener('click', () => {
       body.classList.toggle('light-mode');
-      const currentTheme = body.classList.contains('light-mode') ? 'light' : 'dark';
-      localStorage.setItem('theme', currentTheme);
-      themeToggle.textContent = currentTheme === 'light' ? '🌙' : '☀️';
+
+      const current = body.classList.contains('light-mode') ? 'light' : 'dark';
+      storage.set('theme', current);
+
+      themeToggle.textContent = current === 'light' ? '🌙' : '☀️';
     });
   }
 
   // ========================================
-  // 🌐 LANGUAGE SYSTEM (FULL POWER)
+  // 🌐 TRANSLATIONS (EXTENDED SaaS VERSION)
   // ========================================
-
   const translations = {
     fr: {
       title: "HAM Global Words",
-      subtitle: "Des langues enracinées au Sahel, amplifiées au monde",
+      subtitle: "Plateforme SaaS de traduction, IA linguistique et solutions africaines",
       nav_about: "À propos",
       nav_services: "Services",
-      nav_digital: "Digital",
-      nav_portfolio: "Projets",
+      nav_portfolio: "Solutions",
       nav_booking: "Réserver",
       nav_contact: "Contact",
-      cta_work: "📩 Travailler avec nous",
 
       services_title: "🛠️ Services linguistiques",
-      digital_title: "💻 Solutions digitales",
-      portfolio_title: "🚀 Projets réalisés",
+      portfolio_title: "🚀 Produits & solutions",
       booking_title: "📅 Réserver une session",
       contact_title: "📞 Demande de service",
 
@@ -53,23 +69,21 @@ document.addEventListener("DOMContentLoaded", () => {
       form_email: "Votre email",
       form_message: "Votre besoin...",
       form_select: "Choisissez un service",
+
       send: "🚀 Envoyer"
     },
 
     en: {
       title: "HAM Global Words",
-      subtitle: "Languages rooted in the Sahel, amplified worldwide",
+      subtitle: "SaaS platform for translation, linguistic AI and African language solutions",
       nav_about: "About",
       nav_services: "Services",
-      nav_digital: "Digital",
-      nav_portfolio: "Projects",
+      nav_portfolio: "Solutions",
       nav_booking: "Book",
       nav_contact: "Contact",
-      cta_work: "📩 Work with us",
 
       services_title: "🛠️ Language Services",
-      digital_title: "💻 Digital Solutions",
-      portfolio_title: "🚀 Projects",
+      portfolio_title: "🚀 Products & Solutions",
       booking_title: "📅 Book a session",
       contact_title: "📞 Service Request",
 
@@ -77,23 +91,21 @@ document.addEventListener("DOMContentLoaded", () => {
       form_email: "Your email",
       form_message: "Your need...",
       form_select: "Choose a service",
+
       send: "🚀 Send"
     },
 
     ar: {
       title: "HAM Global Words",
-      subtitle: "لغات من الساحل إلى العالم",
+      subtitle: "منصة SaaS للترجمة والذكاء اللغوي والحلول الإفريقية",
       nav_about: "من نحن",
       nav_services: "الخدمات",
-      nav_digital: "الحلول الرقمية",
-      nav_portfolio: "المشاريع",
+      nav_portfolio: "الحلول",
       nav_booking: "حجز",
       nav_contact: "اتصل",
-      cta_work: "📩 العمل معنا",
 
       services_title: "🛠️ الخدمات اللغوية",
-      digital_title: "💻 الحلول الرقمية",
-      portfolio_title: "🚀 المشاريع",
+      portfolio_title: "🚀 المنتجات والحلول",
       booking_title: "📅 حجز جلسة",
       contact_title: "📞 طلب خدمة",
 
@@ -101,129 +113,80 @@ document.addEventListener("DOMContentLoaded", () => {
       form_email: "بريدك الإلكتروني",
       form_message: "طلبك...",
       form_select: "اختر خدمة",
+
       send: "🚀 إرسال"
     }
   };
 
   const langSwitcher = document.getElementById("langSwitcher");
-
-  const savedLang = localStorage.getItem("lang") || "fr";
+  const currentLang = storage.get("lang", "fr");
 
   if (langSwitcher) {
-    langSwitcher.value = savedLang;
+    langSwitcher.value = currentLang;
 
     langSwitcher.addEventListener("change", (e) => {
       const lang = e.target.value;
-      localStorage.setItem("lang", lang);
-      setLanguage(lang);
+      storage.set("lang", lang);
+      applyLanguage(lang);
     });
   }
 
-  setLanguage(savedLang);
+  applyLanguage(currentLang);
 
-  function setLanguage(lang) {
-    const dict = translations[lang];
+  function applyLanguage(lang) {
+    const dict = translations[lang] || translations.fr;
 
-    // TEXT CONTENT
+    // TEXT
     document.querySelectorAll("[data-key]").forEach(el => {
       const key = el.dataset.key;
       if (dict[key]) el.textContent = dict[key];
     });
 
-    // PLACEHOLDERS
+    // PLACEHOLDER
     document.querySelectorAll("[data-placeholder]").forEach(el => {
       const key = el.dataset.placeholder;
       if (dict[key]) el.placeholder = dict[key];
     });
 
-    // ATTRIBUTES (aria, title…)
-    document.querySelectorAll("[data-attr]").forEach(el => {
-      const attr = el.dataset.attr;
-      const key = el.dataset.key;
-      if (dict[key]) el.setAttribute(attr, dict[key]);
-    });
-
-    // RTL
+    // RTL SUPPORT
     document.documentElement.dir = lang === "ar" ? "rtl" : "ltr";
     document.documentElement.lang = lang;
   }
 
   // ========================================
-  // YEAR
+  // YEAR AUTO
   // ========================================
   const yearEl = document.getElementById('year');
-  if (yearEl) {
-    yearEl.textContent = new Date().getFullYear();
-  }
+  if (yearEl) yearEl.textContent = new Date().getFullYear();
 
   // ========================================
-  // SMOOTH SCROLL
+  // SMOOTH SCROLL (SAFE)
   // ========================================
   document.querySelectorAll('.main-nav a[href^="#"]').forEach(link => {
     link.addEventListener('click', (e) => {
-      const target = document.getElementById(link.getAttribute('href').substring(1));
+      const id = link.getAttribute('href').substring(1);
+      const target = document.getElementById(id);
+
       if (target) {
         e.preventDefault();
-        target.scrollIntoView({ behavior: 'smooth' });
+        target.scrollIntoView({ behavior: 'smooth', block: 'start' });
       }
     });
   });
 
   // ========================================
-  // FADE-IN
+  // INTERSECTION (ANIMATION)
   // ========================================
-  const sections = document.querySelectorAll('section');
-
-  if (sections.length) {
-    const observer = new IntersectionObserver(entries => {
-      entries.forEach(entry => {
-        if (entry.isIntersecting) entry.target.classList.add('visible');
-      });
-    }, { threshold: 0.1 });
-
-    sections.forEach(section => observer.observe(section));
-  }
-
-  // ========================================
-  // MODAL SERVICES
-  // ========================================
-  const modal = document.getElementById('serviceModal');
-
-  if (modal) {
-    const modalTitle = document.getElementById('modal-title');
-    const modalDesc = document.getElementById('modal-desc');
-    const closeBtn = modal.querySelector('.close-modal');
-    const buttons = document.querySelectorAll('.service-btn');
-    const contents = document.querySelectorAll('.service-content > div');
-
-    buttons.forEach(btn => {
-      btn.addEventListener('click', () => {
-        const key = btn.dataset.service;
-        const content = Array.from(contents).find(c => c.dataset.service === key);
-
-        if (content) {
-          modalTitle.textContent = btn.textContent;
-          modalDesc.innerHTML = content.innerHTML;
-          modal.style.display = 'flex';
-        }
-      });
+  const observer = new IntersectionObserver(entries => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) entry.target.classList.add('visible');
     });
+  }, { threshold: 0.15 });
 
-    if (closeBtn) {
-      closeBtn.addEventListener('click', () => modal.style.display = 'none');
-    }
-
-    modal.addEventListener('click', e => {
-      if (e.target === modal) modal.style.display = 'none';
-    });
-
-    document.addEventListener('keydown', e => {
-      if (e.key === 'Escape') modal.style.display = 'none';
-    });
-  }
+  document.querySelectorAll('section').forEach(el => observer.observe(el));
 
   // ========================================
-  // CONTACT FORM
+  // CONTACT FORM (UPGRADED)
   // ========================================
   const contactForm = document.getElementById('contactForm');
 
@@ -231,40 +194,33 @@ document.addEventListener("DOMContentLoaded", () => {
     contactForm.addEventListener('submit', (e) => {
       e.preventDefault();
 
-      const subject = `Demande - ${contactForm.service.value}`;
+      const data = {
+        name: contactForm.name.value.trim(),
+        email: contactForm.email.value.trim(),
+        service: contactForm.service.value,
+        message: contactForm.message.value.trim()
+      };
+
+      if (!data.name || !data.email || !data.message) {
+        alert("Veuillez remplir tous les champs.");
+        return;
+      }
+
+      const subject = `[HAM Global Words] ${data.service}`;
       const body = `
-Nom: ${contactForm.name.value}
-Email: ${contactForm.email.value}
-Service: ${contactForm.service.value}
+Name: ${data.name}
+Email: ${data.email}
+Service: ${data.service}
 
 Message:
-${contactForm.message.value}
+${data.message}
       `;
 
-      window.location.href = `mailto:hamadineagmoctar@gmail.com?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
-    });
-  }
+      // SaaS-ready tracking (future analytics hook)
+      console.log("Lead captured:", data);
 
-  // ========================================
-  // FORMATION FORM
-  // ========================================
-  const formationForm = document.getElementById('formationForm');
-
-  if (formationForm) {
-    formationForm.addEventListener('submit', (e) => {
-      e.preventDefault();
-
-      const subject = `Inscription Formation - ${formationForm.plan.value}`;
-      const body = `
-Nom: ${formationForm.name.value}
-Email: ${formationForm.email.value}
-Formule: ${formationForm.plan.value}
-
-Objectif:
-${formationForm.message.value}
-      `;
-
-      window.location.href = `mailto:hamadineagmoctar@gmail.com?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
+      window.location.href =
+        `mailto:hamadineagmoctar@gmail.com?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
     });
   }
 
