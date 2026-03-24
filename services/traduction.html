@@ -4,98 +4,70 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
 
-  <title>Traduction professionnelle – HAM Global Words</title>
+  <title data-key="traduction_title">Traduction professionnelle – HAM Global Words</title>
 
-  <meta name="description" content="Services de traduction professionnelle en langues africaines et internationales, adaptés aux contextes humanitaires, techniques et institutionnels." />
+  <meta name="description" content="Services de traduction professionnelle multilingue." />
 
   <link rel="stylesheet" href="../assetes/css/style.css" />
 </head>
 
 <body class="dark-mode">
 
-  <button id="themeToggle">🌙</button>
+<!-- 🌐 Language -->
+<div class="lang-switcher">
+  <select id="langSwitcher">
+    <option value="fr">🇫🇷 Français</option>
+    <option value="en">🇬🇧 English</option>
+    <option value="ar">🇸🇦 العربية</option>
+  </select>
+</div>
 
-  <!-- HEADER -->
-  <header class="site-header">
-    <h1>🌐 Traduction professionnelle</h1>
-    <p>Précision linguistique. Impact global.</p>
-    <a href="../index.html" class="cta-btn">⬅ Retour</a>
-  </header>
+<button id="themeToggle">🌙</button>
 
-  <main>
+<header class="site-header">
+  <h1 data-key="traduction_h1">🌐 Traduction professionnelle</h1>
+  <p data-key="traduction_tagline">Précision linguistique. Impact global.</p>
 
-    <!-- INTRO -->
-    <section>
-      <h2>🎯 Notre approche</h2>
-      <p>
-        Chez <strong>HAM Global Words</strong>, la traduction va au-delà des mots. 
-        Elle devient un levier stratégique pour connecter les cultures, transmettre 
-        des messages critiques et soutenir des missions internationales.
-      </p>
-    </section>
+  <a href="../index.html" class="cta-btn" data-key="back">⬅ Retour</a>
+</header>
 
-    <!-- EXPERTISE -->
-    <section>
-      <h2>💼 Expertise terrain</h2>
-      <p>
-        Fort d’une expérience auprès d’organisations comme <strong>UNHCR</strong>, 
-        <strong>IOM</strong> et <strong>Task Force TAKUBA</strong>, nous assurons 
-        des traductions fiables dans des contextes sensibles :
-      </p>
+<main>
 
-      <ul>
-        <li>✔ Documents humanitaires</li>
-        <li>✔ Rapports techniques</li>
-        <li>✔ Contenus médicaux et juridiques</li>
-        <li>✔ Communications stratégiques</li>
-      </ul>
-    </section>
+<section>
+  <h2 data-key="traduction_approach">🎯 Notre approche</h2>
 
-    <!-- LANGUES -->
-    <section>
-      <h2>🗣️ Langues couvertes</h2>
-      <p>
-        Français • Anglais • Arabe • Tadaksahak • Tamajaq • Hausa • Zarma • Songhai • Yoruba • Fon • Éwé
-      </p>
-    </section>
+  <p data-key="traduction_text">
+    HAM Global Words transforme la traduction en levier stratégique.
+  </p>
+</section>
 
-    <!-- TECHNO -->
-    <section>
-      <h2>⚙️ Technologies utilisées</h2>
-      <p>
-        Trados • SmartCAT • SharePoint • Excel • QA linguistique avancée  
-        → Garantie de cohérence, précision et qualité.
-      </p>
-    </section>
+<section>
+  <h2 data-key="traduction_expertise">💼 Expertise</h2>
 
-    <!-- VALEUR -->
-    <section>
-      <h2>🚀 Ce que vous gagnez</h2>
-      <ul>
-        <li>✔ Traductions précises et fiables</li>
-        <li>✔ Adaptation culturelle réelle</li>
-        <li>✔ Confidentialité (NDA)</li>
-        <li>✔ Rapidité d’exécution</li>
-      </ul>
-    </section>
+  <ul>
+    <li data-key="trad_1">✔ Documents humanitaires</li>
+    <li data-key="trad_2">✔ Rapports techniques</li>
+    <li data-key="trad_3">✔ Contenus médicaux</li>
+  </ul>
+</section>
 
-    <!-- CTA -->
-    <section>
-      <h2>📩 Besoin d’une traduction ?</h2>
-      <p>Parlez-nous de votre projet.</p>
+<section>
+  <h2 data-key="traduction_cta_title">📩 Besoin d’une traduction ?</h2>
 
-      <a href="mailto:hamadineagmoctar@gmail.com" class="cta-btn">
-        🚀 Demander un devis
-      </a>
-    </section>
+  <a href="mailto:hamadineagmoctar@gmail.com"
+     class="cta-btn"
+     data-key="cta_quote">
+     🚀 Demander un devis
+  </a>
+</section>
 
-  </main>
+</main>
 
-  <footer class="footer">
-    <p>© HAM Global Words</p>
-  </footer>
+<footer class="footer">
+  <p>© <span id="year"></span> HAM Global Words</p>
+</footer>
 
-  <script src="../assetes/js/app.js" defer></script>
+<script src="../assetes/js/app.js" defer></script>
 
 </body>
 </html>
