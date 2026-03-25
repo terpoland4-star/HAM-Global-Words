@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <title>Admin – HAM Global Words</title>
+  <link rel="stylesheet" href="assetes/css/style.css">
+</head>
+
+<body class="dark-mode">
+
+<header class="site-header">
+  <h1>🛠 Admin Panel</h1>
+</header>
+
+<main>
+
+<section>
+  <h2>📂 Tous les projets clients</h2>
+  <div id="adminList" class="service-grid"></div>
+</section>
+
+</main>
+
+<script type="module">
+import { initializeApp } from "https://www.gstatic.com/firebasejs/12.11.0/firebase-app.js";
+import { getFirestore, collection, getDocs } from "https://www.gstatic.com/firebasejs/12.11.0/firebase-firestore.js";
+
+const firebaseConfig = {
+  apiKey: "AIzaSyB...",
+  authDomain: "ham-global-words.firebaseapp.com",
+  projectId: "ham-global-words",
+};
+
+const app = initializeApp(firebaseConfig);
+const db = getFirestore(app);
+
+const adminList = document.getElementById("adminList");
+
+async function loadAll() {
+  const snapshot = await getDocs(collection(db, "projects"));
+
+  snapshot.forEach(doc => {
+    const data = doc.data();
+
+    const card = document.createElement("div");
+    card.className = "card";
+
+    card.innerHTML = `
+      <h3>${data.service}</h3>
+      <p><strong>Nom:</strong> ${data.name}</p>
+      <p><strong>Email:</strong> ${data.email}</p>
+      <p><strong>Fichier:</strong> ${data.fileName}</p>
+      <p>${data.message}</p>
+    `;
+
+    adminList.appendChild(card);
+  });
+}
+
+loadAll();
+</script>
+
+</body>
+</html>
