@@ -33,49 +33,18 @@
   <h2>👤 Mon profil</h2>
 
   <div class="card">
-    <p><strong>Nom :</strong> Client Demo</p>
-    <p><strong>Email :</strong> client@email.com</p>
+    <p><strong>Email :</strong> <span id="userEmail"></span></p>
     <p><strong>Statut :</strong> Actif</p>
   </div>
 </section>
 
-<!-- PROJECTS -->
+<!-- UPLOAD -->
 <section>
-  <h2>📁 Mes projets</h2>
+  <h2>📤 Envoyer un projet</h2>
 
-  <div class="service-grid">
-
-    <div class="card">
-      <h3>🌐 Traduction ONG</h3>
-      <p>Langues : Français → Anglais</p>
-      <p>Status : <strong style="color:#22C55E;">Terminé</strong></p>
-    </div>
-
-    <div class="card">
-      <h3>🧠 Annotation IA</h3>
-      <p>Dataset linguistique Hausa</p>
-      <p>Status : <strong style="color:#F59E0B;">En cours</strong></p>
-    </div>
-
-    <div class="card">
-      <h3>💻 Site web</h3>
-      <p>Développement plateforme</p>
-      <p>Status : <strong style="color:#6366F1;">En validation</strong></p>
-    </div>
-
-  </div>
-</section>
-
-<section>
-  <h2>📤 Envoyer un fichier</h2>
-
-  <form action="https://formspree.io/f/xpqoabaa" 
-        method="POST" 
-        enctype="multipart/form-data"
-        class="card">
+  <form id="uploadForm" class="card">
 
     <input type="text" name="name" placeholder="Votre nom" required>
-
     <input type="email" name="email" placeholder="Votre email" required>
 
     <select name="service" required>
@@ -89,11 +58,17 @@
 
     <textarea name="message" placeholder="Instructions..." required></textarea>
 
-    <button type="submit">🚀 Envoyer le fichier</button>
+    <button type="submit">🚀 Envoyer</button>
 
   </form>
 </section>
-  
+
+<!-- PROJECTS -->
+<section>
+  <h2>📁 Mes projets</h2>
+  <div id="projectsList" class="service-grid"></div>
+</section>
+
 <!-- ACTIONS -->
 <section>
   <h2>⚡ Actions rapides</h2>
@@ -101,7 +76,7 @@
   <div class="service-grid">
 
     <a href="mailto:hamadineagmoctar@gmail.com" class="service-btn">
-      📩 Demander une mise à jour
+      📩 Support
     </a>
 
     <a href="index.html#contact" class="service-btn">
@@ -115,38 +90,105 @@
   </div>
 </section>
 
-<!-- ANALYTICS -->
-<section>
-  <h2>📊 Statistiques</h2>
-
-  <div class="service-grid">
-
-    <div class="card">
-      <h3>📄 12</h3>
-      <p>Documents traduits</p>
-    </div>
-
-    <div class="card">
-      <h3>🧠 3</h3>
-      <p>Projets IA</p>
-    </div>
-
-    <div class="card">
-      <h3>💼 5</h3>
-      <p>Projets actifs</p>
-    </div>
-
-  </div>
-</section>
-
 </main>
 
-<!-- FOOTER -->
 <footer class="footer">
   <p>© <span id="year"></span> HAM Global Words</p>
 </footer>
 
-<script>
+<!-- FIREBASE -->
+<script type="module">
+import { initializeApp } from "https://www.gstatic.com/firebasejs/12.11.0/firebase-app.js";
+import { getAuth, onAuthStateChanged, signOut } from "https://www.gstatic.com/firebasejs/12.11.0/firebase-auth.js";
+import { getStorage, ref, uploadBytes } from "https://www.gstatic.com/firebasejs/12.11.0/firebase-storage.js";
+import { getFirestore, addDoc, collection, getDocs } from "https://www.gstatic.com/firebasejs/12.11.0/firebase-firestore.js";
+
+// CONFIG
+const firebaseConfig = {
+  apiKey: "AIzaSyBwh9xj4t2QKzfgY3VvzW4Cai3VsDWjmDc",
+  authDomain: "ham-global-words.firebaseapp.com",
+  projectId: "ham-global-words",
+  storageBucket: "ham-global-words.firebasestorage.app",
+  messagingSenderId: "207685512003",
+  appId: "1:207685512003:web:3c281456eddfdece425df6"
+};
+
+// INIT
+const app = initializeApp(firebaseConfig);
+const auth = getAuth(app);
+const storage = getStorage(app);
+const db = getFirestore(app);
+
+// AUTH CHECK
+onAuthStateChanged(auth, (user) => {
+  if (!user) {
+    window.location.href = "login.html";
+  } else {
+    document.getElementById("userEmail").textContent = user.email;
+    loadProjects();
+  }
+});
+
+// FORM
+const form = document.getElementById("uploadForm");
+const projectsList = document.getElementById("projectsList");
+
+form.addEventListener("submit", async (e) => {
+  e.preventDefault();
+
+  const file = form.file.files[0];
+  if (!file) return alert("Ajoute un fichier");
+
+  const fileName = Date.now() + "_" + file.name;
+  const storageRef = ref(storage, "uploads/" + fileName);
+
+  try {
+    await uploadBytes(storageRef, file);
+
+    await addDoc(collection(db, "projects"), {
+      name: form.name.value,
+      email: form.email.value,
+      service: form.service.value,
+      message: form.message.value,
+      fileName: fileName,
+      date: new Date()
+    });
+
+    alert("✅ Projet envoyé !");
+    form.reset();
+    loadProjects();
+
+  } catch (err) {
+    console.error(err);
+    alert("❌ Erreur");
+  }
+});
+
+// LOAD PROJECTS
+async function loadProjects() {
+  projectsList.innerHTML = "";
+
+  const snapshot = await getDocs(collection(db, "projects"));
+
+  snapshot.forEach(doc => {
+    const data = doc.data();
+
+    const card = document.createElement("div");
+    card.className = "card";
+
+    card.innerHTML = `
+      <h3>${data.service}</h3>
+      <p><strong>Client :</strong> ${data.name}</p>
+      <p><strong>Email :</strong> ${data.email}</p>
+      <p><strong>Fichier :</strong> ${data.fileName}</p>
+      <p>${data.message}</p>
+    `;
+
+    projectsList.appendChild(card);
+  });
+}
+
+// YEAR
 document.getElementById("year").textContent = new Date().getFullYear();
 </script>
 
