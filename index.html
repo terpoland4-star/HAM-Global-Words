@@ -207,5 +207,27 @@
 
 <script src="assetes/js/app.js" defer></script>
 
+  
+<!-- 🔥 FIREBASE INTÉGRATION -->
+<script type="module">
+  import { initializeApp } from "https://www.gstatic.com/firebasejs/12.11.0/firebase-app.js";
+  import { getAnalytics } from "https://www.gstatic.com/firebasejs/12.11.0/firebase-analytics.js";
+
+  const firebaseConfig = {
+    apiKey: "AIzaSyBwh9xj4t2QKzfgY3VvzW4Cai3VsDWjmDc",
+    authDomain: "ham-global-words.firebaseapp.com",
+    projectId: "ham-global-words",
+    storageBucket: "ham-global-words.firebasestorage.app",
+    messagingSenderId: "207685512003",
+    appId: "1:207685512003:web:3c281456eddfdece425df6",
+    measurementId: "G-SV5JC4KYPL"
+  };
+
+  const app = initializeApp(firebaseConfig);
+  const analytics = getAnalytics(app);
+
+  console.log("🔥 Firebase connecté");
+</script>
+
 </body>
 </html>
