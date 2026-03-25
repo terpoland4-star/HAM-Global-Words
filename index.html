@@ -53,6 +53,15 @@
 
 <body class="dark-mode">
 
+<!-- 🌐 LANG SWITCH -->
+<div class="lang-switcher">
+  <select id="langSwitcher">
+    <option value="fr">🇫🇷 Français</option>
+    <option value="en">🇬🇧 English</option>
+    <option value="ar">🇸🇦 العربية</option>
+  </select>
+</div>
+
 <!-- LOADER -->
 <div id="loader">
   <div class="loader-content">
@@ -61,7 +70,6 @@
   </div>
 </div>
 
-
 <button id="themeToggle">🌙</button>
 
 <!-- HEADER -->
@@ -69,7 +77,7 @@
 
 <div class="galaxy-bg"></div>
 
-  <div class="header-content">
+<div class="header-content">
   
   <img src="assetes/img/logoHAM.png"
        class="logo"
@@ -94,8 +102,9 @@
 
   <a href="login.html" class="cta-btn">📊 Espace client</a>
 
-</header>
 </div>
+</header>
+
 <main>
 
 <!-- HERO -->
@@ -113,7 +122,6 @@
     <a href="login.html" class="cta-btn secondary">🔐 Espace client</a>
   </div>
 </section>
-
 
 <!-- POSITION -->
 <section>
@@ -142,23 +150,6 @@
   </div>
 </section>
 
-<!-- EXPERTISE -->
-<section id="expertise">
-  <h2>🎯 Expertise & Profil</h2>
-
-  <p>
-    Spécialiste linguistique et expert en annotation IA,
-    combinant expérience terrain et technologies avancées.
-  </p>
-
-  <ul>
-    <li>✔ Interprétation humanitaire</li>
-    <li>✔ Annotation IA & QA linguistique</li>
-    <li>✔ Validation multilingue</li>
-    <li>✔ Solutions digitales linguistiques</li>
-  </ul>
-</section>
-
 <!-- SERVICES -->
 <section id="services">
   <h2>🛠️ Services linguistiques & digitaux</h2>
@@ -167,91 +158,29 @@
     <a href="services/traduction.html" class="service-btn">🌐 Traduction</a>
     <a href="services/interpretation.html" class="service-btn">🎙️ Interprétation</a>
     <a href="services/annotation.html" class="service-btn">🧠 Annotation IA</a>
-    <a href="services/webdev.html" class="service-btn">💻 Web & Apps</a>
-    <a href="services/codefix.html" class="service-btn">🧩 Correction code</a>
-    <a href="services/remote.html" class="service-btn">📡 Remote live</a>
   </div>
 </section>
 
-<!-- PORTFOLIO -->
-<section id="portfolio">
-  <h2>🚀 Produits & Solutions</h2>
-
-  <div class="service-grid">
-    <div class="card">
-      <h3>Dictionnaire Tadaksahak</h3>
-      <p>Application linguistique offline.</p>
-    </div>
-
-    <div class="card">
-      <h3>HabibaMedics</h3>
-      <p>Plateforme santé digitale.</p>
-    </div>
-
-    <div class="card">
-      <h3>Datasets IA</h3>
-      <p>Annotation & QA linguistique.</p>
-    </div>
-  </div>
-</section>
-
-  <section id="proof">
-  <h2>📊 Résultats & impact</h2>
-
-  <div class="service-grid">
-    <div class="card">
-      <h3>+100K</h3>
-      <p>Mots traités en traduction</p>
-    </div>
-
-    <div class="card">
-      <h3>+20</h3>
-      <p>Projets linguistiques & IA</p>
-    </div>
-
-    <div class="card">
-      <h3>+5</h3>
-      <p>Langues africaines supportées</p>
-    </div>
-  </div>
-</section>
-  
-<!-- PRICING -->
-<section id="pricing">
-  <h2>💸 Offres</h2>
-
-  <div class="service-grid">
-    <div class="card">
-      <h3>Starter</h3>
-      <p>Petit projet</p>
-    </div>
-
-    <div class="card">
-      <h3>Business</h3>
-      <p>Solutions complètes</p>
-    </div>
-
-    <div class="card">
-      <h3>Premium</h3>
-      <p>Accompagnement total</p>
-    </div>
-  </div>
-</section>
-
-<!-- CONTACT -->
+<!-- CONTACT + FORMSPREE -->
 <section id="contact">
-  <h2>📞 Demande de service</h2>
+  <h2>📤 Envoyer un fichier / Demande</h2>
 
-  <form id="contactForm">
+  <form action="https://formspree.io/f/xpqoabaa" 
+        method="POST" 
+        enctype="multipart/form-data"
+        class="card">
+
     <input type="text" name="name" placeholder="Votre nom" required />
     <input type="email" name="email" placeholder="Votre email" required />
 
-    <select name="service">
-      <option>Choisissez un service</option>
+    <select name="service" required>
+      <option value="">Choisissez un service</option>
       <option>Traduction</option>
       <option>Interprétation</option>
       <option>Annotation IA</option>
     </select>
+
+    <input type="file" name="file" required />
 
     <textarea name="message" placeholder="Votre besoin..." required></textarea>
 
@@ -261,17 +190,18 @@
 
 </main>
 
-
 <footer class="footer">
   <p>© <span id="year"></span> HAM Global Words — SaaS Linguistique</p>
 
   <div style="margin-top:10px;">
     <a href="about.html" class="cta-btn">🌍 Qui sommes-nous</a>
   </div>
+
   <div class="footer-logo">
-  <img src="assetes/img/HAMpng.png" alt="HAM Global Words">
-</div>
+    <img src="assetes/img/HAMpng.png" alt="HAM Global Words">
+  </div>
 </footer>
+
 <script src="assetes/js/app.js" defer></script>
 
 </body>
