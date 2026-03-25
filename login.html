@@ -1,35 +1,80 @@
 <!DOCTYPE html>
 <html lang="fr">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Connexion</title>
-<link rel="stylesheet" href="assetes/css/style.css">
+  <meta charset="UTF-8">
+  <title>Connexion – HAM Global Words</title>
+  <link rel="stylesheet" href="assetes/css/style.css">
 </head>
 
-<body>
+<body class="dark-mode">
 
-<header class="site-header">
-  <h1>🔐 Connexion</h1>
-  <a href="index.html" class="cta-btn">⬅ Retour</a>
-</header>
+<section style="max-width:400px; margin:auto; padding:5rem 1rem;">
+  <h2>🔐 Connexion</h2>
 
-<main>
-<section>
+  <form id="loginForm" class="card">
+    <input type="email" id="email" placeholder="Email" required>
+    <input type="password" id="password" placeholder="Mot de passe" required>
 
-<form id="loginForm">
-  <input type="email" name="email" placeholder="Email" required>
-  <input type="password" name="password" placeholder="Mot de passe" required>
-  <button type="submit">🚀 Se connecter</button>
-</form>
+    <button type="submit">Connexion</button>
+  </form>
 
-<p style="text-align:center; margin-top:20px;">
-  Pas de compte ? <a href="register.html">Créer un compte</a>
-</p>
-
+  <p style="margin-top:10px;">
+    Pas de compte ?
+    <a href="#" id="registerBtn">Créer un compte</a>
+  </p>
 </section>
-</main>
 
-<script src="assetes/js/app.js"></script>
+<script type="module">
+import { initializeApp } from "https://www.gstatic.com/firebasejs/12.11.0/firebase-app.js";
+import {
+  getAuth,
+  signInWithEmailAndPassword,
+  createUserWithEmailAndPassword
+} from "https://www.gstatic.com/firebasejs/12.11.0/firebase-auth.js";
+
+const firebaseConfig = {
+  apiKey: "AIzaSyB...",
+  authDomain: "ham-global-words.firebaseapp.com",
+  projectId: "ham-global-words",
+};
+
+const app = initializeApp(firebaseConfig);
+const auth = getAuth(app);
+
+const form = document.getElementById("loginForm");
+const registerBtn = document.getElementById("registerBtn");
+
+// LOGIN
+form.addEventListener("submit", async (e) => {
+  e.preventDefault();
+
+  const email = document.getElementById("email").value;
+  const password = document.getElementById("password").value;
+
+  try {
+    await signInWithEmailAndPassword(auth, email, password);
+    alert("Connexion réussie !");
+    window.location.href = "dashboard.html";
+  } catch (err) {
+    alert("Erreur: " + err.message);
+  }
+});
+
+// REGISTER
+registerBtn.addEventListener("click", async () => {
+  const email = prompt("Email ?");
+  const password = prompt("Mot de passe ?");
+
+  if (!email || !password) return;
+
+  try {
+    await createUserWithEmailAndPassword(auth, email, password);
+    alert("Compte créé !");
+  } catch (err) {
+    alert(err.message);
+  }
+});
+</script>
+
 </body>
 </html>
