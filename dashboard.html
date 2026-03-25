@@ -66,6 +66,34 @@
   </div>
 </section>
 
+<section>
+  <h2>📤 Envoyer un fichier</h2>
+
+  <form action="https://formspree.io/f/xpqoabaa" 
+        method="POST" 
+        enctype="multipart/form-data"
+        class="card">
+
+    <input type="text" name="name" placeholder="Votre nom" required>
+
+    <input type="email" name="email" placeholder="Votre email" required>
+
+    <select name="service" required>
+      <option value="">Choisissez un service</option>
+      <option>Traduction</option>
+      <option>Interprétation</option>
+      <option>Annotation IA</option>
+    </select>
+
+    <input type="file" name="file" required>
+
+    <textarea name="message" placeholder="Instructions..." required></textarea>
+
+    <button type="submit">🚀 Envoyer le fichier</button>
+
+  </form>
+</section>
+  
 <!-- ACTIONS -->
 <section>
   <h2>⚡ Actions rapides</h2>
