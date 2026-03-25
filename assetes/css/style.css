@@ -313,3 +313,17 @@ body.light-mode .footer {
   visibility: hidden;
   transition: 0.6s;
 }
+
+/* =========================
+   FOOTER LOGO (RECTANGLE)
+========================= */
+.footer-logo {
+  margin-top: 15px;
+  display: flex;
+  justify-content: center;
+}
+
+.footer-logo img {
+  width: 160px;        /* largeur rectangulaire */
+  height: auto;        /* garde les proportions */
+  border-radius: 8px;  /* léger
