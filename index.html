@@ -15,18 +15,22 @@
   <link rel="canonical" href="https://hamglobalwords.com/" />
   <link rel="manifest" href="/manifest.json" />
 
-  <!-- Open Graph -->
-  <meta property="og:title" content="HAM Global Words – Linguistic AI Platform" />
-  <meta property="og:description" content="Traduction, annotation IA et solutions digitales en langues africaines." />
-  <meta property="og:image" content="https://hamglobalwords.com/assetes/img/logoHAM.png" />
-  <meta property="og:url" content="https://hamglobalwords.com" />
-  <meta property="og:type" content="website" />
+  <!-- PERF -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 
   <!-- Fonts -->
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&display=swap" rel="stylesheet">
 
   <link rel="stylesheet" href="assetes/css/style.css" />
   <link rel="icon" href="assetes/img/logo.png" />
+
+  <!-- Open Graph -->
+  <meta property="og:title" content="HAM Global Words – Linguistic AI Platform" />
+  <meta property="og:description" content="Traduction, annotation IA et solutions digitales en langues africaines." />
+  <meta property="og:image" content="https://hamglobalwords.com/assets/img/logoHAM.png" />
+  <meta property="og:url" content="https://hamglobalwords.com" />
+  <meta property="og:type" content="website" />
 
   <!-- SEO Lang -->
   <link rel="alternate" hreflang="fr" href="https://hamglobalwords.com/" />
@@ -40,7 +44,7 @@
     "@type": "Organization",
     "name": "HAM Global Words",
     "url": "https://hamglobalwords.com",
-    "logo": "https://hamglobalwords.com/assetes/img/logoHAM.png",
+    "logo": "https://hamglobalwords.com/assets/img/logoHAM.png",
     "description": "Plateforme SaaS de services linguistiques et IA.",
     "founder": {
       "@type": "Person",
@@ -54,21 +58,21 @@
 <body class="dark-mode">
 
 <div class="lang-switcher">
-  <select id="langSwitcher">
+  <select id="langSwitcher" aria-label="Changer la langue">
     <option value="fr">🇫🇷 Français</option>
     <option value="en">🇬🇧 English</option>
     <option value="ar">🇸🇦 العربية</option>
   </select>
 </div>
 
-<div id="loader">
+<div id="loader" aria-hidden="true">
   <div class="loader-content">
     <div class="orb"></div>
-    <h1>HAM Global Words</h1>
+    <h2>HAM Global Words</h2>
   </div>
 </div>
 
-<button id="themeToggle">🌙</button>
+<button id="themeToggle" aria-label="Changer le thème">🌙</button>
 
 <header class="site-header">
 <div class="galaxy-bg"></div>
@@ -77,16 +81,16 @@
   
   <img src="assetes/img/logoHAM.png"
        class="logo"
-       alt="HAM Global Words logo"
+       alt="Logo HAM Global Words"
        loading="lazy" />
 
-  <h1 data-key="title">HAM Global Words</h1>
+  <h1>HAM Global Words</h1>
 
-  <p data-key="subtitle">
+  <p>
     Plateforme SaaS spécialisée en traduction, annotation IA et solutions linguistiques africaines à fort impact.
   </p>
 
-  <nav class="main-nav">
+  <nav class="main-nav" aria-label="Navigation principale">
     <ul>
       <li><a href="#expertise">Expertise</a></li>
       <li><a href="#services">Services</a></li>
@@ -103,15 +107,17 @@
 <main>
 
 <section class="hero">
-  <h1>Langues • IA • Solutions digitales</h1>
+  <h2>Langues • IA • Solutions digitales</h2>
 
   <p>
     Nous accompagnons ONG, institutions et entreprises dans leurs opérations linguistiques,
     la structuration de données multilingues et le déploiement de solutions digitales adaptées aux réalités africaines.
   </p>
 
+  <p><strong>+500 projets linguistiques réalisés en Afrique</strong></p>
+
   <div class="hero-actions">
-    <a href="#contact" class="cta-btn">🚀 Démarrer un projet</a>
+    <a href="#contact" class="cta-btn">🚀 Obtenir un devis en 24h</a>
     <a href="#services" class="cta-btn secondary">📦 Voir les services</a>
     <a href="login.html" class="cta-btn secondary">🔐 Espace client</a>
   </div>
@@ -164,7 +170,6 @@
   </div>
 </section>
 
-
 <!-- SERVICES -->
 <section id="services">
   <h2>🛠️ Services linguistiques & digitaux</h2>
@@ -184,7 +189,6 @@
     <a href="formation-html.html" class="service-btn">🎓 Formation HTML</a>
   </div>
 </section>
-
 
 <!-- PORTFOLIO -->
 <section id="portfolio">
@@ -232,20 +236,6 @@
   </div>
 </section>
 
-<section id="services">
-  <h2>🛠️ Services linguistiques & digitaux</h2>
-
-  <div class="service-grid">
-    <a href="services/traduction.html" class="service-btn">🌐 Traduction</a>
-    <a href="services/interpretation.html" class="service-btn">🎙️ Interprétation</a>
-    <a href="services/annotation.html" class="service-btn">🧠 Annotation IA</a>
-    <a href="services/webdev.html" class="service-btn">💻 Web & Apps</a>
-    <a href="services/codefix.html" class="service-btn">🧩 Correction code</a>
-    <a href="services/remote.html" class="service-btn">📡 Remote live</a>
-    <a href="formation-html.html" class="service-btn">🎓 Formation HTML</a>
-  </div>
-</section>
-
 <section id="contact">
   <h2>📤 Envoyer un fichier / Demande</h2>
 
@@ -255,20 +245,21 @@
         class="card">
 
     <input type="hidden" name="_subject" value="Nouvelle demande HAM Global Words">
+    <input type="hidden" name="_captcha" value="false">
 
-    <input type="text" name="name" placeholder="Votre nom" required />
-    <input type="email" name="email" placeholder="Votre email" required />
+    <input type="text" name="name" placeholder="Votre nom" required aria-label="Nom">
+    <input type="email" name="email" placeholder="Votre email" required aria-label="Email">
 
-    <select name="service" required>
+    <select name="service" required aria-label="Service">
       <option value="">Choisissez un service</option>
       <option>Traduction</option>
       <option>Interprétation</option>
       <option>Annotation IA</option>
     </select>
 
-    <input type="file" name="file" required />
+    <input type="file" name="file" required aria-label="Fichier">
 
-    <textarea name="message" placeholder="Décrivez votre besoin (langue, volume, délai)..." required></textarea>
+    <textarea name="message" placeholder="Décrivez votre besoin..." required aria-label="Message"></textarea>
 
     <button type="submit">🚀 Envoyer</button>
   </form>
@@ -279,35 +270,34 @@
 <footer class="footer">
   <p>© <span id="year"></span> HAM Global Words — SaaS Linguistique</p>
 
-  <div style="margin-top:10px;">
-    <a href="about.html" class="cta-btn">🌍 Qui sommes-nous</a>
-  </div>
+  <a href="about.html" class="cta-btn">🌍 Qui sommes-nous</a>
 
   <div class="footer-logo">
-    <img src="assetes/img/HAM.png" alt="HAM Global Words">
+    <img src="assetes/img/HAM.png" alt="HAM Global Words" loading="lazy">
   </div>
 </footer>
 
 <script src="assetes/js/app.js" defer></script>
 
+<!-- FIREBASE OPTIMISÉ -->
 <script type="module">
-  import { initializeApp } from "https://www.gstatic.com/firebasejs/12.11.0/firebase-app.js";
-  import { getAnalytics } from "https://www.gstatic.com/firebasejs/12.11.0/firebase-analytics.js";
+  if (location.hostname !== "localhost") {
+    import("https://www.gstatic.com/firebasejs/12.11.0/firebase-app.js").then(({ initializeApp }) => {
+      import("https://www.gstatic.com/firebasejs/12.11.0/firebase-analytics.js").then(({ getAnalytics }) => {
 
-  const firebaseConfig = {
-    apiKey: "AIzaSyBwh9xj4t2QKzfgY3VvzW4Cai3VsDWjmDc",
-    authDomain: "ham-global-words.firebaseapp.com",
-    projectId: "ham-global-words",
-    storageBucket: "ham-global-words.appspot.com",
-    messagingSenderId: "207685512003",
-    appId: "1:207685512003:web:3c281456eddfdece425df6",
-    measurementId: "G-SV5JC4KYPL"
-  };
+        const firebaseConfig = {
+          apiKey: "YOUR_KEY",
+          authDomain: "ham-global-words.firebaseapp.com",
+          projectId: "ham-global-words",
+          appId: "1:207685512003:web:3c281456eddfdece425df6"
+        };
 
-  const app = initializeApp(firebaseConfig);
-  const analytics = getAnalytics(app);
+        const app = initializeApp(firebaseConfig);
+        getAnalytics(app);
 
-  console.log("🔥 Firebase connecté");
+      });
+    });
+  }
 </script>
 
 </body>
