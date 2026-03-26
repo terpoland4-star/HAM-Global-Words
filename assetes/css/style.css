@@ -255,6 +255,24 @@ section h2 {
   border: 1px solid rgba(99,102,241,0.4);
 }
 
+/* Cards cliquables */
+.card a {
+  display: block;
+  text-decoration: none;
+  color: inherit;
+  transition: transform 0.2s, box-shadow 0.2s;
+}
+
+.card a:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 8px 20px rgba(0,0,0,0.3);
+  cursor: pointer;
+}
+
+.card a h3::after {
+  content: " 🔗"; /* petite icône lien */
+  font-size: 0.9em;
+}
 /* =========================
    SERVICE BUTTON
 ========================= */
