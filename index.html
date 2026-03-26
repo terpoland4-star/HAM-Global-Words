@@ -158,9 +158,7 @@
     <a href="services/traduction.html" class="service-btn">🌐 Traduction</a>
     <a href="services/interpretation.html" class="service-btn">🎙️ Interprétation</a>
     <a href="services/annotation.html" class="service-btn">🧠 Annotation IA</a>
-    <a href="formation-html.html" class="service-btn">
-  🎓 Formation HTML
-</a>
+    <a href="formation-html.html" class="service-btn">🎓 Formation HTML</a>
   </div>
 </section>
 
@@ -172,6 +170,9 @@
         method="POST" 
         enctype="multipart/form-data"
         class="card">
+
+    <!-- amélioration mail -->
+    <input type="hidden" name="_subject" value="Nouvelle demande HAM Global Words">
 
     <input type="text" name="name" placeholder="Votre nom" required />
     <input type="email" name="email" placeholder="Votre email" required />
@@ -200,14 +201,14 @@
     <a href="about.html" class="cta-btn">🌍 Qui sommes-nous</a>
   </div>
 
+  <!-- ✅ CORRECTION IMAGE -->
   <div class="footer-logo">
-    <img src="assetes/img/HAM.png" alt="HAM Global Words">
+    <img src="assetes/img/HAMpng.png" alt="HAM Global Words">
   </div>
 </footer>
 
 <script src="assetes/js/app.js" defer></script>
 
-  
 <!-- 🔥 FIREBASE INTÉGRATION -->
 <script type="module">
   import { initializeApp } from "https://www.gstatic.com/firebasejs/12.11.0/firebase-app.js";
@@ -217,7 +218,7 @@
     apiKey: "AIzaSyBwh9xj4t2QKzfgY3VvzW4Cai3VsDWjmDc",
     authDomain: "ham-global-words.firebaseapp.com",
     projectId: "ham-global-words",
-    storageBucket: "ham-global-words.firebasestorage.app",
+    storageBucket: "ham-global-words.appspot.com", /* 🔥 CORRIGÉ */
     messagingSenderId: "207685512003",
     appId: "1:207685512003:web:3c281456eddfdece425df6",
     measurementId: "G-SV5JC4KYPL"
