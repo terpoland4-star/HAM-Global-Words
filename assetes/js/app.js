@@ -269,3 +269,20 @@ ${data.message}
   };
 
 });
+
+// Toggle section CEO
+const toggleBtn = document.getElementById("toggleCEO");
+const ceoSection = document.getElementById("ceoSection");
+
+if (toggleBtn && ceoSection) {
+  toggleBtn.addEventListener("click", () => {
+    const isVisible = ceoSection.style.display === "block";
+
+    ceoSection.style.display = isVisible ? "none" : "block";
+
+    // Scroll automatique
+    if (!isVisible) {
+      ceoSection.scrollIntoView({ behavior: "smooth" });
+    }
+  });
+}
