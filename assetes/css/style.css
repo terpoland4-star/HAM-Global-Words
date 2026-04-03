@@ -25,6 +25,8 @@
   --shadow-sm: 0 10px 25px rgba(99,102,241,0.4);
   --shadow-md: 0 15px 35px rgba(99,102,241,0.6);
   --transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  --whatsapp-green: #25d366;
+  --whatsapp-dark: #128C7E;
 }
 
 body {
@@ -279,6 +281,18 @@ button:active, .cta-btn:active {
   border-color: var(--accent-primary);
 }
 
+/* Bouton WhatsApp spécifique */
+.cta-btn.whatsapp {
+  background: var(--whatsapp-green);
+  box-shadow: 0 4px 12px rgba(37, 211, 102, 0.3);
+}
+
+.cta-btn.whatsapp:hover {
+  background: var(--whatsapp-dark);
+  transform: translateY(-3px);
+  box-shadow: 0 6px 16px rgba(37, 211, 102, 0.4);
+}
+
 /* =========================
    HERO SECTION
 ========================= */
@@ -456,6 +470,21 @@ form button {
   margin-top: 0.5rem;
 }
 
+/* Message informatif */
+.info-message {
+  background: rgba(99, 102, 241, 0.1);
+  border-left: 3px solid var(--whatsapp-green);
+  padding: 1rem;
+  border-radius: 12px;
+  margin-bottom: 1.5rem;
+  text-align: center;
+}
+
+html[dir="rtl"] .info-message {
+  border-left: none;
+  border-right: 3px solid var(--whatsapp-green);
+}
+
 /* =========================
    FOOTER
 ========================= */
@@ -589,6 +618,10 @@ body.light-mode .service-grid a.service-btn {
   color: #111827;
 }
 
+body.light-mode .info-message {
+  background: rgba(99, 102, 241, 0.05);
+}
+
 /* =========================
    LOADER
 ========================= */
@@ -641,7 +674,7 @@ body.light-mode .service-grid a.service-btn {
   position: fixed;
   bottom: 25px;
   right: 25px;
-  background-color: #25d366;
+  background-color: var(--whatsapp-green);
   width: 55px;
   height: 55px;
   border-radius: 50%;
@@ -655,6 +688,7 @@ body.light-mode .service-grid a.service-btn {
 
 .floating-whatsapp:hover {
   transform: scale(1.1);
+  background-color: var(--whatsapp-dark);
   box-shadow: 0 6px 16px rgba(0,0,0,0.35);
 }
 
@@ -663,6 +697,7 @@ body.light-mode .service-grid a.service-btn {
   height: 32px;
   display: block;
 }
+
 /* =========================
    AMÉLIORATIONS RTL (ARABE)
 ========================= */
@@ -717,11 +752,6 @@ html[dir="rtl"] section h2::after {
   margin: 0.5rem auto 0;
 }
 
-html[dir="rtl"] .stats-grid {
-  direction: rtl;
-}
-
-/* Ajustement des icônes en RTL */
 html[dir="rtl"] .card ul {
   padding-right: 1.5rem;
   padding-left: 0;
@@ -733,10 +763,7 @@ html[dir="rtl"] textarea {
   text-align: right;
 }
 
-/* Boutons de service en arabe */
-html[dir="rtl"] .service-grid a.service-btn {
-  font-family: 'Inter', 'Cairo', sans-serif;
-}
+/* Police pour arabe */
 html[dir="rtl"] body,
 html[dir="rtl"] button,
 html[dir="rtl"] input,
@@ -744,6 +771,7 @@ html[dir="rtl"] textarea,
 html[dir="rtl"] .service-btn {
   font-family: 'Cairo', 'Inter', sans-serif;
 }
+
 /* =========================
    ANIMATIONS
 ========================= */
@@ -791,6 +819,10 @@ html[dir="rtl"] .service-btn {
   section {
     padding: 3rem 1rem;
   }
+  
+  .info-message {
+    font-size: 0.9rem;
+  }
 }
 
 @media (max-width: 480px) {
@@ -824,6 +856,11 @@ html[dir="rtl"] .service-btn {
   .floating-whatsapp img {
     width: 24px;
     height: 24px;
+  }
+  
+  html[dir="rtl"] .floating-whatsapp {
+    right: auto;
+    left: 15px;
   }
 }
 
