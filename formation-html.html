@@ -3,51 +3,145 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Cours HTML complet pour débutants - Programme Starter Tech par HAM Global Words">
+  <meta name="keywords" content="HTML, cours HTML, formation web, développement web, Starter Tech">
+  <meta name="author" content="HAM Global Words">
 
-  <title>Programme Starter Tech | Cours HTML</title>
+  <title>Programme Starter Tech | Cours HTML - HAM Global Words</title>
+
+  <!-- Fonts -->
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700;800&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@300;400;600;700&display=swap" rel="stylesheet">
 
   <link rel="stylesheet" href="assetes/css/style.css">
+  <link rel="icon" href="assetes/img/logo.png">
+
+  <style>
+    /* Styles spécifiques à la page formation */
+    .formation-header {
+      text-align: center;
+      padding: 4rem 1rem;
+      background: linear-gradient(135deg, rgba(99,102,241,0.2), rgba(34,197,94,0.1));
+      border-radius: 0 0 30px 30px;
+      margin-bottom: 2rem;
+    }
+
+    .formation-header h1 {
+      font-size: clamp(2rem, 6vw, 3.5rem);
+      margin-bottom: 1rem;
+    }
+
+    .formation-header p {
+      font-size: 1.2rem;
+      opacity: 0.8;
+    }
+
+    pre {
+      background: var(--bg-secondary);
+      padding: 1rem;
+      border-radius: 12px;
+      overflow-x: auto;
+      font-family: 'Courier New', monospace;
+      font-size: 0.9rem;
+      margin: 1rem 0;
+      border: 1px solid var(--border-light);
+    }
+
+    code {
+      font-family: 'Courier New', monospace;
+      background: rgba(99,102,241,0.2);
+      padding: 0.2rem 0.4rem;
+      border-radius: 6px;
+      font-size: 0.9rem;
+    }
+
+    .quiz-item {
+      background: var(--bg-card);
+      padding: 1rem;
+      border-radius: 12px;
+      margin-bottom: 0.75rem;
+      border-left: 3px solid var(--accent-primary);
+    }
+
+    .quiz-item p {
+      margin: 0;
+      font-weight: 600;
+    }
+
+    .back-link {
+      display: inline-block;
+      margin-top: 2rem;
+    }
+
+    body.light-mode pre {
+      background: #f1f5f9;
+      border-color: #e2e8f0;
+    }
+
+    body.light-mode code {
+      background: rgba(99,102,241,0.1);
+    }
+
+    @media (max-width: 768px) {
+      pre {
+        font-size: 0.8rem;
+        padding: 0.75rem;
+      }
+    }
+  </style>
 </head>
 
-<body>
+<body class="dark-mode">
 
-<header class="site-header">
+<!-- Langue Switcher et Theme Toggle pour cohérence -->
+<div class="lang-switcher">
+  <select id="langSwitcherFormation" aria-label="Changer la langue">
+    <option value="fr">🇫🇷 Français</option>
+    <option value="en">🇬🇧 English</option>
+    <option value="ar">🇸🇦 العربية</option>
+  </select>
+</div>
+
+<button id="themeToggleFormation" aria-label="Changer le thème">🌙</button>
+
+<div class="formation-header">
   <div class="header-content">
     <h1>💻 Programme Starter Tech</h1>
-    <p>Cours HTML – Script complet (2 heures)</p>
+    <p data-key="formation_subtitle">Cours HTML – Script complet (2 heures)</p>
+    <a href="index.html" class="cta-btn secondary" style="margin-top: 1rem;">← Retour à l'accueil</a>
   </div>
-</header>
+</div>
 
 <main>
 
 <section>
-  <h2>🚀 Introduction</h2>
-  <p>
-    Aujourd’hui, vous ne venez pas simplement apprendre le code.
+  <h2 data-key="intro_title">🚀 Introduction</h2>
+  <p data-key="intro_text1">
+    Aujourd'hui, vous ne venez pas simplement apprendre le code.
     Vous venez comprendre comment le monde numérique est construit.
   </p>
-  <p>
+  <p data-key="intro_text2">
     Chaque site, chaque application commence de la même manière :
     une page vide et une personne qui décide de créer.
   </p>
-  <p><strong>Aujourd’hui, cette personne, c’est vous.</strong></p>
+  <p><strong data-key="intro_text3">Aujourd'hui, cette personne, c'est vous.</strong></p>
 </section>
 
 <section>
-  <h2>🌐 Comprendre le Web</h2>
-  <p>
+  <h2 data-key="web_title">🌐 Comprendre le Web</h2>
+  <p data-key="web_text1">
     Le navigateur agit comme un interprète.
     Il reçoit du HTML et le transforme en interface visuelle.
   </p>
-  <p><strong>HTML = HyperText Markup Language</strong></p>
-  <p>
-    Ce n’est pas un langage de programmation,
+  <p><strong data-key="web_text2">HTML = HyperText Markup Language</strong></p>
+  <p data-key="web_text3">
+    Ce n'est pas un langage de programmation,
     mais un langage de structuration.
   </p>
 </section>
 
 <section>
-  <h2>📄 Structure d’une page HTML</h2>
+  <h2 data-key="structure_title">📄 Structure d'une page HTML</h2>
 
 <pre>
 &lt;!DOCTYPE html&gt;
@@ -58,26 +152,26 @@
 </pre>
 
   <ul>
-    <li><strong>DOCTYPE</strong> : définit HTML5</li>
-    <li><strong>html</strong> : contient tout</li>
-    <li><strong>head</strong> : infos invisibles</li>
-    <li><strong>body</strong> : contenu visible</li>
+    <li><strong data-key="structure_doctype">DOCTYPE</strong> <span data-key="structure_doctype_desc">: définit HTML5</span></li>
+    <li><strong data-key="structure_html">html</strong> <span data-key="structure_html_desc">: contient tout</span></li>
+    <li><strong data-key="structure_head">head</strong> <span data-key="structure_head_desc">: infos invisibles</span></li>
+    <li><strong data-key="structure_body">body</strong> <span data-key="structure_body_desc">: contenu visible</span></li>
   </ul>
 </section>
 
 <section>
-  <h2>🏗️ Les balises HTML</h2>
+  <h2 data-key="balises_title">🏗️ Les balises HTML</h2>
 
 <pre>
 &lt;balise&gt;contenu&lt;/balise&gt;
 </pre>
 
   <ul>
-    <li><strong>&lt;h1&gt;</strong> : titre</li>
-    <li><strong>&lt;p&gt;</strong> : paragraphe</li>
-    <li><strong>&lt;a&gt;</strong> : lien</li>
-    <li><strong>&lt;img&gt;</strong> : image</li>
-    <li><strong>&lt;div&gt;</strong> : structure</li>
+    <li><strong>&lt;h1&gt;</strong> <span data-key="balise_h1">: titre principal</span></li>
+    <li><strong>&lt;p&gt;</strong> <span data-key="balise_p">: paragraphe</span></li>
+    <li><strong>&lt;a&gt;</strong> <span data-key="balise_a">: lien</span></li>
+    <li><strong>&lt;img&gt;</strong> <span data-key="balise_img">: image</span></li>
+    <li><strong>&lt;div&gt;</strong> <span data-key="balise_div">: structure</span></li>
   </ul>
 
 <pre>
@@ -88,29 +182,29 @@
 </section>
 
 <section>
-  <h2>⚙️ Les attributs</h2>
+  <h2 data-key="attributs_title">⚙️ Les attributs</h2>
 
 <pre>
 &lt;balise attribut="valeur"&gt;
 </pre>
 
   <ul>
-    <li>href → lien</li>
-    <li>src → image</li>
-    <li>alt → description</li>
-    <li>class → style</li>
-    <li>id → unique</li>
+    <li><strong>href</strong> <span data-key="attribut_href">→ lien</span></li>
+    <li><strong>src</strong> <span data-key="attribut_src">→ source image</span></li>
+    <li><strong>alt</strong> <span data-key="attribut_alt">→ description image</span></li>
+    <li><strong>class</strong> <span data-key="attribut_class">→ style CSS</span></li>
+    <li><strong>id</strong> <span data-key="attribut_id">→ identifiant unique</span></li>
   </ul>
 </section>
 
 <section>
-  <h2>🔣 Les symboles HTML</h2>
+  <h2 data-key="symboles_title">🔣 Les symboles HTML</h2>
 
   <ul>
-    <li>&lt; &gt; → balises</li>
-    <li>/ → fermeture</li>
-    <li>= → assignation</li>
-    <li>" " → valeur</li>
+    <li><code>&lt;</code> et <code>&gt;</code> <span data-key="symbole_balises">→ balises</span></li>
+    <li><code>/</code> <span data-key="symbole_fermeture">→ fermeture</span></li>
+    <li><code>=</code> <span data-key="symbole_assignation">→ assignation</span></li>
+    <li><code>" "</code> <span data-key="symbole_valeur">→ valeur</span></li>
   </ul>
 
 <pre>
@@ -120,14 +214,14 @@
 </section>
 
 <section>
-  <h2>❌ Erreurs courantes</h2>
+  <h2 data-key="erreurs_title">❌ Erreurs courantes</h2>
 
 <pre>
 &lt;h1&gt;Test
 &lt;p&gt;Bonjour
 </pre>
 
-<p>Correction :</p>
+<p data-key="erreurs_correction">Correction :</p>
 
 <pre>
 &lt;h1&gt;Test&lt;/h1&gt;
@@ -137,64 +231,331 @@
 </section>
 
 <section>
-  <h2>🧪 Exercice pratique</h2>
+  <h2 data-key="exercice_title">🧪 Exercice pratique</h2>
 
-  <p>Créer une page HTML contenant :</p>
+  <p data-key="exercice_desc">Créer une page HTML contenant :</p>
 
   <ul>
-    <li>Un titre</li>
-    <li>Un paragraphe</li>
-    <li>Un lien</li>
-    <li>Une image</li>
+    <li data-key="exercice_1">Un titre</li>
+    <li data-key="exercice_2">Un paragraphe</li>
+    <li data-key="exercice_3">Un lien</li>
+    <li data-key="exercice_4">Une image</li>
   </ul>
 </section>
 
 <section>
-  <h2>🧠 Logique du développeur</h2>
+  <h2 data-key="logique_title">🧠 Logique du développeur</h2>
 
   <ul>
-    <li>Lire</li>
-    <li>Comprendre</li>
-    <li>Modifier</li>
-    <li>Tester</li>
+    <li data-key="logique_1">Lire</li>
+    <li data-key="logique_2">Comprendre</li>
+    <li data-key="logique_3">Modifier</li>
+    <li data-key="logique_4">Tester</li>
   </ul>
 
-  <p>
+  <p data-key="logique_text">
     La compréhension est plus importante que la mémorisation.
   </p>
 </section>
 
 <section>
-  <h2>❓ Quiz final</h2>
+  <h2 data-key="quiz_title">❓ Quiz final</h2>
 
-  <ul>
-    <li>HTML est-il un langage de programmation ?</li>
-    <li>Que contient la balise body ?</li>
-    <li>À quoi sert href ?</li>
-    <li>Pourquoi fermer une balise ?</li>
-    <li>À quoi sert img ?</li>
-  </ul>
+  <div class="quiz-item">
+    <p data-key="quiz_1">HTML est-il un langage de programmation ?</p>
+  </div>
+  <div class="quiz-item">
+    <p data-key="quiz_2">Que contient la balise body ?</p>
+  </div>
+  <div class="quiz-item">
+    <p data-key="quiz_3">À quoi sert href ?</p>
+  </div>
+  <div class="quiz-item">
+    <p data-key="quiz_4">Pourquoi fermer une balise ?</p>
+  </div>
+  <div class="quiz-item">
+    <p data-key="quiz_5">À quoi sert img ?</p>
+  </div>
 </section>
 
 <section>
-  <h2>🎯 Conclusion</h2>
+  <h2 data-key="conclusion_title">🎯 Conclusion</h2>
 
-  <p>
+  <p data-key="conclusion_text1">
     Ce cours constitue une base fondamentale du développement web.
   </p>
 
-  <p>
+  <p data-key="conclusion_text2">
     Chaque ligne de code écrite est une étape vers la création
     de solutions numériques concrètes.
   </p>
 
+  <div style="text-align: center; margin-top: 2rem;">
+    <a href="index.html#contact" class="cta-btn" data-key="contact_btn">📩 Demander une formation avancée</a>
+  </div>
 </section>
 
 </main>
 
 <footer class="footer">
-  <p>© HAM Global Words — Programme Starter Tech</p>
+  <p>© <span id="yearFormation"></span> HAM Global Words — <span data-key="footer_text">Programme Starter Tech</span></p>
+  <div class="footer-logo">
+    <img src="assetes/img/HAM.png" alt="HAM Global Words" loading="lazy">
+  </div>
 </footer>
+
+<script>
+  // Script spécifique pour la page formation
+  (function() {
+    // Année dynamique
+    const yearEl = document.getElementById('yearFormation');
+    if (yearEl) yearEl.textContent = new Date().getFullYear();
+
+    // Thème
+    const themeToggle = document.getElementById('themeToggleFormation');
+    const body = document.body;
+    
+    const savedTheme = localStorage.getItem('theme') || 'dark';
+    if (savedTheme === 'light') {
+      body.classList.add('light-mode');
+      if (themeToggle) themeToggle.textContent = '🌙';
+    } else {
+      if (themeToggle) themeToggle.textContent = '☀️';
+    }
+    
+    if (themeToggle) {
+      themeToggle.addEventListener('click', () => {
+        body.classList.toggle('light-mode');
+        const isLight = body.classList.contains('light-mode');
+        localStorage.setItem('theme', isLight ? 'light' : 'dark');
+        themeToggle.textContent = isLight ? '🌙' : '☀️';
+      });
+    }
+
+    // Traductions simplifiées pour la formation
+    const formationTranslations = {
+      fr: {
+        formation_subtitle: "Cours HTML – Script complet (2 heures)",
+        intro_title: "🚀 Introduction",
+        intro_text1: "Aujourd'hui, vous ne venez pas simplement apprendre le code. Vous venez comprendre comment le monde numérique est construit.",
+        intro_text2: "Chaque site, chaque application commence de la même manière : une page vide et une personne qui décide de créer.",
+        intro_text3: "Aujourd'hui, cette personne, c'est vous.",
+        web_title: "🌐 Comprendre le Web",
+        web_text1: "Le navigateur agit comme un interprète. Il reçoit du HTML et le transforme en interface visuelle.",
+        web_text2: "HTML = HyperText Markup Language",
+        web_text3: "Ce n'est pas un langage de programmation, mais un langage de structuration.",
+        structure_title: "📄 Structure d'une page HTML",
+        structure_doctype: "DOCTYPE",
+        structure_doctype_desc: ": définit HTML5",
+        structure_html: "html",
+        structure_html_desc: ": contient tout",
+        structure_head: "head",
+        structure_head_desc: ": infos invisibles",
+        structure_body: "body",
+        structure_body_desc: ": contenu visible",
+        balises_title: "🏗️ Les balises HTML",
+        balise_h1: ": titre principal",
+        balise_p: ": paragraphe",
+        balise_a: ": lien",
+        balise_img: ": image",
+        balise_div: ": structure",
+        attributs_title: "⚙️ Les attributs",
+        attribut_href: "→ lien",
+        attribut_src: "→ source image",
+        attribut_alt: "→ description image",
+        attribut_class: "→ style CSS",
+        attribut_id: "→ identifiant unique",
+        symboles_title: "🔣 Les symboles HTML",
+        symbole_balises: "→ balises",
+        symbole_fermeture: "→ fermeture",
+        symbole_assignation: "→ assignation",
+        symbole_valeur: "→ valeur",
+        erreurs_title: "❌ Erreurs courantes",
+        erreurs_correction: "Correction :",
+        exercice_title: "🧪 Exercice pratique",
+        exercice_desc: "Créer une page HTML contenant :",
+        exercice_1: "Un titre",
+        exercice_2: "Un paragraphe",
+        exercice_3: "Un lien",
+        exercice_4: "Une image",
+        logique_title: "🧠 Logique du développeur",
+        logique_1: "Lire",
+        logique_2: "Comprendre",
+        logique_3: "Modifier",
+        logique_4: "Tester",
+        logique_text: "La compréhension est plus importante que la mémorisation.",
+        quiz_title: "❓ Quiz final",
+        quiz_1: "HTML est-il un langage de programmation ?",
+        quiz_2: "Que contient la balise body ?",
+        quiz_3: "À quoi sert href ?",
+        quiz_4: "Pourquoi fermer une balise ?",
+        quiz_5: "À quoi sert img ?",
+        conclusion_title: "🎯 Conclusion",
+        conclusion_text1: "Ce cours constitue une base fondamentale du développement web.",
+        conclusion_text2: "Chaque ligne de code écrite est une étape vers la création de solutions numériques concrètes.",
+        contact_btn: "📩 Demander une formation avancée",
+        footer_text: "Programme Starter Tech"
+      },
+      en: {
+        formation_subtitle: "HTML Course – Complete Script (2 hours)",
+        intro_title: "🚀 Introduction",
+        intro_text1: "Today, you're not just learning to code. You're understanding how the digital world is built.",
+        intro_text2: "Every website, every app starts the same way: an empty page and someone who decides to create.",
+        intro_text3: "Today, that someone is you.",
+        web_title: "🌐 Understanding the Web",
+        web_text1: "The browser acts as an interpreter. It receives HTML and transforms it into a visual interface.",
+        web_text2: "HTML = HyperText Markup Language",
+        web_text3: "It's not a programming language, but a structuring language.",
+        structure_title: "📄 HTML Page Structure",
+        structure_doctype: "DOCTYPE",
+        structure_doctype_desc: ": defines HTML5",
+        structure_html: "html",
+        structure_html_desc: ": contains everything",
+        structure_head: "head",
+        structure_head_desc: ": invisible info",
+        structure_body: "body",
+        structure_body_desc: ": visible content",
+        balises_title: "🏗️ HTML Tags",
+        balise_h1: ": main title",
+        balise_p: ": paragraph",
+        balise_a: ": link",
+        balise_img: ": image",
+        balise_div: ": structure",
+        attributs_title: "⚙️ Attributes",
+        attribut_href: "→ link destination",
+        attribut_src: "→ image source",
+        attribut_alt: "→ image description",
+        attribut_class: "→ CSS style",
+        attribut_id: "→ unique identifier",
+        symboles_title: "🔣 HTML Symbols",
+        symbole_balises: "→ tags",
+        symbole_fermeture: "→ closing",
+        symbole_assignation: "→ assignment",
+        symbole_valeur: "→ value",
+        erreurs_title: "❌ Common Errors",
+        erreurs_correction: "Correction:",
+        exercice_title: "🧪 Practical Exercise",
+        exercice_desc: "Create an HTML page containing:",
+        exercice_1: "A title",
+        exercice_2: "A paragraph",
+        exercice_3: "A link",
+        exercice_4: "An image",
+        logique_title: "🧠 Developer Logic",
+        logique_1: "Read",
+        logique_2: "Understand",
+        logique_3: "Modify",
+        logique_4: "Test",
+        logique_text: "Understanding is more important than memorization.",
+        quiz_title: "❌ Final Quiz",
+        quiz_1: "Is HTML a programming language?",
+        quiz_2: "What does the body tag contain?",
+        quiz_3: "What is href used for?",
+        quiz_4: "Why close a tag?",
+        quiz_5: "What is img used for?",
+        conclusion_title: "🎯 Conclusion",
+        conclusion_text1: "This course is a fundamental foundation of web development.",
+        conclusion_text2: "Every line of code written is a step toward creating concrete digital solutions.",
+        contact_btn: "📩 Request advanced training",
+        footer_text: "Starter Tech Program"
+      },
+      ar: {
+        formation_subtitle: "دورة HTML – نص كامل (ساعتان)",
+        intro_title: "🚀 مقدمة",
+        intro_text1: "اليوم، أنت لا تتعلم البرمجة فقط. أنت تفهم كيف تم بناء العالم الرقمي.",
+        intro_text2: "كل موقع وكل تطبيق يبدأ بنفس الطريقة: صفحة فارغة وشخص يقرر الإبداع.",
+        intro_text3: "اليوم، هذا الشخص هو أنت.",
+        web_title: "🌐 فهم الويب",
+        web_text1: "يعمل المتصفح كمترجم. يستقبل HTML ويحوله إلى واجهة مرئية.",
+        web_text2: "HTML = لغة ترميز النص الفائق",
+        web_text3: "إنها ليست لغة برمجة، بل لغة هيكلة.",
+        structure_title: "📄 هيكل صفحة HTML",
+        structure_doctype: "DOCTYPE",
+        structure_doctype_desc: ": يعرّف HTML5",
+        structure_html: "html",
+        structure_html_desc: ": يحتوي على كل شيء",
+        structure_head: "head",
+        structure_head_desc: ": معلومات غير مرئية",
+        structure_body: "body",
+        structure_body_desc: ": محتوى مرئي",
+        balises_title: "🏗️ وسوم HTML",
+        balise_h1: ": العنوان الرئيسي",
+        balise_p: ": فقرة",
+        balise_a: ": رابط",
+        balise_img: ": صورة",
+        balise_div: ": هيكل",
+        attributs_title: "⚙️ السمات",
+        attribut_href: "→ وجهة الرابط",
+        attribut_src: "→ مصدر الصورة",
+        attribut_alt: "→ وصف الصورة",
+        attribut_class: "→ نمط CSS",
+        attribut_id: "→ معرف فريد",
+        symboles_title: "🔣 رموز HTML",
+        symbole_balises: "→ الوسوم",
+        symbole_fermeture: "→ إغلاق",
+        symbole_assignation: "→ تعيين",
+        symbole_valeur: "→ قيمة",
+        erreurs_title: "❌ أخطاء شائعة",
+        erreurs_correction: "التصحيح:",
+        exercice_title: "🧪 تمرين عملي",
+        exercice_desc: "إنشاء صفحة HTML تحتوي على:",
+        exercice_1: "عنوان",
+        exercice_2: "فقرة",
+        exercice_3: "رابط",
+        exercice_4: "صورة",
+        logique_title: "🧠 منطق المطور",
+        logique_1: "اقرأ",
+        logique_2: "افهم",
+        logique_3: "عدّل",
+        logique_4: "اختبر",
+        logique_text: "الفهم أهم من الحفظ.",
+        quiz_title: "❌ اختبار نهائي",
+        quiz_1: "هل HTML لغة برمجة؟",
+        quiz_2: "ماذا تحتوي وسوم body؟",
+        quiz_3: "ما فائدة href؟",
+        quiz_4: "لماذا نغلق الوسوم؟",
+        quiz_5: "ما فائدة img؟",
+        conclusion_title: "🎯 خاتمة",
+        conclusion_text1: "هذه الدورة هي أساس أساسي لتطوير الويب.",
+        conclusion_text2: "كل سطر من التعليمات البرمجية هو خطوة نحو إنشاء حلول رقمية ملموسة.",
+        contact_btn: "📩 طلب تدريب متقدم",
+        footer_text: "برنامج Starter Tech"
+      }
+    };
+
+    let currentLang = localStorage.getItem('lang') || 'fr';
+
+    function applyFormationLanguage(lang) {
+      const dict = formationTranslations[lang] || formationTranslations.fr;
+      
+      document.querySelectorAll('[data-key]').forEach(el => {
+        const key = el.dataset.key;
+        if (dict[key] !== undefined) {
+          el.textContent = dict[key];
+        }
+      });
+      
+      document.documentElement.dir = lang === "ar" ? "rtl" : "ltr";
+      document.documentElement.lang = lang;
+      
+      const langSwitcher = document.getElementById('langSwitcherFormation');
+      if (langSwitcher && langSwitcher.value !== lang) {
+        langSwitcher.value = lang;
+      }
+    }
+
+    const langSwitcher = document.getElementById('langSwitcherFormation');
+    if (langSwitcher) {
+      langSwitcher.value = currentLang;
+      langSwitcher.addEventListener('change', (e) => {
+        currentLang = e.target.value;
+        localStorage.setItem('lang', currentLang);
+        applyFormationLanguage(currentLang);
+      });
+    }
+
+    applyFormationLanguage(currentLang);
+  })();
+</script>
 
 </body>
 </html>
