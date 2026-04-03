@@ -663,16 +663,39 @@ body.light-mode .service-grid a.service-btn {
   height: 32px;
   display: block;
 }
-
 /* =========================
-   RTL SUPPORT (ARABE)
+   AMÉLIORATIONS RTL (ARABE)
 ========================= */
-html[dir="rtl"] {
+html[dir="rtl"] .service-grid {
+  direction: rtl;
+}
+
+html[dir="rtl"] .service-btn {
   text-align: right;
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  gap: 10px;
+}
+
+html[dir="rtl"] .service-btn::before {
+  content: "◀";
+  order: -1;
+  font-size: 0.8rem;
+}
+
+html[dir="rtl"] .card h3::after {
+  content: " 🔗";
+  display: inline-block;
+  transform: scaleX(-1);
+}
+
+html[dir="rtl"] .hero-actions {
+  flex-direction: row-reverse;
 }
 
 html[dir="rtl"] .main-nav ul {
-  gap: 1.5rem;
+  gap: 1rem;
 }
 
 html[dir="rtl"] .lang-switcher {
@@ -694,6 +717,26 @@ html[dir="rtl"] section h2::after {
   margin: 0.5rem auto 0;
 }
 
+html[dir="rtl"] .stats-grid {
+  direction: rtl;
+}
+
+/* Ajustement des icônes en RTL */
+html[dir="rtl"] .card ul {
+  padding-right: 1.5rem;
+  padding-left: 0;
+}
+
+html[dir="rtl"] input,
+html[dir="rtl"] select,
+html[dir="rtl"] textarea {
+  text-align: right;
+}
+
+/* Boutons de service en arabe */
+html[dir="rtl"] .service-grid a.service-btn {
+  font-family: 'Inter', 'Cairo', sans-serif;
+}
 /* =========================
    ANIMATIONS
 ========================= */
