@@ -737,6 +737,13 @@ html[dir="rtl"] textarea {
 html[dir="rtl"] .service-grid a.service-btn {
   font-family: 'Inter', 'Cairo', sans-serif;
 }
+html[dir="rtl"] body,
+html[dir="rtl"] button,
+html[dir="rtl"] input,
+html[dir="rtl"] textarea,
+html[dir="rtl"] .service-btn {
+  font-family: 'Cairo', 'Inter', sans-serif;
+}
 /* =========================
    ANIMATIONS
 ========================= */
