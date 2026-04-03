@@ -4,118 +4,503 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
 
-  <title>Formation – HAM Global Words</title>
+  <title>Formation – HAM Global Words | Programme Starter Tech</title>
 
   <meta name="description" content="Formation en développement web, applications et cybersécurité pour débutants. Apprenez à créer vos propres solutions numériques." />
+  <meta name="keywords" content="formation web, développement, cybersécurité, HTML, CSS, JavaScript, Niger, Afrique" />
+  <meta name="author" content="HAM Global Words" />
+  <meta name="robots" content="index, follow" />
+
   <link rel="canonical" href="https://hamglobalwords.com/formation.html" />
+  <link rel="icon" href="assetes/img/logo.png" />
+
+  <!-- Fonts -->
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700;800&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@300;400;600;700&display=swap" rel="stylesheet">
 
   <link rel="stylesheet" href="assetes/css/style.css" />
+
+  <style>
+    .pricing-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 2rem;
+      margin-top: 2rem;
+    }
+    
+    .price-card {
+      text-align: center;
+      position: relative;
+      overflow: hidden;
+    }
+    
+    .price-card.featured {
+      border: 1px solid var(--accent-primary);
+      transform: scale(1.02);
+      box-shadow: var(--shadow-md);
+    }
+    
+    .price-card .price {
+      font-size: 2.5rem;
+      font-weight: 800;
+      background: linear-gradient(135deg, var(--accent-primary), var(--accent-secondary));
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+      margin: 1rem 0;
+    }
+    
+    .price-card .badge {
+      position: absolute;
+      top: 1rem;
+      right: 1rem;
+      background: var(--accent-primary);
+      padding: 0.3rem 0.8rem;
+      border-radius: 50px;
+      font-size: 0.7rem;
+      font-weight: 600;
+    }
+    
+    .price-card ul {
+      text-align: left;
+      margin-top: 1rem;
+      list-style: none;
+      padding-left: 0;
+    }
+    
+    .price-card ul li {
+      padding: 0.5rem 0;
+      border-bottom: 1px solid var(--border-light);
+    }
+    
+    .price-card ul li::before {
+      content: "✓ ";
+      color: var(--accent-secondary);
+      font-weight: bold;
+    }
+    
+    .back-link {
+      display: inline-block;
+      margin-top: 2rem;
+    }
+    
+    body.light-mode .price-card ul li {
+      border-bottom-color: #e5e7eb;
+    }
+  </style>
 </head>
 
 <body class="dark-mode">
 
-  <!-- Header -->
-  <header class="site-header">
+<!-- Langue Switcher et Theme Toggle -->
+<div class="lang-switcher">
+  <select id="langSwitcherFormation" aria-label="Changer la langue">
+    <option value="fr">🇫🇷 Français</option>
+    <option value="en">🇬🇧 English</option>
+    <option value="ar">🇸🇦 العربية</option>
+  </select>
+</div>
+
+<button id="themeToggleFormation" aria-label="Changer le thème">🌙</button>
+
+<!-- Header -->
+<header class="site-header">
+  <div class="header-content">
     <img src="assetes/img/logoHAM.png" alt="Logo" class="logo" />
-    <h1>Programme Starter Tech</h1>
-    <p>De zéro à créateur de solutions numériques</p>
-  </header>
+    <h1 data-key="title">Programme Starter Tech</h1>
+    <p data-key="subtitle">De zéro à créateur de solutions numériques</p>
+    <a href="index.html" class="cta-btn secondary back-link" data-key="back_home">← Retour à l'accueil</a>
+  </div>
+</header>
 
-  <main>
+<main>
 
-    <!-- Intro -->
-    <section>
-      <h2>🚀 Deviens autonome dans le numérique</h2>
-      <p>
-        Cette formation est conçue pour les débutants qui souhaitent apprendre
-        le développement web, la programmation et les bases de la cybersécurité.
+  <!-- Intro -->
+  <section>
+    <h2 data-key="intro_title">🚀 Deviens autonome dans le numérique</h2>
+    <p data-key="intro_desc">
+      Cette formation est conçue pour les débutants qui souhaitent apprendre
+      le développement web, la programmation et les bases de la cybersécurité.
+    </p>
+  </section>
+
+  <!-- Programme -->
+  <section>
+    <h2 data-key="program_title">📚 Programme</h2>
+
+    <div class="service-grid">
+      <div class="card">
+        <h3 data-key="phase1_title">🔹 Phase 1 – Fondations</h3>
+        <p data-key="phase1_desc">HTML, CSS, logique informatique, premières pages web.</p>
+      </div>
+
+      <div class="card">
+        <h3 data-key="phase2_title">🔹 Phase 2 – Développement</h3>
+        <p data-key="phase2_desc">JavaScript, sites dynamiques, mise en ligne.</p>
+      </div>
+
+      <div class="card">
+        <h3 data-key="phase3_title">🔹 Phase 3 – Cybersécurité</h3>
+        <p data-key="phase3_desc">Bases du hacking éthique et sécurisation des projets.</p>
+      </div>
+
+      <div class="card">
+        <h3 data-key="phase4_title">🔹 Projet final</h3>
+        <p data-key="phase4_desc">Création d'un site ou application réel.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- Offres -->
+  <section>
+    <h2 data-key="pricing_title">💰 Nos formules</h2>
+
+    <div class="pricing-grid">
+      <div class="card price-card">
+        <h3 data-key="plan_basic">Basique</h3>
+        <p data-key="plan_basic_desc">Initiation + mini projet</p>
+        <div class="price">50 000 FCFA</div>
+        <ul>
+          <li data-key="basic_feat1">✅ 20h de cours</li>
+          <li data-key="basic_feat2">✅ Certificat de base</li>
+          <li data-key="basic_feat3">✅ Support par email</li>
+        </ul>
+      </div>
+
+      <div class="card price-card featured">
+        <div class="badge" data-key="popular">⭐ Populaire</div>
+        <h3 data-key="plan_standard">Standard</h3>
+        <p data-key="plan_standard_desc">Programme complet + projet réel</p>
+        <div class="price">150 000 FCFA</div>
+        <ul>
+          <li data-key="standard_feat1">✅ 40h de cours</li>
+          <li data-key="standard_feat2">✅ Certificat avancé</li>
+          <li data-key="standard_feat3">✅ Projet tutoré</li>
+          <li data-key="standard_feat4">✅ Support prioritaire</li>
+        </ul>
+      </div>
+
+      <div class="card price-card">
+        <h3 data-key="plan_premium">Premium</h3>
+        <p data-key="plan_premium_desc">Coaching + cybersécurité</p>
+        <div class="price">250 000 FCFA</div>
+        <ul>
+          <li data-key="premium_feat1">✅ 60h de cours</li>
+          <li data-key="premium_feat2">✅ Certification complète</li>
+          <li data-key="premium_feat3">✅ Coaching individuel</li>
+          <li data-key="premium_feat4">✅ Module cybersécurité</li>
+          <li data-key="premium_feat5">✅ Accès à vie</li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <!-- Inscription -->
+  <section id="inscription">
+    <h2 data-key="register_title">📩 S'inscrire à la formation</h2>
+
+    <!-- Message informatif -->
+    <div class="info-message" style="margin-bottom: 1.5rem;">
+      <p style="margin: 0;">
+        📎 <strong data-key="form_info">Remplissez ce formulaire. Je vous recontacte sous 24h pour valider votre inscription.</strong>
       </p>
-    </section>
+    </div>
 
-    <!-- Programme -->
-    <section>
-      <h2>📚 Programme</h2>
+    <form id="formationForm" class="card" onsubmit="return false;">
+      <input type="text" name="name" data-placeholder="form_name" placeholder="Votre nom complet" required>
+      <input type="email" name="email" data-placeholder="form_email" placeholder="Votre email professionnel" required>
+      <input type="tel" name="phone" data-placeholder="form_phone" placeholder="Votre numéro WhatsApp" required>
 
-      <div class="card">
-        <h3>🔹 Phase 1 – Fondations</h3>
-        <p>HTML, CSS, logique informatique, premières pages web.</p>
-      </div>
+      <select name="plan" required>
+        <option value="" data-key="select_plan">Choisissez une formule</option>
+        <option data-key="plan_basic_option">Basique - 50 000 FCFA</option>
+        <option data-key="plan_standard_option">Standard - 150 000 FCFA</option>
+        <option data-key="plan_premium_option">Premium - 250 000 FCFA</option>
+      </select>
 
-      <div class="card">
-        <h3>🔹 Phase 2 – Développement</h3>
-        <p>JavaScript, sites dynamiques, mise en ligne.</p>
-      </div>
+      <textarea name="message" data-placeholder="form_message" placeholder="Décrivez votre objectif et votre niveau actuel..." required rows="4"></textarea>
 
-      <div class="card">
-        <h3>🔹 Phase 3 – Cybersécurité</h3>
-        <p>Bases du hacking éthique et sécurisation des projets.</p>
-      </div>
+      <button type="submit" data-key="submit_btn">🚀 Je m'inscris</button>
+    </form>
 
-      <div class="card">
-        <h3>🔹 Projet final</h3>
-        <p>Création d’un site ou application réel.</p>
-      </div>
+    <!-- Bouton WhatsApp direct -->
+    <div style="text-align: center; margin-top: 1.5rem;">
+      <a href="https://wa.me/22786762903" target="_blank" class="cta-btn whatsapp" style="display: inline-flex; align-items: center; gap: 8px;">
+        <img src="assetes/img/whatsapp.png" alt="WhatsApp" style="width: 20px; height: 20px;">
+        <span data-key="whatsapp_contact">📱 Me contacter directement sur WhatsApp</span>
+      </a>
+    </div>
+  </section>
 
-    </section>
+</main>
 
-    <!-- Offres -->
-    <section>
-      <h2>💰 Nos formules</h2>
+<footer class="footer">
+  <p>© <span id="yearFormation"></span> HAM Global Words — <span data-key="footer_text">Programme Starter Tech</span></p>
+  <div class="footer-logo">
+    <img src="assetes/img/HAM.png" alt="HAM Global Words" loading="lazy">
+  </div>
+</footer>
 
-      <div class="service-grid">
+<script>
+  // Script spécifique pour la page formation
+  (function() {
+    // Année dynamique
+    const yearEl = document.getElementById('yearFormation');
+    if (yearEl) yearEl.textContent = new Date().getFullYear();
 
-        <div class="card">
-          <h3>Basique</h3>
-          <p>Initiation + mini projet</p>
-          <strong>50 000 FCFA</strong>
-        </div>
+    // Thème
+    const themeToggle = document.getElementById('themeToggleFormation');
+    const body = document.body;
+    
+    const savedTheme = localStorage.getItem('theme') || 'dark';
+    if (savedTheme === 'light') {
+      body.classList.add('light-mode');
+      if (themeToggle) themeToggle.textContent = '🌙';
+    } else {
+      if (themeToggle) themeToggle.textContent = '☀️';
+    }
+    
+    if (themeToggle) {
+      themeToggle.addEventListener('click', () => {
+        body.classList.toggle('light-mode');
+        const isLight = body.classList.contains('light-mode');
+        localStorage.setItem('theme', isLight ? 'light' : 'dark');
+        themeToggle.textContent = isLight ? '🌙' : '☀️';
+      });
+    }
 
-        <div class="card">
-          <h3>Standard ⭐</h3>
-          <p>Programme complet + projet réel</p>
-          <strong>150 000 FCFA</strong>
-        </div>
+    // Traductions pour la page formation
+    const formationTranslations = {
+      fr: {
+        title: "Programme Starter Tech",
+        subtitle: "De zéro à créateur de solutions numériques",
+        back_home: "← Retour à l'accueil",
+        intro_title: "🚀 Deviens autonome dans le numérique",
+        intro_desc: "Cette formation est conçue pour les débutants qui souhaitent apprendre le développement web, la programmation et les bases de la cybersécurité.",
+        program_title: "📚 Programme",
+        phase1_title: "🔹 Phase 1 – Fondations",
+        phase1_desc: "HTML, CSS, logique informatique, premières pages web.",
+        phase2_title: "🔹 Phase 2 – Développement",
+        phase2_desc: "JavaScript, sites dynamiques, mise en ligne.",
+        phase3_title: "🔹 Phase 3 – Cybersécurité",
+        phase3_desc: "Bases du hacking éthique et sécurisation des projets.",
+        phase4_title: "🔹 Projet final",
+        phase4_desc: "Création d'un site ou application réel.",
+        pricing_title: "💰 Nos formules",
+        plan_basic: "Basique",
+        plan_basic_desc: "Initiation + mini projet",
+        plan_standard: "Standard",
+        plan_standard_desc: "Programme complet + projet réel",
+        plan_premium: "Premium",
+        plan_premium_desc: "Coaching + cybersécurité",
+        popular: "⭐ Populaire",
+        basic_feat1: "20h de cours",
+        basic_feat2: "Certificat de base",
+        basic_feat3: "Support par email",
+        standard_feat1: "40h de cours",
+        standard_feat2: "Certificat avancé",
+        standard_feat3: "Projet tutoré",
+        standard_feat4: "Support prioritaire",
+        premium_feat1: "60h de cours",
+        premium_feat2: "Certification complète",
+        premium_feat3: "Coaching individuel",
+        premium_feat4: "Module cybersécurité",
+        premium_feat5: "Accès à vie",
+        register_title: "📩 S'inscrire à la formation",
+        form_info: "Remplissez ce formulaire. Je vous recontacte sous 24h pour valider votre inscription.",
+        form_name: "Votre nom complet",
+        form_email: "Votre email professionnel",
+        form_phone: "Votre numéro WhatsApp",
+        select_plan: "Choisissez une formule",
+        plan_basic_option: "Basique - 50 000 FCFA",
+        plan_standard_option: "Standard - 150 000 FCFA",
+        plan_premium_option: "Premium - 250 000 FCFA",
+        form_message: "Décrivez votre objectif et votre niveau actuel...",
+        submit_btn: "🚀 Je m'inscris",
+        whatsapp_contact: "📱 Me contacter directement sur WhatsApp",
+        footer_text: "Programme Starter Tech"
+      },
+      en: {
+        title: "Starter Tech Program",
+        subtitle: "From zero to creator of digital solutions",
+        back_home: "← Back to home",
+        intro_title: "🚀 Become autonomous in digital",
+        intro_desc: "This training is designed for beginners who want to learn web development, programming and cybersecurity basics.",
+        program_title: "📚 Program",
+        phase1_title: "🔹 Phase 1 – Foundations",
+        phase1_desc: "HTML, CSS, computer logic, first web pages.",
+        phase2_title: "🔹 Phase 2 – Development",
+        phase2_desc: "JavaScript, dynamic sites, deployment.",
+        phase3_title: "🔹 Phase 3 – Cybersecurity",
+        phase3_desc: "Basics of ethical hacking and project security.",
+        phase4_title: "🔹 Final Project",
+        phase4_desc: "Create a real website or application.",
+        pricing_title: "💰 Our plans",
+        plan_basic: "Basic",
+        plan_basic_desc: "Introduction + mini project",
+        plan_standard: "Standard",
+        plan_standard_desc: "Complete program + real project",
+        plan_premium: "Premium",
+        plan_premium_desc: "Coaching + cybersecurity",
+        popular: "⭐ Popular",
+        basic_feat1: "20 hours of courses",
+        basic_feat2: "Basic certificate",
+        basic_feat3: "Email support",
+        standard_feat1: "40 hours of courses",
+        standard_feat2: "Advanced certificate",
+        standard_feat3: "Tutored project",
+        standard_feat4: "Priority support",
+        premium_feat1: "60 hours of courses",
+        premium_feat2: "Full certification",
+        premium_feat3: "Individual coaching",
+        premium_feat4: "Cybersecurity module",
+        premium_feat5: "Lifetime access",
+        register_title: "📩 Register for training",
+        form_info: "Fill out this form. I will contact you within 24h to confirm your registration.",
+        form_name: "Your full name",
+        form_email: "Your professional email",
+        form_phone: "Your WhatsApp number",
+        select_plan: "Choose a plan",
+        plan_basic_option: "Basic - 50,000 FCFA",
+        plan_standard_option: "Standard - 150,000 FCFA",
+        plan_premium_option: "Premium - 250,000 FCFA",
+        form_message: "Describe your goal and current level...",
+        submit_btn: "🚀 Register now",
+        whatsapp_contact: "📱 Contact me directly on WhatsApp",
+        footer_text: "Starter Tech Program"
+      },
+      ar: {
+        title: "برنامج Starter Tech",
+        subtitle: "من الصفر إلى مبتكر حلول رقمية",
+        back_home: "← العودة إلى الرئيسية",
+        intro_title: "🚀 كن مستقلاً في المجال الرقمي",
+        intro_desc: "هذا التدريب مصمم للمبتدئين الذين يرغبون في تعلم تطوير الويب والبرمجة وأساسيات الأمن السيبراني.",
+        program_title: "📚 البرنامج",
+        phase1_title: "🔹 المرحلة 1 – الأساسيات",
+        phase1_desc: "HTML، CSS، المنطق الحاسوبي، أولى صفحات الويب.",
+        phase2_title: "🔹 المرحلة 2 – التطوير",
+        phase2_desc: "JavaScript، مواقع ديناميكية، النشر على الإنترنت.",
+        phase3_title: "🔹 المرحلة 3 – الأمن السيبراني",
+        phase3_desc: "أساسيات الاختراق الأخلاقي وتأمين المشاريع.",
+        phase4_title: "🔹 المشروع النهائي",
+        phase4_desc: "إنشاء موقع أو تطبيق حقيقي.",
+        pricing_title: "💰 خططنا",
+        plan_basic: "أساسي",
+        plan_basic_desc: "مقدمة + مشروع صغير",
+        plan_standard: "قياسي",
+        plan_standard_desc: "برنامج كامل + مشروع حقيقي",
+        plan_premium: "بريميوم",
+        plan_premium_desc: "تدريب فردي + أمن سيبراني",
+        popular: "⭐ الأكثر طلباً",
+        basic_feat1: "20 ساعة تدريب",
+        basic_feat2: "شهادة أساسية",
+        basic_feat3: "دعم عبر البريد الإلكتروني",
+        standard_feat1: "40 ساعة تدريب",
+        standard_feat2: "شهادة متقدمة",
+        standard_feat3: "مشروع موجه",
+        standard_feat4: "دعم ذو أولوية",
+        premium_feat1: "60 ساعة تدريب",
+        premium_feat2: "شهادة كاملة",
+        premium_feat3: "تدريب فردي",
+        premium_feat4: "وحدة الأمن السيبراني",
+        premium_feat5: "وصول مدى الحياة",
+        register_title: "📩 التسجيل في التدريب",
+        form_info: "املأ هذا النموذج. سأتصل بك خلال 24 ساعة لتأكيد تسجيلك.",
+        form_name: "الاسم الكامل",
+        form_email: "البريد الإلكتروني المهني",
+        form_phone: "رقم واتساب",
+        select_plan: "اختر خطة",
+        plan_basic_option: "أساسي - 50,000 فرنك إفريقي",
+        plan_standard_option: "قياسي - 150,000 فرنك إفريقي",
+        plan_premium_option: "بريميوم - 250,000 فرنك إفريقي",
+        form_message: "صف هدفك ومستواك الحالي...",
+        submit_btn: "🚀 سجل الآن",
+        whatsapp_contact: "📱 تواصل معي مباشرة على واتساب",
+        footer_text: "برنامج Starter Tech"
+      }
+    };
 
-        <div class="card">
-          <h3>Premium</h3>
-          <p>Coaching + cybersécurité</p>
-          <strong>250 000 FCFA</strong>
-        </div>
+    let currentLang = localStorage.getItem('lang') || 'fr';
 
-      </div>
-    </section>
+    function applyFormationLanguage(lang) {
+      const dict = formationTranslations[lang] || formationTranslations.fr;
+      
+      document.querySelectorAll('[data-key]').forEach(el => {
+        const key = el.dataset.key;
+        if (dict[key] !== undefined) {
+          el.textContent = dict[key];
+        }
+      });
+      
+      document.querySelectorAll('[data-placeholder]').forEach(el => {
+        const key = el.dataset.placeholder;
+        if (dict[key]) el.placeholder = dict[key];
+      });
+      
+      document.documentElement.dir = lang === "ar" ? "rtl" : "ltr";
+      document.documentElement.lang = lang;
+      
+      const langSwitcher = document.getElementById('langSwitcherFormation');
+      if (langSwitcher && langSwitcher.value !== lang) {
+        langSwitcher.value = lang;
+      }
+    }
 
-    <!-- CTA -->
-    <section>
-      <h2>📩 S’inscrire</h2>
+    const langSwitcher = document.getElementById('langSwitcherFormation');
+    if (langSwitcher) {
+      langSwitcher.value = currentLang;
+      langSwitcher.addEventListener('change', (e) => {
+        currentLang = e.target.value;
+        localStorage.setItem('lang', currentLang);
+        applyFormationLanguage(currentLang);
+      });
+    }
 
-      <form id="formationForm">
+    applyFormationLanguage(currentLang);
 
-        <input type="text" name="name" placeholder="Votre nom" required />
-        <input type="email" name="email" placeholder="Votre email" required />
+    // Formulaire d'inscription (mailto + WhatsApp)
+    const formationForm = document.getElementById('formationForm');
+    const WHATSAPP_NUMBER = "22786762903";
 
-        <select name="plan" required>
-          <option value="">Choisissez une formule</option>
-          <option>Basique</option>
-          <option>Standard</option>
-          <option>Premium</option>
-        </select>
-
-        <textarea name="message" placeholder="Votre objectif..." required></textarea>
-
-        <button type="submit">🚀 Je m’inscris</button>
-
-      </form>
-
-    </section>
-
-  </main>
-
-  <footer class="footer">
-    <p>© <span id="year"></span> HAM Global Words</p>
-  </footer>
-
-  <script src="assetes/js/app.js"></script>
+    if (formationForm) {
+      formationForm.addEventListener('submit', (e) => {
+        e.preventDefault();
+        
+        const name = formationForm.querySelector('[name="name"]')?.value.trim();
+        const email = formationForm.querySelector('[name="email"]')?.value.trim();
+        const phone = formationForm.querySelector('[name="phone"]')?.value.trim();
+        const plan = formationForm.querySelector('[name="plan"]')?.value;
+        const message = formationForm.querySelector('[name="message"]')?.value.trim();
+        
+        if (!name || !email || !phone || !plan || !message) {
+          alert(currentLang === 'fr' ? 'Veuillez remplir tous les champs.' : 
+                 currentLang === 'en' ? 'Please fill in all fields.' : 
+                 'الرجاء ملء جميع الحقول.');
+          return;
+        }
+        
+        const subject = `[HAM Global Words] Inscription formation - ${plan}`;
+        const body = `Nom: ${name}\nEmail: ${email}\nWhatsApp: ${phone}\nFormule: ${plan}\n\nObjectif:\n${message}`;
+        
+        if (confirm(currentLang === 'fr' ? 'Envoyer votre demande par email ?' :
+                     currentLang === 'en' ? 'Send your request by email?' :
+                     'إرسال طلبك عبر البريد الإلكتروني؟')) {
+          
+          window.location.href = `mailto:hamadineagmoctar@gmail.com?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
+          
+          setTimeout(() => {
+            if (confirm(currentLang === 'fr' ? 'Souhaitez-vous aussi envoyer un message WhatsApp ?' :
+                        currentLang === 'en' ? 'Do you also want to send a WhatsApp message?' :
+                        'هل تريد أيضًا إرسال رسالة واتساب؟')) {
+              const waText = `*Nouvelle inscription formation*\n\n👤 Nom: ${name}\n📧 Email: ${email}\n📱 WhatsApp: ${phone}\n🎓 Formule: ${plan}\n📝 Objectif: ${message}`;
+              window.open(`https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent(waText)}`, '_blank');
+            }
+          }, 500);
+        }
+      });
+    }
+  })();
+</script>
 
 </body>
 </html>
