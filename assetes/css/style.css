@@ -895,3 +895,73 @@ html[dir="rtl"] .service-btn {
 .mb-2 {
   margin-bottom: 1rem;
 }
+
+/* =========================
+   BANDEAU DE DÉVELOPPEMENT
+========================= */
+.dev-banner {
+  background: linear-gradient(135deg, #f59e0b, #d97706);
+  color: white;
+  text-align: center;
+  padding: 0.75rem 1rem;
+  font-size: 0.9rem;
+  font-weight: 500;
+  position: relative;
+  z-index: 1001;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  flex-wrap: wrap;
+}
+
+.dev-banner span {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+}
+
+.dev-banner .close-banner {
+  background: rgba(255,255,255,0.2);
+  border: none;
+  color: white;
+  cursor: pointer;
+  padding: 0.2rem 0.6rem;
+  border-radius: 50px;
+  font-size: 0.8rem;
+  transition: 0.3s;
+}
+
+.dev-banner .close-banner:hover {
+  background: rgba(255,255,255,0.4);
+  transform: scale(1.05);
+}
+
+body.light-mode .dev-banner {
+  background: linear-gradient(135deg, #ea580c, #c2410c);
+}
+
+@keyframes pulse-badge {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0.7; }
+}
+
+.dev-badge {
+  background: #22c55e;
+  padding: 0.2rem 0.6rem;
+  border-radius: 50px;
+  font-size: 0.7rem;
+  font-weight: 700;
+  animation: pulse-badge 2s infinite;
+}
+
+@media (max-width: 768px) {
+  .dev-banner {
+    font-size: 0.75rem;
+    padding: 0.5rem;
+    gap: 5px;
+  }
+  .dev-badge {
+    font-size: 0.6rem;
+  }
+}
