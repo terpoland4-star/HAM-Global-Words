@@ -1,195 +1,98 @@
 <!DOCTYPE html>
 <html lang="fr">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
-
-  <title>Dashboard Client – HAM Global Words</title>
-
-  <link rel="stylesheet" href="assetes/css/style.css" />
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&display=swap" rel="stylesheet">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Dashboard - HAM Global Words</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="assetes/css/style.css">
+  <link rel="icon" href="assetes/img/logo.png">
+  <style>
+    .dashboard-container { max-width: 1200px; margin: 0 auto; padding: 2rem; }
+    .dashboard-header { display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; margin-bottom: 2rem; }
+    .welcome-card { background: linear-gradient(135deg, rgba(99,102,241,0.2), rgba(34,197,94,0.1)); padding: 2rem; border-radius: 20px; margin-bottom: 2rem; }
+    .stats-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 1.5rem; margin-bottom: 2rem; }
+    .stat-card { text-align: center; padding: 1.5rem; }
+    .stat-number { font-size: 2.5rem; font-weight: 800; background: linear-gradient(135deg, #6366F1, #22C55E); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
+    .recent-list { list-style: none; padding: 0; }
+    .recent-list li { padding: 0.75rem 0; border-bottom: 1px solid rgba(255,255,255,0.1); }
+    .logout-btn { background: linear-gradient(135deg, #dc2626, #b91c1c); }
+    .logout-btn:hover { background: linear-gradient(135deg, #ef4444, #dc2626); }
+  </style>
 </head>
-
 <body class="dark-mode">
 
-<!-- HEADER -->
-<header class="site-header">
-  <div class="galaxy-bg"></div>
+<div class="lang-switcher">
+  <select id="langSwitcher" aria-label="Changer la langue">
+    <option value="fr">🇫🇷 Français</option>
+    <option value="en">🇬🇧 English</option>
+    <option value="ar">🇸🇦 العربية</option>
+  </select>
+</div>
 
-  <div class="header-content">
-    <img src="assetes/img/logoHAM.png" class="logo" alt="HAM Global Words">
+<button id="themeToggle" aria-label="Changer le thème">🌙</button>
 
-    <h1>📊 Espace Client</h1>
-    <p>Suivi de vos projets linguistiques & digitaux</p>
-
-    <a href="index.html" class="cta-btn">⬅ Retour site</a>
+<div class="dashboard-container">
+  <div class="dashboard-header">
+    <img src="assetes/img/logoHAM.png" alt="Logo" style="width: 50px; border-radius: 50%;">
+    <h1 data-key="dashboard_title">📊 Tableau de bord</h1>
+    <button onclick="logout()" class="cta-btn logout-btn" data-key="logout_btn">🚪 Déconnexion</button>
   </div>
-</header>
-
-<main>
-
-<!-- USER INFO -->
-<section>
-  <h2>👤 Mon profil</h2>
-
+  
+  <div class="welcome-card">
+    <h2 data-key="welcome_title">👋 Bonjour, <span id="userName">Client</span> !</h2>
+    <p data-key="welcome_desc">Bienvenue sur votre espace client HAM Global Words. Gérez vos projets linguistiques et suivez vos demandes en temps réel.</p>
+  </div>
+  
+  <div class="stats-grid">
+    <div class="card stat-card"><div class="stat-number" id="projectsCount">0</div><p data-key="stat_projects">Projets en cours</p></div>
+    <div class="card stat-card"><div class="stat-number" id="quotesCount">0</div><p data-key="stat_quotes">Devis en attente</p></div>
+    <div class="card stat-card"><div class="stat-number" id="messagesCount">0</div><p data-key="stat_messages">Messages</p></div>
+  </div>
+  
   <div class="card">
-    <p><strong>Email :</strong> <span id="userEmail"></span></p>
-    <p><strong>Statut :</strong> Actif</p>
+    <h3 data-key="recent_title">📋 Dernières activités</h3>
+    <ul class="recent-list" id="recentActivities">
+      <li data-key="no_activity">Aucune activité récente</li>
+    </ul>
   </div>
-</section>
-
-<!-- UPLOAD -->
-<section>
-  <h2>📤 Envoyer un projet</h2>
-
-  <form id="uploadForm" class="card">
-
-    <input type="text" name="name" placeholder="Votre nom" required>
-    <input type="email" name="email" placeholder="Votre email" required>
-
-    <select name="service" required>
-      <option value="">Choisissez un service</option>
-      <option>Traduction</option>
-      <option>Interprétation</option>
-      <option>Annotation IA</option>
-    </select>
-
-    <input type="file" name="file" required>
-
-    <textarea name="message" placeholder="Instructions..." required></textarea>
-
-    <button type="submit">🚀 Envoyer</button>
-
-  </form>
-</section>
-
-<!-- PROJECTS -->
-<section>
-  <h2>📁 Mes projets</h2>
-  <div id="projectsList" class="service-grid"></div>
-</section>
-
-<!-- ACTIONS -->
-<section>
-  <h2>⚡ Actions rapides</h2>
-
-  <div class="service-grid">
-
-    <a href="mailto:hamadineagmoctar@gmail.com" class="service-btn">
-      📩 Support
-    </a>
-
-    <a href="index.html#contact" class="service-btn">
-      ➕ Nouveau projet
-    </a>
-
-    <a href="login.html" class="service-btn">
-      🔐 Déconnexion
-    </a>
-
+  
+  <div style="margin-top: 2rem; text-align: center;">
+    <a href="index.html" class="cta-btn secondary" data-key="back_home">← Retour au site</a>
   </div>
-</section>
+</div>
 
-</main>
+<script src="assetes/js/app.js" defer></script>
 
-<footer class="footer">
-  <p>© <span id="year"></span> HAM Global Words</p>
-</footer>
-
-<!-- FIREBASE -->
-<script type="module">
-import { initializeApp } from "https://www.gstatic.com/firebasejs/12.11.0/firebase-app.js";
-import { getAuth, onAuthStateChanged, signOut } from "https://www.gstatic.com/firebasejs/12.11.0/firebase-auth.js";
-import { getStorage, ref, uploadBytes } from "https://www.gstatic.com/firebasejs/12.11.0/firebase-storage.js";
-import { getFirestore, addDoc, collection, getDocs } from "https://www.gstatic.com/firebasejs/12.11.0/firebase-firestore.js";
-
-// CONFIG
-const firebaseConfig = {
-  apiKey: "AIzaSyBwh9xj4t2QKzfgY3VvzW4Cai3VsDWjmDc",
-  authDomain: "ham-global-words.firebaseapp.com",
-  projectId: "ham-global-words",
-  storageBucket: "ham-global-words.firebasestorage.app",
-  messagingSenderId: "207685512003",
-  appId: "1:207685512003:web:3c281456eddfdece425df6"
-};
-
-// INIT
-const app = initializeApp(firebaseConfig);
-const auth = getAuth(app);
-const storage = getStorage(app);
-const db = getFirestore(app);
-
-// AUTH CHECK
-onAuthStateChanged(auth, (user) => {
-  if (!user) {
-    window.location.href = "login.html";
-  } else {
-    document.getElementById("userEmail").textContent = user.email;
-    loadProjects();
-  }
-});
-
-// FORM
-const form = document.getElementById("uploadForm");
-const projectsList = document.getElementById("projectsList");
-
-form.addEventListener("submit", async (e) => {
-  e.preventDefault();
-
-  const file = form.file.files[0];
-  if (!file) return alert("Ajoute un fichier");
-
-  const fileName = Date.now() + "_" + file.name;
-  const storageRef = ref(storage, "uploads/" + fileName);
-
-  try {
-    await uploadBytes(storageRef, file);
-
-    await addDoc(collection(db, "projects"), {
-      name: form.name.value,
-      email: form.email.value,
-      service: form.service.value,
-      message: form.message.value,
-      fileName: fileName,
-      date: new Date()
+<script>
+  const dashboardTranslations = {
+    fr: { dashboard_title: "📊 Tableau de bord", welcome_title: "👋 Bonjour,", welcome_desc: "Bienvenue sur votre espace client HAM Global Words. Gérez vos projets linguistiques et suivez vos demandes en temps réel.", stat_projects: "Projets en cours", stat_quotes: "Devis en attente", stat_messages: "Messages", recent_title: "📋 Dernières activités", no_activity: "Aucune activité récente", back_home: "← Retour au site", logout_btn: "🚪 Déconnexion" },
+    en: { dashboard_title: "📊 Dashboard", welcome_title: "👋 Hello,", welcome_desc: "Welcome to your HAM Global Words client area. Manage your linguistic projects and track your requests in real time.", stat_projects: "Active projects", stat_quotes: "Pending quotes", stat_messages: "Messages", recent_title: "📋 Recent activities", no_activity: "No recent activity", back_home: "← Back to site", logout_btn: "🚪 Logout" },
+    ar: { dashboard_title: "📊 لوحة التحكم", welcome_title: "👋 مرحباً،", welcome_desc: "مرحباً بك في منطقة عملاء HAM Global Words. إدارة مشاريعك اللغوية وتتبع طلباتك في الوقت الفعلي.", stat_projects: "المشاريع النشطة", stat_quotes: "عروض الأسعار المعلقة", stat_messages: "الرسائل", recent_title: "📋 الأنشطة الأخيرة", no_activity: "لا توجد أنشطة حديثة", back_home: "← العودة إلى الموقع", logout_btn: "🚪 تسجيل الخروج" }
+  };
+  
+  function applyDashboardLanguage(lang) {
+    const dict = dashboardTranslations[lang] || dashboardTranslations.fr;
+    Object.keys(dict).forEach(key => {
+      const el = document.querySelector(`[data-key="${key}"]`);
+      if (el && !el.classList.contains('stat-number')) el.textContent = dict[key];
     });
-
-    alert("✅ Projet envoyé !");
-    form.reset();
-    loadProjects();
-
-  } catch (err) {
-    console.error(err);
-    alert("❌ Erreur");
   }
-});
-
-// LOAD PROJECTS
-async function loadProjects() {
-  projectsList.innerHTML = "";
-
-  const snapshot = await getDocs(collection(db, "projects"));
-
-  snapshot.forEach(doc => {
-    const data = doc.data();
-
-    const card = document.createElement("div");
-    card.className = "card";
-
-    card.innerHTML = `
-      <h3>${data.service}</h3>
-      <p><strong>Client :</strong> ${data.name}</p>
-      <p><strong>Email :</strong> ${data.email}</p>
-      <p><strong>Fichier :</strong> ${data.fileName}</p>
-      <p>${data.message}</p>
-    `;
-
-    projectsList.appendChild(card);
+  
+  const lang = localStorage.getItem('lang') || 'fr';
+  applyDashboardLanguage(lang);
+  
+  document.getElementById('langSwitcher')?.addEventListener('change', (e) => {
+    localStorage.setItem('lang', e.target.value);
+    applyDashboardLanguage(e.target.value);
   });
-}
-
-// YEAR
-document.getElementById("year").textContent = new Date().getFullYear();
+  
+  // Simuler des données dashboard
+  const user = JSON.parse(localStorage.getItem('user') || '{}');
+  document.getElementById('userName').textContent = user.name || 'Client';
+  document.getElementById('projectsCount').textContent = Math.floor(Math.random() * 5) + 1;
+  document.getElementById('quotesCount').textContent = Math.floor(Math.random() * 3);
+  document.getElementById('messagesCount').textContent = Math.floor(Math.random() * 10);
 </script>
 
 </body>
