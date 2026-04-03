@@ -2,78 +2,96 @@
 <html lang="fr">
 <head>
   <meta charset="UTF-8">
-  <title>Connexion – HAM Global Words</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Connexion - HAM Global Words</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700;800&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="assetes/css/style.css">
+  <link rel="icon" href="assetes/img/logo.png">
+  <style>
+    .auth-container {
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 2rem;
+    }
+    .auth-card {
+      max-width: 450px;
+      width: 100%;
+      padding: 2.5rem;
+    }
+    .auth-card h2 {
+      text-align: center;
+      margin-bottom: 1.5rem;
+    }
+    .auth-footer {
+      text-align: center;
+      margin-top: 1.5rem;
+    }
+    .back-home {
+      display: inline-block;
+      margin-top: 1rem;
+      color: var(--accent-primary);
+    }
+  </style>
 </head>
-
 <body class="dark-mode">
 
-<section style="max-width:400px; margin:auto; padding:5rem 1rem;">
-  <h2>🔐 Connexion</h2>
+<div class="lang-switcher">
+  <select id="langSwitcher" aria-label="Changer la langue">
+    <option value="fr">🇫🇷 Français</option>
+    <option value="en">🇬🇧 English</option>
+    <option value="ar">🇸🇦 العربية</option>
+  </select>
+</div>
 
-  <form id="loginForm" class="card">
-    <input type="email" id="email" placeholder="Email" required>
-    <input type="password" id="password" placeholder="Mot de passe" required>
+<button id="themeToggle" aria-label="Changer le thème">🌙</button>
 
-    <button type="submit">Connexion</button>
-  </form>
+<div class="auth-container">
+  <div class="card auth-card">
+    <h2 data-key="login_title">🔐 Connexion</h2>
+    
+    <form id="loginForm">
+      <input type="email" name="email" data-placeholder="form_email" placeholder="Votre email" required>
+      <input type="password" name="password" data-placeholder="login_password" placeholder="Mot de passe" required>
+      <button type="submit" data-key="login_btn">Se connecter</button>
+    </form>
+    
+    <div class="auth-footer">
+      <p data-key="register_prompt">Pas encore de compte ?</p>
+      <a href="register.html" class="cta-btn secondary" data-key="register_link">Créer un compte</a>
+      <br>
+      <a href="index.html" class="back-home" data-key="back_home">← Retour à l'accueil</a>
+    </div>
+  </div>
+</div>
 
-  <p style="margin-top:10px;">
-    Pas de compte ?
-    <a href="#" id="registerBtn">Créer un compte</a>
-  </p>
-</section>
+<script src="assetes/js/app.js" defer></script>
 
-<script type="module">
-import { initializeApp } from "https://www.gstatic.com/firebasejs/12.11.0/firebase-app.js";
-import {
-  getAuth,
-  signInWithEmailAndPassword,
-  createUserWithEmailAndPassword
-} from "https://www.gstatic.com/firebasejs/12.11.0/firebase-auth.js";
-
-const firebaseConfig = {
-  apiKey: "AIzaSyB...",
-  authDomain: "ham-global-words.firebaseapp.com",
-  projectId: "ham-global-words",
-};
-
-const app = initializeApp(firebaseConfig);
-const auth = getAuth(app);
-
-const form = document.getElementById("loginForm");
-const registerBtn = document.getElementById("registerBtn");
-
-// LOGIN
-form.addEventListener("submit", async (e) => {
-  e.preventDefault();
-
-  const email = document.getElementById("email").value;
-  const password = document.getElementById("password").value;
-
-  try {
-    await signInWithEmailAndPassword(auth, email, password);
-    alert("Connexion réussie !");
-    window.location.href = "dashboard.html";
-  } catch (err) {
-    alert("Erreur: " + err.message);
+<script>
+  // Traductions spécifiques pour login
+  const loginTranslations = {
+    fr: { login_password: "Mot de passe", login_btn: "Se connecter", register_prompt: "Pas encore de compte ?", register_link: "Créer un compte", back_home: "← Retour à l'accueil" },
+    en: { login_password: "Password", login_btn: "Login", register_prompt: "Don't have an account yet?", register_link: "Create an account", back_home: "← Back to home" },
+    ar: { login_password: "كلمة المرور", login_btn: "تسجيل الدخول", register_prompt: "ليس لديك حساب؟", register_link: "إنشاء حساب", back_home: "← العودة إلى الرئيسية" }
+  };
+  
+  function applyLoginLanguage(lang) {
+    const dict = loginTranslations[lang] || loginTranslations.fr;
+    document.querySelector('[data-placeholder="login_password"]')?.setAttribute('placeholder', dict.login_password);
+    document.querySelector('[data-key="login_btn"]') && (document.querySelector('[data-key="login_btn"]').textContent = dict.login_btn);
+    document.querySelector('[data-key="register_prompt"]') && (document.querySelector('[data-key="register_prompt"]').textContent = dict.register_prompt);
+    document.querySelector('[data-key="register_link"]') && (document.querySelector('[data-key="register_link"]').textContent = dict.register_link);
+    document.querySelector('[data-key="back_home"]') && (document.querySelector('[data-key="back_home"]').textContent = dict.back_home);
   }
-});
-
-// REGISTER
-registerBtn.addEventListener("click", async () => {
-  const email = prompt("Email ?");
-  const password = prompt("Mot de passe ?");
-
-  if (!email || !password) return;
-
-  try {
-    await createUserWithEmailAndPassword(auth, email, password);
-    alert("Compte créé !");
-  } catch (err) {
-    alert(err.message);
-  }
-});
+  
+  const lang = localStorage.getItem('lang') || 'fr';
+  applyLoginLanguage(lang);
+  
+  document.getElementById('langSwitcher')?.addEventListener('change', (e) => {
+    localStorage.setItem('lang', e.target.value);
+    applyLoginLanguage(e.target.value);
+  });
 </script>
 
 </body>
