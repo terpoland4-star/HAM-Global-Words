@@ -1,32 +1,81 @@
 <!DOCTYPE html>
 <html lang="fr">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Inscription</title>
-<link rel="stylesheet" href="assetes/css/style.css">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Inscription - HAM Global Words</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="assetes/css/style.css">
+  <link rel="icon" href="assetes/img/logo.png">
+  <style>
+    .auth-container { min-height: 100vh; display: flex; align-items: center; justify-content: center; padding: 2rem; }
+    .auth-card { max-width: 450px; width: 100%; padding: 2.5rem; }
+    .auth-card h2 { text-align: center; margin-bottom: 1.5rem; }
+    .auth-footer { text-align: center; margin-top: 1.5rem; }
+    .back-home { display: inline-block; margin-top: 1rem; color: var(--accent-primary); }
+  </style>
 </head>
+<body class="dark-mode">
 
-<body>
+<div class="lang-switcher">
+  <select id="langSwitcher" aria-label="Changer la langue">
+    <option value="fr">🇫🇷 Français</option>
+    <option value="en">🇬🇧 English</option>
+    <option value="ar">🇸🇦 العربية</option>
+  </select>
+</div>
 
-<header class="site-header">
-  <h1>🧠 Créer un compte</h1>
-  <a href="index.html" class="cta-btn">⬅ Retour</a>
-</header>
+<button id="themeToggle" aria-label="Changer le thème">🌙</button>
 
-<main>
-<section>
+<div class="auth-container">
+  <div class="card auth-card">
+    <h2 data-key="register_title">📝 Créer un compte</h2>
+    
+    <form id="registerForm">
+      <input type="text" name="name" data-placeholder="form_name" placeholder="Nom complet" required>
+      <input type="email" name="email" data-placeholder="form_email" placeholder="Email" required>
+      <input type="password" name="password" data-placeholder="register_password" placeholder="Mot de passe (min 6 caractères)" required>
+      <input type="password" name="confirm_password" data-placeholder="register_confirm" placeholder="Confirmer le mot de passe" required>
+      <button type="submit" data-key="register_btn">Créer mon compte</button>
+    </form>
+    
+    <div class="auth-footer">
+      <p data-key="login_prompt">Déjà un compte ?</p>
+      <a href="login.html" class="cta-btn secondary" data-key="login_link">Se connecter</a>
+      <br>
+      <a href="index.html" class="back-home" data-key="back_home">← Retour à l'accueil</a>
+    </div>
+  </div>
+</div>
 
-<form id="registerForm">
-  <input type="text" name="name" placeholder="Nom" required>
-  <input type="email" name="email" placeholder="Email" required>
-  <input type="password" name="password" placeholder="Mot de passe" required>
-  <button type="submit">🚀 S'inscrire</button>
-</form>
+<script src="assetes/js/app.js" defer></script>
 
-</section>
-</main>
+<script>
+  const registerTranslations = {
+    fr: { register_title: "📝 Créer un compte", register_password: "Mot de passe (min 6 caractères)", register_confirm: "Confirmer le mot de passe", register_btn: "Créer mon compte", login_prompt: "Déjà un compte ?", login_link: "Se connecter", back_home: "← Retour à l'accueil" },
+    en: { register_title: "📝 Create an account", register_password: "Password (min 6 characters)", register_confirm: "Confirm password", register_btn: "Create my account", login_prompt: "Already have an account?", login_link: "Login", back_home: "← Back to home" },
+    ar: { register_title: "📝 إنشاء حساب", register_password: "كلمة المرور (6 أحرف على الأقل)", register_confirm: "تأكيد كلمة المرور", register_btn: "إنشاء حسابي", login_prompt: "لديك حساب بالفعل؟", login_link: "تسجيل الدخول", back_home: "← العودة إلى الرئيسية" }
+  };
+  
+  function applyRegisterLanguage(lang) {
+    const dict = registerTranslations[lang] || registerTranslations.fr;
+    document.querySelector('[data-key="register_title"]') && (document.querySelector('[data-key="register_title"]').textContent = dict.register_title);
+    document.querySelector('[data-placeholder="register_password"]')?.setAttribute('placeholder', dict.register_password);
+    document.querySelector('[data-placeholder="register_confirm"]')?.setAttribute('placeholder', dict.register_confirm);
+    document.querySelector('[data-key="register_btn"]') && (document.querySelector('[data-key="register_btn"]').textContent = dict.register_btn);
+    document.querySelector('[data-key="login_prompt"]') && (document.querySelector('[data-key="login_prompt"]').textContent = dict.login_prompt);
+    document.querySelector('[data-key="login_link"]') && (document.querySelector('[data-key="login_link"]').textContent = dict.login_link);
+    document.querySelector('[data-key="back_home"]') && (document.querySelector('[data-key="back_home"]').textContent = dict.back_home);
+  }
+  
+  const lang = localStorage.getItem('lang') || 'fr';
+  applyRegisterLanguage(lang);
+  
+  document.getElementById('langSwitcher')?.addEventListener('change', (e) => {
+    localStorage.setItem('lang', e.target.value);
+    applyRegisterLanguage(e.target.value);
+  });
+</script>
 
-<script src="assetes/js/app.js"></script>
 </body>
 </html>
