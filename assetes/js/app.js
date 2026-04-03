@@ -1,6 +1,6 @@
 // ========================================
 // HAM Global Words - Application principale
-// Version finale avec traductions complètes
+// Version finale corrigée - mailto + WhatsApp
 // ========================================
 
 (function() {
@@ -57,218 +57,172 @@
   // ========================================
   const translations = {
     fr: {
-      // Général
       title: "HAM Global Words",
       subtitle: "L'excellence linguistique au service de l'innovation africaine",
       loader_tagline: "Pont entre les langues, connecteur de futurs",
-      
-      // Navigation
       nav_expertise: "Expertise",
       nav_services: "Services",
       nav_portfolio: "Solutions",
       nav_contact: "Contact",
-      
-      // Hero
       hero_title: "Langues • Intelligence Artificielle • Solutions digitales",
-      hero_desc: "Nous accompagnons ONG, institutions internationales et entreprises dans leurs opérations linguistiques, la structuration de données multilingues et le déploiement de solutions digitales adaptées aux réalités africaines.",
-      hero_stats: "📊 +500 projets linguistiques réalisés | 🌍 15+ langues africaines | 🤝 98% de satisfaction client",
-      
-      // Boutons
+      hero_desc: "Nous accompagnons ONG, institutions internationales et entreprises dans leurs opérations linguistiques.",
+      hero_stats: "📊 +500 projets | 🌍 15+ langues | 🤝 98% satisfaction",
       btn_devis: "🚀 Devis gratuit sous 24h",
       btn_services: "📦 Explorer nos services",
-      btn_client: "🔐 Espace client sécurisé",
-      
-      // CEO
+      btn_client: "🔐 Espace client",
       ceo_toggle: "👤 Fondateur",
       ceo_title: "👤 Le fondateur",
       ceo_title_role: "Fondateur & CEO – HAM Global Words",
-      ceo_bio1: "Expert en opérations linguistiques, intelligence artificielle et gestion de projets multiculturels en Afrique.",
-      ceo_bio2: "Fort d'une expérience terrain avec les ONG, institutions internationales et projets tech, je combine rigueur analytique et innovation digitale.",
+      ceo_bio1: "Expert en opérations linguistiques et intelligence artificielle.",
+      ceo_bio2: "Expérience terrain avec ONG et institutions internationales.",
       ceo_expertise_title: "🌍 Domaines d'expertise",
       ceo_exp1: "Annotation linguistique & IA",
-      ceo_exp2: "Interprétation terrain & médiation",
+      ceo_exp2: "Interprétation terrain",
       ceo_exp3: "Gestion de projets multilingues",
       ceo_exp4: "Solutions digitales pour l'Afrique",
       ceo_vision_title: "🚀 Vision",
-      ceo_vision_text: "Intégrer les langues africaines dans les technologies modernes et rendre les solutions digitales accessibles aux réalités locales.",
-      
-      // Expertise
+      ceo_vision_text: "Intégrer les langues africaines dans les technologies modernes.",
       expertise_title: "🎯 Notre expertise",
-      expertise_desc: "HAM Global Words fusionne linguistique de terrain, gestion opérationnelle et technologies IA avancées pour délivrer des solutions fiables, éthiques et adaptées aux environnements complexes. Notre force : l'expérience terrain couplée à l'innovation digitale.",
-      exp_ia_desc: "Structuration, annotation et validation de données multilingues pour modèles NLP, reconnaissance vocale et systèmes d'IA. Qualité garantie par des linguistes experts.",
-      exp_interp_desc: "Communication stratégique entre acteurs internationaux et communautés locales dans des contextes humanitaires, médicaux et institutionnels sensibles.",
-      exp_ops_desc: "Pilotage de projets linguistiques complexes, contrôle qualité, conformité RGPD et optimisation des performances pour des livraisons impeccables.",
-      exp_lang_desc: "Expertise native en langues africaines (Tamasheq, Hausa, Songhay, Zarma, Peulh, Arabe, Français, Anglais) avec adaptation culturelle et précision contextuelle.",
-      
-      // Services
-      services_title: "🛠️ Nos services linguistiques & digitaux",
-      services_desc: "Une couverture complète de la chaîne linguistique, de la traduction classique à l'intelligence artificielle, avec une approche orientée résultats et satisfaction client.",
-      
-      // Portfolio
-      portfolio_title: "🚀 Solutions & produits innovants",
-      portfolio_desc: "Des solutions concrètes, testées sur le terrain, conçues pour répondre aux besoins des ONG, entreprises et projets technologiques opérant en Afrique et à l'international.",
-      portfolio_dict_desc: "Application linguistique multilingue offline dédiée à la valorisation, préservation et structuration des langues africaines menacées.",
-      portfolio_ai_desc: "Création, annotation et validation de données linguistiques pour projets d'IA et technologies vocales. Rejoignez notre programme de collecte rémunérée (10 USDC/heure).",
-      portfolio_saas_desc: "Développement de dashboards clients, systèmes d'upload sécurisé, automatisation des flux et gestion complète de projets linguistiques.",
-      portfolio_sector_desc: "Outils spécialisés pour la santé, l'humanitaire et l'éducation, intégrant langues locales et accessibilité terrain (offline first).",
-      
-      // Contact
-      contact_title: "📤 Envoyez votre demande ou fichier",
+      expertise_desc: "HAM Global Words fusionne linguistique, IA et innovation digitale.",
+      exp_ia_desc: "Structuration et annotation de données multilingues pour l'IA.",
+      exp_interp_desc: "Communication stratégique en contextes sensibles.",
+      exp_ops_desc: "Pilotage de projets linguistiques complexes.",
+      exp_lang_desc: "Expertise native en langues africaines.",
+      services_title: "🛠️ Nos services",
+      services_desc: "Couverture complète de la chaîne linguistique.",
+      portfolio_title: "🚀 Solutions innovantes",
+      portfolio_desc: "Des solutions concrètes testées sur le terrain.",
+      portfolio_dict_desc: "Dictionnaire multilingue offline.",
+      portfolio_ai_desc: "Création de datasets IA.",
+      portfolio_saas_desc: "Plateformes SaaS sur mesure.",
+      portfolio_sector_desc: "Outils santé, humanitaire, éducation.",
+      contact_title: "📤 Envoyez votre demande",
       form_name: "Votre nom complet",
       form_email: "Votre email professionnel",
       form_service: "Sélectionnez un service",
-      form_message: "Décrivez votre projet, vos besoins et vos contraintes...",
-      form_send: "🚀 Envoyer la demande",
-      
-      // Footer
+      form_message: "Décrivez votre projet...",
+      form_send: "🚀 Envoyer",
       footer_text: "Linguistique, IA & Innovation pour l'Afrique",
-      about_btn: "🌍 Qui sommes-nous ?"
+      about_btn: "🌍 Qui sommes-nous ?",
+      file_info: "📎 Fichiers acceptés : PDF, DOCX, TXT (max 5 Mo)",
+      file_heavy: "📁 Fichier plus lourd ? → Transfert WhatsApp",
+      whatsapp_btn: "📱 Envoyer un fichier sur WhatsApp"
     },
     
     en: {
-      // General
       title: "HAM Global Words",
       subtitle: "Linguistic excellence serving African innovation",
       loader_tagline: "Bridging languages, connecting futures",
-      
-      // Navigation
       nav_expertise: "Expertise",
       nav_services: "Services",
       nav_portfolio: "Solutions",
       nav_contact: "Contact",
-      
-      // Hero
-      hero_title: "Languages • Artificial Intelligence • Digital Solutions",
-      hero_desc: "We support NGOs, international institutions and businesses in their linguistic operations, multilingual data structuring, and deployment of digital solutions adapted to African realities.",
-      hero_stats: "📊 +500 linguistic projects completed | 🌍 15+ African languages | 🤝 98% client satisfaction",
-      
-      // Buttons
+      hero_title: "Languages • AI • Digital Solutions",
+      hero_desc: "We support NGOs, institutions and businesses in linguistic operations.",
+      hero_stats: "📊 +500 projects | 🌍 15+ languages | 🤝 98% satisfaction",
       btn_devis: "🚀 Free quote within 24h",
       btn_services: "📦 Explore our services",
-      btn_client: "🔐 Secure client area",
-      
-      // CEO
+      btn_client: "🔐 Client area",
       ceo_toggle: "👤 Founder",
       ceo_title: "👤 The founder",
       ceo_title_role: "Founder & CEO – HAM Global Words",
-      ceo_bio1: "Expert in linguistic operations, artificial intelligence and multicultural project management in Africa.",
-      ceo_bio2: "With field experience alongside NGOs, international institutions and tech projects, I combine analytical rigor and digital innovation.",
+      ceo_bio1: "Expert in linguistic operations and AI.",
+      ceo_bio2: "Field experience with NGOs and institutions.",
       ceo_expertise_title: "🌍 Areas of expertise",
       ceo_exp1: "Linguistic annotation & AI",
-      ceo_exp2: "Field interpretation & mediation",
+      ceo_exp2: "Field interpretation",
       ceo_exp3: "Multilingual project management",
       ceo_exp4: "Digital solutions for Africa",
       ceo_vision_title: "🚀 Vision",
-      ceo_vision_text: "Integrate African languages into modern technologies and make digital solutions accessible to local realities.",
-      
-      // Expertise
+      ceo_vision_text: "Integrate African languages into modern tech.",
       expertise_title: "🎯 Our expertise",
-      expertise_desc: "HAM Global Words combines field linguistics, operational management and advanced AI technologies to deliver reliable, ethical solutions adapted to complex environments. Our strength: field experience coupled with digital innovation.",
-      exp_ia_desc: "Structuring, annotation and validation of multilingual data for NLP models, speech recognition and AI systems. Quality guaranteed by expert linguists.",
-      exp_interp_desc: "Strategic communication between international actors and local communities in sensitive humanitarian, medical and institutional contexts.",
-      exp_ops_desc: "Management of complex linguistic projects, quality control, GDPR compliance and performance optimization for flawless deliveries.",
-      exp_lang_desc: "Native expertise in African languages (Tamasheq, Hausa, Songhay, Zarma, Fulani, Arabic, French, English) with cultural adaptation and contextual precision.",
-      
-      // Services
-      services_title: "🛠️ Our linguistic & digital services",
-      services_desc: "Complete coverage of the linguistic chain, from traditional translation to artificial intelligence, with a results-oriented and customer satisfaction approach.",
-      
-      // Portfolio
-      portfolio_title: "🚀 Innovative solutions & products",
-      portfolio_desc: "Concrete, field-tested solutions designed to meet the needs of NGOs, businesses and technology projects operating in Africa and internationally.",
-      portfolio_dict_desc: "Offline multilingual linguistic application dedicated to the valorization, preservation and structuring of endangered African languages.",
-      portfolio_ai_desc: "Creation, annotation and validation of linguistic data for AI projects and voice technologies. Join our paid collection program (10 USDC/hour).",
-      portfolio_saas_desc: "Development of client dashboards, secure upload systems, workflow automation and complete management of linguistic projects.",
-      portfolio_sector_desc: "Specialized tools for health, humanitarian and education, integrating local languages and field accessibility (offline first).",
-      
-      // Contact
-      contact_title: "📤 Send your request or file",
+      expertise_desc: "Combining linguistics, AI and digital innovation.",
+      exp_ia_desc: "Multilingual data annotation for AI.",
+      exp_interp_desc: "Strategic communication in sensitive contexts.",
+      exp_ops_desc: "Complex linguistic project management.",
+      exp_lang_desc: "Native expertise in African languages.",
+      services_title: "🛠️ Our services",
+      services_desc: "Complete linguistic chain coverage.",
+      portfolio_title: "🚀 Innovative solutions",
+      portfolio_desc: "Field-tested concrete solutions.",
+      portfolio_dict_desc: "Offline multilingual dictionary.",
+      portfolio_ai_desc: "AI dataset creation.",
+      portfolio_saas_desc: "Custom SaaS platforms.",
+      portfolio_sector_desc: "Health, humanitarian, education tools.",
+      contact_title: "📤 Send your request",
       form_name: "Your full name",
       form_email: "Your professional email",
       form_service: "Select a service",
-      form_message: "Describe your project, needs and constraints...",
-      form_send: "🚀 Submit request",
-      
-      // Footer
+      form_message: "Describe your project...",
+      form_send: "🚀 Send",
       footer_text: "Linguistics, AI & Innovation for Africa",
-      about_btn: "🌍 About us?"
+      about_btn: "🌍 About us?",
+      file_info: "📎 Accepted files: PDF, DOCX, TXT (max 5 MB)",
+      file_heavy: "📁 Larger file? → WhatsApp transfer",
+      whatsapp_btn: "📱 Send a file via WhatsApp"
     },
     
-ar: {
-  // General
-  title: "HAM Global Words",
-  subtitle: "التميز اللغوي في خدمة الابتكار الأفريقي",
-  loader_tagline: "جسر اللغات، ربط المستقبل",
-  
-  // Navigation
-  nav_expertise: "الخبرات",
-  nav_services: "الخدمات",
-  nav_portfolio: "الحلول",
-  nav_contact: "اتصل بنا",
-  
-  // Hero
-  hero_title: "اللغات • الذكاء الاصطناعي • الحلول الرقمية",
-  hero_desc: "نرافق المنظمات غير الحكومية والمؤسسات الدولية والشركات في عملياتها اللغوية، وهيكلة البيانات متعددة اللغات، ونشر الحلول الرقمية المتكيفة مع الواقع الأفريقي.",
-  hero_stats: "📊 +500 مشروع لغوي مكتمل | 🌍 15+ لغة أفريقية | 🤝 98% رضا العملاء",
-  
-  // Buttons
-  btn_devis: "🚀 عرض سعر مجاني خلال 24 ساعة",
-  btn_services: "📦 استكشف خدماتنا",
-  btn_client: "🔐 منطقة العملاء الآمنة",
-  
-  // CEO
-  ceo_toggle: "👤 المؤسس",
-  ceo_title: "👤 المؤسس",
-  ceo_title_role: "المؤسس والرئيس التنفيذي – HAM Global Words",
-  ceo_bio1: "خبير في العمليات اللغوية والذكاء الاصطناعي وإدارة المشاريع متعددة الثقافات في أفريقيا.",
-  ceo_bio2: "بفضل الخبرة الميدانية مع المنظمات غير الحكومية والمؤسسات الدولية والمشاريع التقنية، أجمع بين الدقة التحليلية والابتكار الرقمي.",
-  ceo_expertise_title: "🌍 مجالات الخبرة",
-  ceo_exp1: "الوسم اللغوي والذكاء الاصطناعي",
-  ceo_exp2: "الترجمة الفورية الميدانية والوساطة",
-  ceo_exp3: "إدارة المشاريع متعددة اللغات",
-  ceo_exp4: "الحلول الرقمية لأفريقيا",
-  ceo_vision_title: "🚀 الرؤية",
-  ceo_vision_text: "دمج اللغات الأفريقية في التقنيات الحديثة وجعل الحلول الرقمية في متناول الواقع المحلي.",
-  
-  // Expertise
-  expertise_title: "🎯 خبراتنا",
-  expertise_desc: "تجمع HAM Global Words بين الخبرة اللغوية الميدانية والإدارة التشغيلية وتقنيات الذكاء الاصطناعي المتقدمة لتقديم حلول موثوقة وأخلاقية تتكيف مع البيئات المعقدة.",
-  exp_ia_desc: "هيكلة ووسم والتحقق من صحة البيانات متعددة اللغات لنماذج معالجة اللغة الطبيعية والتعرف على الصوت وأنظمة الذكاء الاصطناعي.",
-  exp_interp_desc: "التواصل الاستراتيجي بين الفاعلين الدوليين والمجتمعات المحلية في السياقات الإنسانية والطبية والمؤسسية الحساسة.",
-  exp_ops_desc: "إدارة المشاريع اللغوية المعقدة ومراقبة الجودة والامتثال للقانون العام لحماية البيانات وتحسين الأداء.",
-  exp_lang_desc: "خبرة أصلية في اللغات الأفريقية (طماشق، الهوسا، السونغاي، الزرما، الفولانية، العربية، الفرنسية، الإنجليزية) مع التكيف الثقافي والدقة السياقية.",
-  
-  // Services
-  services_title: "🛠️ خدماتنا اللغوية والرقمية",
-  services_desc: "تغطية كاملة للسلسلة اللغوية، من الترجمة التقليدية إلى الذكاء الاصطناعي، مع نهج موجه نحو النتائج ورضا العملاء.",
-  
-  // Portfolio
-  portfolio_title: "🚀 حلول ومنتجات مبتكرة",
-  portfolio_desc: "حلول ملموسة، تم اختبارها ميدانياً، مصممة لتلبية احتياجات المنظمات غير الحكومية والشركات والمشاريع التقنية العاملة في أفريقيا وعلى المستوى الدولي.",
-  portfolio_dict_desc: "تطبيق لغوي متعدد اللغات يعمل دون اتصال بالإنترنت مخصص لتثمين والحفاظ وهيكلة اللغات الأفريقية المهددة بالانقراض.",
-  portfolio_ai_desc: "إنشاء ووسم والتحقق من صحة البيانات اللغوية لمشاريع الذكاء الاصطناعي وتقنيات الصوت. انضم إلى برنامج جمعنا المدفوع (10 USDC/ساعة).",
-  portfolio_saas_desc: "تطوير لوحات تحكم العملاء وأنظمة الرفع الآمن وأتمتة سير العمل والإدارة الكاملة للمشاريع اللغوية.",
-  portfolio_sector_desc: "أدوات متخصصة للصحة والعمل الإنساني والتعليم، تدمج اللغات المحلية وإمكانية الوصول الميداني (دون اتصال أولاً).",
-  
-  // Contact
-  contact_title: "📤 أرسل طلبك أو ملفك",
-  form_name: "الاسم الكامل",
-  form_email: "البريد الإلكتروني المهني",
-  form_service: "اختر خدمة",
-  form_message: "صِف مشروعك واحتياجاتك وقيودك...",
-  form_send: "🚀 إرسال الطلب",
-  
-  // Footer
-  footer_text: "اللغويات والذكاء الاصطناعي والابتكار لأفريقيا",
-  about_btn: "🌍 من نحن؟"
-}
+    ar: {
+      title: "HAM Global Words",
+      subtitle: "التميز اللغوي لخدمة الابتكار في أفريقيا",
+      loader_tagline: "جسر اللغات، ربط المستقبل",
+      nav_expertise: "خبراتنا",
+      nav_services: "خدماتنا",
+      nav_portfolio: "حلولنا",
+      nav_contact: "اتصل بنا",
+      hero_title: "اللغات • الذكاء الاصطناعي • الحلول الرقمية",
+      hero_desc: "نرافق المؤسسات في عملياتها اللغوية.",
+      hero_stats: "📊 +500 مشروع | 🌍 15+ لغة | 🤝 98% رضا",
+      btn_devis: "🚀 عرض سعر مجاني",
+      btn_services: "📦 خدماتنا",
+      btn_client: "🔐 منطقة العملاء",
+      ceo_toggle: "👤 المؤسس",
+      ceo_title: "👤 المؤسس",
+      ceo_title_role: "المؤسس والرئيس التنفيذي",
+      ceo_bio1: "خبير في العمليات اللغوية والذكاء الاصطناعي.",
+      ceo_bio2: "خبرة ميدانية مع المنظمات الدولية.",
+      ceo_expertise_title: "🌍 مجالات الخبرة",
+      ceo_exp1: "الوسم اللغوي والذكاء الاصطناعي",
+      ceo_exp2: "الترجمة الفورية الميدانية",
+      ceo_exp3: "إدارة المشاريع متعددة اللغات",
+      ceo_exp4: "الحلول الرقمية لأفريقيا",
+      ceo_vision_title: "🚀 الرؤية",
+      ceo_vision_text: "دمج اللغات الأفريقية في التقنيات الحديثة.",
+      expertise_title: "🎯 خبراتنا",
+      expertise_desc: "نحن نقدم حلولاً لغوية ورقمية متكاملة.",
+      exp_ia_desc: "هيكلة البيانات للذكاء الاصطناعي.",
+      exp_interp_desc: "تواصل استراتيجي في السياقات الحساسة.",
+      exp_ops_desc: "إدارة المشاريع اللغوية.",
+      exp_lang_desc: "خبرة في اللغات الأفريقية.",
+      services_title: "🛠️ خدماتنا",
+      services_desc: "تغطية كاملة للسلسلة اللغوية.",
+      portfolio_title: "🚀 حلولنا",
+      portfolio_desc: "حلول ملموسة تم اختبارها.",
+      portfolio_dict_desc: "قاموس لغوي متعدد اللغات.",
+      portfolio_ai_desc: "بيانات للذكاء الاصطناعي.",
+      portfolio_saas_desc: "منصات SaaS مخصصة.",
+      portfolio_sector_desc: "أدوات للصحة والتعليم.",
+      contact_title: "📤 أرسل طلبك",
+      form_name: "الاسم الكامل",
+      form_email: "البريد الإلكتروني",
+      form_service: "اختر خدمة",
+      form_message: "صِف مشروعك...",
+      form_send: "🚀 إرسال",
+      footer_text: "اللغويات والذكاء الاصطناعي لأفريقيا",
+      about_btn: "🌍 من نحن؟",
+      file_info: "📎 الملفات المقبولة: PDF، DOCX، TXT (حد أقصى 5 ميغابايت)",
+      file_heavy: "📁 ملف أكبر؟ → إرسال عبر واتساب",
+      whatsapp_btn: "📱 إرسال ملف عبر واتساب"
+    }
+  };  // <--- Accolade fermante de translations
+
   // ========================================
   // DOM READY
   // ========================================
   document.addEventListener("DOMContentLoaded", () => {
 
     // ========================================
-    // LOADER (amélioré)
+    // LOADER
     // ========================================
     const loader = document.getElementById("loader");
     if (loader) {
@@ -291,7 +245,7 @@ ar: {
     }
 
     // ========================================
-    // THEME SYSTEM (amélioré)
+    // THEME SYSTEM
     // ========================================
     const themeToggle = document.getElementById('themeToggle');
     const body = document.body;
@@ -331,7 +285,6 @@ ar: {
     function applyLanguage(lang) {
       const dict = translations[lang] || translations.fr;
       
-      // Mise à jour des éléments avec data-key
       document.querySelectorAll("[data-key]").forEach(el => {
         const key = el.dataset.key;
         if (dict[key] !== undefined) {
@@ -343,23 +296,28 @@ ar: {
         }
       });
       
-      // Mise à jour des attributs placeholder spécifiques
       document.querySelectorAll("[data-placeholder]").forEach(el => {
         const key = el.dataset.placeholder;
         if (dict[key]) el.placeholder = dict[key];
       });
       
-      // Mise à jour du loader tagline
       const loaderTagline = document.querySelector('#loader p');
       if (loaderTagline && dict.loader_tagline) {
         loaderTagline.textContent = dict.loader_tagline;
       }
       
-      // Direction RTL pour l'arabe
+      // Mise à jour des messages info
+      const fileInfoEl = document.querySelector('.file-info');
+      const fileHeavyEl = document.querySelector('.file-heavy');
+      const whatsappBtnEl = document.querySelector('.whatsapp-btn-text');
+      
+      if (fileInfoEl && dict.file_info) fileInfoEl.textContent = dict.file_info;
+      if (fileHeavyEl && dict.file_heavy) fileHeavyEl.textContent = dict.file_heavy;
+      if (whatsappBtnEl && dict.whatsapp_btn) whatsappBtnEl.textContent = dict.whatsapp_btn;
+      
       document.documentElement.dir = lang === "ar" ? "rtl" : "ltr";
       document.documentElement.lang = lang;
       
-      // Mise à jour du sélecteur
       const langSwitcher = document.getElementById("langSwitcher");
       if (langSwitcher && langSwitcher.value !== lang) {
         langSwitcher.value = lang;
@@ -379,7 +337,6 @@ ar: {
       });
     }
 
-    // Application initiale de la langue
     applyLanguage(currentLang);
 
     // ========================================
@@ -389,7 +346,7 @@ ar: {
     if (yearEl) yearEl.textContent = new Date().getFullYear();
 
     // ========================================
-    // SMOOTH SCROLL (amélioré)
+    // SMOOTH SCROLL
     // ========================================
     document.querySelectorAll('a[href^="#"]:not([href="#"])').forEach(link => {
       link.addEventListener('click', (e) => {
@@ -411,7 +368,7 @@ ar: {
     });
 
     // ========================================
-    // INTERSECTION OBSERVER (animations)
+    // INTERSECTION OBSERVER
     // ========================================
     const observer = new IntersectionObserver((entries) => {
       entries.forEach(entry => {
@@ -426,67 +383,113 @@ ar: {
     });
 
     // ========================================
-    // FORMULAIRE DE CONTACT (amélioré)
+    // FORMULAIRE DE CONTACT (mailto + WhatsApp)
     // ========================================
     const contactForm = document.getElementById('contactForm');
+    const WHATSAPP_NUMBER = "22786762903";
+    const MAX_SIZE_MB = 5;
     
     if (contactForm) {
-      // Validation taille fichier
+      
+      // Validation de la taille du fichier à la sélection
       const fileInput = contactForm.querySelector('input[type="file"]');
       if (fileInput) {
         fileInput.addEventListener('change', () => {
           const file = fileInput.files[0];
-          if (file && file.size > 5 * 1024 * 1024) {
-            alert('Le fichier ne doit pas dépasser 5 Mo.');
-            fileInput.value = '';
+          if (file && file.size > MAX_SIZE_MB * 1024 * 1024) {
+            const sizeMB = (file.size / 1024 / 1024).toFixed(1);
+            const msg = currentLang === 'fr' 
+              ? `📁 Fichier de ${sizeMB} Mo détecté.\n\nIl dépasse la limite de ${MAX_SIZE_MB} Mo.\n\nIl sera envoyé via WhatsApp.`
+              : currentLang === 'en'
+              ? `📁 ${sizeMB} MB file detected.\n\nIt exceeds the ${MAX_SIZE_MB} MB limit.\n\nIt will be sent via WhatsApp.`
+              : `📁 تم اكتشاف ملف بحجم ${sizeMB} ميغابايت.\n\nيتجاوز الحد الأقصى ${MAX_SIZE_MB} ميغابايت.\n\nسيتم إرساله عبر واتساب.`;
+            alert(msg);
           }
         });
       }
       
+      // Soumission du formulaire
       contactForm.addEventListener('submit', (e) => {
+        e.preventDefault();
+        
         const name = contactForm.querySelector('[name="name"]')?.value.trim();
         const email = contactForm.querySelector('[name="email"]')?.value.trim();
+        const service = contactForm.querySelector('[name="service"]')?.value;
         const message = contactForm.querySelector('[name="message"]')?.value.trim();
+        const file = contactForm.querySelector('[name="file"]')?.files[0];
         
+        // Validation
         if (!name || !email || !message) {
-          e.preventDefault();
-          const errorMsg = currentLang === 'fr' ? 'Veuillez remplir tous les champs obligatoires (nom, email, message).' :
-                           currentLang === 'en' ? 'Please fill in all required fields (name, email, message).' :
-                           'الرجاء ملء جميع الحقول المطلوبة (الاسم، البريد الإلكتروني، الرسالة).';
+          const errorMsg = currentLang === 'fr' 
+            ? 'Veuillez remplir tous les champs obligatoires.'
+            : currentLang === 'en'
+            ? 'Please fill in all required fields.'
+            : 'الرجاء ملء جميع الحقول المطلوبة.';
           alert(errorMsg);
-          return false;
+          return;
         }
         
-        if (!email.includes('@') || !email.includes('.')) {
-          e.preventDefault();
-          const errorMsg = currentLang === 'fr' ? 'Veuillez entrer un email valide.' :
-                           currentLang === 'en' ? 'Please enter a valid email.' :
-                           'الرجاء إدخال بريد إلكتروني صالح.';
+        if (!email.includes('@')) {
+          const errorMsg = currentLang === 'fr' 
+            ? 'Email invalide.'
+            : currentLang === 'en'
+            ? 'Invalid email.'
+            : 'بريد إلكتروني غير صالح.';
           alert(errorMsg);
-          return false;
+          return;
         }
         
-        // Indicateur de chargement
-        const submitBtn = contactForm.querySelector('button[type="submit"]');
-        if (submitBtn) {
-          submitBtn.disabled = true;
-          const loadingText = currentLang === 'fr' ? '⏳ Envoi en cours...' :
-                              currentLang === 'en' ? '⏳ Sending...' :
-                              '⏳ جاري الإرسال...';
-          submitBtn.textContent = loadingText;
-          setTimeout(() => {
-            submitBtn.disabled = false;
-            const sendText = translations[currentLang]?.form_send || '🚀 Envoyer';
-            submitBtn.textContent = sendText;
-          }, 5000);
+        // Construction de l'email
+        let subject = `[HAM Global Words] Demande ${service} - ${name}`;
+        let body = `Nom: ${name}\nEmail: ${email}\nService: ${service}\n\nMessage:\n${message}`;
+        
+        let useWhatsApp = false;
+        
+        if (file) {
+          const fileSizeMB = file.size / 1024 / 1024;
+          body += `\n\n📎 Fichier: ${file.name} (${fileSizeMB.toFixed(2)} Mo)`;
+          
+          if (fileSizeMB > MAX_SIZE_MB) {
+            useWhatsApp = true;
+            body += `\n\n📁 FICHIER LOURD - À envoyer via WhatsApp: https://wa.me/${WHATSAPP_NUMBER}`;
+          } else {
+            body += `\n\n⚠️ Pièce jointe non supportée par email.`;
+            body += `\n➡️ Envoyez le fichier via WhatsApp: https://wa.me/${WHATSAPP_NUMBER}`;
+          }
         }
         
-        return true;
+        // Confirmation et envoi
+        const confirmMsg = currentLang === 'fr'
+          ? 'Envoyer votre demande par email ?'
+          : currentLang === 'en'
+          ? 'Send your request by email?'
+          : 'إرسال طلبك عبر البريد الإلكتروني؟';
+        
+        if (confirm(confirmMsg)) {
+          // Envoi email
+          window.location.href = `mailto:hamadineagmoctar@gmail.com?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
+          
+          // Proposition WhatsApp si fichier
+          if (file) {
+            setTimeout(() => {
+              const whatsappMsg = currentLang === 'fr'
+                ? `Souhaitez-vous envoyer le fichier "${file.name}" via WhatsApp ?`
+                : currentLang === 'en'
+                ? `Do you want to send the file "${file.name}" via WhatsApp?`
+                : `هل تريد إرسال الملف "${file.name}" عبر واتساب؟`;
+              
+              if (confirm(whatsappMsg)) {
+                const waText = `*Nouvelle demande HAM Global Words*\n\n👤 Nom: ${name}\n📧 Email: ${email}\n🛠️ Service: ${service}\n📝 Message: ${message}\n\n📎 Fichier: ${file.name} (${(file.size/1024/1024).toFixed(1)} Mo)`;
+                window.open(`https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent(waText)}`, '_blank');
+              }
+            }, 500);
+          }
+        }
       });
     }
 
     // ========================================
-    // TOGGLE CEO (amélioré)
+    // TOGGLE CEO
     // ========================================
     const toggleBtn = document.getElementById("toggleCEO");
     const ceoSection = document.getElementById("ceoSection");
@@ -507,15 +510,8 @@ ar: {
     }
 
     // ========================================
-    // AUTHENTIFICATION (prototype uniquement)
+    // AUTHENTIFICATION
     // ========================================
-    if (window.location.pathname.includes('login.html') || 
-        window.location.pathname.includes('register.html') ||
-        window.location.pathname.includes('dashboard.html')) {
-      console.warn('⚠️ L\'authentification utilise localStorage (non sécurisé). Pour la production, utilisez un backend.');
-    }
-    
-    // REGISTER
     const registerForm = document.getElementById("registerForm");
     if (registerForm) {
       registerForm.addEventListener("submit", (e) => {
@@ -541,15 +537,12 @@ ar: {
           return;
         }
         
-        const user = { name, email, password };
-        storage.setJSON("user", user);
-        
-        alert("Compte créé avec succès ! Vous pouvez vous connecter.");
+        storage.setJSON("user", { name, email, password });
+        alert("Compte créé avec succès !");
         window.location.href = "login.html";
       });
     }
     
-    // LOGIN
     const loginForm = document.getElementById("loginForm");
     if (loginForm) {
       loginForm.addEventListener("submit", (e) => {
@@ -569,7 +562,6 @@ ar: {
       });
     }
     
-    // PROTECT DASHBOARD
     if (window.location.pathname.includes("dashboard.html")) {
       const isLogged = storage.get("isLogged", null);
       if (!isLogged) {
@@ -583,19 +575,15 @@ ar: {
       }
     }
     
-    // LOGOUT
     window.logout = function() {
       storage.remove("isLogged");
       storage.remove("loggedUserEmail");
       window.location.href = "index.html";
     };
     
-    // ========================================
-    // GESTION DES ERREURS GLOBALES
-    // ========================================
     window.addEventListener('error', (e) => {
       console.error('Global error:', e.error);
     });
     
-  }); // Fin DOMContentLoaded
-})(); // Fin IIFE
+  });
+})();
