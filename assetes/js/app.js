@@ -56,64 +56,67 @@
   // TRADUCTIONS COMPLÈTES (3 langues)
   // ========================================
   const translations = {
-fr: {
-  title: "HAM Global Words",
-  dev_badge: "EN EXPANSION",
-  dev_message: "Plateforme opérationnelle — Nouvelles fonctionnalités et services linguistiques à venir",
-  subtitle: "L'excellence linguistique au service de l'innovation africaine",
-  loader_tagline: "Pont entre les langues, connecteur de futurs",
-  nav_expertise: "Expertise",
-  nav_services: "Services",
-  nav_portfolio: "Solutions",
-  nav_contact: "Contact",
-  hero_title: "Langues • Intelligence Artificielle • Solutions digitales",
-  hero_desc: "Nous accompagnons ONG, institutions internationales et entreprises dans leurs opérations linguistiques.",
-  hero_stats: "📊 +500 projets | 🌍 15+ langues | 🤝 98% satisfaction",
-  btn_devis: "🚀 Devis gratuit sous 24h",
-  btn_services: "📦 Explorer nos services",
-  btn_client: "🔐 Espace client",
-  ceo_toggle: "👤 Fondateur",
-  ceo_title: "👤 Le fondateur",
-  ceo_title_role: "Fondateur & CEO – HAM Global Words",
-  ceo_bio1: "Expert en opérations linguistiques et intelligence artificielle.",
-  ceo_bio2: "Expérience terrain avec ONG et institutions internationales.",
-  ceo_expertise_title: "🌍 Domaines d'expertise",
-  ceo_exp1: "Annotation linguistique & IA",
-  ceo_exp2: "Interprétation terrain",
-  ceo_exp3: "Gestion de projets multilingues",
-  ceo_exp4: "Solutions digitales pour l'Afrique",
-  ceo_vision_title: "🚀 Vision",
-  ceo_vision_text: "Intégrer les langues africaines dans les technologies modernes.",
-  expertise_title: "🎯 Notre expertise",
-  expertise_desc: "HAM Global Words fusionne linguistique, IA et innovation digitale.",
-  exp_ia_desc: "Structuration et annotation de données multilingues pour l'IA.",
-  exp_interp_desc: "Communication stratégique en contextes sensibles.",
-  exp_ops_desc: "Pilotage de projets linguistiques complexes.",
-  exp_lang_desc: "Expertise native en langues africaines.",
-  services_title: "🛠️ Nos services",
-  services_desc: "Couverture complète de la chaîne linguistique.",
-  portfolio_title: "🚀 Solutions innovantes",
-  portfolio_desc: "Des solutions concrètes testées sur le terrain.",
-  portfolio_dict_desc: "Dictionnaire multilingue offline.",
-  portfolio_ai_desc: "Création de datasets IA.",
-  portfolio_saas_desc: "Plateformes SaaS sur mesure.",
-  portfolio_sector_desc: "Outils santé, humanitaire, éducation.",
-  contact_title: "📤 Envoyez votre demande",
-  form_name: "Votre nom complet",
-  form_email: "Votre email professionnel",
-  form_service: "Sélectionnez un service",
-  form_message: "Décrivez votre projet...",
-  form_send: "🚀 Envoyer",
-  footer_text: "Linguistique, IA & Innovation pour l'Afrique",
-  about_btn: "🌍 Qui sommes-nous ?",
-  file_info: "📎 Fichiers acceptés : PDF, DOCX, TXT (max 5 Mo)",
-  file_heavy: "📁 Fichier plus lourd ? → Transfert WhatsApp",
-  whatsapp_btn: "📱 Envoyer un fichier sur WhatsApp"
-},
+    fr: {
+      title: "HAM Global Words",
+      dev_badge: "EN EXPANSION",
+      dev_message: "Plateforme opérationnelle — Nouvelles fonctionnalités et services linguistiques à venir",
+      dev_close: "Fermer",
+      subtitle: "L'excellence linguistique au service de l'innovation africaine",
+      loader_tagline: "Pont entre les langues, connecteur de futurs",
+      nav_expertise: "Expertise",
+      nav_services: "Services",
+      nav_portfolio: "Solutions",
+      nav_contact: "Contact",
+      hero_title: "Langues • Intelligence Artificielle • Solutions digitales",
+      hero_desc: "Nous accompagnons ONG, institutions internationales et entreprises dans leurs opérations linguistiques.",
+      hero_stats: "📊 +500 projets | 🌍 15+ langues | 🤝 98% satisfaction",
+      btn_devis: "🚀 Devis gratuit sous 24h",
+      btn_services: "📦 Explorer nos services",
+      btn_client: "🔐 Espace client",
+      ceo_toggle: "👤 Fondateur",
+      ceo_title: "👤 Le fondateur",
+      ceo_title_role: "Fondateur & CEO – HAM Global Words",
+      ceo_bio1: "Expert en opérations linguistiques et intelligence artificielle.",
+      ceo_bio2: "Expérience terrain avec ONG et institutions internationales.",
+      ceo_expertise_title: "🌍 Domaines d'expertise",
+      ceo_exp1: "Annotation linguistique & IA",
+      ceo_exp2: "Interprétation terrain",
+      ceo_exp3: "Gestion de projets multilingues",
+      ceo_exp4: "Solutions digitales pour l'Afrique",
+      ceo_vision_title: "🚀 Vision",
+      ceo_vision_text: "Intégrer les langues africaines dans les technologies modernes.",
+      expertise_title: "🎯 Notre expertise",
+      expertise_desc: "HAM Global Words fusionne linguistique, IA et innovation digitale.",
+      exp_ia_desc: "Structuration et annotation de données multilingues pour l'IA.",
+      exp_interp_desc: "Communication stratégique en contextes sensibles.",
+      exp_ops_desc: "Pilotage de projets linguistiques complexes.",
+      exp_lang_desc: "Expertise native en langues africaines.",
+      services_title: "🛠️ Nos services",
+      services_desc: "Couverture complète de la chaîne linguistique.",
+      portfolio_title: "🚀 Solutions innovantes",
+      portfolio_desc: "Des solutions concrètes testées sur le terrain.",
+      portfolio_dict_desc: "Dictionnaire multilingue offline.",
+      portfolio_ai_desc: "Création de datasets IA.",
+      portfolio_saas_desc: "Plateformes SaaS sur mesure.",
+      portfolio_sector_desc: "Outils santé, humanitaire, éducation.",
+      contact_title: "📤 Envoyez votre demande",
+      form_name: "Votre nom complet",
+      form_email: "Votre email professionnel",
+      form_service: "Sélectionnez un service",
+      form_message: "Décrivez votre projet...",
+      form_send: "🚀 Envoyer",
+      footer_text: "Linguistique, IA & Innovation pour l'Afrique",
+      about_btn: "🌍 Qui sommes-nous ?",
+      file_info: "📎 Fichiers acceptés : PDF, DOCX, TXT (max 5 Mo)",
+      file_heavy: "📁 Fichier plus lourd ? → Transfert WhatsApp",
+      whatsapp_btn: "📱 Envoyer un fichier sur WhatsApp"
+    },
+    
     en: {
       title: "HAM Global Words",
-dev_badge: "EXPANDING", 
-dev_message: "Platform operational — New features and linguistic services coming soon",
+      dev_badge: "EXPANDING",
+      dev_message: "Platform operational — New features and linguistic services coming soon",
+      dev_close: "Close",
       subtitle: "Linguistic excellence serving African innovation",
       loader_tagline: "Bridging languages, connecting futures",
       nav_expertise: "Expertise",
@@ -167,8 +170,9 @@ dev_message: "Platform operational — New features and linguistic services comi
     
     ar: {
       title: "HAM Global Words",
-dev_message: "المنصة تعمل — ميزات وخدمات لغوية جديدة قريباً",
-dev_badge: "قيد التوسع", 
+      dev_badge: "قيد التوسع",
+      dev_message: "المنصة تعمل — ميزات وخدمات لغوية جديدة قريباً",
+      dev_close: "إغلاق",
       subtitle: "التميز اللغوي لخدمة الابتكار في أفريقيا",
       loader_tagline: "جسر اللغات، ربط المستقبل",
       nav_expertise: "خبراتنا",
@@ -219,7 +223,7 @@ dev_badge: "قيد التوسع",
       file_heavy: "📁 ملف أكبر؟ → إرسال عبر واتساب",
       whatsapp_btn: "📱 إرسال ملف عبر واتساب"
     }
-  };  // <--- Accolade fermante de translations
+  };
 
   // ========================================
   // DOM READY
@@ -473,6 +477,18 @@ dev_badge: "قيد التوسع",
         if (confirm(confirmMsg)) {
           // Envoi email
           window.location.href = `mailto:hamadineagmoctar@gmail.com?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
+          
+          // Sauvegarde dans l'historique
+          if (typeof saveRequestToHistory === 'function') {
+            saveRequestToHistory({
+              name: name,
+              email: email,
+              service: service,
+              message: message,
+              file: file ? file.name : null,
+              status: 'sent'
+            });
+          }
           
           // Proposition WhatsApp si fichier
           if (file) {
