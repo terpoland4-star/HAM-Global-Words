@@ -9,90 +9,221 @@
   <link rel="icon" href="assetes/img/logo.png">
   <style>
     .dashboard-container { max-width: 1200px; margin: 0 auto; padding: 2rem; }
-    .dashboard-header { display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; margin-bottom: 2rem; }
+    .dashboard-header { display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; margin-bottom: 2rem; gap: 1rem; }
     .welcome-card { background: linear-gradient(135deg, rgba(99,102,241,0.2), rgba(34,197,94,0.1)); padding: 2rem; border-radius: 20px; margin-bottom: 2rem; }
-    .stats-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 1.5rem; margin-bottom: 2rem; }
-    .stat-card { text-align: center; padding: 1.5rem; }
-    .stat-number { font-size: 2.5rem; font-weight: 800; background: linear-gradient(135deg, #6366F1, #22C55E); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
-    .recent-list { list-style: none; padding: 0; }
-    .recent-list li { padding: 0.75rem 0; border-bottom: 1px solid rgba(255,255,255,0.1); }
-    .logout-btn { background: linear-gradient(135deg, #dc2626, #b91c1c); }
-    .logout-btn:hover { background: linear-gradient(135deg, #ef4444, #dc2626); }
+    .action-buttons { display: flex; gap: 0.5rem; flex-wrap: wrap; }
+    .action-btn { padding: 0.4rem 1rem; font-size: 0.8rem; }
+    .section-title { margin: 2rem 0 1rem 0; }
   </style>
 </head>
 <body class="dark-mode">
 
 <div class="lang-switcher">
-  <select id="langSwitcher" aria-label="Changer la langue">
+  <select id="langSwitcher">
     <option value="fr">🇫🇷 Français</option>
     <option value="en">🇬🇧 English</option>
     <option value="ar">🇸🇦 العربية</option>
   </select>
 </div>
 
-<button id="themeToggle" aria-label="Changer le thème">🌙</button>
+<button id="themeToggle">🌙</button>
 
 <div class="dashboard-container">
   <div class="dashboard-header">
     <img src="assetes/img/logoHAM.png" alt="Logo" style="width: 50px; border-radius: 50%;">
-    <h1 data-key="dashboard_title">📊 Tableau de bord</h1>
-    <button onclick="logout()" class="cta-btn logout-btn" data-key="logout_btn">🚪 Déconnexion</button>
+    <h1>📊 Tableau de bord</h1>
+    <div class="action-buttons">
+      <button onclick="window.location.href='index.html'" class="cta-btn secondary action-btn">🏠 Accueil</button>
+      <button onclick="window.location.href='history.html'" class="cta-btn secondary action-btn">📋 Historique</button>
+      <button onclick="logout()" class="cta-btn action-btn" style="background: #ef4444;">🚪 Déconnexion</button>
+    </div>
   </div>
   
   <div class="welcome-card">
-    <h2 data-key="welcome_title">👋 Bonjour, <span id="userName">Client</span> !</h2>
-    <p data-key="welcome_desc">Bienvenue sur votre espace client HAM Global Words. Gérez vos projets linguistiques et suivez vos demandes en temps réel.</p>
+    <h2>👋 Bonjour, <span id="userName">Client</span> !</h2>
+    <p>Bienvenue sur votre espace client HAM Global Words. Gérez vos projets linguistiques et suivez vos demandes en temps réel.</p>
   </div>
   
-  <div class="stats-grid">
-    <div class="card stat-card"><div class="stat-number" id="projectsCount">0</div><p data-key="stat_projects">Projets en cours</p></div>
-    <div class="card stat-card"><div class="stat-number" id="quotesCount">0</div><p data-key="stat_quotes">Devis en attente</p></div>
-    <div class="card stat-card"><div class="stat-number" id="messagesCount">0</div><p data-key="stat_messages">Messages</p></div>
+  <div id="statsContainer" class="stats-grid"></div>
+  
+  <div style="display: flex; gap: 1rem; justify-content: center; flex-wrap: wrap; margin-bottom: 2rem;">
+    <button onclick="exportUserData()" class="cta-btn export-btn">📥 Exporter mes données</button>
+    <button onclick="toggleFocusMode()" class="cta-btn secondary">🎯 Mode Focus</button>
+    <button onclick="if(confirm('Créer des données de démonstration ?')) enableDemoMode()" class="cta-btn secondary">🎬 Mode Démo</button>
+    <button onclick="showQRCode()" class="cta-btn secondary">📱 QR Code</button>
+    <button onclick="exportToPDF()" class="cta-btn secondary">📄 Export PDF</button>
   </div>
   
   <div class="card">
-    <h3 data-key="recent_title">📋 Dernières activités</h3>
-    <ul class="recent-list" id="recentActivities">
-      <li data-key="no_activity">Aucune activité récente</li>
-    </ul>
+    <h3>📋 Demandes récentes</h3>
+    <div id="recentHistory"></div>
+    <a href="history.html" class="cta-btn secondary" style="margin-top: 1rem;">Voir tout l'historique →</a>
   </div>
   
-  <div style="margin-top: 2rem; text-align: center;">
-    <a href="index.html" class="cta-btn secondary" data-key="back_home">← Retour au site</a>
+  <div class="card" style="margin-top: 2rem;">
+    <h3>🏆 Mes badges</h3>
+    <div id="badgesContainer"></div>
+  </div>
+  
+  <div class="card" style="margin-top: 2rem;">
+    <h3>📝 Notes personnelles</h3>
+    <textarea id="noteInput" placeholder="Écrivez une note..." rows="2" style="margin-bottom: 0.5rem;"></textarea>
+    <button onclick="saveNote(document.getElementById('noteInput').value); document.getElementById('noteInput').value=''; displayNotes('notesList');" class="cta-btn" style="width: auto;">➕ Ajouter</button>
+    <div id="notesList" style="margin-top: 1rem;"></div>
+  </div>
+  
+  <div class="card" style="margin-top: 2rem;">
+    <h3>✅ Liste des tâches</h3>
+    <div style="display: flex; gap: 0.5rem; flex-wrap: wrap; margin-bottom: 1rem;">
+      <input type="text" id="todoInput" placeholder="Nouvelle tâche..." style="flex: 1;">
+      <input type="date" id="todoDate" style="width: auto;">
+      <button onclick="addTodo(document.getElementById('todoInput').value, document.getElementById('todoDate').value); document.getElementById('todoInput').value=''; displayTodos('todosList');" class="cta-btn" style="width: auto;">➕</button>
+    </div>
+    <div id="todosList"></div>
+  </div>
+  
+  <div class="card" style="margin-top: 2rem;">
+    <h3>📅 Calendrier d'activité</h3>
+    <div id="calendarContainer"></div>
+  </div>
+  
+  <div class="card" style="margin-top: 2rem;">
+    <h3>🔔 Rappel programmé</h3>
+    <div style="display: flex; gap: 0.5rem; flex-wrap: wrap;">
+      <input type="text" id="reminderMessage" placeholder="Message du rappel..." style="flex: 2;">
+      <select id="reminderDays">
+        <option value="1">Dans 1 jour</option>
+        <option value="3">Dans 3 jours</option>
+        <option value="7">Dans 7 jours</option>
+        <option value="14">Dans 14 jours</option>
+        <option value="30">Dans 30 jours</option>
+      </select>
+      <button onclick="scheduleReminder(document.getElementById('reminderMessage').value, parseInt(document.getElementById('reminderDays').value)); document.getElementById('reminderMessage').value='';" class="cta-btn">⏰ Programmer</button>
+    </div>
+  </div>
+  
+  <div class="card" style="margin-top: 2rem;">
+    <h3>🎨 Thèmes</h3>
+    <div style="display: flex; gap: 0.5rem; flex-wrap: wrap;">
+      <button onclick="applyTheme('dark')" class="cta-btn secondary">🌙 Sombre</button>
+      <button onclick="applyTheme('light')" class="cta-btn secondary">☀️ Clair</button>
+      <button onclick="applyTheme('blue')" class="cta-btn secondary">💙 Bleu</button>
+      <button onclick="applyTheme('purple')" class="cta-btn secondary">💜 Violet</button>
+    </div>
+  </div>
+  
+  <div class="card" style="margin-top: 2rem;">
+    <h3>📝 Templates rapides</h3>
+    <div style="display: flex; gap: 0.5rem; flex-wrap: wrap;">
+      <button onclick="applyTemplate('devis')" class="template-btn">📄 Devis</button>
+      <button onclick="applyTemplate('traduction')" class="template-btn">🌐 Traduction</button>
+      <button onclick="applyTemplate('formation')" class="template-btn">🎓 Formation</button>
+      <button onclick="applyTemplate('interpretation')" class="template-btn">🎙️ Interprétation</button>
+      <button onclick="applyTemplate('annotation')" class="template-btn">🧠 Annotation</button>
+    </div>
   </div>
 </div>
 
-<script src="assetes/js/app.js" defer></script>
+<footer class="footer">
+  <p>© <span id="year"></span> HAM Global Words</p>
+  <div class="footer-logo">
+    <img src="assetes/img/HAM.png" alt="HAM Global Words" loading="lazy">
+  </div>
+</footer>
+
+<script src="assetes/js/app.js"></script>
+<script src="assetes/js/enhancements.js"></script>
 
 <script>
-  const dashboardTranslations = {
-    fr: { dashboard_title: "📊 Tableau de bord", welcome_title: "👋 Bonjour,", welcome_desc: "Bienvenue sur votre espace client HAM Global Words. Gérez vos projets linguistiques et suivez vos demandes en temps réel.", stat_projects: "Projets en cours", stat_quotes: "Devis en attente", stat_messages: "Messages", recent_title: "📋 Dernières activités", no_activity: "Aucune activité récente", back_home: "← Retour au site", logout_btn: "🚪 Déconnexion" },
-    en: { dashboard_title: "📊 Dashboard", welcome_title: "👋 Hello,", welcome_desc: "Welcome to your HAM Global Words client area. Manage your linguistic projects and track your requests in real time.", stat_projects: "Active projects", stat_quotes: "Pending quotes", stat_messages: "Messages", recent_title: "📋 Recent activities", no_activity: "No recent activity", back_home: "← Back to site", logout_btn: "🚪 Logout" },
-    ar: { dashboard_title: "📊 لوحة التحكم", welcome_title: "👋 مرحباً،", welcome_desc: "مرحباً بك في منطقة عملاء HAM Global Words. إدارة مشاريعك اللغوية وتتبع طلباتك في الوقت الفعلي.", stat_projects: "المشاريع النشطة", stat_quotes: "عروض الأسعار المعلقة", stat_messages: "الرسائل", recent_title: "📋 الأنشطة الأخيرة", no_activity: "لا توجد أنشطة حديثة", back_home: "← العودة إلى الموقع", logout_btn: "🚪 تسجيل الخروج" }
-  };
-  
-  function applyDashboardLanguage(lang) {
-    const dict = dashboardTranslations[lang] || dashboardTranslations.fr;
-    Object.keys(dict).forEach(key => {
-      const el = document.querySelector(`[data-key="${key}"]`);
-      if (el && !el.classList.contains('stat-number')) el.textContent = dict[key];
-    });
+  // Afficher les stats
+  const stats = getStats();
+  const statsContainer = document.getElementById('statsContainer');
+  if (statsContainer) {
+    statsContainer.innerHTML = `
+      <div class="card stat-card">
+        <div class="stat-number">${stats.total}</div>
+        <div class="stat-label">Total demandes</div>
+      </div>
+      <div class="card stat-card">
+        <div class="stat-number">${stats.thisMonth}</div>
+        <div class="stat-label">Ce mois-ci</div>
+      </div>
+      <div class="card stat-card">
+        <div class="stat-number">${stats.completionRate}%</div>
+        <div class="stat-label">Taux d'envoi</div>
+      </div>
+      <div class="card stat-card">
+        <div class="stat-number">${stats.mostUsedService}</div>
+        <div class="stat-label">Service le plus utilisé</div>
+      </div>
+    `;
   }
   
-  const lang = localStorage.getItem('lang') || 'fr';
-  applyDashboardLanguage(lang);
+  // Afficher l'historique récent
+  const history = getRequestHistory();
+  const recentContainer = document.getElementById('recentHistory');
+  if (recentContainer && history.length > 0) {
+    recentContainer.innerHTML = `
+      <ul class="history-list">
+        ${history.slice(0, 5).map(item => `
+          <li>
+            <div>
+              <strong>${escapeHtml(item.service || 'Demande')}</strong>
+              <div class="history-date">${item.date}</div>
+            </div>
+            <span class="history-status status-${item.status}">${item.status === 'envoyé' ? 'Envoyé' : item.status}</span>
+          </li>
+        `).join('')}
+      </ul>
+    `;
+  } else if (recentContainer) {
+    recentContainer.innerHTML = '<p class="text-center">Aucune demande récente</p>';
+  }
   
-  document.getElementById('langSwitcher')?.addEventListener('change', (e) => {
-    localStorage.setItem('lang', e.target.value);
-    applyDashboardLanguage(e.target.value);
+  // Afficher les badges
+  displayBadges('badgesContainer');
+  
+  // Afficher les notes
+  displayNotes('notesList');
+  
+  // Afficher les todos
+  displayTodos('todosList');
+  
+  // Afficher le calendrier
+  renderMiniCalendar('calendarContainer');
+  
+  // Année
+  document.getElementById('year').textContent = new Date().getFullYear();
+  
+  // Thème
+  const themeToggle = document.getElementById('themeToggle');
+  const body = document.body;
+  const savedTheme = localStorage.getItem('theme') || 'dark';
+  if (savedTheme === 'light') {
+    body.classList.add('light-mode');
+    themeToggle.textContent = '🌙';
+  } else {
+    themeToggle.textContent = '☀️';
+  }
+  themeToggle.addEventListener('click', () => {
+    body.classList.toggle('light-mode');
+    const isLight = body.classList.contains('light-mode');
+    localStorage.setItem('theme', isLight ? 'light' : 'dark');
+    themeToggle.textContent = isLight ? '🌙' : '☀️';
   });
   
-  // Simuler des données dashboard
+  // Langue
+  const langSwitcher = document.getElementById('langSwitcher');
+  const savedLang = localStorage.getItem('lang') || 'fr';
+  langSwitcher.value = savedLang;
+  langSwitcher.addEventListener('change', (e) => {
+    localStorage.setItem('lang', e.target.value);
+    location.reload();
+  });
+  
+  // Nom utilisateur
   const user = JSON.parse(localStorage.getItem('user') || '{}');
   document.getElementById('userName').textContent = user.name || 'Client';
-  document.getElementById('projectsCount').textContent = Math.floor(Math.random() * 5) + 1;
-  document.getElementById('quotesCount').textContent = Math.floor(Math.random() * 3);
-  document.getElementById('messagesCount').textContent = Math.floor(Math.random() * 10);
 </script>
 
 </body>
