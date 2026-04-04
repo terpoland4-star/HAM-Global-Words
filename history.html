@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Historique - HAM Global Words</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="assetes/css/style.css">
+  <link rel="icon" href="assetes/img/logo.png">
+  <style>
+    .search-box {
+      display: flex;
+      gap: 1rem;
+      margin-bottom: 2rem;
+      flex-wrap: wrap;
+    }
+    .search-box input {
+      flex: 1;
+      margin-bottom: 0;
+    }
+  </style>
+</head>
+<body class="dark-mode">
+
+<div class="lang-switcher">
+  <select id="langSwitcher">
+    <option value="fr">🇫🇷 Français</option>
+    <option value="en">🇬🇧 English</option>
+    <option value="ar">🇸🇦 العربية</option>
+  </select>
+</div>
+
+<button id="themeToggle">🌙</button>
+
+<header class="site-header">
+  <div class="header-content">
+    <img src="assetes/img/logoHAM.png" alt="Logo" class="logo">
+    <h1>📋 Historique des demandes</h1>
+    <p>Suivez l'état de vos demandes</p>
+    <div style="display: flex; gap: 1rem; justify-content: center; flex-wrap: wrap;">
+      <a href="dashboard.html" class="cta-btn secondary">← Retour au dashboard</a>
+      <a href="index.html" class="cta-btn secondary">← Retour à l'accueil</a>
+    </div>
+  </div>
+</header>
+
+<main>
+  <section>
+    <div class="search-box">
+      <input type="text" id="searchInput" placeholder="Rechercher une demande...">
+      <button onclick="displaySearchResults(document.getElementById('searchInput').value, 'searchResults')" class="cta-btn">🔍 Rechercher</button>
+      <button onclick="displayRequestHistory('historyContainer'); document.getElementById('searchInput').value=''" class="cta-btn secondary">🔄 Afficher tout</button>
+    </div>
+    
+    <div class="card">
+      <div id="historyContainer"></div>
+    </div>
+    
+    <div id="searchResults" style="margin-top: 2rem;"></div>
+    
+    <div style="display: flex; gap: 1rem; justify-content: center; margin-top: 2rem; flex-wrap: wrap;">
+      <button onclick="exportUserData()" class="cta-btn export-btn">📥 Exporter mes données</button>
+      <input type="file" id="importFile" accept=".json" style="display: none;">
+      <button onclick="document.getElementById('importFile').click()" class="cta-btn secondary">📤 Importer des données</button>
+      <button onclick="exportToPDF()" class="cta-btn secondary">📄 Exporter en PDF</button>
+    </div>
+  </section>
+</main>
+
+<footer class="footer">
+  <p>© <span id="year"></span> HAM Global Words</p>
+  <div class="footer-logo">
+    <img src="assetes/img/HAM.png" alt="HAM Global Words" loading="lazy">
+  </div>
+</footer>
+
+<script src="assetes/js/app.js"></script>
+<script src="assetes/js/enhancements.js"></script>
+
+<script>
+  // Afficher l'historique
+  displayRequestHistory('historyContainer');
+  
+  // Gestion de l'import
+  document.getElementById('importFile').addEventListener('change', (e) => {
+    if (e.target.files[0]) {
+      importUserData(e.target.files[0]);
+    }
+  });
+  
+  // Année
+  document.getElementById('year').textContent = new Date().getFullYear();
+  
+  // Thème
+  const themeToggle = document.getElementById('themeToggle');
+  const body = document.body;
+  const savedTheme = localStorage.getItem('theme') || 'dark';
+  if (savedTheme === 'light') {
+    body.classList.add('light-mode');
+    themeToggle.textContent = '🌙';
+  } else {
+    themeToggle.textContent = '☀️';
+  }
+  themeToggle.addEventListener('click', () => {
+    body.classList.toggle('light-mode');
+    const isLight = body.classList.contains('light-mode');
+    localStorage.setItem('theme', isLight ? 'light' : 'dark');
+    themeToggle.textContent = isLight ? '🌙' : '☀️';
+  });
+  
+  // Langue
+  const langSwitcher = document.getElementById('langSwitcher');
+  const savedLang = localStorage.getItem('lang') || 'fr';
+  langSwitcher.value = savedLang;
+  langSwitcher.addEventListener('change', (e) => {
+    localStorage.setItem('lang', e.target.value);
+    location.reload();
+  });
+  
+  // Recherche au clic Entrée
+  document.getElementById('searchInput').addEventListener('keypress', (e) => {
+    if (e.key === 'Enter') {
+      displaySearchResults(document.getElementById('searchInput').value, 'searchResults');
+    }
+  });
+</script>
+
+</body>
+</html>
