@@ -11,9 +11,28 @@
     .dashboard-container { max-width: 1200px; margin: 0 auto; padding: 2rem; }
     .dashboard-header { display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; margin-bottom: 2rem; gap: 1rem; }
     .welcome-card { background: linear-gradient(135deg, rgba(99,102,241,0.2), rgba(34,197,94,0.1)); padding: 2rem; border-radius: 20px; margin-bottom: 2rem; }
-    .action-buttons { display: flex; gap: 0.5rem; flex-wrap: wrap; }
-    .action-btn { padding: 0.4rem 1rem; font-size: 0.8rem; }
-    .section-title { margin: 2rem 0 1rem 0; }
+    .stats-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)); gap: 1rem; margin-bottom: 2rem; }
+    .stat-card { text-align: center; padding: 1.5rem; cursor: pointer; transition: 0.3s; }
+    .stat-card:hover { transform: translateY(-5px); }
+    .stat-number { font-size: 2.5rem; font-weight: 800; background: linear-gradient(135deg, var(--accent-primary), var(--accent-secondary)); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
+    .quick-actions { display: flex; gap: 1rem; flex-wrap: wrap; margin-bottom: 2rem; }
+    .quick-btn { flex: 1; text-align: center; padding: 1rem; background: var(--bg-card); border-radius: 12px; cursor: pointer; transition: 0.3s; }
+    .quick-btn:hover { background: var(--accent-primary); transform: translateY(-3px); }
+    .widget { margin-bottom: 2rem; }
+    .request-item { display: flex; justify-content: space-between; align-items: center; padding: 1rem; border-bottom: 1px solid var(--border-light); flex-wrap: wrap; gap: 0.5rem; }
+    .request-status { padding: 0.2rem 0.6rem; border-radius: 50px; font-size: 0.7rem; font-weight: 600; }
+    .status-sent { background: #22c55e20; color: #22c55e; }
+    .status-pending { background: #f59e0b20; color: #f59e0b; }
+    .empty-state { text-align: center; padding: 2rem; opacity: 0.6; }
+    .note-card, .todo-card { background: var(--bg-card); padding: 1rem; border-radius: 12px; margin-bottom: 0.5rem; display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 0.5rem; }
+    .delete-btn { background: none; border: none; color: #ef4444; cursor: pointer; font-size: 1.2rem; padding: 0.2rem 0.5rem; border-radius: 8px; }
+    .delete-btn:hover { background: #ef444420; transform: none; box-shadow: none; }
+    .add-form { display: flex; gap: 0.5rem; margin-bottom: 1rem; flex-wrap: wrap; }
+    .add-form input, .add-form select { flex: 1; margin-bottom: 0; }
+    .chart-bar { background: var(--bg-secondary); border-radius: 8px; height: 30px; margin-bottom: 0.5rem; overflow: hidden; }
+    .chart-fill { background: linear-gradient(90deg, var(--accent-primary), var(--accent-secondary)); height: 100%; display: flex; align-items: center; justify-content: flex-end; padding-right: 0.5rem; color: white; font-size: 0.8rem; }
+    .badge-item { display: inline-flex; align-items: center; gap: 0.5rem; background: var(--bg-card); padding: 0.5rem 1rem; border-radius: 50px; margin: 0.25rem; }
+    .refresh-btn { background: none; border: 1px solid var(--border-light); padding: 0.3rem 0.8rem; border-radius: 50px; cursor: pointer; }
   </style>
 </head>
 <body class="dark-mode">
@@ -31,174 +50,446 @@
 <div class="dashboard-container">
   <div class="dashboard-header">
     <img src="assetes/img/logoHAM.png" alt="Logo" style="width: 50px; border-radius: 50%;">
-    <h1>📊 Tableau de bord</h1>
-    <div class="action-buttons">
-      <button onclick="window.location.href='index.html'" class="cta-btn secondary action-btn">🏠 Accueil</button>
-      <button onclick="window.location.href='history.html'" class="cta-btn secondary action-btn">📋 Historique</button>
-      <button onclick="logout()" class="cta-btn action-btn" style="background: #ef4444;">🚪 Déconnexion</button>
+    <h1>📊 Mon Dashboard</h1>
+    <div>
+      <button onclick="logout()" class="cta-btn" style="background: #ef4444;">🚪 Déconnexion</button>
     </div>
   </div>
   
   <div class="welcome-card">
     <h2>👋 Bonjour, <span id="userName">Client</span> !</h2>
-    <p>Bienvenue sur votre espace client HAM Global Words. Gérez vos projets linguistiques et suivez vos demandes en temps réel.</p>
+    <p>Voici votre activité sur HAM Global Words. Gérez vos demandes, notes et tâches depuis cet espace.</p>
+    <small>📅 Dernière connexion : <span id="lastLogin">Aujourd'hui</span></small>
   </div>
   
-  <div id="statsContainer" class="stats-grid"></div>
-  
-  <div style="display: flex; gap: 1rem; justify-content: center; flex-wrap: wrap; margin-bottom: 2rem;">
-    <button onclick="exportUserData()" class="cta-btn export-btn">📥 Exporter mes données</button>
-    <button onclick="toggleFocusMode()" class="cta-btn secondary">🎯 Mode Focus</button>
-    <button onclick="if(confirm('Créer des données de démonstration ?')) enableDemoMode()" class="cta-btn secondary">🎬 Mode Démo</button>
-    <button onclick="showQRCode()" class="cta-btn secondary">📱 QR Code</button>
-    <button onclick="exportToPDF()" class="cta-btn secondary">📄 Export PDF</button>
+  <!-- Actions rapides -->
+  <div class="quick-actions">
+    <div class="quick-btn" onclick="window.location.href='index.html#contact'">📝 Nouvelle demande</div>
+    <div class="quick-btn" onclick="window.location.href='history.html'">📋 Voir historique</div>
+    <div class="quick-btn" onclick="exportData()">💾 Exporter mes données</div>
+    <div class="quick-btn" onclick="clearAllData()" style="background: #ef444420;">🗑️ Réinitialiser</div>
   </div>
   
-  <div class="card">
-    <h3>📋 Demandes récentes</h3>
-    <div id="recentHistory"></div>
-    <a href="history.html" class="cta-btn secondary" style="margin-top: 1rem;">Voir tout l'historique →</a>
+  <!-- Statistiques -->
+  <div class="stats-grid" id="statsGrid"></div>
+  
+  <!-- Graphique d'activité -->
+  <div class="card widget">
+    <h3>📊 Activité par mois</h3>
+    <div id="activityChart"></div>
   </div>
   
-  <div class="card" style="margin-top: 2rem;">
+  <!-- Demandes récentes -->
+  <div class="card widget">
+    <div style="display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; margin-bottom: 1rem;">
+      <h3>📋 Dernières demandes</h3>
+      <button class="refresh-btn" onclick="loadDashboardData()">🔄 Actualiser</button>
+    </div>
+    <div id="recentRequests"></div>
+    <a href="history.html" style="display: block; text-align: center; margin-top: 1rem;">Voir toutes →</a>
+  </div>
+  
+  <!-- Notes + Todo en grille -->
+  <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 2rem;">
+    
+    <!-- Notes -->
+    <div class="card widget">
+      <h3>📝 Mes notes</h3>
+      <div class="add-form">
+        <input type="text" id="noteInput" placeholder="Nouvelle note...">
+        <button onclick="addNote()" class="cta-btn" style="width: auto;">➕</button>
+      </div>
+      <div id="notesList"></div>
+    </div>
+    
+    <!-- Todo List -->
+    <div class="card widget">
+      <h3>✅ Mes tâches</h3>
+      <div class="add-form">
+        <input type="text" id="todoInput" placeholder="Nouvelle tâche...">
+        <button onclick="addTodo()" class="cta-btn" style="width: auto;">➕</button>
+      </div>
+      <div id="todosList"></div>
+    </div>
+    
+  </div>
+  
+  <!-- Badges -->
+  <div class="card widget">
     <h3>🏆 Mes badges</h3>
-    <div id="badgesContainer"></div>
+    <div id="badgesList"></div>
   </div>
   
-  <div class="card" style="margin-top: 2rem;">
-    <h3>📝 Notes personnelles</h3>
-    <textarea id="noteInput" placeholder="Écrivez une note..." rows="2" style="margin-bottom: 0.5rem;"></textarea>
-    <button onclick="saveNote(document.getElementById('noteInput').value); document.getElementById('noteInput').value=''; displayNotes('notesList');" class="cta-btn" style="width: auto;">➕ Ajouter</button>
-    <div id="notesList" style="margin-top: 1rem;"></div>
+  <!-- Stats détaillées -->
+  <div class="card widget">
+    <h3>📈 Statistiques détaillées</h3>
+    <div id="detailedStats"></div>
   </div>
   
-  <div class="card" style="margin-top: 2rem;">
-    <h3>✅ Liste des tâches</h3>
-    <div style="display: flex; gap: 0.5rem; flex-wrap: wrap; margin-bottom: 1rem;">
-      <input type="text" id="todoInput" placeholder="Nouvelle tâche..." style="flex: 1;">
-      <input type="date" id="todoDate" style="width: auto;">
-      <button onclick="addTodo(document.getElementById('todoInput').value, document.getElementById('todoDate').value); document.getElementById('todoInput').value=''; displayTodos('todosList');" class="cta-btn" style="width: auto;">➕</button>
-    </div>
-    <div id="todosList"></div>
-  </div>
-  
-  <div class="card" style="margin-top: 2rem;">
-    <h3>📅 Calendrier d'activité</h3>
-    <div id="calendarContainer"></div>
-  </div>
-  
-  <div class="card" style="margin-top: 2rem;">
-    <h3>🔔 Rappel programmé</h3>
-    <div style="display: flex; gap: 0.5rem; flex-wrap: wrap;">
-      <input type="text" id="reminderMessage" placeholder="Message du rappel..." style="flex: 2;">
-      <select id="reminderDays">
-        <option value="1">Dans 1 jour</option>
-        <option value="3">Dans 3 jours</option>
-        <option value="7">Dans 7 jours</option>
-        <option value="14">Dans 14 jours</option>
-        <option value="30">Dans 30 jours</option>
-      </select>
-      <button onclick="scheduleReminder(document.getElementById('reminderMessage').value, parseInt(document.getElementById('reminderDays').value)); document.getElementById('reminderMessage').value='';" class="cta-btn">⏰ Programmer</button>
-    </div>
-  </div>
-  
-  <div class="card" style="margin-top: 2rem;">
-    <h3>🎨 Thèmes</h3>
-    <div style="display: flex; gap: 0.5rem; flex-wrap: wrap;">
-      <button onclick="applyTheme('dark')" class="cta-btn secondary">🌙 Sombre</button>
-      <button onclick="applyTheme('light')" class="cta-btn secondary">☀️ Clair</button>
-      <button onclick="applyTheme('blue')" class="cta-btn secondary">💙 Bleu</button>
-      <button onclick="applyTheme('purple')" class="cta-btn secondary">💜 Violet</button>
-    </div>
-  </div>
-  
-  <div class="card" style="margin-top: 2rem;">
-    <h3>📝 Templates rapides</h3>
-    <div style="display: flex; gap: 0.5rem; flex-wrap: wrap;">
-      <button onclick="applyTemplate('devis')" class="template-btn">📄 Devis</button>
-      <button onclick="applyTemplate('traduction')" class="template-btn">🌐 Traduction</button>
-      <button onclick="applyTemplate('formation')" class="template-btn">🎓 Formation</button>
-      <button onclick="applyTemplate('interpretation')" class="template-btn">🎙️ Interprétation</button>
-      <button onclick="applyTemplate('annotation')" class="template-btn">🧠 Annotation</button>
-    </div>
-  </div>
 </div>
 
 <footer class="footer">
-  <p>© <span id="year"></span> HAM Global Words</p>
-  <div class="footer-logo">
-    <img src="assetes/img/HAM.png" alt="HAM Global Words" loading="lazy">
-  </div>
+  <p>© <span id="year"></span> HAM Global Words — <span id="footerText">Mon espace personnel</span></p>
 </footer>
 
 <script src="assetes/js/app.js"></script>
-<script src="assetes/js/enhancements.js"></script>
-
 <script>
-  // Afficher les stats
-  const stats = getStats();
-  const statsContainer = document.getElementById('statsContainer');
-  if (statsContainer) {
-    statsContainer.innerHTML = `
-      <div class="card stat-card">
-        <div class="stat-number">${stats.total}</div>
-        <div class="stat-label">Total demandes</div>
+  // ========================================
+  // DASHBOARD VIVANT - DONNÉES RÉELLES
+  // ========================================
+  
+  // Stockage local
+  const storage = {
+    get: (key, fallback = null) => {
+      try { const value = localStorage.getItem(key); return value !== null ? value : fallback; } catch { return fallback; }
+    },
+    set: (key, value) => {
+      try { localStorage.setItem(key, value); return true; } catch { return false; }
+    },
+    getJSON: (key, fallback = null) => {
+      try { const value = localStorage.getItem(key); return value ? JSON.parse(value) : fallback; } catch { return fallback; }
+    },
+    setJSON: (key, value) => {
+      try { localStorage.setItem(key, JSON.stringify(value)); return true; } catch { return false; }
+    },
+    remove: (key) => {
+      try { localStorage.removeItem(key); return true; } catch { return false; }
+    }
+  };
+  
+  // Initialiser les données si vide
+  function initUserData() {
+    if (!storage.getJSON('userRequests')) {
+      storage.setJSON('userRequests', []);
+    }
+    if (!storage.getJSON('userNotes')) {
+      storage.setJSON('userNotes', []);
+    }
+    if (!storage.getJSON('userTodos')) {
+      storage.setJSON('userTodos', []);
+    }
+    if (!storage.getJSON('userBadges')) {
+      storage.setJSON('userBadges', []);
+    }
+    if (!storage.getJSON('userActivity')) {
+      storage.setJSON('userActivity', {});
+    }
+  }
+  
+  // Ajouter une demande (à appeler depuis le formulaire)
+  window.addRequest = function(request) {
+    const requests = storage.getJSON('userRequests', []);
+    const newRequest = {
+      id: Date.now(),
+      ...request,
+      date: new Date().toLocaleString(),
+      timestamp: new Date().toISOString(),
+      status: 'envoyé'
+    };
+    requests.unshift(newRequest);
+    storage.setJSON('userRequests', requests);
+    
+    // Enregistrer l'activité
+    const month = new Date().toLocaleString('fr', { month: 'long' });
+    const activity = storage.getJSON('userActivity', {});
+    activity[month] = (activity[month] || 0) + 1;
+    storage.setJSON('userActivity', activity);
+    
+    // Vérifier les badges
+    checkBadges();
+    loadDashboardData();
+    return newRequest;
+  };
+  
+  // Ajouter une note
+  window.addNote = function() {
+    const input = document.getElementById('noteInput');
+    const content = input.value.trim();
+    if (!content) return;
+    
+    const notes = storage.getJSON('userNotes', []);
+    notes.unshift({
+      id: Date.now(),
+      content: content,
+      date: new Date().toLocaleString()
+    });
+    storage.setJSON('userNotes', notes);
+    input.value = '';
+    loadDashboardData();
+    showMessage('Note ajoutée', 'success');
+  };
+  
+  // Supprimer une note
+  window.deleteNote = function(id) {
+    let notes = storage.getJSON('userNotes', []);
+    notes = notes.filter(n => n.id !== id);
+    storage.setJSON('userNotes', notes);
+    loadDashboardData();
+    showMessage('Note supprimée', 'info');
+  };
+  
+  // Ajouter une tâche
+  window.addTodo = function() {
+    const input = document.getElementById('todoInput');
+    const task = input.value.trim();
+    if (!task) return;
+    
+    const todos = storage.getJSON('userTodos', []);
+    todos.unshift({
+      id: Date.now(),
+      task: task,
+      completed: false,
+      date: new Date().toLocaleString()
+    });
+    storage.setJSON('userTodos', todos);
+    input.value = '';
+    loadDashboardData();
+    showMessage('Tâche ajoutée', 'success');
+  };
+  
+  // Basculer une tâche
+  window.toggleTodo = function(id) {
+    let todos = storage.getJSON('userTodos', []);
+    todos = todos.map(t => t.id === id ? { ...t, completed: !t.completed } : t);
+    storage.setJSON('userTodos', todos);
+    loadDashboardData();
+    const todo = todos.find(t => t.id === id);
+    showMessage(todo.completed ? '✅ Tâche terminée !' : '🔄 Tâche réactivée', 'info');
+  };
+  
+  // Supprimer une tâche
+  window.deleteTodo = function(id) {
+    let todos = storage.getJSON('userTodos', []);
+    todos = todos.filter(t => t.id !== id);
+    storage.setJSON('userTodos', todos);
+    loadDashboardData();
+    showMessage('Tâche supprimée', 'info');
+  };
+  
+  // Vérifier et attribuer les badges
+  function checkBadges() {
+    const requests = storage.getJSON('userRequests', []);
+    const count = requests.length;
+    const badges = storage.getJSON('userBadges', []);
+    const newBadges = [];
+    
+    if (count >= 1 && !badges.includes('premier_pas')) newBadges.push({ id: 'premier_pas', name: '🌟 Premier pas', icon: '🌟' });
+    if (count >= 5 && !badges.includes('assidu')) newBadges.push({ id: 'assidu', name: '📚 Assidu', icon: '📚' });
+    if (count >= 10 && !badges.includes('expert')) newBadges.push({ id: 'expert', name: '🎯 Expert', icon: '🎯' });
+    if (count >= 20 && !badges.includes('legendaire')) newBadges.push({ id: 'legendaire', name: '🏆 Légendaire', icon: '🏆' });
+    
+    if (newBadges.length > 0) {
+      const updated = [...badges, ...newBadges.map(b => b.id)];
+      storage.setJSON('userBadges', updated);
+      newBadges.forEach(b => showMessage(`🏆 Badge débloqué : ${b.name} !`, 'success'));
+    }
+  }
+  
+  // Exporter les données
+  window.exportData = function() {
+    const data = {
+      exportDate: new Date().toISOString(),
+      user: storage.getJSON('user', null),
+      requests: storage.getJSON('userRequests', []),
+      notes: storage.getJSON('userNotes', []),
+      todos: storage.getJSON('userTodos', []),
+      badges: storage.getJSON('userBadges', []),
+      activity: storage.getJSON('userActivity', {})
+    };
+    
+    const blob = new Blob([JSON.stringify(data, null, 2)], { type: 'application/json' });
+    const url = URL.createObjectURL(blob);
+    const a = document.createElement('a');
+    a.href = url;
+    a.download = `ham-data-${new Date().toISOString().slice(0,19)}.json`;
+    a.click();
+    URL.revokeObjectURL(url);
+    showMessage('Données exportées !', 'success');
+  };
+  
+  // Réinitialiser toutes les données
+  window.clearAllData = function() {
+    if (confirm('⚠️ ATTENTION : Toutes vos données seront supprimées définitivement. Continuer ?')) {
+      storage.remove('userRequests');
+      storage.remove('userNotes');
+      storage.remove('userTodos');
+      storage.remove('userBadges');
+      storage.remove('userActivity');
+      initUserData();
+      loadDashboardData();
+      showMessage('Toutes les données ont été réinitialisées', 'warning');
+    }
+  };
+  
+  // Message toast
+  function showMessage(msg, type) {
+    const toast = document.createElement('div');
+    toast.className = `toast toast-${type}`;
+    toast.innerHTML = `<span>${type === 'success' ? '✅' : type === 'warning' ? '⚠️' : 'ℹ️'}</span><span>${msg}</span>`;
+    document.body.appendChild(toast);
+    setTimeout(() => {
+      toast.classList.add('toast-hide');
+      setTimeout(() => toast.remove(), 300);
+    }, 2500);
+  }
+  
+  // Charger toutes les données du dashboard
+  function loadDashboardData() {
+    const requests = storage.getJSON('userRequests', []);
+    const notes = storage.getJSON('userNotes', []);
+    const todos = storage.getJSON('userTodos', []);
+    const badges = storage.getJSON('userBadges', []);
+    const activity = storage.getJSON('userActivity', {});
+    const user = storage.getJSON('user', { name: 'Client' });
+    
+    // Nom utilisateur
+    document.getElementById('userName').textContent = user.name || 'Client';
+    
+    // Dernière connexion
+    const lastLogin = storage.get('lastLogin');
+    if (lastLogin) {
+      document.getElementById('lastLogin').textContent = new Date(lastLogin).toLocaleString();
+    }
+    storage.set('lastLogin', new Date().toISOString());
+    
+    // Statistiques
+    const statsHtml = `
+      <div class="stat-card" onclick="window.location.href='history.html'">
+        <div class="stat-number">${requests.length}</div>
+        <div class="stat-label">📋 Demandes totales</div>
       </div>
-      <div class="card stat-card">
-        <div class="stat-number">${stats.thisMonth}</div>
-        <div class="stat-label">Ce mois-ci</div>
+      <div class="stat-card" onclick="window.location.href='index.html#contact'">
+        <div class="stat-number">${notes.length}</div>
+        <div class="stat-label">📝 Notes</div>
       </div>
-      <div class="card stat-card">
-        <div class="stat-number">${stats.completionRate}%</div>
-        <div class="stat-label">Taux d'envoi</div>
+      <div class="stat-card" onclick="document.getElementById('todoInput').focus()">
+        <div class="stat-number">${todos.filter(t => !t.completed).length}</div>
+        <div class="stat-label">✅ Tâches en cours</div>
       </div>
-      <div class="card stat-card">
-        <div class="stat-number">${stats.mostUsedService}</div>
-        <div class="stat-label">Service le plus utilisé</div>
+      <div class="stat-card" onclick="window.location.href='history.html'">
+        <div class="stat-number">${badges.length}</div>
+        <div class="stat-label">🏆 Badges</div>
+      </div>
+    `;
+    document.getElementById('statsGrid').innerHTML = statsHtml;
+    
+    // Graphique d'activité
+    const months = ['Janvier', 'Février', 'Mars', 'Avril', 'Mai', 'Juin', 'Juillet', 'Août', 'Septembre', 'Octobre', 'Novembre', 'Décembre'];
+    const maxActivity = Math.max(...Object.values(activity), 1);
+    const chartHtml = months.map(month => {
+      const count = activity[month] || 0;
+      const percent = (count / maxActivity) * 100;
+      return `
+        <div>
+          <div style="display: flex; justify-content: space-between; font-size: 0.8rem; margin-bottom: 0.2rem;">
+            <span>${month}</span>
+            <span>${count} demande${count !== 1 ? 's' : ''}</span>
+          </div>
+          <div class="chart-bar">
+            <div class="chart-fill" style="width: ${percent}%">${percent > 15 ? count : ''}</div>
+          </div>
+        </div>
+      `;
+    }).join('');
+    document.getElementById('activityChart').innerHTML = chartHtml || '<p>Aucune activité enregistrée</p>';
+    
+    // Demandes récentes
+    if (requests.length === 0) {
+      document.getElementById('recentRequests').innerHTML = '<div class="empty-state">📭 Aucune demande pour le moment. <a href="index.html#contact">Créer ma première demande →</a></div>';
+    } else {
+      document.getElementById('recentRequests').innerHTML = requests.slice(0, 5).map(r => `
+        <div class="request-item">
+          <div>
+            <strong>${escapeHtml(r.service || 'Demande')}</strong>
+            <div style="font-size: 0.7rem; opacity: 0.6;">${r.date}</div>
+          </div>
+          <span class="request-status status-${r.status}">${r.status === 'envoyé' ? '✅ Envoyé' : r.status}</span>
+        </div>
+      `).join('');
+    }
+    
+    // Notes
+    if (notes.length === 0) {
+      document.getElementById('notesList').innerHTML = '<div class="empty-state">📝 Aucune note. Écrivez-en une !</div>';
+    } else {
+      document.getElementById('notesList').innerHTML = notes.map(n => `
+        <div class="note-card">
+          <div>
+            <div>${escapeHtml(n.content)}</div>
+            <div style="font-size: 0.6rem; opacity: 0.5;">${n.date}</div>
+          </div>
+          <button class="delete-btn" onclick="deleteNote(${n.id})">🗑️</button>
+        </div>
+      `).join('');
+    }
+    
+    // Todos
+    if (todos.length === 0) {
+      document.getElementById('todosList').innerHTML = '<div class="empty-state">✅ Aucune tâche. Ajoutez-en une !</div>';
+    } else {
+      document.getElementById('todosList').innerHTML = todos.map(t => `
+        <div class="todo-card" style="${t.completed ? 'opacity: 0.6;' : ''}">
+          <div style="display: flex; align-items: center; gap: 0.5rem; flex: 1;">
+            <input type="checkbox" ${t.completed ? 'checked' : ''} onchange="toggleTodo(${t.id})">
+            <span style="${t.completed ? 'text-decoration: line-through;' : ''}">${escapeHtml(t.task)}</span>
+            <span style="font-size: 0.6rem; opacity: 0.5;">${t.date}</span>
+          </div>
+          <button class="delete-btn" onclick="deleteTodo(${t.id})">🗑️</button>
+        </div>
+      `).join('');
+    }
+    
+    // Badges
+    const badgesList = [
+      { id: 'premier_pas', name: '🌟 Premier pas', desc: '1ère demande', earned: badges.includes('premier_pas') },
+      { id: 'assidu', name: '📚 Assidu', desc: '5 demandes', earned: badges.includes('assidu') },
+      { id: 'expert', name: '🎯 Expert', desc: '10 demandes', earned: badges.includes('expert') },
+      { id: 'legendaire', name: '🏆 Légendaire', desc: '20 demandes', earned: badges.includes('legendaire') }
+    ];
+    document.getElementById('badgesList').innerHTML = badgesList.map(b => `
+      <span class="badge-item" style="${b.earned ? '' : 'opacity: 0.3; filter: grayscale(1);'}">
+        ${b.name} <small>${b.desc}</small> ${b.earned ? '✓' : '🔒'}
+      </span>
+    `).join('');
+    
+    // Stats détaillées
+    const completedTodos = todos.filter(t => t.completed).length;
+    const pendingTodos = todos.length - completedTodos;
+    const completionRate = requests.length > 0 ? Math.round((requests.filter(r => r.status === 'envoyé').length / requests.length) * 100) : 0;
+    
+    document.getElementById('detailedStats').innerHTML = `
+      <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); gap: 1rem;">
+        <div><strong>📊 Taux d'envoi</strong><br>${completionRate}%</div>
+        <div><strong>📝 Tâches terminées</strong><br>${completedTodos}/${todos.length}</div>
+        <div><strong>🏆 Badges obtenus</strong><br>${badges.length}/4</div>
+        <div><strong>📅 Dernière activité</strong><br>${requests[0]?.date || 'Aucune'}</div>
       </div>
     `;
   }
   
-  // Afficher l'historique récent
-  const history = getRequestHistory();
-  const recentContainer = document.getElementById('recentHistory');
-  if (recentContainer && history.length > 0) {
-    recentContainer.innerHTML = `
-      <ul class="history-list">
-        ${history.slice(0, 5).map(item => `
-          <li>
-            <div>
-              <strong>${escapeHtml(item.service || 'Demande')}</strong>
-              <div class="history-date">${item.date}</div>
-            </div>
-            <span class="history-status status-${item.status}">${item.status === 'envoyé' ? 'Envoyé' : item.status}</span>
-          </li>
-        `).join('')}
-      </ul>
-    `;
-  } else if (recentContainer) {
-    recentContainer.innerHTML = '<p class="text-center">Aucune demande récente</p>';
+  function escapeHtml(str) {
+    if (!str) return '';
+    return str.replace(/[&<>]/g, function(m) {
+      if (m === '&') return '&amp;';
+      if (m === '<') return '&lt;';
+      if (m === '>') return '&gt;';
+      return m;
+    });
   }
   
-  // Afficher les badges
-  displayBadges('badgesContainer');
+  // Déconnexion
+  window.logout = function() {
+    storage.set('isLogged', 'false');
+    window.location.href = 'index.html';
+  };
   
-  // Afficher les notes
-  displayNotes('notesList');
-  
-  // Afficher les todos
-  displayTodos('todosList');
-  
-  // Afficher le calendrier
-  renderMiniCalendar('calendarContainer');
-  
-  // Année
-  document.getElementById('year').textContent = new Date().getFullYear();
+  // Initialisation
+  initUserData();
   
   // Thème
   const themeToggle = document.getElementById('themeToggle');
   const body = document.body;
-  const savedTheme = localStorage.getItem('theme') || 'dark';
+  const savedTheme = storage.get('theme', 'dark');
   if (savedTheme === 'light') {
     body.classList.add('light-mode');
     themeToggle.textContent = '🌙';
@@ -208,23 +499,63 @@
   themeToggle.addEventListener('click', () => {
     body.classList.toggle('light-mode');
     const isLight = body.classList.contains('light-mode');
-    localStorage.setItem('theme', isLight ? 'light' : 'dark');
+    storage.set('theme', isLight ? 'light' : 'dark');
     themeToggle.textContent = isLight ? '🌙' : '☀️';
   });
   
   // Langue
   const langSwitcher = document.getElementById('langSwitcher');
-  const savedLang = localStorage.getItem('lang') || 'fr';
+  const savedLang = storage.get('lang', 'fr');
   langSwitcher.value = savedLang;
   langSwitcher.addEventListener('change', (e) => {
-    localStorage.setItem('lang', e.target.value);
+    storage.set('lang', e.target.value);
     location.reload();
   });
   
-  // Nom utilisateur
-  const user = JSON.parse(localStorage.getItem('user') || '{}');
-  document.getElementById('userName').textContent = user.name || 'Client';
+  // Année
+  document.getElementById('year').textContent = new Date().getFullYear();
+  
+  // Charger au démarrage
+  loadDashboardData();
+  
+  // Protéger l'accès si non connecté
+  if (!storage.get('isLogged') || storage.get('isLogged') !== 'true') {
+    window.location.href = 'login.html';
+  }
 </script>
+
+<style>
+  .toast {
+    position: fixed;
+    bottom: 20px;
+    left: 50%;
+    transform: translateX(-50%);
+    padding: 12px 24px;
+    border-radius: 50px;
+    z-index: 10000;
+    font-size: 0.9rem;
+    font-weight: 500;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.3);
+    animation: slideUp 0.3s ease;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+  }
+  .toast-success { background: #22c55e; color: white; }
+  .toast-warning { background: #f59e0b; color: white; }
+  .toast-info { background: #3b82f6; color: white; }
+  @keyframes slideUp {
+    from { opacity: 0; transform: translateX(-50%) translateY(20px); }
+    to { opacity: 1; transform: translateX(-50%) translateY(0); }
+  }
+  .toast-hide {
+    animation: slideDown 0.3s ease;
+  }
+  @keyframes slideDown {
+    from { opacity: 1; transform: translateX(-50%) translateY(0); }
+    to { opacity: 0; transform: translateX(-50%) translateY(20px); }
+  }
+</style>
 
 </body>
 </html>
