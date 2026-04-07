@@ -226,6 +226,19 @@
   };
 
   // ========================================
+  // UTILITAIRES
+  // ========================================
+  function getCurrentLanguage() {
+    return storage.get('lang', 'fr');
+  }
+
+  function getTranslation(key, lang = null) {
+    const currentLang = lang || getCurrentLanguage();
+    const dict = translations[currentLang] || translations.fr;
+    return dict[key] || key;
+  }
+
+  // ========================================
   // DOM READY
   // ========================================
   document.addEventListener("DOMContentLoaded", () => {
@@ -398,6 +411,19 @@
     const WHATSAPP_NUMBER = "22786762903";
     const MAX_SIZE_MB = 5;
     
+    // Fonction pour sauvegarder l'historique des requêtes
+    function saveRequestToHistory(requestData) {
+      const history = storage.getJSON('contactHistory', []);
+      history.push({
+        ...requestData,
+        timestamp: new Date().toISOString(),
+        id: Date.now()
+      });
+      // Garder seulement les 50 dernières requêtes
+      if (history.length > 50) history.shift();
+      storage.setJSON('contactHistory', history);
+    }
+    
     if (contactForm) {
       
       // Validation de la taille du fichier à la sélection
@@ -407,18 +433,19 @@
           const file = fileInput.files[0];
           if (file && file.size > MAX_SIZE_MB * 1024 * 1024) {
             const sizeMB = (file.size / 1024 / 1024).toFixed(1);
-            const msg = currentLang === 'fr' 
-              ? `📁 Fichier de ${sizeMB} Mo détecté.\n\nIl dépasse la limite de ${MAX_SIZE_MB} Mo.\n\nIl sera envoyé via WhatsApp.`
-              : currentLang === 'en'
-              ? `📁 ${sizeMB} MB file detected.\n\nIt exceeds the ${MAX_SIZE_MB} MB limit.\n\nIt will be sent via WhatsApp.`
-              : `📁 تم اكتشاف ملف بحجم ${sizeMB} ميغابايت.\n\nيتجاوز الحد الأقصى ${MAX_SIZE_MB} ميغابايت.\n\nسيتم إرساله عبر واتساب.`;
+            const msg = getTranslation('file_heavy_message', currentLang) || 
+              (currentLang === 'fr' 
+                ? `📁 Fichier de ${sizeMB} Mo détecté.\n\nIl dépasse la limite de ${MAX_SIZE_MB} Mo.\n\nIl sera envoyé via WhatsApp.`
+                : currentLang === 'en'
+                ? `📁 ${sizeMB} MB file detected.\n\nIt exceeds the ${MAX_SIZE_MB} MB limit.\n\nIt will be sent via WhatsApp.`
+                : `📁 تم اكتشاف ملف بحجم ${sizeMB} ميغابايت.\n\nيتجاوز الحد الأقصى ${MAX_SIZE_MB} ميغابايت.\n\nسيتم إرساله عبر واتساب.`);
             alert(msg);
           }
         });
       }
       
       // Soumission du formulaire
-      contactForm.addEventListener('submit', (e) => {
+      contactForm.addEventListener('submit', async (e) => {
         e.preventDefault();
         
         const name = contactForm.querySelector('[name="name"]')?.value.trim();
@@ -429,21 +456,23 @@
         
         // Validation
         if (!name || !email || !message) {
-          const errorMsg = currentLang === 'fr' 
-            ? 'Veuillez remplir tous les champs obligatoires.'
-            : currentLang === 'en'
-            ? 'Please fill in all required fields.'
-            : 'الرجاء ملء جميع الحقول المطلوبة.';
+          const errorMsg = getTranslation('required_fields', currentLang) ||
+            (currentLang === 'fr' 
+              ? 'Veuillez remplir tous les champs obligatoires.'
+              : currentLang === 'en'
+              ? 'Please fill in all required fields.'
+              : 'الرجاء ملء جميع الحقول المطلوبة.');
           alert(errorMsg);
           return;
         }
         
         if (!email.includes('@')) {
-          const errorMsg = currentLang === 'fr' 
-            ? 'Email invalide.'
-            : currentLang === 'en'
-            ? 'Invalid email.'
-            : 'بريد إلكتروني غير صالح.';
+          const errorMsg = getTranslation('invalid_email', currentLang) ||
+            (currentLang === 'fr' 
+              ? 'Email invalide.'
+              : currentLang === 'en'
+              ? 'Invalid email.'
+              : 'بريد إلكتروني غير صالح.');
           alert(errorMsg);
           return;
         }
@@ -452,11 +481,13 @@
         let subject = `[HAM Global Words] Demande ${service} - ${name}`;
         let body = `Nom: ${name}\nEmail: ${email}\nService: ${service}\n\nMessage:\n${message}`;
         
+        let fileInfo = '';
         let useWhatsApp = false;
         
         if (file) {
           const fileSizeMB = file.size / 1024 / 1024;
-          body += `\n\n📎 Fichier: ${file.name} (${fileSizeMB.toFixed(2)} Mo)`;
+          fileInfo = `\n\n📎 Fichier: ${file.name} (${fileSizeMB.toFixed(2)} Mo)`;
+          body += fileInfo;
           
           if (fileSizeMB > MAX_SIZE_MB) {
             useWhatsApp = true;
@@ -468,42 +499,67 @@
         }
         
         // Confirmation et envoi
-        const confirmMsg = currentLang === 'fr'
-          ? 'Envoyer votre demande par email ?'
-          : currentLang === 'en'
-          ? 'Send your request by email?'
-          : 'إرسال طلبك عبر البريد الإلكتروني؟';
+        const confirmMsg = getTranslation('confirm_email_send', currentLang) ||
+          (currentLang === 'fr'
+            ? 'Envoyer votre demande par email ?'
+            : currentLang === 'en'
+            ? 'Send your request by email?'
+            : 'إرسال طلبك عبر البريد الإلكتروني؟');
         
         if (confirm(confirmMsg)) {
-          // Envoi email
-          window.location.href = `mailto:hamadineagmoctar@gmail.com?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
-          
-          // Sauvegarde dans l'historique
-          if (typeof saveRequestToHistory === 'function') {
+          try {
+            // Envoi email via mailto
+            window.location.href = `mailto:hamadineagmoctar@gmail.com?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
+            
+            // Sauvegarde dans l'historique
             saveRequestToHistory({
               name: name,
               email: email,
               service: service,
               message: message,
               file: file ? file.name : null,
-              status: 'sent'
+              fileSize: file ? file.size : null,
+              status: 'sent',
+              method: 'email'
             });
-          }
-          
-          // Proposition WhatsApp si fichier
-          if (file) {
-            setTimeout(() => {
-              const whatsappMsg = currentLang === 'fr'
-                ? `Souhaitez-vous envoyer le fichier "${file.name}" via WhatsApp ?`
+            
+            // Message de succès
+            const successMsg = getTranslation('request_sent', currentLang) ||
+              (currentLang === 'fr'
+                ? 'Votre demande a été envoyée avec succès !'
                 : currentLang === 'en'
-                ? `Do you want to send the file "${file.name}" via WhatsApp?`
-                : `هل تريد إرسال الملف "${file.name}" عبر واتساب؟`;
-              
-              if (confirm(whatsappMsg)) {
-                const waText = `*Nouvelle demande HAM Global Words*\n\n👤 Nom: ${name}\n📧 Email: ${email}\n🛠️ Service: ${service}\n📝 Message: ${message}\n\n📎 Fichier: ${file.name} (${(file.size/1024/1024).toFixed(1)} Mo)`;
-                window.open(`https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent(waText)}`, '_blank');
-              }
-            }, 500);
+                ? 'Your request has been sent successfully!'
+                : 'تم إرسال طلبك بنجاح!');
+            alert(successMsg);
+            
+            // Réinitialiser le formulaire
+            contactForm.reset();
+            
+            // Proposition WhatsApp si fichier
+            if (file) {
+              setTimeout(() => {
+                const whatsappMsg = getTranslation('send_via_whatsapp', currentLang) ||
+                  (currentLang === 'fr'
+                    ? `Souhaitez-vous envoyer le fichier "${file.name}" via WhatsApp ?`
+                    : currentLang === 'en'
+                    ? `Do you want to send the file "${file.name}" via WhatsApp?`
+                    : `هل تريد إرسال الملف "${file.name}" عبر واتساب؟`);
+                
+                if (confirm(whatsappMsg)) {
+                  const waText = `*Nouvelle demande HAM Global Words*\n\n👤 Nom: ${name}\n📧 Email: ${email}\n🛠️ Service: ${service}\n📝 Message: ${message}\n\n📎 Fichier: ${file.name} (${(file.size/1024/1024).toFixed(1)} Mo)`;
+                  window.open(`https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent(waText)}`, '_blank');
+                }
+              }, 500);
+            }
+          } catch (error) {
+            console.error('Erreur lors de l\'envoi:', error);
+            const errorMsg = getTranslation('send_error', currentLang) ||
+              (currentLang === 'fr'
+                ? 'Une erreur est survenue. Veuillez réessayer.'
+                : currentLang === 'en'
+                ? 'An error occurred. Please try again.'
+                : 'حدث خطأ. الرجاء المحاولة مرة أخرى.');
+            alert(errorMsg);
           }
         }
       });
@@ -527,6 +583,12 @@
             ceoSection.scrollIntoView({ behavior: "smooth", block: "start" });
           }, 100);
         }
+        
+        // Mettre à jour le texte du bouton
+        const btnText = isHidden ? 
+          (currentLang === 'fr' ? 'Masquer' : currentLang === 'en' ? 'Hide' : 'إخفاء') : 
+          (currentLang === 'fr' ? '👤 Fondateur' : currentLang === 'en' ? '👤 Founder' : '👤 المؤسس');
+        toggleBtn.textContent = btnText;
       });
     }
 
@@ -544,22 +606,23 @@
         const confirmPassword = registerForm.querySelector('[name="confirm_password"]')?.value;
         
         if (!name || !email || !password) {
-          alert("Veuillez remplir tous les champs.");
+          alert(getTranslation('fill_all_fields', currentLang) || "Veuillez remplir tous les champs.");
           return;
         }
         
         if (password !== confirmPassword) {
-          alert("Les mots de passe ne correspondent pas.");
+          alert(getTranslation('password_mismatch', currentLang) || "Les mots de passe ne correspondent pas.");
           return;
         }
         
         if (password.length < 6) {
-          alert("Le mot de passe doit faire au moins 6 caractères.");
+          alert(getTranslation('password_length', currentLang) || "Le mot de passe doit faire au moins 6 caractères.");
           return;
         }
         
+        // Stockage sécurisé (à améliorer avec hashage en production)
         storage.setJSON("user", { name, email, password });
-        alert("Compte créé avec succès !");
+        alert(getTranslation('account_created', currentLang) || "Compte créé avec succès !");
         window.location.href = "login.html";
       });
     }
@@ -576,16 +639,31 @@
         if (savedUser && savedUser.email === email && savedUser.password === password) {
           storage.set("isLogged", "true");
           storage.set("loggedUserEmail", email);
+          storage.set("loginTime", new Date().toISOString());
           window.location.href = "dashboard.html";
         } else {
-          alert("Email ou mot de passe incorrect.");
+          alert(getTranslation('invalid_credentials', currentLang) || "Email ou mot de passe incorrect.");
         }
       });
     }
     
+    // Vérification de session pour dashboard
     if (window.location.pathname.includes("dashboard.html")) {
       const isLogged = storage.get("isLogged", null);
-      if (!isLogged) {
+      const loginTime = storage.get("loginTime", null);
+      
+      // Vérifier si la session est encore valide (24h)
+      const isValidSession = () => {
+        if (!loginTime) return false;
+        const loginDate = new Date(loginTime);
+        const now = new Date();
+        const hoursDiff = (now - loginDate) / (1000 * 60 * 60);
+        return hoursDiff < 24;
+      };
+      
+      if (!isLogged || !isValidSession()) {
+        storage.remove("isLogged");
+        storage.remove("loginTime");
         window.location.href = "login.html";
       } else {
         const user = storage.getJSON("user", null);
@@ -596,15 +674,39 @@
       }
     }
     
+    // Fonction globale de déconnexion
     window.logout = function() {
       storage.remove("isLogged");
       storage.remove("loggedUserEmail");
+      storage.remove("loginTime");
       window.location.href = "index.html";
     };
     
+    // Gestionnaire d'erreurs global
     window.addEventListener('error', (e) => {
       console.error('Global error:', e.error);
+      // Optionnel: envoyer l'erreur à un service de monitoring
     });
+    
+    // Gestionnaire pour les promesses non catchées
+    window.addEventListener('unhandledrejection', (e) => {
+      console.error('Unhandled promise rejection:', e.reason);
+    });
+    
+    // Afficher un message de bienvenue si première visite
+    const hasVisited = storage.get('hasVisited', false);
+    if (!hasVisited) {
+      setTimeout(() => {
+        const welcomeMsg = getTranslation('welcome_message', currentLang) ||
+          (currentLang === 'fr'
+            ? 'Bienvenue sur HAM Global Words ! Découvrez nos services linguistiques innovants.'
+            : currentLang === 'en'
+            ? 'Welcome to HAM Global Words! Discover our innovative language services.'
+            : 'مرحباً بكم في HAM Global Words! اكتشفوا خدماتنا اللغوية المبتكرة.');
+        console.log(welcomeMsg); // Ou afficher une notification plus élégante
+      }, 1000);
+      storage.set('hasVisited', 'true');
+    }
     
   });
 })();
