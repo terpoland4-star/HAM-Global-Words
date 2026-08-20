@@ -1438,8 +1438,9 @@
           storage.set('authToken', data.token);
           storage.setJSON('user', data.user);
           toast.success('✅ Connexion réussie !', 2000);
-          setTimeout(() => window.location.href = "dashboard.html", 1000);
-          analytics.track('login');
+          const redirectTarget = data.user?.role === 'admin' ? "admin.html" : "dashboard.html";
+          setTimeout(() => window.location.href = redirectTarget, 1000);
+          analytics.track('login', { role: data.user?.role });
         } catch (err) {
           toast.error('Impossible de contacter le serveur. Réessayez.', 3000);
         }
