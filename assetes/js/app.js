@@ -1257,44 +1257,73 @@
         });
       }
       
+      const universeMap = {
+        'Traduction Professionnelle': 'linguistique',
+        'Interprétation Stratégique': 'linguistique',
+        'Formation & Accompagnement': 'linguistique',
+        'Annotation IA & NLP': 'tech',
+        'Développement Web & Apps': 'tech'
+      };
+
       contactForm.addEventListener('submit', async (e) => {
         e.preventDefault();
-        
+
         const name = contactForm.querySelector('[name="name"]')?.value.trim();
         const email = contactForm.querySelector('[name="email"]')?.value.trim();
         const service = contactForm.querySelector('[name="service"]')?.value;
         const message = contactForm.querySelector('[name="message"]')?.value.trim();
-        
+        const universe = universeMap[service] || 'tech';
+
         if (!name || !email || !message) {
           toast.error('Veuillez remplir tous les champs obligatoires.', 3000);
           return;
         }
-        
+
         if (!email.includes('@')) {
           toast.error('Email invalide.', 3000);
           return;
         }
-        
-        // Sauvegarder dans IndexedDB
-        await storage.add('contacts', {
-          name, email, service, message,
-          timestamp: Date.now()
-        });
-        
-        let subject = `[HAM Global Words] Demande ${service} - ${name}`;
-        let body = `Nom: ${name}\nEmail: ${email}\nService: ${service}\n\nMessage:\n${message}`;
-        
-        window.location.href = `mailto:${CONFIG.supportEmail}?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
-        
-        toast.success('✅ Votre demande a été envoyée avec succès !', 3000, [
-          {
-            label: '📱 WhatsApp',
-            handler: () => window.open(`https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent(body)}`, '_blank')
+
+        const payload = { name, email, service, message, universe };
+
+        try {
+          const response = await fetch(`${CONFIG.apiBaseUrl}/quotes`, {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify(payload)
+          });
+
+          if (!response.ok) {
+            throw new Error('Reponse API invalide');
           }
-        ]);
-        
-        contactForm.reset();
-        analytics.track('contact_form_submit', { service });
+
+          toast.success('✅ Votre demande a été envoyée avec succès !', 3000, [
+            {
+              label: '📱 WhatsApp',
+              handler: () => window.open(`https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent(`Nom: ${name}\nEmail: ${email}\nService: ${service}\n\nMessage:\n${message}`)}`, '_blank')
+            }
+          ]);
+
+          contactForm.reset();
+          analytics.track('contact_form_submit', { service, universe });
+        } catch (err) {
+          await storage.add('contacts', {
+            name, email, service, message, universe,
+            timestamp: Date.now(),
+            syncStatus: 'pending'
+          });
+
+          let subject = `[HAM Global Words] Demande ${service} - ${name}`;
+          let body = `Nom: ${name}\nEmail: ${email}\nService: ${service}\n\nMessage:\n${message}`;
+          window.location.href = `mailto:${CONFIG.supportEmail}?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
+
+          toast.error('⚠️ Impossible de contacter le serveur. Un email de secours a été préparé.', 4000, [
+            {
+              label: '📱 WhatsApp',
+              handler: () => window.open(`https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent(body)}`, '_blank')
+            }
+          ]);
+        }
       });
     }
 
