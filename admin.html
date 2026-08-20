@@ -2,62 +2,234 @@
 <html lang="fr">
 <head>
   <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Admin – HAM Global Words</title>
   <link rel="stylesheet" href="assetes/css/style.css">
+  <link rel="icon" href="assetes/img/logo.png">
+  <style>
+    .admin-container { max-width: 1200px; margin: 0 auto; padding: 2rem; }
+    .admin-header { display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 1rem; margin-bottom: 2rem; }
+    .admin-tabs { display: flex; gap: 0.5rem; margin-bottom: 1.5rem; flex-wrap: wrap; }
+    .admin-tab { padding: 0.6rem 1.2rem; border-radius: 50px; background: var(--bg-card); cursor: pointer; border: none; }
+    .admin-tab.active { background: var(--accent-primary); color: #fff; }
+    .status-select { padding: 0.3rem 0.6rem; border-radius: 8px; }
+    .empty-state { text-align: center; padding: 3rem; opacity: 0.6; }
+    .loading-state { text-align: center; padding: 3rem; }
+  </style>
 </head>
 
 <body class="dark-mode">
 
-<header class="site-header">
-  <h1>🛠 Admin Panel</h1>
-</header>
+<button id="themeToggle" aria-label="Changer le thème">🌙</button>
 
-<main>
+<div class="admin-container">
+  <div class="admin-header">
+    <div>
+      <h1>🛠 Panel Admin</h1>
+      <p id="adminName" style="opacity:0.7;"></p>
+    </div>
+    <div>
+      <a href="index.html" class="cta-btn secondary">🏠 Accueil</a>
+      <button onclick="logout()" class="cta-btn" style="background:#ef4444;">🚪 Déconnexion</button>
+    </div>
+  </div>
 
-<section>
-  <h2>📂 Tous les projets clients</h2>
-  <div id="adminList" class="service-grid"></div>
-</section>
+  <div class="admin-tabs">
+    <button class="admin-tab active" data-tab="quotes">📩 Demandes de devis</button>
+    <button class="admin-tab" data-tab="projects">📂 Projets</button>
+    <button class="admin-tab" data-tab="clients">👤 Clients</button>
+  </div>
 
-</main>
+  <section id="tab-quotes"><div class="loading-state">Chargement…</div></section>
+  <section id="tab-projects" style="display:none;"><div class="loading-state">Chargement…</div></section>
+  <section id="tab-clients" style="display:none;"><div class="loading-state">Chargement…</div></section>
+</div>
 
-<script type="module">
-import { initializeApp } from "https://www.gstatic.com/firebasejs/12.11.0/firebase-app.js";
-import { getFirestore, collection, getDocs } from "https://www.gstatic.com/firebasejs/12.11.0/firebase-firestore.js";
+<script>
+  const CONFIG = { apiBaseUrl: 'https://hamadine.mooo.com/ham-api' };
 
-const firebaseConfig = {
-  apiKey: "AIzaSyB...",
-  authDomain: "ham-global-words.firebaseapp.com",
-  projectId: "ham-global-words",
-};
+  function getStored(key, fallback = null) {
+    try {
+      const raw = localStorage.getItem(key);
+      if (!raw) return fallback;
+      const data = JSON.parse(raw);
+      return data.value !== undefined ? data.value : fallback;
+    } catch {
+      return fallback;
+    }
+  }
 
-const app = initializeApp(firebaseConfig);
-const db = getFirestore(app);
+  function removeStored(key) {
+    try { localStorage.removeItem(key); } catch {}
+  }
 
-const adminList = document.getElementById("adminList");
+  window.logout = function () {
+    removeStored('authToken');
+    removeStored('user');
+    window.location.href = 'index.html';
+  };
 
-async function loadAll() {
-  const snapshot = await getDocs(collection(db, "projects"));
+  const token = getStored('authToken', null);
+  if (!token) {
+    window.location.href = 'login.html';
+  }
 
-  snapshot.forEach(doc => {
-    const data = doc.data();
+  async function apiFetch(path, options = {}) {
+    const response = await fetch(`${CONFIG.apiBaseUrl}${path}`, {
+      ...options,
+      headers: {
+        'Content-Type': 'application/json',
+        'Authorization': `Bearer ${token}`,
+        ...(options.headers || {})
+      }
+    });
+    if (response.status === 401 || response.status === 403) {
+      removeStored('authToken');
+      removeStored('user');
+      window.location.href = 'login.html';
+      throw new Error('Non autorisé');
+    }
+    return response.json();
+  }
 
-    const card = document.createElement("div");
-    card.className = "card";
+  const statusLabels = {
+    pending: '⏳ En attente',
+    contacted: '📞 Contacté',
+    sent: '✅ Envoyé',
+    closed: '🔒 Clôturé',
+    in_progress: '🚧 En cours',
+    completed: '✅ Terminé',
+    cancelled: '❌ Annulé'
+  };
 
-    card.innerHTML = `
-      <h3>${data.service}</h3>
-      <p><strong>Nom:</strong> ${data.name}</p>
-      <p><strong>Email:</strong> ${data.email}</p>
-      <p><strong>Fichier:</strong> ${data.fileName}</p>
-      <p>${data.message}</p>
-    `;
+  async function checkAdminAndLoad() {
+    try {
+      const me = await apiFetch('/me');
+      if (me.user.role !== 'admin') {
+        document.querySelector('.admin-container').innerHTML =
+          '<div class="empty-state">⛔ Accès réservé aux administrateurs.</div>';
+        return;
+      }
+      document.getElementById('adminName').textContent = `Connecté en tant que ${me.user.name}`;
+      loadQuotes();
+      loadProjects();
+      loadClients();
+    } catch (err) {
+      // apiFetch redirige déjà vers login.html si non autorisé
+    }
+  }
 
-    adminList.appendChild(card);
+  async function loadQuotes() {
+    const container = document.getElementById('tab-quotes');
+    try {
+      const data = await apiFetch('/admin/quotes');
+      if (!data.quotes || data.quotes.length === 0) {
+        container.innerHTML = '<div class="empty-state">Aucune demande de devis pour le moment.</div>';
+        return;
+      }
+      container.innerHTML = '<div class="service-grid">' + data.quotes.map(q => `
+        <div class="card">
+          <h3>${q.universe === 'linguistique' ? '🌍' : '💻'} ${escapeHtml(q.service)}</h3>
+          <p><strong>Nom :</strong> ${escapeHtml(q.name)}</p>
+          <p><strong>Email :</strong> ${escapeHtml(q.email)}</p>
+          ${q.phone ? `<p><strong>Téléphone :</strong> ${escapeHtml(q.phone)}</p>` : ''}
+          ${q.message ? `<p>${escapeHtml(q.message)}</p>` : ''}
+          <label>Statut :
+            <select class="status-select" data-id="${q.id}" data-type="quote">
+              ${Object.entries({pending:'⏳ En attente',contacted:'📞 Contacté',sent:'✅ Envoyé',closed:'🔒 Clôturé'})
+                .map(([val, label]) => `<option value="${val}" ${q.status === val ? 'selected' : ''}>${label}</option>`).join('')}
+            </select>
+          </label>
+        </div>
+      `).join('') + '</div>';
+    } catch (err) {
+      container.innerHTML = '<div class="empty-state">Erreur de chargement des demandes.</div>';
+    }
+  }
+
+  async function loadProjects() {
+    const container = document.getElementById('tab-projects');
+    try {
+      const data = await apiFetch('/admin/projects');
+      if (!data.projects || data.projects.length === 0) {
+        container.innerHTML = '<div class="empty-state">Aucun projet enregistré pour le moment.</div>';
+        return;
+      }
+      container.innerHTML = '<div class="service-grid">' + data.projects.map(p => `
+        <div class="card">
+          <h3>${p.universe === 'linguistique' ? '🌍' : '💻'} ${escapeHtml(p.title)}</h3>
+          ${p.description ? `<p>${escapeHtml(p.description)}</p>` : ''}
+          ${p.amount ? `<p><strong>Montant :</strong> ${p.amount} FCFA</p>` : ''}
+          <label>Statut :
+            <select class="status-select" data-id="${p.id}" data-type="project">
+              ${Object.entries({pending:'⏳ En attente',in_progress:'🚧 En cours',completed:'✅ Terminé',cancelled:'❌ Annulé'})
+                .map(([val, label]) => `<option value="${val}" ${p.status === val ? 'selected' : ''}>${label}</option>`).join('')}
+            </select>
+          </label>
+        </div>
+      `).join('') + '</div>';
+    } catch (err) {
+      container.innerHTML = '<div class="empty-state">Erreur de chargement des projets.</div>';
+    }
+  }
+
+  async function loadClients() {
+    const container = document.getElementById('tab-clients');
+    try {
+      const data = await apiFetch('/admin/clients');
+      if (!data.clients || data.clients.length === 0) {
+        container.innerHTML = '<div class="empty-state">Aucun client inscrit pour le moment.</div>';
+        return;
+      }
+      container.innerHTML = '<div class="service-grid">' + data.clients.map(c => `
+        <div class="card">
+          <h3>👤 ${escapeHtml(c.name)}</h3>
+          <p><strong>Email :</strong> ${escapeHtml(c.email)}</p>
+          <p><strong>Inscrit le :</strong> ${new Date(c.createdAt).toLocaleDateString('fr-FR')}</p>
+        </div>
+      `).join('') + '</div>';
+    } catch (err) {
+      container.innerHTML = '<div class="empty-state">Erreur de chargement des clients.</div>';
+    }
+  }
+
+  function escapeHtml(str) {
+    const div = document.createElement('div');
+    div.textContent = str ?? '';
+    return div.innerHTML;
+  }
+
+  document.addEventListener('change', async (e) => {
+    if (!e.target.classList.contains('status-select')) return;
+    const id = e.target.dataset.id;
+    const type = e.target.dataset.type;
+    const status = e.target.value;
+    const endpoint = type === 'quote' ? `/admin/quotes/${id}` : `/admin/projects/${id}`;
+    try {
+      await apiFetch(endpoint, { method: 'PATCH', body: JSON.stringify({ status }) });
+    } catch (err) {
+      alert('Erreur lors de la mise à jour du statut.');
+    }
   });
-}
 
-loadAll();
+  document.querySelectorAll('.admin-tab').forEach(tab => {
+    tab.addEventListener('click', () => {
+      document.querySelectorAll('.admin-tab').forEach(t => t.classList.remove('active'));
+      tab.classList.add('active');
+      document.querySelectorAll('[id^="tab-"]').forEach(s => s.style.display = 'none');
+      document.getElementById(`tab-${tab.dataset.tab}`).style.display = 'block';
+    });
+  });
+
+  const themeToggle = document.getElementById('themeToggle');
+  themeToggle?.addEventListener('click', () => {
+    document.body.classList.toggle('dark-mode');
+    themeToggle.textContent = document.body.classList.contains('dark-mode') ? '🌙' : '☀️';
+  });
+
+  if (token) {
+    checkAdminAndLoad();
+  }
 </script>
 
 </body>
