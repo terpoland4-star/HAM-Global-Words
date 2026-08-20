@@ -12,7 +12,7 @@
   // ========================================
   const CONFIG = {
     version: '3.0.0',
-    apiBaseUrl: 'https://api.hamglobalwords.com/v1',
+    apiBaseUrl: 'https://hamadine.mooo.com/ham-api',
     whatsappNumber: '22786762903',
     supportEmail: 'hamadineagmoctar@gmail.com',
     maxFileSizeMB: 5,
@@ -1338,87 +1338,122 @@
     // ========================================
     const registerForm = document.getElementById("registerForm");
     if (registerForm) {
-      registerForm.addEventListener("submit", (e) => {
+      registerForm.addEventListener("submit", async (e) => {
         e.preventDefault();
-        
+
         const name = registerForm.querySelector('[name="name"]')?.value.trim();
         const email = registerForm.querySelector('[name="email"]')?.value.trim();
         const password = registerForm.querySelector('[name="password"]')?.value;
         const confirmPassword = registerForm.querySelector('[name="confirm_password"]')?.value;
-        
+
         if (!name || !email || !password) {
           toast.error('Veuillez remplir tous les champs.', 3000);
           return;
         }
-        
+
         if (password !== confirmPassword) {
           toast.error('Les mots de passe ne correspondent pas.', 3000);
           return;
         }
-        
+
         if (password.length < 8) {
           toast.error('Le mot de passe doit faire au moins 8 caractères.', 3000);
           return;
         }
-        
-        storage.setJSON("user", { name, email, password });
-        toast.success('✅ Compte créé avec succès !', 2000);
-        setTimeout(() => window.location.href = "login.html", 1500);
-        analytics.track('register');
+
+        try {
+          const response = await fetch(`${CONFIG.apiBaseUrl}/register`, {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ name, email, password })
+          });
+          const data = await response.json();
+
+          if (!response.ok) {
+            toast.error(data.error || 'Erreur lors de la création du compte.', 3000);
+            return;
+          }
+
+          storage.set('authToken', data.token);
+          storage.setJSON('user', data.user);
+          toast.success('✅ Compte créé avec succès !', 2000);
+          setTimeout(() => window.location.href = "dashboard.html", 1000);
+          analytics.track('register');
+        } catch (err) {
+          toast.error('Impossible de contacter le serveur. Réessayez.', 3000);
+        }
       });
     }
-    
+
     const loginForm = document.getElementById("loginForm");
     if (loginForm) {
-      loginForm.addEventListener("submit", (e) => {
+      loginForm.addEventListener("submit", async (e) => {
         e.preventDefault();
-        
+
         const email = loginForm.querySelector('[name="email"]')?.value.trim();
         const password = loginForm.querySelector('[name="password"]')?.value;
-        const savedUser = storage.getJSON("user", null);
-        
-        if (savedUser && savedUser.email === email && savedUser.password === password) {
-          storage.set("isLogged", "true");
-          storage.set("loggedUserEmail", email);
-          storage.set("loginTime", new Date().toISOString());
+
+        try {
+          const response = await fetch(`${CONFIG.apiBaseUrl}/login`, {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ email, password })
+          });
+          const data = await response.json();
+
+          if (!response.ok) {
+            toast.error(data.error || 'Email ou mot de passe incorrect.', 3000);
+            return;
+          }
+
+          storage.set('authToken', data.token);
+          storage.setJSON('user', data.user);
           toast.success('✅ Connexion réussie !', 2000);
           setTimeout(() => window.location.href = "dashboard.html", 1000);
           analytics.track('login');
-        } else {
-          toast.error('Email ou mot de passe incorrect.', 3000);
+        } catch (err) {
+          toast.error('Impossible de contacter le serveur. Réessayez.', 3000);
         }
       });
     }
-    
+
     if (window.location.pathname.includes("dashboard.html")) {
-      const isLogged = storage.get("isLogged", null);
-      const loginTime = storage.get("loginTime", null);
-      
-      const isValidSession = () => {
-        if (!loginTime) return false;
-        const loginDate = new Date(loginTime);
-        const now = new Date();
-        const minutesDiff = (now - loginDate) / (1000 * 60);
-        return minutesDiff < CONFIG.sessionTimeoutMinutes;
-      };
-      
-      if (!isLogged || !isValidSession()) {
-        storage.remove("isLogged");
-        storage.remove("loginTime");
-        window.location.href = "login.html";
-      } else {
-        const user = storage.getJSON("user", null);
-        const userNameSpan = document.getElementById("userName");
-        if (userNameSpan && user) {
-          userNameSpan.textContent = user.name;
+      (async () => {
+        const token = storage.get('authToken', null);
+
+        if (!token) {
+          window.location.href = "login.html";
+          return;
         }
-      }
+
+        try {
+          const response = await fetch(`${CONFIG.apiBaseUrl}/me`, {
+            headers: { 'Authorization': `Bearer ${token}` }
+          });
+
+          if (!response.ok) {
+            storage.remove('authToken');
+            storage.remove('user');
+            window.location.href = "login.html";
+            return;
+          }
+
+          const data = await response.json();
+          storage.setJSON('user', data.user);
+
+          const userNameSpan = document.getElementById("userName");
+          if (userNameSpan) {
+            userNameSpan.textContent = data.user.name;
+          }
+        } catch (err) {
+          window.location.href = "login.html";
+        }
+      })();
     }
-    
+
     window.logout = function() {
-      storage.remove("isLogged");
-      storage.remove("loggedUserEmail");
-      storage.remove("loginTime");
+      storage.remove("authToken");
+      storage.remove("user");
       analytics.track('logout');
       window.location.href = "index.html";
     };
