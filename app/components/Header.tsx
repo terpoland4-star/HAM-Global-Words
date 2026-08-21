@@ -27,6 +27,9 @@ export default function Header() {
         <Link href="/realisations" className="hover:text-amber transition-colors">
           Réalisations
         </Link>
+        <Link href="/about" className="hover:text-amber transition-colors">
+          À propos
+        </Link>
         <Link href="/login" className="hover:text-amber transition-colors">
           Connexion
         </Link>

@@ -1,4 +1,5 @@
 import Image from "next/image";
+import ContactForm from "./components/ContactForm";
 
 const linguistique = [
   {
@@ -137,6 +138,23 @@ export default function Home() {
         >
           Démarrer une collaboration
         </a>
+      </section>
+
+      <section id="contact" className="px-6 py-16 border-t border-harmattan/10">
+        <div className="mx-auto max-w-2xl">
+          <div className="text-center mb-10">
+            <span className="font-mono text-xs tracking-[0.2em] uppercase text-amber">
+              Contact
+            </span>
+            <h2 className="mt-4 font-display text-3xl sm:text-4xl">
+              Initiez une collaboration
+            </h2>
+            <p className="mt-3 text-harmattan/60 text-sm">
+              Réponse sous 24 à 48h ouvrées.
+            </p>
+          </div>
+          <ContactForm />
+        </div>
       </section>
     </>
   );
