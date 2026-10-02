@@ -1,4 +1,5 @@
-export const API_BASE = "https://hamadine.mooo.com/ham-api";
+export const API_BASE =
+  process.env.NEXT_PUBLIC_API_BASE ?? "https://hamadine.mooo.com/ham-api";
 
 export type User = {
   id: number;
@@ -11,6 +12,12 @@ export type User = {
 export function getToken(): string | null {
   if (typeof window === "undefined") return null;
   return localStorage.getItem("authToken");
+}
+
+export const AUTH_EVENT = "auth-change";
+
+function notifyAuthChange() {
+  window.dispatchEvent(new Event(AUTH_EVENT));
 }
 
 export function setToken(token: string) {
@@ -30,11 +37,13 @@ export function getUser(): User | null {
 
 export function setUser(user: User) {
   localStorage.setItem("user", JSON.stringify(user));
+  notifyAuthChange();
 }
 
 export function clearAuth() {
   localStorage.removeItem("authToken");
   localStorage.removeItem("user");
+  notifyAuthChange();
 }
 
 export async function apiFetch(path: string, options: RequestInit = {}) {
@@ -48,4 +57,15 @@ export async function apiFetch(path: string, options: RequestInit = {}) {
     },
   });
   return response;
+}
+
+/** Lit le corps JSON d'une reponse sans planter si le serveur renvoie autre chose (ex. page HTML 502). */
+export async function readJson<T = Record<string, unknown>>(
+  response: Response
+): Promise<Partial<T>> {
+  try {
+    return (await response.json()) as T;
+  } catch {
+    return {};
+  }
 }

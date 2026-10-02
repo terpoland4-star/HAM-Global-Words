@@ -1,36 +1,44 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# HAM Global Words
 
-## Getting Started
+Site de HAM Global Words (Hamadine AG Moctar) : traduction professionnelle,
+interprétation diplomatique et de terrain, annotation IA/NLP, développement web
+et formation.
 
-First, run the development server:
+Next.js (App Router) · React 19 · Tailwind CSS v4 · pnpm 9
+
+## Démarrer
 
 ```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+pnpm install
+pnpm dev        # http://localhost:3000
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+## Scripts
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+| Commande         | Rôle                                              |
+| ---------------- | ------------------------------------------------- |
+| `pnpm dev`       | Serveur de développement                          |
+| `pnpm build`     | Build de production                               |
+| `pnpm start`     | Sert le build de production                       |
+| `pnpm lint`      | ESLint                                            |
+| `pnpm typecheck` | Génère les types Next.js puis lance `tsc`         |
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+La CI GitHub (`.github/workflows/ci.yml`) lance lint, typecheck, audit des
+dépendances de production et build sur chaque pull request.
 
-## Learn More
+## Configuration
 
-To learn more about Next.js, take a look at the following resources:
+| Variable               | Défaut                               | Rôle                         |
+| ---------------------- | ------------------------------------ | ---------------------------- |
+| `NEXT_PUBLIC_API_BASE` | `https://hamadine.mooo.com/ham-api`  | URL de l'API (auth, devis)   |
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+Les en-têtes de sécurité (CSP, HSTS, X-Frame-Options…) sont définis dans
+`next.config.ts`. L'origine de l'API y est ajoutée automatiquement à
+`connect-src` : si l'API change de domaine, il suffit de modifier la variable.
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+## Structure
 
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+- `app/` : pages (App Router). `linguistique/` et `tech/` = les deux pôles ;
+  `login`, `register`, `dashboard`, `admin` = espace client/admin (non indexé).
+- `app/components/` : en-tête, navigation (menu mobile), formulaire de contact.
+- `lib/api.ts` : client de l'API JWT. `lib/statuses.ts` : statuts de devis/projets.

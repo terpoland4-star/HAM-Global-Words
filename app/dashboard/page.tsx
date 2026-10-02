@@ -3,6 +3,7 @@
 import { useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
 import { apiFetch, clearAuth, getToken, setUser, type User } from "@/lib/api";
+import { quoteStatusLabel } from "@/lib/statuses";
 
 type Quote = {
   id: number;
@@ -17,6 +18,7 @@ export default function DashboardPage() {
   const [user, setLocalUser] = useState<User | null>(null);
   const [quotes, setQuotes] = useState<Quote[]>([]);
   const [loading, setLoading] = useState(true);
+  const [error, setError] = useState<string | null>(null);
 
   useEffect(() => {
     const token = getToken();
@@ -28,9 +30,13 @@ export default function DashboardPage() {
     (async () => {
       try {
         const meRes = await apiFetch("/me");
-        if (!meRes.ok) {
+        if (meRes.status === 401 || meRes.status === 403) {
           clearAuth();
           router.push("/login");
+          return;
+        }
+        if (!meRes.ok) {
+          setError("Le serveur est momentanément indisponible. Réessayez plus tard.");
           return;
         }
         const meData = await meRes.json();
@@ -41,9 +47,11 @@ export default function DashboardPage() {
         if (quotesRes.ok) {
           const quotesData = await quotesRes.json();
           setQuotes(quotesData.quotes || []);
+        } else {
+          setError("Impossible de charger vos demandes pour le moment.");
         }
       } catch {
-        router.push("/login");
+        setError("Impossible de contacter le serveur. Vérifiez votre connexion.");
       } finally {
         setLoading(false);
       }
@@ -54,13 +62,6 @@ export default function DashboardPage() {
     clearAuth();
     router.push("/");
   }
-
-  const statusLabels: Record<string, string> = {
-    pending: "⏳ En attente",
-    contacted: "📞 Contacté",
-    sent: "✅ Envoyé",
-    closed: "🔒 Clôturé",
-  };
 
   if (loading) {
     return (
@@ -90,6 +91,12 @@ export default function DashboardPage() {
           </button>
         </div>
 
+        {error && (
+          <p className="mt-6 rounded-lg border border-red-400/30 bg-red-400/10 px-4 py-3 text-sm text-red-400">
+            {error}
+          </p>
+        )}
+
         <div className="mt-10 space-y-4">
           {quotes.length === 0 ? (
             <div className="rounded-2xl border border-harmattan/10 bg-surface p-8 text-center text-harmattan/60">
@@ -110,7 +117,7 @@ export default function DashboardPage() {
                   </p>
                 </div>
                 <span className="rounded-full bg-ink px-3 py-1 text-xs font-mono text-harmattan/70">
-                  {statusLabels[q.status] || q.status}
+                  {quoteStatusLabel(q.status)}
                 </span>
               </div>
             ))

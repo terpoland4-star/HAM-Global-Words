@@ -25,7 +25,16 @@ const plexMono = IBM_Plex_Mono({
 export const metadata: Metadata = {
   title: "HAM Global Words — Traduction, interprétation & développement web",
   description:
-    "Studio bilingue et technique basé au Niger. Traduction professionnelle, interprétation stratégique, annotation IA/NLP et développement web & applications.",
+    "Studio linguistique et technique basé au Niger. Traduction professionnelle, interprétation diplomatique et de terrain, annotation IA/NLP et développement web & applications.",
+  icons: { apple: "/icon-192.png" },
+  openGraph: {
+    type: "website",
+    locale: "fr_FR",
+    siteName: "HAM Global Words",
+    title: "HAM Global Words — Traduction, interprétation & développement web",
+    description:
+      "Traduction professionnelle, interprétation diplomatique et de terrain, annotation IA/NLP et développement web & applications.",
+  },
 };
 
 export default function RootLayout({ children }: LayoutProps<"/">) {

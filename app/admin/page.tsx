@@ -3,6 +3,7 @@
 import { useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
 import { apiFetch, clearAuth, getToken, type User } from "@/lib/api";
+import { PROJECT_STATUSES, QUOTE_STATUSES } from "@/lib/statuses";
 
 type Quote = {
   id: number;
@@ -31,20 +32,6 @@ type Client = {
   createdAt: string;
 };
 
-const QUOTE_STATUSES = [
-  { value: "pending", label: "⏳ En attente" },
-  { value: "contacted", label: "📞 Contacté" },
-  { value: "sent", label: "✅ Envoyé" },
-  { value: "closed", label: "🔒 Clôturé" },
-];
-
-const PROJECT_STATUSES = [
-  { value: "pending", label: "⏳ En attente" },
-  { value: "in_progress", label: "🚧 En cours" },
-  { value: "completed", label: "✅ Terminé" },
-  { value: "cancelled", label: "❌ Annulé" },
-];
-
 export default function AdminPage() {
   const router = useRouter();
   const [user, setUser] = useState<User | null>(null);
@@ -56,6 +43,7 @@ export default function AdminPage() {
   const [clients, setClients] = useState<Client[]>([]);
   const [loading, setLoading] = useState(true);
   const [forbidden, setForbidden] = useState(false);
+  const [error, setError] = useState<string | null>(null);
 
   useEffect(() => {
     const token = getToken();
@@ -67,9 +55,13 @@ export default function AdminPage() {
     (async () => {
       try {
         const meRes = await apiFetch("/me");
-        if (!meRes.ok) {
+        if (meRes.status === 401 || meRes.status === 403) {
           clearAuth();
           router.push("/login");
+          return;
+        }
+        if (!meRes.ok) {
+          setError("Le serveur est momentanément indisponible. Réessayez plus tard.");
           return;
         }
         const meData = await meRes.json();
@@ -89,8 +81,11 @@ export default function AdminPage() {
         if (projectsRes.ok)
           setProjects((await projectsRes.json()).projects || []);
         if (clientsRes.ok) setClients((await clientsRes.json()).clients || []);
+        if (!quotesRes.ok || !projectsRes.ok || !clientsRes.ok) {
+          setError("Certaines données n'ont pas pu être chargées.");
+        }
       } catch {
-        // silencieux, l'UI affichera les etats vides
+        setError("Impossible de contacter le serveur. Vérifiez votre connexion.");
       } finally {
         setLoading(false);
       }
@@ -102,22 +97,32 @@ export default function AdminPage() {
     router.push("/");
   }
 
+  async function patchStatus(path: string, status: string) {
+    setError(null);
+    try {
+      const res = await apiFetch(path, {
+        method: "PATCH",
+        body: JSON.stringify({ status }),
+      });
+      if (!res.ok) {
+        setError("La mise à jour du statut a échoué. Réessayez.");
+        return false;
+      }
+      return true;
+    } catch {
+      setError("Impossible de contacter le serveur. Le statut n'a pas été modifié.");
+      return false;
+    }
+  }
+
   async function updateQuoteStatus(id: number, status: string) {
-    const res = await apiFetch(`/admin/quotes/${id}`, {
-      method: "PATCH",
-      body: JSON.stringify({ status }),
-    });
-    if (res.ok) {
+    if (await patchStatus(`/admin/quotes/${id}`, status)) {
       setQuotes((prev) => prev.map((q) => (q.id === id ? { ...q, status } : q)));
     }
   }
 
   async function updateProjectStatus(id: number, status: string) {
-    const res = await apiFetch(`/admin/projects/${id}`, {
-      method: "PATCH",
-      body: JSON.stringify({ status }),
-    });
-    if (res.ok) {
+    if (await patchStatus(`/admin/projects/${id}`, status)) {
       setProjects((prev) =>
         prev.map((p) => (p.id === id ? { ...p, status } : p))
       );
@@ -159,6 +164,12 @@ export default function AdminPage() {
             🚪 Déconnexion
           </button>
         </div>
+
+        {error && (
+          <p className="mt-6 rounded-lg border border-red-400/30 bg-red-400/10 px-4 py-3 text-sm text-red-400">
+            {error}
+          </p>
+        )}
 
         <div className="mt-8 flex gap-2 flex-wrap">
           {(
@@ -243,7 +254,7 @@ export default function AdminPage() {
                       {p.description}
                     </p>
                   )}
-                  {p.amount && (
+                  {p.amount != null && (
                     <p className="mt-2 text-sm text-harmattan/70">
                       {p.amount} FCFA
                     </p>

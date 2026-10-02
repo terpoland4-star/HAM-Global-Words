@@ -79,13 +79,13 @@ export default function LinguistiquePage() {
             l&apos;OCE, combinées à une expertise pointue en technologies
             linguistiques et intelligence artificielle.
           </p>
-          <a
+          <Link
             href="/#contact"
             className="animate-fade-up mt-8 inline-block rounded-full bg-indigo px-6 py-3 text-sm font-medium text-harmattan transition-colors hover:bg-indigo/85"
             style={{ animationDelay: "0.3s" }}
           >
             Demander un devis
-          </a>
+          </Link>
         </div>
       </section>
 
@@ -151,12 +151,12 @@ export default function LinguistiquePage() {
         <p className="mx-auto max-w-lg font-display italic text-xl sm:text-2xl text-harmattan/85">
           &laquo; Connecting voices across cultures. &raquo;
         </p>
-        <a
+        <Link
           href="/#contact"
           className="mt-8 inline-block rounded-full bg-amber px-6 py-3 text-sm font-medium text-ink transition-colors hover:bg-amber/85"
         >
           Démarrer une collaboration
-        </a>
+        </Link>
       </section>
     </>
   );

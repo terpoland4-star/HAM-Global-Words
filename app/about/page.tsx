@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import Image from "next/image";
+import Link from "next/link";
 
 export const metadata: Metadata = {
   title: "À propos — Hamadine AG Moctar | HAM Global Words",
@@ -106,7 +107,7 @@ export default function AboutPage() {
             Projets techniques
           </h2>
           <div className="grid gap-4 sm:grid-cols-2">
-            <a
+            <Link
               href="/realisations"
               className="rounded-2xl border border-harmattan/10 bg-surface p-6 transition-colors hover:border-indigo/40"
             >
@@ -118,8 +119,8 @@ export default function AboutPage() {
                 préservation et l&apos;apprentissage de la langue
                 Tadaksahak.
               </p>
-            </a>
-            <a
+            </Link>
+            <Link
               href="/realisations"
               className="rounded-2xl border border-harmattan/10 bg-surface p-6 transition-colors hover:border-acacia/40"
             >
@@ -130,7 +131,7 @@ export default function AboutPage() {
                 Plateforme e-commerce complète en production, du frontend
                 au backend, hébergement et maintenance inclus.
               </p>
-            </a>
+            </Link>
           </div>
         </div>
       </section>
@@ -157,12 +158,12 @@ export default function AboutPage() {
       </section>
 
       <section className="px-6 py-16 border-t border-harmattan/10 text-center">
-        <a
+        <Link
           href="/#contact"
           className="inline-block rounded-full bg-amber px-6 py-3 text-sm font-medium text-ink transition-colors hover:bg-amber/85"
         >
           Démarrer une collaboration
-        </a>
+        </Link>
       </section>
     </>
   );

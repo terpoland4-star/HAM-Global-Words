@@ -56,12 +56,12 @@ export default function AnnotationPage() {
       </section>
 
       <section className="px-6 py-16 border-t border-harmattan/10 text-center">
-        <a
+        <Link
           href="/#contact"
           className="inline-block rounded-full bg-indigo px-6 py-3 text-sm font-medium text-harmattan transition-colors hover:bg-indigo/85"
         >
           Discuter d&apos;un projet d&apos;annotation
-        </a>
+        </Link>
       </section>
     </>
   );

@@ -3,7 +3,7 @@
 import { useState } from "react";
 import { useRouter } from "next/navigation";
 import Link from "next/link";
-import { apiFetch, setToken, setUser } from "@/lib/api";
+import { apiFetch, readJson, setToken, setUser, type User } from "@/lib/api";
 
 export default function RegisterPage() {
   const router = useRouter();
@@ -34,7 +34,7 @@ export default function RegisterPage() {
         method: "POST",
         body: JSON.stringify({ name, email, password }),
       });
-      const data = await response.json();
+      const data = await readJson<{ token: string; user: User; error: string }>(response);
 
       if (!response.ok) {
         setError(data.error || "Erreur lors de la création du compte.");
@@ -42,6 +42,11 @@ export default function RegisterPage() {
         return;
       }
 
+      if (!data.token || !data.user) {
+        setError("Réponse inattendue du serveur. Réessayez.");
+        setLoading(false);
+        return;
+      }
       setToken(data.token);
       setUser(data.user);
       router.push("/dashboard");
@@ -59,6 +64,8 @@ export default function RegisterPage() {
         <form onSubmit={handleSubmit} className="mt-6 space-y-4">
           <input
             type="text"
+            aria-label="Nom complet"
+            autoComplete="name"
             placeholder="Votre nom complet"
             required
             value={name}
@@ -67,6 +74,8 @@ export default function RegisterPage() {
           />
           <input
             type="email"
+            aria-label="Email"
+            autoComplete="email"
             placeholder="Votre email"
             required
             value={email}
@@ -75,6 +84,9 @@ export default function RegisterPage() {
           />
           <input
             type="password"
+            aria-label="Mot de passe"
+            autoComplete="new-password"
+            minLength={8}
             placeholder="Mot de passe (8 caractères min.)"
             required
             value={password}
@@ -83,6 +95,8 @@ export default function RegisterPage() {
           />
           <input
             type="password"
+            aria-label="Confirmer le mot de passe"
+            autoComplete="new-password"
             placeholder="Confirmer le mot de passe"
             required
             value={confirmPassword}
