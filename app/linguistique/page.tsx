@@ -5,20 +5,20 @@ import Link from "next/link";
 export const metadata: Metadata = {
   title: "Linguistique — Traduction & Interprétation | HAM Global Words",
   description:
-    "Traduction assermentée, interprétation stratégique et annotation IA multilingue. 15+ langues, expertise terrain ONU/IOM/Takuba.",
+    "Traduction professionnelle, interprétation diplomatique et de terrain, annotation IA multilingue. Expérience Opération Barkhane, Task Force Takuba, HCR, OIM et OCE.",
 };
 
 const services = [
   {
     slug: "traduction",
-    name: "Traduction Professionnelle & Assermentée",
-    desc: "Documents juridiques, techniques et commerciaux, du français vers l'anglais et le haoussa, sans perte de nuance ni de valeur légale.",
+    name: "Traduction Professionnelle",
+    desc: "Documents juridiques, techniques, institutionnels et commerciaux, entre le français, l'anglais, l'arabe et les langues du Sahel, sans perte de nuance.",
     icon: "🌐",
   },
   {
     slug: "interpretation",
-    name: "Interprétation de Conférence & Terrain",
-    desc: "Présence en réunion, négociation ou mission humanitaire — pour que la barrière de langue ne coûte jamais une décision.",
+    name: "Interprétation Diplomatique & Terrain",
+    desc: "Séances diplomatiques, entretiens sensibles, missions humanitaires et sécuritaires — pour que la barrière de langue ne coûte jamais une décision.",
     icon: "🎙️",
   },
   {
@@ -74,9 +74,10 @@ export default function LinguistiquePage() {
             className="animate-fade-up mt-5 max-w-xl text-harmattan/70 text-base sm:text-lg"
             style={{ animationDelay: "0.2s" }}
           >
-            Une expérience de terrain avec des institutions internationales
-            (ONU, IOM, Takuba), combinée à une expertise pointue en
-            technologies linguistiques et intelligence artificielle.
+            Des années d&apos;expérience de terrain auprès de l&apos;Opération
+            Barkhane, de la Task Force Takuba, du HCR, de l&apos;OIM et de
+            l&apos;OCE, combinées à une expertise pointue en technologies
+            linguistiques et intelligence artificielle.
           </p>
           <a
             href="/#contact"
@@ -127,6 +128,22 @@ export default function LinguistiquePage() {
               </span>
             ))}
           </div>
+        </div>
+      </section>
+
+      <section className="px-6 py-16 border-t border-harmattan/10">
+        <div className="mx-auto max-w-3xl">
+          <h2 className="font-display text-2xl text-indigo">
+            Confidentialité & probité
+          </h2>
+          <p className="mt-4 text-harmattan/70">
+            Les données personnelles et les informations reçues dans le
+            cadre de chaque mission sont traitées avec probité, dans le
+            strict respect des lois applicables en matière de protection des
+            données et de confidentialité. Rien de ce qui est entendu ou lu
+            pendant une prestation n&apos;est conservé ni divulgué au-delà
+            de ce que la mission exige.
+          </p>
         </div>
       </section>
 

@@ -4,8 +4,8 @@ import { useState } from "react";
 import { apiFetch } from "@/lib/api";
 
 const services = [
-  { label: "🌐 Traduction Professionnelle & Assermentée", universe: "linguistique" },
-  { label: "🎙️ Interprétation de Conférence & Terrain", universe: "linguistique" },
+  { label: "🌐 Traduction Professionnelle", universe: "linguistique" },
+  { label: "🎙️ Interprétation Diplomatique, Institutionnelle & Terrain", universe: "linguistique" },
   { label: "🧠 Annotation de Données pour l'IA", universe: "linguistique" },
   { label: "📡 Interprétation à Distance (RSI/VRI)", universe: "linguistique" },
   { label: "💻 Développement Web & Applications", universe: "tech" },

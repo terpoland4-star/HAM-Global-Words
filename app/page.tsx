@@ -7,8 +7,8 @@ const linguistique = [
     desc: "Documents juridiques, techniques et commerciaux, du français vers l'anglais et le haoussa, sans perte de nuance.",
   },
   {
-    name: "Interprétation Stratégique",
-    desc: "Présence en réunion, négociation ou terrain, pour que la barrière de langue ne coûte jamais une décision.",
+    name: "Interprétation Diplomatique & Terrain",
+    desc: "Séances diplomatiques, entretiens sensibles et missions de terrain, pour que la barrière de langue ne coûte jamais une décision.",
   },
   {
     name: "Formation & Accompagnement",
