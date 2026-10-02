@@ -1,5 +1,6 @@
 import Image from "next/image";
 import Link from "next/link";
+import NavLinks from "./NavLinks";
 
 export default function Header() {
   return (
@@ -17,23 +18,7 @@ export default function Header() {
         </span>
       </Link>
 
-      <nav className="hidden sm:flex items-center gap-6 font-mono text-xs uppercase tracking-wide text-harmattan/70">
-        <Link href="/linguistique" className="hover:text-indigo transition-colors">
-          Linguistique
-        </Link>
-        <Link href="/tech" className="hover:text-acacia transition-colors">
-          Tech
-        </Link>
-        <Link href="/realisations" className="hover:text-amber transition-colors">
-          Réalisations
-        </Link>
-        <Link href="/about" className="hover:text-amber transition-colors">
-          À propos
-        </Link>
-        <Link href="/login" className="hover:text-amber transition-colors">
-          Connexion
-        </Link>
-      </nav>
+      <NavLinks />
     </header>
   );
 }

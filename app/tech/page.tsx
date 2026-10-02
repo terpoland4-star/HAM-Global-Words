@@ -75,13 +75,13 @@ export default function TechPage() {
             programmation — avec la même exigence de précision que nos
             services linguistiques.
           </p>
-          <a
+          <Link
             href="/#contact"
             className="animate-fade-up mt-8 inline-block rounded-full bg-acacia px-6 py-3 text-sm font-medium text-harmattan transition-colors hover:bg-acacia/85"
             style={{ animationDelay: "0.3s" }}
           >
             Demander un devis
-          </a>
+          </Link>
         </div>
       </section>
 
@@ -132,12 +132,12 @@ export default function TechPage() {
           &laquo; Traduire le sens, écrire le code — la même rigueur, deux
           langages différents. &raquo;
         </p>
-        <a
+        <Link
           href="/#contact"
           className="mt-8 inline-block rounded-full bg-amber px-6 py-3 text-sm font-medium text-ink transition-colors hover:bg-amber/85"
         >
           Démarrer une collaboration
-        </a>
+        </Link>
       </section>
     </>
   );

@@ -3,7 +3,7 @@
 import { useState } from "react";
 import { useRouter } from "next/navigation";
 import Link from "next/link";
-import { apiFetch, setToken, setUser } from "@/lib/api";
+import { apiFetch, readJson, setToken, setUser, type User } from "@/lib/api";
 
 export default function LoginPage() {
   const router = useRouter();
@@ -22,7 +22,7 @@ export default function LoginPage() {
         method: "POST",
         body: JSON.stringify({ email, password }),
       });
-      const data = await response.json();
+      const data = await readJson<{ token: string; user: User; error: string }>(response);
 
       if (!response.ok) {
         setError(data.error || "Email ou mot de passe incorrect.");
@@ -30,6 +30,11 @@ export default function LoginPage() {
         return;
       }
 
+      if (!data.token || !data.user) {
+        setError("Réponse inattendue du serveur. Réessayez.");
+        setLoading(false);
+        return;
+      }
       setToken(data.token);
       setUser(data.user);
       router.push(data.user.role === "admin" ? "/admin" : "/dashboard");
@@ -47,6 +52,8 @@ export default function LoginPage() {
         <form onSubmit={handleSubmit} className="mt-6 space-y-4">
           <input
             type="email"
+            aria-label="Email"
+            autoComplete="email"
             placeholder="Votre email"
             required
             value={email}
@@ -55,6 +62,8 @@ export default function LoginPage() {
           />
           <input
             type="password"
+            aria-label="Mot de passe"
+            autoComplete="current-password"
             placeholder="Mot de passe"
             required
             value={password}

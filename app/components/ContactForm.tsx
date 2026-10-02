@@ -4,8 +4,8 @@ import { useState } from "react";
 import { apiFetch } from "@/lib/api";
 
 const services = [
-  { label: "🌐 Traduction Professionnelle & Assermentée", universe: "linguistique" },
-  { label: "🎙️ Interprétation de Conférence & Terrain", universe: "linguistique" },
+  { label: "🌐 Traduction Professionnelle", universe: "linguistique" },
+  { label: "🎙️ Interprétation Diplomatique, Institutionnelle & Terrain", universe: "linguistique" },
   { label: "🧠 Annotation de Données pour l'IA", universe: "linguistique" },
   { label: "📡 Interprétation à Distance (RSI/VRI)", universe: "linguistique" },
   { label: "💻 Développement Web & Applications", universe: "tech" },
@@ -22,6 +22,7 @@ export default function ContactForm() {
   const [phone, setPhone] = useState("");
   const [service, setService] = useState("");
   const [message, setMessage] = useState("");
+  const [website, setWebsite] = useState(""); // champ piege anti-spam
   const [status, setStatus] = useState<Status>("idle");
   const [errorMsg, setErrorMsg] = useState<string | null>(null);
 
@@ -36,6 +37,12 @@ export default function ContactForm() {
     }
     if (!name || !email || !message) {
       setErrorMsg("Veuillez remplir tous les champs obligatoires.");
+      return;
+    }
+
+    // Un robot remplit le champ cache : on simule un succes sans rien envoyer.
+    if (website) {
+      setStatus("success");
       return;
     }
 
@@ -67,6 +74,7 @@ export default function ContactForm() {
       setPhone("");
       setService("");
       setMessage("");
+      setWebsite("");
     } catch {
       setErrorMsg("Impossible de contacter le serveur. Réessayez.");
       setStatus("error");
@@ -94,11 +102,13 @@ export default function ContactForm() {
   return (
     <form
       onSubmit={handleSubmit}
-      className="rounded-2xl border border-harmattan/10 bg-surface p-6 sm:p-8 space-y-4"
+      className="relative rounded-2xl border border-harmattan/10 bg-surface p-6 sm:p-8 space-y-4"
     >
       <div className="grid gap-4 sm:grid-cols-2">
         <input
           type="text"
+          aria-label="Nom complet"
+          autoComplete="name"
           placeholder="Votre nom complet"
           required
           value={name}
@@ -107,6 +117,8 @@ export default function ContactForm() {
         />
         <input
           type="email"
+          aria-label="Email"
+          autoComplete="email"
           placeholder="Votre email professionnel"
           required
           value={email}
@@ -116,7 +128,20 @@ export default function ContactForm() {
       </div>
 
       <input
+        type="text"
+        name="website"
+        tabIndex={-1}
+        autoComplete="off"
+        aria-hidden="true"
+        value={website}
+        onChange={(e) => setWebsite(e.target.value)}
+        className="absolute -left-[9999px] h-0 w-0 opacity-0"
+      />
+
+      <input
         type="tel"
+        aria-label="Téléphone"
+        autoComplete="tel"
         placeholder="Téléphone (optionnel)"
         value={phone}
         onChange={(e) => setPhone(e.target.value)}
@@ -125,6 +150,7 @@ export default function ContactForm() {
 
       <select
         required
+        aria-label="Service"
         value={service}
         onChange={(e) => setService(e.target.value)}
         className="w-full rounded-lg border border-harmattan/20 bg-ink px-4 py-2.5 text-harmattan focus:border-indigo focus:outline-none"
@@ -138,6 +164,8 @@ export default function ContactForm() {
       </select>
 
       <textarea
+        aria-label="Message"
+        maxLength={5000}
         placeholder="Décrivez votre projet, vos objectifs et vos contraintes spécifiques..."
         required
         rows={5}

@@ -1,10 +1,11 @@
 import type { Metadata } from "next";
 import Image from "next/image";
+import Link from "next/link";
 
 export const metadata: Metadata = {
   title: "À propos — Hamadine AG Moctar | HAM Global Words",
   description:
-    "Spécialiste linguistique et interprète multilingue, expérience UNHCR/IOM/Task Force TAKUBA, développeur de la plateforme Tadaksahak.",
+    "Traducteur professionnel et interprète multilingue : séances diplomatiques, Opération Barkhane, Task Force Takuba, HCR, OIM/OCE. Développeur de la plateforme Tadaksahak.",
 };
 
 const experience = [
@@ -16,9 +17,15 @@ const experience = [
   },
   {
     period: "2019 — 2024",
-    org: "UNHCR / IOM / Task Force TAKUBA",
+    org: "Opération Barkhane / Task Force Takuba",
+    role: "Interprète de terrain",
+    desc: "Plusieurs années d'interprétation simultanée et consécutive en environnement militaire et sécuritaire, y compris lors d'entretiens de contre-ingérence. Lettre de recommandation officielle de la Task Force Takuba pour excellence en interprétation.",
+  },
+  {
+    period: "2019 — 2024",
+    org: "HCR / OIM / OCE",
     role: "Interprète multilingue",
-    desc: "Interprétation simultanée et consécutive en opérations humanitaires et de terrain. Protection des réfugiés, médiation médicale et missions à enjeux sensibles. Lettre de recommandation officielle de Task Force TAKUBA pour excellence en interprétation.",
+    desc: "Interprétation lors des entretiens avec les réfugiés pour le HCR, l'OIM et ses partenaires de l'OCE (Orientation Canadienne à l'Étranger). Protection des réfugiés, médiation médicale et missions à enjeux sensibles.",
   },
 ];
 
@@ -56,12 +63,15 @@ export default function AboutPage() {
             Hamadine AG Moctar
           </h1>
           <p className="mt-5 max-w-xl text-harmattan/70 text-base sm:text-lg">
-            Spécialiste linguistique et interprète multilingue, spécialisé
-            en traduction, annotation de données pour l&apos;IA et
-            assurance qualité. Expérience de terrain auprès d&apos;opérations
-            humanitaires à fort impact avec UNHCR et Task Force TAKUBA,
-            validation confidentielle anglais-arabe reconnue officiellement
-            pour son excellence en interprétation.
+            Traducteur professionnel et interprète multilingue, capable
+            d&apos;intervenir lors de séances diplomatiques. Des années
+            d&apos;expérience de terrain auprès de l&apos;Opération Barkhane
+            et de la Task Force Takuba, notamment lors d&apos;entretiens de
+            contre-ingérence, et auprès du HCR, de l&apos;OIM et de ses
+            partenaires de l&apos;OCE pour les entretiens avec les réfugiés.
+            Les données personnelles et informations reçues dans
+            l&apos;exercice de ces missions sont traitées avec probité et
+            dans le respect des lois en vigueur.
           </p>
         </div>
       </section>
@@ -97,7 +107,7 @@ export default function AboutPage() {
             Projets techniques
           </h2>
           <div className="grid gap-4 sm:grid-cols-2">
-            <a
+            <Link
               href="/realisations"
               className="rounded-2xl border border-harmattan/10 bg-surface p-6 transition-colors hover:border-indigo/40"
             >
@@ -109,8 +119,8 @@ export default function AboutPage() {
                 préservation et l&apos;apprentissage de la langue
                 Tadaksahak.
               </p>
-            </a>
-            <a
+            </Link>
+            <Link
               href="/realisations"
               className="rounded-2xl border border-harmattan/10 bg-surface p-6 transition-colors hover:border-acacia/40"
             >
@@ -121,7 +131,7 @@ export default function AboutPage() {
                 Plateforme e-commerce complète en production, du frontend
                 au backend, hébergement et maintenance inclus.
               </p>
-            </a>
+            </Link>
           </div>
         </div>
       </section>
@@ -148,12 +158,12 @@ export default function AboutPage() {
       </section>
 
       <section className="px-6 py-16 border-t border-harmattan/10 text-center">
-        <a
+        <Link
           href="/#contact"
           className="inline-block rounded-full bg-amber px-6 py-3 text-sm font-medium text-ink transition-colors hover:bg-amber/85"
         >
           Démarrer une collaboration
-        </a>
+        </Link>
       </section>
     </>
   );

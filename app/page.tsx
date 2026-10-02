@@ -1,29 +1,30 @@
 import Image from "next/image";
+import Link from "next/link";
 import ContactForm from "./components/ContactForm";
 
 const linguistique = [
   {
     name: "Traduction Professionnelle",
-    desc: "Documents juridiques, techniques et commerciaux, du français vers l'anglais et le haoussa, sans perte de nuance.",
+    desc: "Documents juridiques, techniques, institutionnels et commerciaux, entre le français, l'anglais, l'arabe et les langues du Sahel, sans perte de nuance.",
   },
   {
-    name: "Interprétation Stratégique",
-    desc: "Présence en réunion, négociation ou terrain, pour que la barrière de langue ne coûte jamais une décision.",
+    name: "Interprétation Diplomatique & Terrain",
+    desc: "Séances diplomatiques, entretiens sensibles et missions de terrain, pour que la barrière de langue ne coûte jamais une décision.",
   },
   {
-    name: "Formation & Accompagnement",
-    desc: "Montée en compétence linguistique pour équipes et institutions, construite sur des cas réels du secteur.",
+    name: "Annotation IA & NLP",
+    desc: "Jeux de données annotés pour l'entraînement de modèles, avec un œil linguistique que peu d'annotateurs ont.",
   },
 ];
 
 const tech = [
   {
-    name: "Annotation IA & NLP",
-    desc: "Jeux de données annotés pour l'entraînement de modèles, avec un œil linguistique que peu d'annotateurs ont.",
-  },
-  {
     name: "Développement Web & Apps",
     desc: "Plateformes complètes, du backend à la PWA, pensées pour des connexions et des usages ouest-africains.",
+  },
+  {
+    name: "Formation & Accompagnement",
+    desc: "Montée en compétence technique pour particuliers, équipes et institutions, construite sur des cas réels.",
   },
 ];
 
@@ -69,18 +70,18 @@ export default function Home() {
             className="animate-fade-up mt-9 flex flex-col sm:flex-row gap-3"
             style={{ animationDelay: "0.4s" }}
           >
-            <a
+            <Link
               href="/linguistique"
               className="rounded-full bg-indigo px-6 py-3 text-sm font-medium text-harmattan transition-colors hover:bg-indigo/85"
             >
               Explorer l&apos;univers Linguistique
-            </a>
-            <a
+            </Link>
+            <Link
               href="/tech"
               className="rounded-full border border-acacia/50 px-6 py-3 text-sm font-medium text-acacia transition-colors hover:bg-acacia/10"
             >
               Explorer l&apos;univers Tech
-            </a>
+            </Link>
           </div>
 
           <div
@@ -132,12 +133,12 @@ export default function Home() {
           &laquo; Traduire le sens, écrire le code — la même rigueur, deux
           langages différents. &raquo;
         </p>
-        <a
+        <Link
           href="/#contact"
           className="mt-8 inline-block rounded-full bg-amber px-6 py-3 text-sm font-medium text-ink transition-colors hover:bg-amber/85"
         >
           Démarrer une collaboration
-        </a>
+        </Link>
       </section>
 
       <section id="contact" className="px-6 py-16 border-t border-harmattan/10">

@@ -54,12 +54,12 @@ export default function CodefixPage() {
       </section>
 
       <section className="px-6 py-16 border-t border-harmattan/10 text-center">
-        <a
+        <Link
           href="/#contact"
           className="inline-block rounded-full bg-acacia px-6 py-3 text-sm font-medium text-harmattan transition-colors hover:bg-acacia/85"
         >
           Demander un audit de code
-        </a>
+        </Link>
       </section>
     </>
   );

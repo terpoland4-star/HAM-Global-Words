@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import Link from "next/link";
 
 export const metadata: Metadata = {
   title: "Réalisations — HAM Global Words",
@@ -57,11 +58,14 @@ export default function RealisationsPage() {
       <section className="px-6 py-16">
         <div className="mx-auto max-w-4xl space-y-8">
           {projects.map((p) => {
-            const accent = p.universe === "tech" ? "acacia" : "indigo";
+            const hoverBorder =
+              p.universe === "tech"
+                ? "hover:border-acacia/40"
+                : "hover:border-indigo/40";
             return (
               <div
                 key={p.name}
-                className={`rounded-2xl border border-harmattan/10 bg-surface p-8 transition-colors hover:border-${accent}/40`}
+                className={`rounded-2xl border border-harmattan/10 bg-surface p-8 transition-colors ${hoverBorder}`}
               >
                 <div className="flex flex-wrap items-center gap-3 justify-between">
                   <h2 className="font-display text-2xl">{p.name}</h2>
@@ -112,12 +116,12 @@ export default function RealisationsPage() {
           &laquo; Chaque projet est un pont — entre une langue et une autre,
           entre une idée et son code. &raquo;
         </p>
-        <a
+        <Link
           href="/#contact"
           className="mt-8 inline-block rounded-full bg-amber px-6 py-3 text-sm font-medium text-ink transition-colors hover:bg-amber/85"
         >
           Démarrer une collaboration
-        </a>
+        </Link>
       </section>
     </>
   );
